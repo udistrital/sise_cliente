@@ -1,0 +1,162 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Informacion academica</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="Inicio">
+    <center>
+      <ion-card-header>
+        <ion-avatar>
+          <img src="./assets/avatar.png">
+        </ion-avatar>
+        <ion-card-title>Nombre del Egresado</ion-card-title>
+        <ion-card-subtitle class="subtitulo">Datos de escuela media</ion-card-subtitle>
+      </ion-card-header>
+    </center>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-item lines="full">
+            <ion-label position="floating">Nombre del colegio</ion-label>
+            <ion-icon slot ="start" name="business-outline"></ion-icon>
+            <ion-input disabled="true"></ion-input></ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item lines="full">
+            <ion-label position="floating">Ciudad donde se encuentra</ion-label>
+            <ion-icon slot ="start" name="flag-outline"></ion-icon>
+            <ion-input disabled="true"></ion-input></ion-item>
+        </ion-col>
+      </ion-row>
+    <ion-row>
+        <ion-col>
+          <ion-item lines="full">
+            <ion-label position="floating">Fecha de graduacion</ion-label>
+            <ion-icon slot ="start" name="calendar-outline"></ion-icon>
+            <ion-input disabled="true"></ion-input></ion-item>
+        </ion-col>
+        <ion-col> 
+        </ion-col>
+      </ion-row>
+    </ion-grid> 
+    
+    <center>
+      <ion-card-header>  
+        <ion-card-subtitle class="subtitulo">Datos de educacion superior</ion-card-subtitle>
+      </ion-card-header>
+    </center>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-item lines="full">
+            <ion-label position="floating">Nombre de la universidad</ion-label>
+            <ion-icon slot ="start" name="business-outline"></ion-icon>
+            <ion-input type="text" required></ion-input></ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item lines="full">
+            <ion-label position="floating">Nombre de la carrera</ion-label>
+            <ion-icon slot ="start" name="book-outline"></ion-icon>
+            <ion-input type="text" required></ion-input></ion-item>
+        </ion-col>
+      </ion-row>
+    <ion-row>
+        <ion-col>
+          <ion-item lines="full">
+            <ion-label position="floating">Titulo obtenido</ion-label>
+            <ion-icon slot ="start" name="school-outline"></ion-icon>
+            <ion-input type="text" required></ion-input></ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-label>Tipo de estudio</ion-label>
+            <ion-icon slot ="start" name="school-outline"></ion-icon>
+            <ion-select placeholder="Seleccionar" interface="popover">              
+              <ion-select-option value="p">Pregrado</ion-select-option>
+              <ion-select-option value="e">Especializacion</ion-select-option>
+              <ion-select-option value="m">Maestria</ion-select-option>
+              <ion-select-option value="d">Doctorado</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item lines="full">
+            <ion-label position="floating">Fecha de inicio</ion-label>
+            <ion-icon slot ="start" name="calendar-outline"></ion-icon>
+            <ion-input type="text" required></ion-input></ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item lines="full">
+            <ion-label position="floating">Fecha de finalizacion</ion-label>
+            <ion-icon slot ="start" name="calendar-outline"></ion-icon>
+            <ion-input type="text" required></ion-input></ion-item>
+        </ion-col>
+      </ion-row>
+    <ion-row>
+        <ion-col>
+          <ion-item lines="full">
+            <ion-label position="floating">Apreciacion sobre la formacion dada</ion-label>
+            <ion-icon slot ="start" name="checkmark-circle-outline"></ion-icon>
+            <ion-range min="0" max="10" step="1" value="5" snaps color="primary" snaps="true" pin="true">
+              <ion-icon slot="start"  name="close-outline"></ion-icon>
+              <ion-icon slot="end"    name="checkmark-outline"></ion-icon>
+            </ion-range>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-label>Verificacion del titulo</ion-label>
+            <ion-icon slot ="start" name="folder-open-outline"></ion-icon>
+            <ion-input type="file"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>      
+    </ion-grid> 
+    <ion-button class="boton" [routerLink]="['/']" type="submit" color="primary" expand="block">Agregar estudios</ion-button>
+    <center>
+      <ion-card-header>  
+        <ion-card-subtitle class="subtitulo">Datos de Certificaciones</ion-card-subtitle>
+      </ion-card-header>
+    </center>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-item lines="full">
+            <ion-label position="floating">Nombre de la entidad que certifica</ion-label>
+            <ion-icon slot ="start" name="business-outline"></ion-icon>
+            <ion-input type="text" required></ion-input></ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item lines="full">
+            <ion-label position="floating">Nombre de la certificacion</ion-label>
+            <ion-icon slot ="start" name="book-outline"></ion-icon>
+            <ion-input type="text" required></ion-input></ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-item lines="full">
+            <ion-label position="floating">Fecha de finalizacion</ion-label>
+            <ion-icon slot ="start" name="calendar-outline"></ion-icon>
+            <ion-input type="text" required></ion-input></ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-label>Verificacion de la certificacion</ion-label>
+            <ion-icon slot ="start" name="folder-open-outline"></ion-icon>
+            <ion-input type="file"></ion-input>
+          </ion-item>          
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-button class="boton" [routerLink]="['/']" type="submit" color="primary" expand="block">Agregar certificaciones</ion-button>
+    <ion-button class="boton" [routerLink]="['/home']" type="submit" color="primary" expand="block">Actualizar Informacion</ion-button>
+  </ion-card> 
+</ion-content>
