@@ -42,9 +42,9 @@ steps:
         from_secret: aws_secret_access_key
       region: "us-east-1"    
       bucket: "cliente-pruebas"
-      source: dist/**/*
+      source: www/**/*
       target: /${DRONE_REPO_NAME}
-      strip_prefix: dist/
+      strip_prefix: www/
     when:
       branch: [release/*]
       event: [push, pull_request] 
@@ -59,9 +59,9 @@ steps:
         from_secret: aws_secret_access_key
       region: "us-east-1"    
       bucket: "cliente-prod"
-      source: dist/**/*
+      source: www/**/*
       target: /${DRONE_REPO_NAME}
-      strip_prefix: dist/
+      strip_prefix: www/
     when:
       branch: [master]
       event: [push, pull_request] 
