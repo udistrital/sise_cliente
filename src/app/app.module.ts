@@ -6,6 +6,8 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Camera } from '@ionic-native/camera/ngx';
+import { environment } from './../environments/environment';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -15,18 +17,24 @@ import { ComponentsModule } from './@theme/components/components.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 
+import { AgmCoreModule } from '@agm/core';
+
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, 
+  imports: [BrowserModule,
     IonicModule.forRoot(),
-     AppRoutingModule, 
-     ComponentsModule, NoopAnimationsModule, MatIconModule,
-    ],
+    HttpClientModule,
+    AppRoutingModule,
+    ComponentsModule, NoopAnimationsModule, MatIconModule,
+    AgmCoreModule.forRoot({
+      apiKey: environment.MAPSKEY
+    }),
+  ],
   providers: [
-    StatusBar, 
-    Camera, 
+    StatusBar,
+    Camera,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     ImplicitAutenticationService,
@@ -34,4 +42,4 @@ import { MatIconModule } from '@angular/material/icon';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
