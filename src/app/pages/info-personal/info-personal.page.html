@@ -4,30 +4,23 @@
     <ion-buttons slot="start">
       <ion-menu-button menu="main-menu"></ion-menu-button>
     </ion-buttons>
-
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card class="Inicio">
-    <center>
-      <ion-card-header>
-        <ion-avatar>
-          <img src="./assets/avatar.png">
-        </ion-avatar>
-
-
-        <ion-card-title>Nombre del Egresado</ion-card-title>
-
-        <ion-card-subtitle class="subtitulo">Datos personales</ion-card-subtitle>
-      </ion-card-header>
-    </center>
+  <ion-card class="inicio">
+    <ion-card-header class="center">
+      <ion-avatar>
+        <img alt="avatar" src="./assets/avatar.png">
+      </ion-avatar>
+      <ion-card-title>{{dataInfo?.NombreCompleto}}</ion-card-title>
+      <ion-card-subtitle class="subtitulo">Datos personales</ion-card-subtitle>
+    </ion-card-header>
     <ion-grid>
       <ion-row>
         <ion-col>
           <ion-item lines="center">
             <ion-label position="floating">Tipo de identificacion</ion-label>
-            <!--  <mat-icon class="mat-icon" svgIcon="at-outline" inline="true"></mat-icon> -->
             <ion-icon slot="start" src='data:image/svg+xml;utf8,<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
           viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
        <g>
@@ -106,8 +99,9 @@
        <g>
        </g>
        </svg>
-       '></ion-icon>
-            <ion-input [value]="dataTercero.Id" disabled="true"></ion-input>
+          '>
+            </ion-icon>
+            <ion-input disabled="true"></ion-input>
           </ion-item>
         </ion-col>
         <ion-col>
@@ -191,8 +185,9 @@
        <g>
        </g>
        </svg>
-       '></ion-icon>
-            <ion-input disabled="true"></ion-input>
+       '>
+            </ion-icon>
+            <ion-input disabled="true" value="{{dataInfo?.Id}}"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -208,7 +203,7 @@
           <ion-item lines="full">
             <ion-label position="floating">Fecha de nacimiento</ion-label>
             <ion-icon slot="start" name="calendar-outline"></ion-icon>
-            <ion-input disabled="true"></ion-input>
+            <ion-input value="{{dateBirth}}" disabled="true"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -221,7 +216,7 @@
             <ion-icon slot="start"
               src='data:image/svg+xml;utf8,<svg height="512" viewBox="0 0 64 64" width="512" xmlns="http://www.w3.org/2000/svg"><g id="outline"><path d="m32 62c7.843 0 21-4.547 21-35 0-15.187-8.243-25-21-25s-21 9.813-21 25c0 30.453 13.157 35 21 35zm-15.932-14.447c-2.017-5.283-3.068-12.173-3.068-20.553 0-14.187 7.28-23 19-23s19 8.813 19 23q0 2.136-.093 4.14c-.727 2.227-5.794 16.686-16.354 21.965l.894 1.79c7.386-3.693 12.161-11.274 14.841-16.89-2.03 14.278-8.346 21.995-18.288 21.995-6.225 0-11.026-3.031-14.246-8.8 3.24 2.18 8.2 5.137 12.081 5.784l.33-1.972c-4.942-.822-12.229-6.065-14.097-7.459z"/><path d="m27 23a4 4 0 0 0 4-4h-2a2 2 0 0 1 -4 0h-2a4 4 0 0 0 4 4z"/><path d="m37 23a4 4 0 0 0 4-4h-2a2 2 0 0 1 -4 0h-2a4 4 0 0 0 4 4z"/><path d="m38 25h3v2h-3z"/><path d="m23 25h3v2h-3z"/><path d="m29 26a3 3 0 1 0 3-3 3 3 0 0 0 -3 3zm3-1a1 1 0 1 1 -1 1 1 1 0 0 1 1-1z"/><path d="m25.734 44.038c2.957-.07 8.914-.8 13.658-5.112 4.385-3.987 6.608-10.018 6.608-17.926v-1a14 14 0 0 0 -28-.043c-.042.965-.885 23.719 11.552 29.938l.894-1.79a13.431 13.431 0 0 1 -4.712-4.067zm10.09-35.4.789 2.362h-1.892l-.952-2.855a11.884 11.884 0 0 1 2.055.491zm-7.648 0a11.884 11.884 0 0 1 2.055-.491l-.952 2.853h-1.892zm-2.5 1.188-.62 1.86a1 1 0 0 0 .944 1.314h4a1 1 0 0 0 .949-.684l1.051-3.153 1.051 3.153a1 1 0 0 0 .949.684h4a1 1 0 0 0 .949-1.316l-.62-1.86a12 12 0 1 1 -12.658 0zm-1.252 32.2c-2.475-4.356-3.582-9.856-4.067-14.27a13.965 13.965 0 0 0 22.821.647 17.611 17.611 0 0 1 -5.111 9.033c-5.135 4.674-12.1 4.655-13.648 4.587z"/><path d="m18 45h2v2h-2z"/><path d="m17 33.928-2 .144c.448 6.2 2.047 9.27 2.115 9.4l1.767-.937c-.012-.03-1.471-2.876-1.882-8.607z"/><path d="m47 30h2v2h-2z"/><path d="m45 34h2v2h-2z"/></g></svg>'>
             </ion-icon>
-            <ion-input disabled="true"></ion-input>
+            <ion-input disabled="true" value="{{dataInfo?.LugarOrigen}}"></ion-input>
           </ion-item>
         </ion-col>
         <ion-col>
@@ -569,11 +564,6 @@
               <ion-select-option value="Yemen" id="YE">Yemen</ion-select-option>
               <ion-select-option value="Zambia" id="ZM">Zambia</ion-select-option>
               <ion-select-option value="Zimbabue" id="ZW">Zimbabue</ion-select-option>
-
-
-
-
-
             </ion-select>
           </ion-item>
         </ion-col>
@@ -635,7 +625,6 @@
           </ion-item>
         </ion-col>
       </ion-row>
-
       <ion-row>
         <ion-col>
           <ion-item lines="full">
@@ -678,20 +667,10 @@
           </ion-item>
         </ion-col>
         <ion-col>
-
         </ion-col>
       </ion-row>
-
     </ion-grid>
-
-
-
-
     <ion-button class="boton" [routerLink]="['/home']" type="submit" color="primary" expand="block" (click)="Alerta()">
       Actualizar Informacion</ion-button>
-
-
-
-
   </ion-card>
 </ion-content>
