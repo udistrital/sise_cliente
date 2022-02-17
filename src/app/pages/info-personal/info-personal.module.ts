@@ -7,14 +7,18 @@ import { IonicModule } from '@ionic/angular';
 import { InfoPersonalPageRoutingModule } from './info-personal-routing.module';
 
 import { InfoPersonalPage } from './info-personal.page';
+import { HttpClientModule } from '@angular/common/http';
+import { InfoPersonalService } from './info-personal.service';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    InfoPersonalPageRoutingModule
+    InfoPersonalPageRoutingModule,
+    HttpClientModule
   ],
-  declarations: [InfoPersonalPage]
+  declarations: [InfoPersonalPage],
+  providers: [InfoPersonalService]
 })
 export class InfoPersonalPageModule {}

@@ -6,8 +6,20 @@ import { ActionSheetController } from '@ionic/angular';
 import { __await } from 'tslib';
 import { MatIconRegistry } from '@angular/material/icon';
 import { Observable } from 'rxjs';
+import { InfoPersonalService } from './info-personal.service';
+import { environment } from 'src/environments/environment';
 
-
+interface Documento{
+  documento: string;
+  documento_compuesto: string;
+}
+class DataInfoTercero{
+  Id?: number | string = "";
+  NombreCompleto?:string = "";
+  LugarOrigen?:string = "";
+  FechaNacimiento?:string = "";
+  TipoDocumento?:string = "";
+}
 
 @Component({
   selector: 'app-info-personal',
@@ -15,21 +27,32 @@ import { Observable } from 'rxjs';
   styleUrls: ['./info-personal.page.scss'],
 })
 
-
-
-
 export class InfoPersonalPage implements OnInit {
   // loadFormDataFunction: (...params) => Observable<any>;
   dataTercero: any[] = [];
-  dataInfo: any;
-  dataInfoTercero: any;
+  dataInfo: DataInfoTercero = new DataInfoTercero();
+  dataInfoTercero:any;
   dateBirth: any;
   constructor(
-    private terceroHerlper: TerceroHerlper
+    private terceroHerlper: TerceroHerlper,
+    private readonly infoPersonalService: InfoPersonalService
   ) { }
 
-
   async ngOnInit() {
+    const body = {
+      "user": "jgcastellanosj@correo.udistrital.edu.co"
+    };
+    const { documento, documento_compuesto } = await this.infoPersonalService.getIndentification(environment.API_GET_IDENTIFICATION, body).toPromise() as Documento;
+    if(!documento){
+      console.log("Something went wrong, when try to get the identification");
+      return
+    }
+    const data = await this.infoPersonalService.getInformationByDocument(environment.GET_INFORMATION_BY_INDENTIFICATION, documento).toPromise();
+    console.log(data)
+
+    this.dataInfo.NombreCompleto = data[0].TerceroId.NombreCompleto as string;
+    this.dataInfo.TipoDocumento = documento_compuesto.substring(0,2);
+    this.dataInfo.Id = documento_compuesto.substring(2);
     // const loadFormDataFunction = await this.terceroHerlper.getTerceros('264').toPromise();
     // this.loadFormDataFunction = this.terceroHerlper.getTerceros;
     // this.dataTercero = JSON.stringify(loadFormDataFunction);
@@ -37,7 +60,7 @@ export class InfoPersonalPage implements OnInit {
     // console.log(typeof this.data);
     // console.log(loadFormDataFunction);
     // this.getPosts();
-    this.getInfoTercero('264');
+    // this.getInfoTercero('264');
 
   }
 
