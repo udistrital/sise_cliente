@@ -42,17 +42,22 @@ export class InfoPersonalPage implements OnInit {
     const body = {
       "user": "jgcastellanosj@correo.udistrital.edu.co"
     };
-    const { documento, documento_compuesto } = await this.infoPersonalService.getIndentification(environment.API_GET_IDENTIFICATION, body).toPromise() as Documento;
+    const { documento, documento_compuesto,...rest } = await this.infoPersonalService.getIndentification(environment.API_GET_IDENTIFICATION, body).toPromise() as Documento;
     if(!documento){
       console.log("Something went wrong, when try to get the identification");
       return
     }
     const data = await this.infoPersonalService.getInformationByDocument(environment.GET_INFORMATION_BY_INDENTIFICATION, documento).toPromise();
-    console.log(data)
+    console.log(data,rest)
 
     this.dataInfo.NombreCompleto = data[0].TerceroId.NombreCompleto as string;
     this.dataInfo.TipoDocumento = documento_compuesto.substring(0,2);
     this.dataInfo.Id = documento_compuesto.substring(2);
+    const Id = data[0].TerceroId.Id as number;
+    this.infoPersonalService.updateInformation(environment.GET_INFORMATION_BY_INDENTIFICATION+`/${Id}`,this.cleanInfoToUpdate({ ...data[0] }))
+    .subscribe((data)=>{
+      console.log(data, "Resultado de la actualizacion");
+    })
     // const loadFormDataFunction = await this.terceroHerlper.getTerceros('264').toPromise();
     // this.loadFormDataFunction = this.terceroHerlper.getTerceros;
     // this.dataTercero = JSON.stringify(loadFormDataFunction);
@@ -72,6 +77,28 @@ export class InfoPersonalPage implements OnInit {
   //     this.dataTercero = data;
   //   });
   // }
+
+  private cleanInfoToUpdate({
+    Numero,
+    DigitoVerificacion,
+    FechaExpedicion,
+    CiudadExpedicion,
+    Activo,
+    DocumentoSoporte,
+    FechaCreacion,
+    FechaModificacion
+ }){
+  return {
+    Numero,
+    DigitoVerificacion,
+    FechaExpedicion: new Date(FechaExpedicion).toISOString(),
+    CiudadExpedicion,
+    Activo,
+    DocumentoSoporte,
+    FechaCreacion : new Date(FechaCreacion).toISOString(),
+    FechaModificacion:new Date(FechaModificacion).toISOString()
+ }
+}
 
   async getInfoTercero(id: any) {
     this.dataInfo = await this.terceroHerlper.getTerceros(id).toPromise();

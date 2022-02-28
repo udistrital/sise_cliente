@@ -51,6 +51,10 @@ export class InfoPersonalService {
             catchError(handleError),
         );
     }
-
+    updateInformation(endpoint, data) {
+        return this.httpClient.put(endpoint, data, this.getOptions()).pipe(
+            catchError(handleError),
+        );
+    }
 
 }
