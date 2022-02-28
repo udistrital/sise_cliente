@@ -21,6 +21,7 @@ export class HomePage {
   ) {}
 
   logout(){
+    // console.log(this.autenticacion)
     this.autenticacion.logout();
   }
 
