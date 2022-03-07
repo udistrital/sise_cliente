@@ -63,6 +63,10 @@ export class InfoPersonalService {
     return this.httpClient.get(endpoint, params)
   }
 
+  getDocumentTypes(endpoint) {
+    return this.httpClient.get(endpoint, this.getOptions())
+  }
+
   updateInformation(endpoint, data) {
     return this.httpClient.put(endpoint, data, this.getOptions())
   }

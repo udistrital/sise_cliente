@@ -1,4 +1,4 @@
-<ion-grid class="ion-align-items-center" >
+<ion-grid class="ion-align-items-center" style="overflow-x: auto !important;">
 
   <ion-row>
     <ion-col size="12">
@@ -32,6 +32,7 @@
           <ion-input id="PrimerApellido" name="PrimerApellido" #PrimerApellido="ngModel" [(ngModel)]="selectedBasicUserData.PrimerApellido" class="border-0 border-none"></ion-input>
         </ion-item>
       </ion-col>
+
       <ion-col size="6" class="ion-margin-vertical">
         <ion-item lines="full">
           <ion-label position="floating">Segundo apellido</ion-label>
@@ -39,11 +40,39 @@
           <ion-input id="SegundoApellido" name="SegundoApellido" #SegundoApellido="ngModel" [(ngModel)]="selectedBasicUserData.SegundoApellido" class="border-0 border-none"></ion-input>
         </ion-item>
       </ion-col>
-      <ion-col size="7" class="ion-margin-vertical">
+
+      <ion-col size="6" class="ion-margin-vertical">
+        <ion-item lines="full">
+          <ion-label position="floating">Tipo de documento</ion-label>
+          <!-- <ion-icon slot="start" name="calendar-outline"></ion-icon> -->
+          <!-- interface="popover" -->
+          <ion-select interface="action-sheet" id="TipoDocumentoId" name="TipoDocumentoId" #TipoDocumentoId="ngModel" [(ngModel)]="selectedBasicUserData.TipoDocumentoId">
+            <ion-select-option *ngFor="let documentType of documentTypes" value="{{documentType.Id}}">{{documentType.Nombre}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6" class="ion-margin-vertical">
+        <ion-item lines="full">
+          <ion-label position="floating">No. documento</ion-label>
+          <!-- <ion-icon slot="start" name="calendar-outline"></ion-icon> -->
+          <ion-input minlength="8" maxlength="15" autocomplete="cc-number" type="number" id="Numero" name="Numero" #Numero="ngModel" [(ngModel)]="selectedBasicUserData.Numero" class="border-0 border-none"></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6" class="ion-margin-vertical">
+        <ion-item lines="full">
+          <ion-label position="floating">Fecha expedición documento</ion-label>
+          <!-- <ion-icon slot="start" name="calendar-outline"></ion-icon> -->
+          <ion-input type="date" id="FechaExpedicion" name="FechaExpedicion" #FechaExpedicion="ngModel" [(ngModel)]="selectedBasicUserData.FechaExpedicion" class="border-0 border-none"></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6" class="ion-margin-vertical">
         <ion-item lines="full">
           <ion-label position="floating">Tipo de contribuyente</ion-label>
           <!-- <ion-icon slot="start" name="calendar-outline"></ion-icon> -->
-          <ion-select placeholder="Selecciona uno..." id="TipoContribuyenteId" name="TipoContribuyenteId" #TipoContribuyenteId="ngModel" [(ngModel)]="selectedBasicUserData.TipoContribuyenteId">
+          <ion-select interface="popover" placeholder="Selecciona uno..." id="TipoContribuyenteId" name="TipoContribuyenteId" #TipoContribuyenteId="ngModel" [(ngModel)]="selectedBasicUserData.TipoContribuyenteId">
             <ion-select-option value="1">Persona natural</ion-select-option>
             <ion-select-option value="2">Persona juridica</ion-select-option>
           </ion-select>

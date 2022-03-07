@@ -80,7 +80,7 @@ export class HomePage implements OnInit {
       this.infoPersonalService.getDocumentIdByEmail(environment.API_GET_IDENTIFICATION, body)
         .subscribe(res => (result: any) => {
   
-          console.log(result);
+          console.log('resultado obtencion documento por email', result);
         },
           error => {
             if (error.error.System.Error == 'usuario no registrado') {

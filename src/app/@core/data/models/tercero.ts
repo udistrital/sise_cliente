@@ -12,6 +12,9 @@ export class Tercero {
   SegundoApellido: string;
   TipoContribuyenteId: string;
   UsuarioWSO2: string;
+  Numero: string;
+  FechaExpedicion: string;
+  TipoDocumentoId: string;
 
   constructor(
     Id = '',
@@ -26,7 +29,11 @@ export class Tercero {
     PrimerApellido = '',
     SegundoApellido = '',
     TipoContribuyenteId = '',
-    UsuarioWSO2 = '') {
+    UsuarioWSO2 = '',
+    Numero = '',
+    FechaExpedicion = '',
+    TipoDocumentoId = ''
+  ) {
 
     this.Id = Id
     this.Activo = Activo
@@ -41,5 +48,8 @@ export class Tercero {
     this.SegundoApellido = SegundoApellido
     this.TipoContribuyenteId = TipoContribuyenteId
     this.UsuarioWSO2 = UsuarioWSO2
+    this.Numero = Numero
+    this.FechaExpedicion = FechaExpedicion
+    this.TipoDocumentoId = TipoDocumentoId
   }
 }
