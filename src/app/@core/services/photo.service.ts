@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Plugins, CameraResultType, Capacitor, FilesystemDirectory, 
-  CameraPhoto, CameraSource } from '@capacitor/core';
+// , Capacitor
+import {
+  Plugins
+} from '@capacitor/core';
+// CameraPhoto,
+import { CameraResultType, CameraSource } from '@capacitor/camera';
+// import { Filesystem, Directory } from '@capacitor/filesystem';
 
 const { Camera, Filesystem, Storage } = Plugins;
 
@@ -15,18 +20,18 @@ export class PhotoService {
   constructor() { }
 
   public async addNewToGallery() {
-      // Take a photo
-      const capturedPhoto = await Camera.getPhoto({
-        resultType: CameraResultType.Uri, // file-based data; provides best performance
-        source: CameraSource.Camera, // automatically take a new photo with the camera
-        quality: 100 // highest quality (0 to 100)
-      });
+    // Take a photo
+    const capturedPhoto = await Camera.getPhoto({
+      resultType: CameraResultType.Uri, // file-based data; provides best performance
+      source: CameraSource.Camera, // automatically take a new photo with the camera
+      quality: 100 // highest quality (0 to 100)
+    });
   }
-  
 
-  
-  
- 
+
+
+
+
 }
 
 export interface Photo {

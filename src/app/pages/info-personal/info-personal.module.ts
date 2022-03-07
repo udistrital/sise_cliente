@@ -8,7 +8,7 @@ import { InfoPersonalPageRoutingModule } from './info-personal-routing.module';
 
 import { InfoPersonalPage } from './info-personal.page';
 import { HttpClientModule } from '@angular/common/http';
-import { InfoPersonalService } from './info-personal.service';
+import { InfoPersonalService } from '../../@core/services/infopersonal.service';
 
 @NgModule({
   imports: [

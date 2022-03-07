@@ -6,19 +6,18 @@ import { ActionSheetController } from '@ionic/angular';
 import { __await } from 'tslib';
 import { MatIconRegistry } from '@angular/material/icon';
 import { Observable } from 'rxjs';
-import { InfoPersonalService } from './info-personal.service';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../../environments/environment';
+import { InfoComplementariaTercero } from '../../@core/data/models/info_complementaria_tercero';
+import { ImplicitAutenticationService } from '../../@core/utils/implicit_autentication.service';
+import { InfoPersonalService } from '../../@core/services/infopersonal.service';
+import { Documento } from '../../@core/data/models/document';
 
-interface Documento{
-  documento: string;
-  documento_compuesto: string;
-}
-class DataInfoTercero{
+class DataInfoTercero {
   Id?: number | string = "";
-  NombreCompleto?:string = "";
-  LugarOrigen?:string = "";
-  FechaNacimiento?:string = "";
-  TipoDocumento?:string = "";
+  NombreCompleto?: string = "";
+  LugarOrigen?: string = "";
+  FechaNacimiento?: string = "";
+  TipoDocumento?: string = "";
 }
 
 @Component({
@@ -28,55 +27,61 @@ class DataInfoTercero{
 })
 
 export class InfoPersonalPage implements OnInit {
+
+  private autenticacion = new ImplicitAutenticationService;
   // loadFormDataFunction: (...params) => Observable<any>;
   dataTercero: any[] = [];
   dataInfo: DataInfoTercero = new DataInfoTercero();
-  dataInfoTercero:any;
+  dataInfoTercero: any;
   dateBirth: any;
+  idPersonalInfo: any
+  arrPersonalInfo: any
+  datosGenero: InfoComplementariaTercero;
+
   constructor(
     private terceroHerlper: TerceroHerlper,
     private readonly infoPersonalService: InfoPersonalService
   ) { }
 
   async ngOnInit() {
+
+    const { email } = this.autenticacion.getPayload()
+    console.log(this.autenticacion.getPayload());
+
     const body = {
-      "user": "jgcastellanosj@correo.udistrital.edu.co"
+      "user": email
     };
-    const { documento, documento_compuesto,...rest } = await this.infoPersonalService.getIndentification(environment.API_GET_IDENTIFICATION, body).toPromise() as Documento;
-    if(!documento){
+
+    const { documento, documento_compuesto, ...rest } = await this.infoPersonalService.getDocumentIdByEmail(environment.API_GET_IDENTIFICATION, body).toPromise() as Documento;
+
+    if (!documento) {
       console.log("Something went wrong, when try to get the identification");
       return
     }
+
     const data = await this.infoPersonalService.getInformationByDocument(environment.GET_INFORMATION_BY_INDENTIFICATION, documento).toPromise();
-    console.log(data,rest)
+
+    this.arrPersonalInfo = data
+
+    console.log(data, rest)
 
     this.dataInfo.NombreCompleto = data[0].TerceroId.NombreCompleto as string;
-    this.dataInfo.TipoDocumento = documento_compuesto.substring(0,2);
+    this.dataInfo.TipoDocumento = documento_compuesto.substring(0, 2);
     this.dataInfo.Id = documento_compuesto.substring(2);
+    this.dataInfo.FechaNacimiento = new Date(data[0].TerceroId.FechaNacimiento).toISOString().replace(/T/, ' ').replace(/\..+/, '').slice(0, -9)
+    this.dataInfo.LugarOrigen = data[0].TerceroId.LugarOrigen as string;
+
+    // Traer datos genero
+    //     const dataGenero = await this.infoPersonalService.getInformationByDocument(environment.GET_INFORMATION_BY_INDENTIFICATION, `info_complementaria_tercero/?query=TerceroId.Id:${!!this.tercero ? this.tercero.Id ? this.tercero.Id : '' : ''}`
+    //     + `,InfoComplementariaId.GrupoInfoComplementariaId.Id:6`).toPromise();
+    // console.log('dataGenero', dataGenero)
+
     const Id = data[0].TerceroId.Id as number;
-    this.infoPersonalService.updateInformation(environment.GET_INFORMATION_BY_INDENTIFICATION+`/${Id}`,this.cleanInfoToUpdate({ ...data[0] }))
-    .subscribe((data)=>{
-      console.log(data, "Resultado de la actualizacion");
-    })
-    // const loadFormDataFunction = await this.terceroHerlper.getTerceros('264').toPromise();
-    // this.loadFormDataFunction = this.terceroHerlper.getTerceros;
-    // this.dataTercero = JSON.stringify(loadFormDataFunction);
-    // console.log(this.dataTercero);
-    // console.log(typeof this.data);
-    // console.log(loadFormDataFunction);
-    // this.getPosts();
-    // this.getInfoTercero('264');
+    this.idPersonalInfo = Id
+
+    console.log('data[0]', data[0])
 
   }
-
-  // ngOnInit() {
-  // }
-
-  // getPosts() { //llamamos a la funcion getPost de nuestro servicio.
-  //   this.terceroHerlper.getTerceros('264').toPromise().then(data => {
-  //     this.dataTercero = data;
-  //   });
-  // }
 
   private cleanInfoToUpdate({
     Numero,
@@ -87,45 +92,22 @@ export class InfoPersonalPage implements OnInit {
     DocumentoSoporte,
     FechaCreacion,
     FechaModificacion
- }){
-  return {
-    Numero,
-    DigitoVerificacion,
-    FechaExpedicion: new Date(FechaExpedicion).toISOString(),
-    CiudadExpedicion,
-    Activo,
-    DocumentoSoporte,
-    FechaCreacion : new Date(FechaCreacion).toISOString(),
-    FechaModificacion:new Date(FechaModificacion).toISOString()
- }
-}
+  }) {
+    return {
+      Numero,
+      DigitoVerificacion,
+      FechaExpedicion: new Date(FechaExpedicion).toISOString(),
+      CiudadExpedicion,
+      Activo,
+      DocumentoSoporte,
+      FechaCreacion: new Date(FechaCreacion).toISOString(),
+      FechaModificacion: new Date(FechaModificacion).toISOString()
+    }
+  }
 
   async getInfoTercero(id: any) {
     this.dataInfo = await this.terceroHerlper.getTerceros(id).toPromise();
-    console.log(this.dataInfo);
     this.getDateBirth();
-    // this.dataInfo = JSON.stringify(data);
-    // console.log(this.dataInfo.Id);
-    // console.log(data.Id);
-    // for (const [key, value] of Object.entries(data)) {
-    //   console.log(key);
-    //   console.log(value);
-    //   this.dataTercero.push(
-    //     key
-    //   )
-    // }
-    // for (var i = 0; i < data.length; i++) {
-
-    //   this.dataInfoTercero.push(
-    //     {
-    //       job_id: data.Id,
-    //       //  job_name: data[i].name,
-    //       //  job_desc: data[i].desc
-    //     }
-    //   );
-    // }
-    // console.log(this.dataTercero);
-    // console.log(this.dataTercero);
   }
 
   getDateBirth() {
@@ -134,6 +116,20 @@ export class InfoPersonalPage implements OnInit {
     const mo = new Intl.DateTimeFormat('es', { month: 'short' }).format(d);
     const da = new Intl.DateTimeFormat('es', { day: '2-digit' }).format(d);
     this.dateBirth = da + '-' + mo + '-' + ye;
+  }
+
+  updatePersonalInfo() {
+
+    if (this.idPersonalInfo && this.arrPersonalInfo) {
+      console.log('this.arrPersonalInfo', this.arrPersonalInfo)
+
+      // this.infoPersonalService.updateInformation(environment.GET_INFORMATION_BY_INDENTIFICATION + `/${this.idPersonalInfo}`, this.cleanInfoToUpdate({ ...this.arrPersonalInfo }))
+      //   .subscribe((data) => {
+      //     console.log(data, "Resultado de la actualizacion");
+      //   })
+    } else {
+      alert("Espera a que cargue la información.")
+    }
   }
 }
 
