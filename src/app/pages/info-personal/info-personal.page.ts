@@ -59,7 +59,7 @@ export class InfoPersonalPage implements OnInit {
       return
     }
 
-    const data = await this.infoPersonalService.getInformationByDocument(environment.GET_INFORMATION_BY_INDENTIFICATION, documento).toPromise();
+    const data = await this.infoPersonalService.getInformationByDocument(environment.DATOS_IDENTIFICACION_TERCERO_ENDPOINT, documento).toPromise()
 
     this.arrPersonalInfo = data
 
@@ -71,15 +71,17 @@ export class InfoPersonalPage implements OnInit {
     this.dataInfo.FechaNacimiento = new Date(data[0].TerceroId.FechaNacimiento).toISOString().replace(/T/, ' ').replace(/\..+/, '').slice(0, -9)
     this.dataInfo.LugarOrigen = data[0].TerceroId.LugarOrigen as string;
 
-    // Traer datos genero
-    //     const dataGenero = await this.infoPersonalService.getInformationByDocument(environment.GET_INFORMATION_BY_INDENTIFICATION, `info_complementaria_tercero/?query=TerceroId.Id:${!!this.tercero ? this.tercero.Id ? this.tercero.Id : '' : ''}`
-    //     + `,InfoComplementariaId.GrupoInfoComplementariaId.Id:6`).toPromise();
-    // console.log('dataGenero', dataGenero)
 
-    const Id = data[0].TerceroId.Id as number;
+    const Id = data[0].TerceroId.Id as number; // id del tercero
     this.idPersonalInfo = Id
 
-    console.log('data[0]', data[0])
+
+    console.log('ID DEL TERCERO ', Id)
+    // console.log('data[0]', data[0])
+
+    // Traer datos genero
+    const dataGenero = await this.infoPersonalService.getInfoComplementariaGenero(environment.TERCEROS_SERVICE, `info_complementaria_tercero/?query=TerceroId.Id:${Id}` + `,InfoComplementariaId.GrupoInfoComplementariaId.Id:6`).toPromise();
+    console.log('dataGenero', dataGenero)
 
   }
 
@@ -123,7 +125,7 @@ export class InfoPersonalPage implements OnInit {
     if (this.idPersonalInfo && this.arrPersonalInfo) {
       console.log('this.arrPersonalInfo', this.arrPersonalInfo)
 
-      // this.infoPersonalService.updateInformation(environment.GET_INFORMATION_BY_INDENTIFICATION + `/${this.idPersonalInfo}`, this.cleanInfoToUpdate({ ...this.arrPersonalInfo }))
+      // this.infoPersonalService.updateInformation(environment.DATOS_IDENTIFICACION_TERCERO_ENDPOINT + `/${this.idPersonalInfo}`, this.cleanInfoToUpdate({ ...this.arrPersonalInfo }))
       //   .subscribe((data) => {
       //     console.log(data, "Resultado de la actualizacion");
       //   })

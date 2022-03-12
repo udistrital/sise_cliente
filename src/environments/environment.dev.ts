@@ -33,7 +33,7 @@ export const environment = {
     SIGN_OUT_REDIRECT_URL: 'http://10.20.0.254/sise/',
   },
   API_GET_IDENTIFICATION: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/autenticacion_mid/v1/token/userRol',
-  GET_INFORMATION_BY_INDENTIFICATION: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/terceros_crud/v1/datos_identificacion',
+  DATOS_IDENTIFICACION_TERCERO_ENDPOINT: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/terceros_crud/v1/datos_identificacion',
   CREATE_TERCERO_ENDPOINT: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/terceros_crud/tercero',
   CREATE_DATA_IDENTIFICATION_TERCERO_ENDPOINT: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/terceros_crud/datos_identificacion',
   GET_DOCUMENT_TYPES_ENDPOINT: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/terceros_crud/tipo_documento',

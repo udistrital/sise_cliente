@@ -1,16 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ImplicitAutenticationService } from '../../@core/utils/implicit_autentication.service';
 import { PhotoService } from '../../@core/services/photo.service';
-
-// import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { InfoPersonalService } from '../../@core/services/infopersonal.service';
 import { environment } from '../../../environments/environment.dev';
-// import { Documento } from '../../@core/data/models/document';
 import { ModalController } from '@ionic/angular';
 import { ModalbasicinfoComponent } from '../../@theme/components/modalbasicinfo/modalbasicinfo.component';
 import { HomeService } from '../../@core/services/home.service';
-
-// declare var window: any;
+import { DatosIdentificacionTercero } from 'src/app/@core/data/models/datos_identificacion_tercero';
 
 @Component({
   selector: 'app-home',
@@ -20,23 +16,18 @@ import { HomeService } from '../../@core/services/home.service';
 })
 
 export class HomePage implements OnInit {
-  // @ViewChild('modalBasicInfoUserOpen') modalBasicInfoUserOpen: ElementRef;
 
   private autenticacion = new ImplicitAutenticationService;
   sessionUser: any
-  // formModal: any
-  // isModalOpen: any
-  // modalBasicInfoUserOpen:any
+  terceroPersonalData: any
+  dataInfo: DatosIdentificacionTercero = new DatosIdentificacionTercero();
 
   constructor(
     public homeService: HomeService,
     public modalCtrl: ModalController,
-    // private renderer: Renderer2,
     public photoService: PhotoService,
-    // private camera: Camera,
     private readonly infoPersonalService: InfoPersonalService
   ) {
-    // this.isModalOpen = true
 
   }
 
@@ -59,47 +50,20 @@ export class HomePage implements OnInit {
 
   async ngOnInit() {
 
-    try {
-      
-      console.log('HERE')
-      // this.formModal = new window.bootstrap.Modal(
-      //   document.getElementById('modalBasicUserData')
-      // )
-  
-      const { email } = this.autenticacion.getPayload()
-  
-      // console.log(email)
-      // if (email)
-      //   this.sessionUser.email = email
-  
-      const body = {
-        // "user": email
-        "user": 'egresados@udistrital.edu.co'
-      };
-  
-      this.infoPersonalService.getDocumentIdByEmail(environment.API_GET_IDENTIFICATION, body)
-        .subscribe(res => (result: any) => {
-  
-          console.log('resultado obtencion documento por email', result);
-        },
-          error => {
-            if (error.error.System.Error == 'usuario no registrado') {
-              this.openModal();
-            }
-          }
-  
-        )
-  
-      // if (!documento) {
-      //   console.log("Something went wrong, when try to get the identification");
-      //   return
-      // }
-  
-      // this.sessionUser.NombreCompleto = 
-    } catch (error) {
-      console.log(error)
-    }
+    console.log('HERE')
+    console.log(this.autenticacion.getPayload())
+    const { email, documento } = this.autenticacion.getPayload()
 
+    let data = await this.infoPersonalService.getInformationByDocument(environment.DATOS_IDENTIFICACION_TERCERO_ENDPOINT, documento).toPromise();
+
+    console.log(data[0]);
+    
+    this.terceroPersonalData = data[0]
+    this.terceroPersonalData.FechaModificacion = new Date(this.terceroPersonalData.FechaModificacion).toISOString().replace(/T/, ' ').replace(/\..+/, '').slice(0, -9)
+    // .subscribe((result: any) => {
+    //   console.log('resultado obtencion DATA TERCERO', result);
+    //   this.dataInfo = result
+    // })
   }
 
   logout() {

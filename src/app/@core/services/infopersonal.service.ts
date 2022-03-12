@@ -35,7 +35,7 @@ export class InfoPersonalService {
 
   constructor(
     private readonly httpClient: HttpClient
-  ) {}
+  ) { }
 
   private getOptions() {
     return {
@@ -47,7 +47,7 @@ export class InfoPersonalService {
     };
   }
 
-  createTercero(endpoint, data){
+  createTercero(endpoint, data) {
     return this.httpClient.post(endpoint, data, this.getOptions())
   }
 
@@ -60,7 +60,7 @@ export class InfoPersonalService {
   }
 
   getInfoComplementariaGenero(endpoint, params) {
-    return this.httpClient.get(endpoint, params)
+    return this.httpClient.get(endpoint + params, this.getOptions())
   }
 
   getDocumentTypes(endpoint) {

@@ -38,8 +38,8 @@ export class ModalbasicinfoComponent implements OnInit {
   }
 
   public createTercero(form: NgForm) {
-    // const { email } = this.autenticacion.getPayload()
-    let email = 'egresados@udistrital.edu.co'
+    const { email } = this.autenticacion.getPayload()
+    // let email = 'egresados@udistrital.edu.co'
     console.log(this.modalCtrl);
 
 

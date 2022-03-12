@@ -32,8 +32,8 @@
       <ion-avatar style="margin: 0 auto;">
         <img src="../assets/avatar.png">
       </ion-avatar>
-      <ion-card-title>Nombre del Egresado</ion-card-title>
-      <ion-card-subtitle class="subtitulo">Fecha ultima actualizacion: dd/mm/aaaa</ion-card-subtitle>
+      <ion-card-title>{{this.terceroPersonalData?.TerceroId?.NombreCompleto}}</ion-card-title>
+      <ion-card-subtitle class="subtitulo">Fecha ultima actualizacion: {{this.terceroPersonalData?.FechaModificacion}}</ion-card-subtitle>
     </ion-card-header>
     <ion-button slot="start" (click)="addPhotoToGallery()">Tomar o subir una foto</ion-button>
   </ion-card>

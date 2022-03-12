@@ -23,7 +23,7 @@
           <ion-icon slot="end"></ion-icon>
         </ion-item> -->
 
-        <ion-item (click)="isRemainder === 1 ? isRemainder = 0 : isRemainder = 1">
+        <ion-item (click)="isRemainder === 1 ? isRemainder = 0 : isRemainder = 1" class="pointer">
           <ion-icon name="information-circle-outline" slot="start"></ion-icon>
           Actualizar Informacion
           <ion-icon slot="end" [name]="isRemainder? 'arrow-down' : 'arrow-forward'"></ion-icon>
@@ -31,7 +31,7 @@
 
         <ion-menu-toggle>
           <ion-list>
-            <ion-item menuclose [hidden]="!isRemainder" [routerLink]="['/info-personal']" menuClose class="sub-menu">
+            <ion-item menuclose [hidden]="!isRemainder" [routerLink]="['/info-personal']" menuClose class="sub-menu pointer">
               <ion-icon name="person-outline" slot="start"></ion-icon>
               Informacion Personal
             </ion-item>
@@ -40,7 +40,7 @@
 
         <ion-menu-toggle auto-hide="false">
           <ion-list>
-            <ion-item menuclose [hidden]="!isRemainder" [routerLink]="['/info-academica']" menuClose class="sub-menu">
+            <ion-item menuclose [hidden]="!isRemainder" [routerLink]="['/info-academica']" menuClose class="sub-menu pointer">
               <ion-icon name="school-outline" slot="start"></ion-icon>
               Informacion Academica
             </ion-item>
@@ -49,7 +49,7 @@
 
         <ion-menu-toggle auto-hide="false">
           <ion-list>
-            <ion-item menuclose [hidden]="!isRemainder" [routerLink]="['/info-laboral']" menuClose class="sub-menu">
+            <ion-item menuclose [hidden]="!isRemainder" [routerLink]="['/info-laboral']" menuClose class="sub-menu pointer">
               <ion-icon name="briefcase-outline" slot="start"></ion-icon>
               Informacion Laboral
             </ion-item>
@@ -58,52 +58,29 @@
 
         <ion-menu-toggle auto-hide="false">
           <ion-list>
-            <ion-item menuclose [hidden]="!isRemainder" [routerLink]="['/info-empresarial']" menuClose class="sub-menu">
+            <ion-item menuclose [hidden]="!isRemainder" [routerLink]="['/info-empresarial']" menuClose class="sub-menu pointer">
               <ion-icon name="business-outline" slot="start"></ion-icon>
               Informacion Empresarial
             </ion-item>
           </ion-list>
         </ion-menu-toggle>
 
-
-
-
-
-        <!--        <ion-menu-toggle>
-         <ion-item routerLink="/info-personal">
-         <ion-icon name="person-outline" slot ="start"></ion-icon>  
-         <ion-label>Informacion Personal</ion-label>
-         </ion-item>
-       </ion-menu-toggle>
-     <ion-menu-toggle>
-         <ion-item routerLink="/info-academica">
-         <ion-icon name="school-outline" slot ="start"></ion-icon>  
-         <ion-label>Informacion Academica</ion-label>
-         </ion-item>
-       </ion-menu-toggle>
-     <ion-menu-toggle>
-         <ion-item routerLink="/info-laboral">
-         <ion-icon name="briefcase-outline" slot ="start"></ion-icon>  
-         <ion-label>Informacion laboral</ion-label>
-         </ion-item>
-       </ion-menu-toggle>
-     <ion-menu-toggle>
-         <ion-item routerLink="/info-empresarial">
-         <ion-icon name="business-outline" slot ="start"></ion-icon>  
-         <ion-label>Informacion Empresarial</ion-label>
-         </ion-item>
-       </ion-menu-toggle>
- -->
         <ion-menu-toggle>
-          <ion-item>
+          <ion-item class="pointer">
+            <ion-icon name="newspaper-outline" slot="start"></ion-icon>
+            Inscripción a eventos
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle>
+          <ion-item class="pointer">
             <ion-icon name="map-outline" slot="start"></ion-icon>
             <ion-label>Contactar Egresado</ion-label>
           </ion-item>
         </ion-menu-toggle>
 
-
         <ion-menu-toggle>
-          <ion-item>
+          <ion-item class="pointer">
             <ion-icon slot="start" src='data:image/svg+xml;utf8,<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
           viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
        <g>
@@ -188,10 +165,6 @@
             <ion-label>Carnet virtual</ion-label>
           </ion-item>
         </ion-menu-toggle>
-
-
-
-
 
       </ion-list>
 
