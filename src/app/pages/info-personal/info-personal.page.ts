@@ -77,6 +77,7 @@ export class InfoPersonalPage implements OnInit {
 
 
     console.log('ID DEL TERCERO ', Id)
+    
     // console.log('data[0]', data[0])
 
     // Traer datos genero
