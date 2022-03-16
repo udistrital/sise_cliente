@@ -16,6 +16,7 @@ import { ComponentsModule } from './@theme/components/components.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import { AgmCoreModule } from '@agm/core';
+// import NgxDatatableModule from '@swimlane/ngx-datatable';
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,6 +32,7 @@ import { AgmCoreModule } from '@agm/core';
     AgmCoreModule.forRoot({
       apiKey: environment.MAPSKEY
     }),
+    // NgxDatatableModule
   ],
   providers: [
     StatusBar,

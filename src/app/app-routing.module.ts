@@ -12,6 +12,10 @@ const routes: Routes = [
     pathMatch: 'full'
   },
 
+  // {
+  //   path: 'inscripcionaeventos',
+  //   loadChildren: () => import('./pages/inscripcionaeventos/inscripcionaeventos.module').then(m => m.InfoPersonalPageModule)
+  // },
   {
     path: 'info-personal',
     loadChildren: () => import('./pages/info-personal/info-personal.module').then(m => m.InfoPersonalPageModule)

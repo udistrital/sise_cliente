@@ -27,8 +27,17 @@ export class ImplicitAutenticationService {
   }
 
   public logout() {
-
-    auth.logout();
+    // limpiar localstorage y redirigir a login - home
+    // validar si da error sino llamarlo
+    // localStorage.removeItem('access_token')
+    // localStorage.removeItem('id_token')
+    // localStorage.removeItem('state')
+    // localStorage.removeItem('expires_in')
+    // localStorage.removeItem('expires_at')
+    localStorage.clear();
+    window.location.href = "/"
+    // if(!auth.logout()) {
+    // }
   }
 
   getPayload() {
@@ -36,12 +45,12 @@ export class ImplicitAutenticationService {
   }
 
   public live() {
-    if (auth.live(true)) {
-      auth.liveToken();
-      return true;
-    } else {
+    // if (auth.live(true)) {
+    //   auth.liveToken();
+    //   return true;
+    // } else {
       return false;
-    }
+    // }
   }
 
   public getAuthorizationUrl(button): string {

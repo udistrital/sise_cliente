@@ -18,6 +18,8 @@ class DataInfoTercero {
   LugarOrigen?: string = "";
   FechaNacimiento?: string = "";
   TipoDocumento?: string = "";
+  Genero?: string = "";
+  UsuarioWSO2?: string = "";
 }
 
 @Component({
@@ -48,9 +50,8 @@ export class InfoPersonalPage implements OnInit {
     const { email } = this.autenticacion.getPayload()
     console.log(this.autenticacion.getPayload());
 
-    const body = {
-      "user": email
-    };
+    const body = {"user": email};
+    this.dataInfo.UsuarioWSO2 = email
 
     const { documento, documento_compuesto, ...rest } = await this.infoPersonalService.getDocumentIdByEmail(environment.API_GET_IDENTIFICATION, body).toPromise() as Documento;
 
@@ -70,20 +71,32 @@ export class InfoPersonalPage implements OnInit {
     this.dataInfo.Id = documento_compuesto.substring(2);
     this.dataInfo.FechaNacimiento = new Date(data[0].TerceroId.FechaNacimiento).toISOString().replace(/T/, ' ').replace(/\..+/, '').slice(0, -9)
     this.dataInfo.LugarOrigen = data[0].TerceroId.LugarOrigen as string;
-
-
     const Id = data[0].TerceroId.Id as number; // id del tercero
     this.idPersonalInfo = Id
-
-
     console.log('ID DEL TERCERO ', Id)
-    
-    // console.log('data[0]', data[0])
 
     // Traer datos genero
-    const dataGenero = await this.infoPersonalService.getInfoComplementariaGenero(environment.TERCEROS_SERVICE, `info_complementaria_tercero/?query=TerceroId.Id:${Id}` + `,InfoComplementariaId.GrupoInfoComplementariaId.Id:6`).toPromise();
-    console.log('dataGenero', dataGenero)
+    const dataGeneroOneId = await this.infoPersonalService.getInfoComplementariaGenero(environment.TERCEROS_SERVICE, `/info_complementaria_tercero/?query=TerceroId.Id:${Id}` + `,InfoComplementariaId.Id:${environment.IDS_INFO_COMPLEMENTARIA_GENERO[0]}`).toPromise();
 
+    console.log('dataGeneroOneId', dataGeneroOneId)
+
+    if (Object.keys(dataGeneroOneId[0]).length > 0) {
+      this.dataInfo.Genero = dataGeneroOneId[0].InfoComplementariaId.Nombre
+    } else {
+      const dataGeneroTwoId = await this.infoPersonalService.getInfoComplementariaGenero(environment.TERCEROS_SERVICE, `/info_complementaria_tercero/?query=TerceroId.Id:${Id}` + `,InfoComplementariaId.Id:${environment.IDS_INFO_COMPLEMENTARIA_GENERO[1]}`).toPromise();
+
+      console.log('dataGeneroTwoId', dataGeneroTwoId)
+      if (Object.keys(dataGeneroTwoId[0]).length > 0) {
+        this.dataInfo.Genero = dataGeneroTwoId[0].InfoComplementariaId.Nombre
+      } else {
+        const dataGeneroLastId = await this.infoPersonalService.getInfoComplementariaGenero(environment.TERCEROS_SERVICE, `/info_complementaria_tercero/?query=TerceroId.Id:${Id}` + `,InfoComplementariaId.Id:${environment.IDS_INFO_COMPLEMENTARIA_GENERO[2]}`).toPromise();
+
+        console.log('dataGeneroLastId', dataGeneroLastId)
+        if (Object.keys(dataGeneroLastId[0]).length > 0) {
+          this.dataInfo.Genero = dataGeneroLastId[0].InfoComplementariaId.Nombre
+        }
+      }
+    }
   }
 
   private cleanInfoToUpdate({
