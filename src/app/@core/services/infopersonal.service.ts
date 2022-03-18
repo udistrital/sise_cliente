@@ -59,7 +59,7 @@ export class InfoPersonalService {
     return this.httpClient.get(endpoint + `?query=Numero:${document}`, this.getOptions())
   }
 
-  getInfoComplementariaGenero(endpoint, params) {
+  getInfoComplementariaTercero(endpoint, params) {
     return this.httpClient.get(endpoint + params, this.getOptions())
   }
 
@@ -70,5 +70,4 @@ export class InfoPersonalService {
   updateInformation(endpoint, data) {
     return this.httpClient.put(endpoint, data, this.getOptions())
   }
-
 }

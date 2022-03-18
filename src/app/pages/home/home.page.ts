@@ -4,9 +4,10 @@ import { PhotoService } from '../../@core/services/photo.service';
 import { InfoPersonalService } from '../../@core/services/infopersonal.service';
 import { environment } from '../../../environments/environment.dev';
 import { ModalController } from '@ionic/angular';
-import { ModalbasicinfoComponent } from '../../@theme/components/modalbasicinfo/modalbasicinfo.component';
+import { ModalbasicinfoComponent } from '../../@theme/components/modals/modalbasicinfo/modalbasicinfo.component';
 import { HomeService } from '../../@core/services/home.service';
-import { DatosIdentificacionTercero } from 'src/app/@core/data/models/datos_identificacion_tercero';
+import { DatosIdentificacionTercero } from '../../@core/data/models/datos_identificacion_tercero';
+import { ModalbirthdayComponent } from '../../@theme/components/modals/modalbirthday/modalbirthday.component';
 
 @Component({
   selector: 'app-home',
@@ -31,12 +32,12 @@ export class HomePage implements OnInit {
 
   }
 
-  async openModal() {
+  async openModal(component, id) {
     const modal = await this.modalCtrl.create({
-      component: ModalbasicinfoComponent,
+      component: component,
       keyboardClose: false,
       backdropDismiss: false,
-      id: 'modalCreateTercero'
+      id
     });
 
     return await modal.present();
@@ -57,13 +58,11 @@ export class HomePage implements OnInit {
     let data = await this.infoPersonalService.getInformationByDocument(environment.DATOS_IDENTIFICACION_TERCERO_ENDPOINT, documento).toPromise();
 
     console.log(data[0]);
-    
+    this.openModal(ModalbirthdayComponent, 'modal-birthday');
+
     this.terceroPersonalData = data[0]
+    // this.terceroPersonalData.TerceroId.FechaNacimiento = new Date(this.terceroPersonalData.TerceroId.FechaNacimiento).toISOString().replace(/T/, ' ').replace(/\..+/, '').slice(0, -9)
     this.terceroPersonalData.FechaModificacion = new Date(this.terceroPersonalData.FechaModificacion).toISOString().replace(/T/, ' ').replace(/\..+/, '').slice(0, -9)
-    // .subscribe((result: any) => {
-    //   console.log('resultado obtencion DATA TERCERO', result);
-    //   this.dataInfo = result
-    // })
   }
 
   logout() {

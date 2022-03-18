@@ -19,6 +19,7 @@ class DataInfoTercero {
   FechaNacimiento?: string = "";
   TipoDocumento?: string = "";
   Genero?: string = "";
+  EstadoCivil?: string = "";
   UsuarioWSO2?: string = "";
 }
 
@@ -38,6 +39,7 @@ export class InfoPersonalPage implements OnInit {
   dateBirth: any;
   idPersonalInfo: any
   arrPersonalInfo: any
+  arrMaritalStatus: any
   datosGenero: InfoComplementariaTercero;
 
   constructor(
@@ -50,7 +52,7 @@ export class InfoPersonalPage implements OnInit {
     const { email } = this.autenticacion.getPayload()
     console.log(this.autenticacion.getPayload());
 
-    const body = {"user": email};
+    const body = { "user": email };
     this.dataInfo.UsuarioWSO2 = email
 
     const { documento, documento_compuesto, ...rest } = await this.infoPersonalService.getDocumentIdByEmail(environment.API_GET_IDENTIFICATION, body).toPromise() as Documento;
@@ -59,6 +61,12 @@ export class InfoPersonalPage implements OnInit {
       console.log("Something went wrong, when try to get the identification");
       return
     }
+
+    // Setear generos
+    let maritalStatus = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria/?query=GrupoInfoComplementariaId.Id:${environment.ID_GRUPO_ESTADO_CIVIL}` + `&fields=Id,Nombre`).toPromise();
+
+    this.arrMaritalStatus = maritalStatus
+    console.log('civul status', maritalStatus)
 
     const data = await this.infoPersonalService.getInformationByDocument(environment.DATOS_IDENTIFICACION_TERCERO_ENDPOINT, documento).toPromise()
 
@@ -75,28 +83,29 @@ export class InfoPersonalPage implements OnInit {
     this.idPersonalInfo = Id
     console.log('ID DEL TERCERO ', Id)
 
-    // Traer datos genero
-    const dataGeneroOneId = await this.infoPersonalService.getInfoComplementariaGenero(environment.TERCEROS_SERVICE, `/info_complementaria_tercero/?query=TerceroId.Id:${Id}` + `,InfoComplementariaId.Id:${environment.IDS_INFO_COMPLEMENTARIA_GENERO[0]}`).toPromise();
+    await this.getDataInfoComplementariaTercero(environment.IDS_INFO_COMPLEMENTARIA_ESTADO_CIVIL, 'EstadoCivil')
+    await this.getDataInfoComplementariaTercero(environment.IDS_INFO_COMPLEMENTARIA_GENERO, 'Genero')
+  }
 
-    console.log('dataGeneroOneId', dataGeneroOneId)
+  async getDataInfoComplementariaTercero(arrIds: any, fieldToSet: any) {
+    arrIds.forEach(async id => {
+      let data = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria_tercero/?query=TerceroId.Id:${this.idPersonalInfo}` + `,InfoComplementariaId.Id:${id}`).toPromise();
 
-    if (Object.keys(dataGeneroOneId[0]).length > 0) {
-      this.dataInfo.Genero = dataGeneroOneId[0].InfoComplementariaId.Nombre
-    } else {
-      const dataGeneroTwoId = await this.infoPersonalService.getInfoComplementariaGenero(environment.TERCEROS_SERVICE, `/info_complementaria_tercero/?query=TerceroId.Id:${Id}` + `,InfoComplementariaId.Id:${environment.IDS_INFO_COMPLEMENTARIA_GENERO[1]}`).toPromise();
+      if (Object.keys(data[0]).length > 0) {
 
-      console.log('dataGeneroTwoId', dataGeneroTwoId)
-      if (Object.keys(dataGeneroTwoId[0]).length > 0) {
-        this.dataInfo.Genero = dataGeneroTwoId[0].InfoComplementariaId.Nombre
-      } else {
-        const dataGeneroLastId = await this.infoPersonalService.getInfoComplementariaGenero(environment.TERCEROS_SERVICE, `/info_complementaria_tercero/?query=TerceroId.Id:${Id}` + `,InfoComplementariaId.Id:${environment.IDS_INFO_COMPLEMENTARIA_GENERO[2]}`).toPromise();
-
-        console.log('dataGeneroLastId', dataGeneroLastId)
-        if (Object.keys(dataGeneroLastId[0]).length > 0) {
-          this.dataInfo.Genero = dataGeneroLastId[0].InfoComplementariaId.Nombre
-        }
+        console.log('data[0]', data[0]);
+        this.dataInfo[fieldToSet] = data[0].InfoComplementariaId.Nombre.trim().toUpperCase();
+        return true;
       }
-    }
+    });
+
+    return;
+  }
+
+  compareObject(o1: any, o2: any) {
+    console.log(o1, o2);
+    // return o1 && o2 ? o1.id === o2.id : o1 === o2;
+    return o1?.Nombre === this.dataInfo?.EstadoCivil;
   }
 
   private cleanInfoToUpdate({

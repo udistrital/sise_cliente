@@ -247,11 +247,19 @@
           <ion-item>
             <ion-label>Estado civil</ion-label>
             <ion-icon slot="start" name="person-outline"></ion-icon>
-            <ion-select placeholder="Seleccionar" interface="popover">
-              <ion-select-option value="Soltero">Soltero(a)</ion-select-option>
+            <!-- placeholder="Seleccionar" -->
+            <!-- value="{{}}" -->
+            <!-- [compareWith]="compareObject" -->
+
+            <!-- PENDIENTE DE DEJAR SETEADO POR DEFECTO CON COMPAREWITH -->
+            <ion-select 
+            placeholder="{{dataInfo?.EstadoCivil}}"
+            interface="popover">
+              <!-- <ion-select-option value="Soltero">Soltero(a)</ion-select-option>
               <ion-select-option value="Casado">Casado(a)</ion-select-option>
-              <ion-select-option value="Unionlibre">Union libre</ion-select-option>
-              <ion-select-option value="Separado">Separado(a)</ion-select-option>
+              <ion-select-option value="Separado">Separado(a)</ion-select-option> -->
+              <ion-select-option *ngFor="let maritalStatus of arrMaritalStatus" value="{{maritalStatus.Id}}">{{maritalStatus.Nombre}}</ion-select-option>
+              <!-- <ion-option value="Unionlibre" [selected]="true">Union libre</ion-option> -->
             </ion-select>
           </ion-item>
         </ion-col>
