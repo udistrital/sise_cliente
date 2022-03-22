@@ -8,12 +8,13 @@ import { ModalbasicinfoComponent } from '../../@theme/components/modals/modalbas
 import { HomeService } from '../../@core/services/home.service';
 import { DatosIdentificacionTercero } from '../../@core/data/models/datos_identificacion_tercero';
 import { ModalbirthdayComponent } from '../../@theme/components/modals/modalbirthday/modalbirthday.component';
+import { ModalService } from '../../@core/services/modal.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  providers: [HomeService, InfoPersonalService, PhotoService]
+  providers: [HomeService, InfoPersonalService, PhotoService, ModalService]
 })
 
 export class HomePage implements OnInit {
@@ -25,29 +26,10 @@ export class HomePage implements OnInit {
 
   constructor(
     public homeService: HomeService,
-    public modalCtrl: ModalController,
+    public modalService: ModalService,
     public photoService: PhotoService,
     private readonly infoPersonalService: InfoPersonalService
-  ) {
-
-  }
-
-  async openModal(component, id) {
-    const modal = await this.modalCtrl.create({
-      component: component,
-      keyboardClose: false,
-      backdropDismiss: false,
-      id
-    });
-
-    return await modal.present();
-  }
-
-  public dismiss() {
-    this.modalCtrl.dismiss({
-      'dismissed': true
-    });
-  }
+  ) {}
 
   async ngOnInit() {
 
@@ -58,7 +40,7 @@ export class HomePage implements OnInit {
     let data = await this.infoPersonalService.getInformationByDocument(environment.DATOS_IDENTIFICACION_TERCERO_ENDPOINT, documento).toPromise();
 
     console.log(data[0]);
-    this.openModal(ModalbirthdayComponent, 'modal-birthday');
+    this.modalService.openModal(ModalbirthdayComponent, 'modal-birthday');
 
     this.terceroPersonalData = data[0]
     // this.terceroPersonalData.TerceroId.FechaNacimiento = new Date(this.terceroPersonalData.TerceroId.FechaNacimiento).toISOString().replace(/T/, ' ').replace(/\..+/, '').slice(0, -9)

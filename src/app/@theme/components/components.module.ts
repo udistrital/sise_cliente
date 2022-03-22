@@ -6,12 +6,14 @@ import { ModalbasicinfoComponent } from './modals/modalbasicinfo/modalbasicinfo.
 import { FormsModule } from '@angular/forms';
 import { HomePage } from '../../pages/home/home.page';
 import { ModalbirthdayComponent } from './modals/modalbirthday/modalbirthday.component';
+import { ModalneweventComponent } from './modals/modalsevents/modalnewevent/modalnewevent/modalnewevent.component';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     ModalbasicinfoComponent,
     ModalbirthdayComponent,
+    ModalneweventComponent,
   ],
   imports: [
     IonicModule.forRoot(),
@@ -22,10 +24,12 @@ import { ModalbirthdayComponent } from './modals/modalbirthday/modalbirthday.com
     HeaderComponent,
     ModalbasicinfoComponent,
     ModalbirthdayComponent,
+    ModalneweventComponent,
   ],
   entryComponents: [
     ModalbasicinfoComponent,
     ModalbirthdayComponent,
+    ModalneweventComponent,
   ],
   providers: [
     HomePage

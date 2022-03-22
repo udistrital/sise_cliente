@@ -34,8 +34,10 @@
       </ion-avatar>
       <ion-card-title>{{this.terceroPersonalData?.TerceroId?.NombreCompleto}}</ion-card-title>
       <ion-card-subtitle class="subtitulo">Fecha ultima actualizacion: {{this.terceroPersonalData?.FechaModificacion}}</ion-card-subtitle>
+      
+      <ion-button (click)="addPhotoToGallery()">Tomar o subir una foto</ion-button>
     </ion-card-header>
-    <ion-button slot="start" (click)="addPhotoToGallery()">Tomar o subir una foto</ion-button>
+    <!-- slot="start" -->
   </ion-card>
 
   <!-- <div class="modal" id="modalBasicUserData">
