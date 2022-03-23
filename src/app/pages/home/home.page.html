@@ -1,86 +1,115 @@
-<ion-header>
+<ion-header style="margin-bottom:2rem;">
   <ion-toolbar>
     <ion-title>Inicio</ion-title>
-    <ion-buttons slot="start"> 
-      <ion-menu-button menu="main-menu">
-      </ion-menu-button>
-    </ion-buttons>    
-    <ion-button class = "boton-cerrar" slot="start" (click)="logout()">Cerrar Sesion</ion-button>
-    
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons>
+    <ion-button class="boton-cerrar" style="z-index:100;" slot="start" (click)="logout()">Cerrar Sesion</ion-button>
+
   </ion-toolbar>
 </ion-header>
 
+<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Launch demo modal
+</button> -->
 
+<!-- Modal -->
 
+<!-- <div class="modal" #modalBasicInfoUserOpen>
+  <div class="modal-content">
+    <h4>Modal Header</h4>
+    <p>A bunch of text</p>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+  </div>
+</div> -->
 
-<ion-content fullscreen>
+<ion-content>
   <ion-card class="Inicio">
-    <center>
-      <ion-card-header>
-        <ion-avatar>
-          <img src="../assets/avatar.png">
-        </ion-avatar>
-        <ion-card-title>Nombre del Egresado</ion-card-title>
-        <ion-card-subtitle class="subtitulo">Fecha ultima actualizacion: dd/mm/aaaa</ion-card-subtitle>
-      </ion-card-header>
-      <ion-button  slot="start" (click)="addPhotoToGallery()">Tomar o subir una foto</ion-button>
+    <ion-card-header style="justify-content: center; display: grid; text-align: center;
+      align-items: center;">
+      <ion-avatar style="margin: 0 auto;">
+        <img src="../assets/avatar.png">
+      </ion-avatar>
+      <ion-card-title>{{this.terceroPersonalData?.TerceroId?.NombreCompleto}}</ion-card-title>
+      <ion-card-subtitle class="subtitulo">Fecha ultima actualizacion: {{this.terceroPersonalData?.FechaModificacion}}</ion-card-subtitle>
       
-    </center>
-  </ion-card> 
-<ion-grid>
-  <ion-row>
-  <ion-col>
-    <ion-card class="Inicio-derecha">
-      <ion-card-title>Eventos</ion-card-title>
-    </ion-card>
-  </ion-col>
-  <ion-col>
-    <ion-card class="Inicio-izquierda">
-      <ion-card-title>Noticias</ion-card-title>
-    </ion-card>
+      <ion-button (click)="addPhotoToGallery()">Tomar o subir una foto</ion-button>
+    </ion-card-header>
+    <!-- slot="start" -->
+  </ion-card>
 
-  </ion-col>
+  <!-- <div class="modal" id="modalBasicUserData">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div> -->
 
-</ion-row>
-</ion-grid>
 
- 
-
-
-</ion-content>
-
-
-<ion-footer class=footer>
   <ion-grid>
     <ion-row>
       <ion-col>
-        <img class="logo-ud" src="../../../assets/icon/logo_horizontal_ud.png">
+        <ion-card class="Inicio-derecha">
+          <ion-card-title>Eventos</ion-card-title>
+        </ion-card>
       </ion-col>
       <ion-col>
-        <ion-item >
-          <div >
-            <span>Lunes a viernes </span>
-            <span>8:00 am a 5:00 pm</span>
-        </div>
-          <ion-icon slot ="start" name="time-outline"></ion-icon>
-        </ion-item>
+        <ion-card class="Inicio-izquierda">
+          <ion-card-title>Noticias</ion-card-title>
+        </ion-card>
+
       </ion-col>
-      <ion-col>
-        <ion-item >
-          <div >
-            <span>Sistema de Informacion y Seguimiento al Egresado</span>
-        </div>
-          <ion-icon slot ="start" name="globe-outline"></ion-icon>
-        </ion-item>
-      </ion-col>
-      <ion-col>
-        <ion-item >
-          <div >
-            <span>Cra. 8 # 40 - 78</span>
-        </div>
-          <ion-icon slot ="start" name="location-outline"></ion-icon>
-        </ion-item>
-      </ion-col>
+
     </ion-row>
   </ion-grid>
-</ion-footer>
+
+
+  <ion-footer class="footer bg-white">
+    <ion-grid>
+      <ion-row style="justify-content: center; align-items: center; display:flex;">
+        <ion-col>
+          <img class="logo-ud" src="../../../assets/icon/logo_horizontal_ud.png">
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <div>
+              <span>Lunes a viernes </span>
+              <span>8:00 am a 5:00 pm</span>
+            </div>
+            <ion-icon slot="start" name="time-outline"></ion-icon>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <div>
+              <span>Sistema de Informacion y Seguimiento al Egresado</span>
+            </div>
+            <ion-icon slot="start" name="globe-outline"></ion-icon>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item style="width: 75%;">
+            <div>
+              <span>Cra. 8 # 40 - 78</span>
+            </div>
+            <ion-icon slot="start" name="location-outline"></ion-icon>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-footer>
+
+</ion-content>

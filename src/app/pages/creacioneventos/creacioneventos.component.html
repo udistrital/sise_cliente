@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Gestión de eventos</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="Inicio">
+    <ion-card-header style="display: flex; justify-content: space-between;">
+      <ion-card-title>Eventos</ion-card-title>
+      <ion-button class="boton" type="submit" color="primary" (click)="openNewEventModal()">
+        Nuevo evento
+      </ion-button>
+      <!-- <ion-card-subtitle class="subtitulo">Datos de escuela media</ion-card-subtitle> -->
+    </ion-card-header>
+
+    <ion-grid>
+      <ion-row style="border: none;">
+        <ion-col style="border: none;">
+
+          <!-- <ion-content class="ion-margin"> -->
+          <ion-grid class="ion-margin">
+            <ion-row style="color: black">
+              <ion-col color="dark" size="1">#</ion-col>
+              <ion-col color="dark">Título</ion-col>
+              <ion-col color="dark">Lugar</ion-col>
+              <ion-col color="dark">Fecha / Hora</ion-col>
+              <ion-col color="dark">Invitados</ion-col>
+              <ion-col color="dark">Acciones</ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-col size="1">1</ion-col>
+              <ion-col>
+                Integración equipo de trabajo egresados
+              </ion-col>
+              <ion-col>
+                Coworking monserrate
+              </ion-col>
+              <ion-col>
+                2022/05/21 12:00pm
+              </ion-col>
+              <ion-col>
+                Contratistas programa de egresados
+              </ion-col>
+              <ion-col style="display: flex; justify-content: center; align-items:center;">
+                <ion-button color="warning">
+                  <ion-icon name="create-outline"></ion-icon>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+</ion-content>

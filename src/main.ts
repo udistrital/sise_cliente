@@ -15,7 +15,7 @@ import {defineCustomElements} from '@ionic/pwa-elements/loader'
 if (environment.production) {
  enableProdMode();
 }
-const autenticacion = new ImplicitAutenticationService;
+const autenticacion = new ImplicitAutenticationService();
 
 
 
