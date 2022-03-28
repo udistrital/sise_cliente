@@ -21,6 +21,7 @@ class DataInfoTercero {
   Genero?: string = "";
   EstadoCivil?: string = "";
   UsuarioWSO2?: string = "";
+  Celular?: string = "";
 }
 
 @Component({
@@ -79,10 +80,15 @@ export class InfoPersonalPage implements OnInit {
     this.dataInfo.Id = documento_compuesto.substring(2);
     this.dataInfo.FechaNacimiento = new Date(data[0].TerceroId.FechaNacimiento).toISOString().replace(/T/, ' ').replace(/\..+/, '').slice(0, -9)
     this.dataInfo.LugarOrigen = data[0].TerceroId.LugarOrigen as string;
+    
+    // Obtenemos info de contacto
+    // const contactInfo = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria_tercero/?query=InfoComplementariaId.Id:${environment.ID_INFO_COMPLEMENTARIA_CELULAR}`).toPromise();
+    // this.dataInfo.Celular =
+    
     const Id = data[0].TerceroId.Id as number; // id del tercero
     this.idPersonalInfo = Id
-    console.log('ID DEL TERCERO ', Id)
 
+    console.log('ID DEL TERCERO ', Id)
     await this.getDataInfoComplementariaTercero(environment.IDS_INFO_COMPLEMENTARIA_ESTADO_CIVIL, 'EstadoCivil')
     await this.getDataInfoComplementariaTercero(environment.IDS_INFO_COMPLEMENTARIA_GENERO, 'Genero')
   }

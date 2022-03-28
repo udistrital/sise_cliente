@@ -4,6 +4,8 @@
 /out-tsc
 .angular/cache
 .angular
+www/
+www
 
 # dependencies
 /node_modules
