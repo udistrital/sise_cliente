@@ -9,24 +9,24 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
 import { ImplicitAutenticationService } from './app/@core/utils/implicit_autentication.service';
-import {defineCustomElements} from '@ionic/pwa-elements/loader'
+import { defineCustomElements } from '@ionic/pwa-elements/loader'
 
 
 if (environment.production) {
- enableProdMode();
+  enableProdMode();
 }
+
 const autenticacion = new ImplicitAutenticationService();
-
-
 
 const isButtonLogin = false;
 
+// console.log('MAIN.TS')
+// alert('MAIN.TS')
 if (!autenticacion.getAuthorizationUrl(isButtonLogin)) {
+} else {
+  autenticacion.live();
+}
 
- } else {
-   autenticacion.live();
-
-        }
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));
 

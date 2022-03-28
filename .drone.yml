@@ -15,7 +15,7 @@ steps:
     commands:
      - node --version
      - npm i
-     - npm run build
+     - npm run build --configuration=test
      - ls -la
     when:
       branch: [release/*]
