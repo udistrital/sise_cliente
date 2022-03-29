@@ -22,6 +22,12 @@ class DataInfoTercero {
   EstadoCivil?: string = "";
   UsuarioWSO2?: string = "";
   Celular?: string = "";
+  CorreoPersonal?: string = "";
+  Direccion?: string = "";
+  RedSocialUno?: string = "";
+  RedSocialDos?: string = "";
+  Nacionalidad?: string = "";
+  LugarNacimiento?: string = "";
 }
 
 @Component({
@@ -71,22 +77,47 @@ export class InfoPersonalPage implements OnInit {
 
     const data = await this.infoPersonalService.getInformationByDocument(environment.DATOS_IDENTIFICACION_TERCERO_ENDPOINT, documento).toPromise()
 
+    const Id = data[0].TerceroId.Id as number; // id del tercero
+    this.idPersonalInfo = Id
     this.arrPersonalInfo = data
 
-    console.log(data, rest)
+    // console.log(data, rest)
+    console.log('data', data)
 
     this.dataInfo.NombreCompleto = data[0].TerceroId.NombreCompleto as string;
     this.dataInfo.TipoDocumento = documento_compuesto.substring(0, 2);
     this.dataInfo.Id = documento_compuesto.substring(2);
     this.dataInfo.FechaNacimiento = new Date(data[0].TerceroId.FechaNacimiento).toISOString().replace(/T/, ' ').replace(/\..+/, '').slice(0, -9)
     this.dataInfo.LugarOrigen = data[0].TerceroId.LugarOrigen as string;
-    
+
     // Obtenemos info de contacto
-    // const contactInfo = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria_tercero/?query=InfoComplementariaId.Id:${environment.ID_INFO_COMPLEMENTARIA_CELULAR}`).toPromise();
-    // this.dataInfo.Celular =
-    
-    const Id = data[0].TerceroId.Id as number; // id del tercero
-    this.idPersonalInfo = Id
+    // setear celular
+    const celular = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria_tercero/?query=InfoComplementariaId.Id:${environment.ID_INFO_COMPLEMENTARIA_CELULAR},TerceroId.Id:${this.idPersonalInfo}`).toPromise();
+    this.dataInfo.Celular = celular[0].Dato
+
+    // setear correo personal
+    const correoPersonal = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria_tercero/?query=InfoComplementariaId.Id:${environment.ID_INFO_COMPLEMENTARIA_CORREO_PERSONAL},TerceroId.Id:${this.idPersonalInfo}`).toPromise();
+    this.dataInfo.CorreoPersonal = JSON.parse(correoPersonal[0].Dato).Data
+
+    // setear DIRECCIÓN
+    const direccionAPIResults = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria_tercero/?query=InfoComplementariaId.Id:${environment.ID_INFO_COMPLEMENTARIA_DIRECCION},TerceroId.Id:${this.idPersonalInfo}`).toPromise();
+    this.dataInfo.Direccion = JSON.parse(direccionAPIResults[0].Dato).DIRECCIÓN
+
+    // setear RED SOCIAL 1
+    const redSocialUnoAPIResults = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria_tercero/?query=InfoComplementariaId.Id:${environment.ID_INFO_COMPLEMENTARIA_RED_SOCIAL_UNO},TerceroId.Id:${this.idPersonalInfo}`).toPromise();
+    this.dataInfo.RedSocialUno = JSON.parse(redSocialUnoAPIResults[0].Dato).Data
+
+    // setear RED SOCIAL 2
+    const redSocialDosAPIResults = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria_tercero/?query=InfoComplementariaId.Id:${environment.ID_INFO_COMPLEMENTARIA_RED_SOCIAL_DOS},TerceroId.Id:${this.idPersonalInfo}`).toPromise();
+    this.dataInfo.RedSocialDos = JSON.parse(redSocialDosAPIResults[0].Dato).Data
+
+    // setear nacionalidad
+    const nacionalidadAPIResults = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria_tercero/?query=InfoComplementariaId.Id:${environment.ID_INFO_COMPLEMENTARIA_NACIONALIDAD},TerceroId.Id:${this.idPersonalInfo}`).toPromise();
+    this.dataInfo.Nacionalidad = JSON.parse(nacionalidadAPIResults[0].Dato).Data
+
+    // setear lugar de nacimiento
+    const lugarNacimientoAPIResults = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria_tercero/?query=InfoComplementariaId.Id:${environment.ID_INFO_COMPLEMENTARIA_LUGAR_NACIMIENTO},TerceroId.Id:${this.idPersonalInfo}`).toPromise();
+    this.dataInfo.LugarNacimiento = JSON.parse(lugarNacimientoAPIResults[0].Dato).Data
 
     console.log('ID DEL TERCERO ', Id)
     await this.getDataInfoComplementariaTercero(environment.IDS_INFO_COMPLEMENTARIA_ESTADO_CIVIL, 'EstadoCivil')
