@@ -14,7 +14,7 @@ steps:
     image: node:15.3
     commands:
      - node --version
-     - npm i
+     - npm i --force
      - npm run build --configuration=test
      - ls -la
     when:
