@@ -22,14 +22,14 @@
           <ion-item lines="full">
             <ion-label position="floating">Nombre del colegio</ion-label>
             <ion-icon slot="start" name="business-outline"></ion-icon>
-            <ion-input disabled="true"></ion-input>
+            <ion-input disabled="true" value="{{dataInfo?.NombreColegio}}"></ion-input>
           </ion-item>
         </ion-col>
         <ion-col>
           <ion-item lines="full">
-            <ion-label position="floating">Ciudad donde se encuentra</ion-label>
+            <ion-label position="floating">Ciudad donde esta el colegio</ion-label>
             <ion-icon slot="start" name="flag-outline"></ion-icon>
-            <ion-input disabled="true"></ion-input>
+            <ion-input disabled="true" value="{{dataInfo?.CiudadColegio}}"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -38,7 +38,7 @@
           <ion-item lines="full">
             <ion-label position="floating">Fecha de graduacion</ion-label>
             <ion-icon slot="start" name="calendar-outline"></ion-icon>
-            <ion-input disabled="true"></ion-input>
+            <ion-input disabled="true" value="{{dataInfo?.FechaGraduacionColegio}}"></ion-input>
           </ion-item>
         </ion-col>
         <ion-col>
