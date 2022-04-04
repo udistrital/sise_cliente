@@ -11,7 +11,7 @@ name: cliente_deploy
 steps:
   # build and test the go program
   - name: nodejs
-    image: node:15.3
+    image: node:latest
     commands:
      - node --version
      - npm i --force
@@ -22,10 +22,10 @@ steps:
       event: [push]
 
   - name: nodejs_prod
-    image: node:15.3
+    image: node:latest
     commands:
      - node --version
-     - npm i
+     - npm i --force
      - npm run build --configuration=prod
      - ls -la
     when:
