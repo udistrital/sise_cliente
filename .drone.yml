@@ -16,7 +16,7 @@ steps:
      - node --version
      - npm i --force
      - npm run build --configuration=test
-     - ls -la
+    #  - ls -la
     when:
       branch: [release/*]
       event: [push]
@@ -27,7 +27,7 @@ steps:
      - node --version
      - npm i --force
      - npm run build --configuration=prod
-     - ls -la
+    #  - ls -la
     when:
       branch: [master]
       event: [push, pull_request]

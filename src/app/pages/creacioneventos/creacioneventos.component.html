@@ -11,17 +11,15 @@
   <ion-card class="Inicio">
     <ion-card-header style="display: flex; justify-content: space-between;">
       <ion-card-title>Eventos</ion-card-title>
-      <ion-button class="boton" type="submit" color="primary" (click)="openNewEventModal()">
+      <!-- <ion-button class="boton" type="submit" color="primary" (click)="openNewEventModal()">
         Nuevo evento
-      </ion-button>
-      <!-- <ion-card-subtitle class="subtitulo">Datos de escuela media</ion-card-subtitle> -->
+      </ion-button> -->
     </ion-card-header>
 
     <ion-grid>
       <ion-row style="border: none;">
         <ion-col style="border: none;">
 
-          <!-- <ion-content class="ion-margin"> -->
           <ion-grid class="ion-margin">
             <ion-row style="color: black">
               <ion-col color="dark" size="1">#</ion-col>
@@ -52,9 +50,68 @@
                 </ion-button>
               </ion-col>
             </ion-row>
+            <ion-row>
+              <ion-col size="1">2</ion-col>
+              <ion-col>
+                Integración equipo de trabajo egresados
+              </ion-col>
+              <ion-col>
+                Coworking monserrate
+              </ion-col>
+              <ion-col>
+                2022/05/21 12:00pm
+              </ion-col>
+              <ion-col>
+                Contratistas programa de egresados
+              </ion-col>
+              <ion-col style="display: flex; justify-content: center; align-items:center;">
+                <ion-button color="warning">
+                  <ion-icon name="create-outline"></ion-icon>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="1">3</ion-col>
+              <ion-col>
+                Integración equipo de trabajo egresados
+              </ion-col>
+              <ion-col>
+                Coworking monserrate
+              </ion-col>
+              <ion-col>
+                2022/05/21 12:00pm
+              </ion-col>
+              <ion-col>
+                Contratistas programa de egresados
+              </ion-col>
+              <ion-col style="display: flex; justify-content: center; align-items:center;">
+                <ion-button color="warning">
+                  <ion-icon name="create-outline"></ion-icon>
+                </ion-button>
+              </ion-col>
+            </ion-row>
           </ion-grid>
         </ion-col>
       </ion-row>
     </ion-grid>
   </ion-card>
+
+
+  <ion-header style="margin-right: 2rem; margin-left: 2rem;" [translucent]="false">
+    <ion-toolbar style="display: flex; justify-content: space-between;">
+      <ion-title style="display: flex; justify-content: space-between;">
+        Eventos
+      </ion-title>
+      
+      <ion-button class="boton" type="submit" color="primary" (click)="openNewEventModal()">
+        Nuevo evento
+      </ion-button>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content [fullscreen]="false">
+    <ngx-datatable style="margin-right: 2rem; margin-left: 2rem; padding: 2rem;" [columnMode]="'force'" class="material" [limit]="7" [rows]="rows" [rowHeight]="60" [columns]="col" [sortType]="'multi'" [headerHeight]="60" [footerHeight]="60">
+    </ngx-datatable>
+  </ion-content>
+
 </ion-content>
