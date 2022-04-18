@@ -45,7 +45,7 @@ export const environment = {
   MAPSKEY: 'AIzaSyB_TBcoCJNaFCJBiwMreM2PoHOkj19Gr00',
   TOKEN: {
     AUTORIZATION_URL: 'https://autenticacion.portaloas.udistrital.edu.co/oauth2/authorize',
-    CLIENTE_ID: 'e36v1MPQk2jbz9KM4SmKhk8Cyw0a',
+    CLIENTE_ID: 's2BR5hCyo1Bea2dCiMxx9usviQoa',
     RESPONSE_TYPE: 'id_token token',
     SCOPE: 'openid email role',
     REDIRECT_URL: 'https://pruebassise.portaloas.udistrital.edu.co',
@@ -76,5 +76,6 @@ export const environment = {
   ID_INFO_COMPLEMENTARIA_INTERESES: 320,
   ID_INFO_COMPLEMENTARIA_PAIS: 321,
   IDS_INFO_COMPLEMENTARIA_MUNICIPIOS: [147, 148, 149],
-  ID_GRUPO_INFO_COMPLEMENTARIA_MUNICIPIOS: 30
+  ID_GRUPO_INFO_COMPLEMENTARIA_MUNICIPIOS: 30,
+  API_ENDPOINT_UBICACIONES: "https://autenticacion.portaloas.udistrital.edu.co/apioas/ubicaciones_crud/v2/"
 };
