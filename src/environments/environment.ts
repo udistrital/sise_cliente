@@ -45,7 +45,7 @@ export const environment = {
   MAPSKEY: 'AIzaSyB_TBcoCJNaFCJBiwMreM2PoHOkj19Gr00',
   TOKEN: {
     AUTORIZATION_URL: 'https://autenticacion.portaloas.udistrital.edu.co/oauth2/authorize',
-    CLIENTE_ID: 's2BR5hCyo1Bea2dCiMxx9usviQoa',
+    CLIENTE_ID: 'e36v1MPQk2jbz9KM4SmKhk8Cyw0a',
     RESPONSE_TYPE: 'id_token token',
     SCOPE: 'openid email role',
     REDIRECT_URL: 'https://pruebassise.portaloas.udistrital.edu.co',
