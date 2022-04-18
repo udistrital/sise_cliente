@@ -1,13 +1,34 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Contactar Egresado</ion-title>
+    <ion-title>Ubicar Egresado</ion-title>
     <ion-buttons slot="start">
       <ion-menu-button menu="main-menu"></ion-menu-button>
     </ion-buttons>
-    
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
+  <div class="wrapper">
+    <div class="container">
+      <div class="flex">
+        <div class="search form-inline form--search" id="search">
+          <div class="form-group">
+            <ion-item lines="full">
+              <ion-label position="floating">Filtrar por país</ion-label>
+              <ion-icon slot="start" name="search-outline"></ion-icon>
+              <ion-input id="searchInput" type="text" required></ion-input>
+            </ion-item>
+          </div>
+        </div>
+        <div class="price hidden" id="price">
+          <span class="price__value" id="value"></span>
+          <span class="price__unit" id="unit"></span>
+        </div>
+      </div>
+      <div class="map__wrap" id="mapContainer">
+        <div class="map">Cargando mapa...</div>
+      </div>
+    </div>
+  </div>
 </ion-content>

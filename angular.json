@@ -14,7 +14,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "www",
+            "outputPath": "build",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -40,6 +40,7 @@
               }
             ],
             "scripts": [
+              
             ]
           },
           "configurations": {
@@ -100,7 +101,9 @@
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "styles": [],
-            "scripts": [],
+            "scripts": [
+           
+            ],
             "assets": [
               {
                 "glob": "favicon.ico",

@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { ImplicitAutenticationService } from '../utils/implicit_autentication.service';
+import { environment } from 'src/environments/environment';
 
 
 export const handleError = (error: HttpErrorResponse) => {
@@ -32,6 +34,7 @@ export const handleError = (error: HttpErrorResponse) => {
 })
 
 export class InfoPersonalService {
+  private autenticacion = new ImplicitAutenticationService;
 
   constructor(
     private readonly httpClient: HttpClient
@@ -69,5 +72,19 @@ export class InfoPersonalService {
 
   updateInformation(endpoint, data) {
     return this.httpClient.put(endpoint, data, this.getOptions())
+  }
+
+  async getTerceroId() {
+    const { email } = this.autenticacion.getPayload()
+    const { documento } = await this.getDocumentIdByEmail(environment.API_GET_IDENTIFICATION, { "user": email }).toPromise() as any;
+
+    if (!documento) {
+      console.error("Something went wrong, when try to get the identification");
+      return
+    }
+
+    const data = await this.getInformationByDocument(environment.DATOS_IDENTIFICACION_TERCERO_ENDPOINT, documento).toPromise()
+    const Id = data[0].TerceroId.Id as number;
+    return Id
   }
 }
