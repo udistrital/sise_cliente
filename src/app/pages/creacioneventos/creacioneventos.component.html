@@ -8,12 +8,12 @@
 </ion-header>
 
 <ion-content>
-  <ion-card class="Inicio">
+  <!-- <ion-card class="Inicio">
     <ion-card-header style="display: flex; justify-content: space-between;">
       <ion-card-title>Eventos</ion-card-title>
-      <!-- <ion-button class="boton" type="submit" color="primary" (click)="openNewEventModal()">
+      <ion-button class="boton" type="submit" color="primary" (click)="openEventModal()">
         Nuevo evento
-      </ion-button> -->
+      </ion-button>
     </ion-card-header>
 
     <ion-grid>
@@ -94,24 +94,47 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-  </ion-card>
+  </ion-card> -->
 
 
-  <ion-header style="margin-right: 2rem; margin-left: 2rem;" [translucent]="false">
-    <ion-toolbar style="display: flex; justify-content: space-between;">
-      <ion-title style="display: flex; justify-content: space-between;">
+  <ion-header style="margin-right: 4rem; margin-left: 2rem;" [translucent]="false">
+    <ion-toolbar style="display: flex; justify-content: space-between; margin-top: 2rem;">
+      <ion-title style="float:left;">
         Eventos
       </ion-title>
-      
-      <ion-button class="boton" type="submit" color="primary" (click)="openNewEventModal()">
+
+      <ion-button style="float: right; margin-right: 7rem;" class="boton" type="submit" color="primary" (click)="openEventModal()">
         Nuevo evento
       </ion-button>
     </ion-toolbar>
   </ion-header>
 
   <ion-content [fullscreen]="false">
-    <ngx-datatable style="margin-right: 2rem; margin-left: 2rem; padding: 2rem;" [columnMode]="'force'" class="material" [limit]="7" [rows]="rows" [rowHeight]="60" [columns]="col" [sortType]="'multi'" [headerHeight]="60" [footerHeight]="60">
+    <ngx-datatable [sorts]="[{prop: 'Id', dir: 'desc'}]" style="margin: 2rem; padding: 2rem;" [columnMode]="'force'" class="material" [limit]="7" [rows]="rows" [rowHeight]="60" [headerHeight]="60" [footerHeight]="60" [sortable]="true">
+      <ngx-datatable-column name="Id"></ngx-datatable-column>
+      <ngx-datatable-column name="Descripcion"></ngx-datatable-column>
+      <ngx-datatable-column name="Inicio"></ngx-datatable-column>
+      <ngx-datatable-column name="Fin"></ngx-datatable-column>
+      <ngx-datatable-column name="Lugar"></ngx-datatable-column>
+      <ngx-datatable-column name="test" [resizeable]="false">
+        <ng-template ngx-datatable-header-template></ng-template>
+        <ng-template ngx-datatable-cell-template let-row="row">
+          <!-- (click)="open(row)" -->
+          <!-- <button ion-button small outline color="light">
+            Detalles
+          </button> -->
+          <ion-button color="warning" (click)="openEventModal(row)">
+            <ion-icon name="create-outline"></ion-icon>
+          </ion-button>
+        </ng-template>
+      </ngx-datatable-column>
     </ngx-datatable>
+
+    <!-- <ion-col style="display: flex; justify-content: center; align-items:center;">
+      <ion-button color="warning">
+        <ion-icon name="create-outline"></ion-icon>
+      </ion-button>
+    </ion-col> -->
   </ion-content>
 
 </ion-content>

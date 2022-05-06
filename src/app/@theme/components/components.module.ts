@@ -7,6 +7,8 @@ import { FormsModule } from '@angular/forms';
 import { HomePage } from '../../pages/home/home.page';
 import { ModalbirthdayComponent } from './modals/modalbirthday/modalbirthday.component';
 import { ModalneweventComponent } from './modals/modalsevents/modalnewevent/modalnewevent/modalnewevent.component';
+import { IonicSelectableModule } from 'ionic-selectable';
+import { InfoPersonalService } from '../../@core/services/infopersonal.service';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,7 @@ import { ModalneweventComponent } from './modals/modalsevents/modalnewevent/moda
     IonicModule.forRoot(),
     CommonModule,
     FormsModule,
+    IonicSelectableModule
   ],
   exports: [
     HeaderComponent,
@@ -32,7 +35,8 @@ import { ModalneweventComponent } from './modals/modalsevents/modalnewevent/moda
     ModalneweventComponent,
   ],
   providers: [
-    HomePage
+    HomePage,
+    InfoPersonalService
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

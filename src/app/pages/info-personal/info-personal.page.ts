@@ -12,6 +12,7 @@ import { ImplicitAutenticationService } from '../../@core/utils/implicit_autenti
 import { InfoPersonalService } from '../../@core/services/infopersonal.service';
 import { Documento } from '../../@core/data/models/document';
 import { DataInfoTercero } from '../../@core/data/models/data_info_tercero';
+// import {}
 
 @Component({
   selector: 'app-info-personal',
@@ -31,7 +32,9 @@ export class InfoPersonalPage implements OnInit {
   arrPersonalInfo: any
   arrMaritalStatus: any
   arrMunicipalities: any
+  arrLocalities: any
   datosGenero: InfoComplementariaTercero;
+  dpts:any
 
   constructor(
     private terceroHerlper: TerceroHerlper,
@@ -39,6 +42,41 @@ export class InfoPersonalPage implements OnInit {
   ) { }
 
   async ngOnInit() {
+    this.dpts = [
+      "Amazonas",
+      "Antioquia",
+      "Arauca",
+      "Archipielago De San Andres",
+      "Atlantico",
+      "Bogota D.C",
+      "Bolivar",
+      "Boyaca",
+      "Caldas",
+      "Caqueta",
+      "Casanare",
+      "Cauca",
+      "Cesar",
+      "Choco",
+      "Cordoba",
+      "Cundinamarca",
+      "Guainia",
+      "Guaviare",
+      "Huila",
+      "La Guajira",
+      "Magdalena",
+      "Meta",
+      "Nariño",
+      "Norte De Santander",
+      "Putumayo",
+      "Quindio",
+      "Risaralda",
+      "Santander",
+      "Sucre",
+      "Tolima",
+      "Valle Del Cauca",
+      "Vaupes",
+      "Vichada"
+    ]
 
     const { email } = this.autenticacion.getPayload()
     console.log(this.autenticacion.getPayload());
@@ -60,6 +98,14 @@ export class InfoPersonalPage implements OnInit {
     // Setear Municipios
     let municipalities = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria/?query=GrupoInfoComplementariaId.Id:${environment.ID_GRUPO_INFO_COMPLEMENTARIA_MUNICIPIOS}` + `&fields=Id,Nombre`).toPromise();
     this.arrMunicipalities = municipalities
+
+     // Setear Localidades
+     let localities = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria/?query=GrupoInfoComplementariaId.Id:${environment.ID_GRUPO_INFO_COMPLEMENTARIA_LOCALIDADES}` + `&fields=Id,Nombre`).toPromise();
+     this.arrLocalities = localities
+
+      // Setear Municipios
+    // let municipalities = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria/?query=GrupoInfoComplementariaId.Id:${environment.ID_GRUPO_INFO_COMPLEMENTARIA_MUNICIPIOS}` + `&fields=Id,Nombre`).toPromise();
+    // this.arrMunicipalities = municipalities
     // console.log('civul status', maritalStatus)
 
     const data = await this.infoPersonalService.getInformationByDocument(environment.DATOS_IDENTIFICACION_TERCERO_ENDPOINT, documento).toPromise()
@@ -110,6 +156,16 @@ export class InfoPersonalPage implements OnInit {
     const PaisAPIResults = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria_tercero/?query=InfoComplementariaId.Id:${environment.ID_INFO_COMPLEMENTARIA_PAIS},TerceroId.Id:${this.idPersonalInfo}`).toPromise();
     this.dataInfo.Pais = JSON.parse(PaisAPIResults[0].Dato).Data
 
+    // Setear dpto
+    const dptoAPIResults = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria_tercero/?query=InfoComplementariaId.Id:${environment.ID_INFO_COMPLEMENTARIA_DPTO},TerceroId.Id:${this.idPersonalInfo}`).toPromise();
+    this.dataInfo.Departamento = JSON.parse(dptoAPIResults[0].Dato).Data
+
+     // setear LOCALIDAD
+    //  const localidadAPIResults = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria_tercero/?query=InfoComplementariaId.Id:${environment.ID_INFO_COMPLEMENTARIA_RED_SOCIAL_DOS},TerceroId.Id:${this.idPersonalInfo}`).toPromise();
+    //  this.dataInfo.Localidad = JSON.parse(localidadAPIResults[0].Dato).Data
+    const localitiesIDS = await this.getICIdsByGIC(environment.ID_GRUPO_INFO_COMPLEMENTARIA_LOCALIDADES)
+    await this.getDataInfoComplementariaTercero(localitiesIDS, 'Localidad', 'Id')
+
     // setear Municipio
     await this.getDataInfoComplementariaTercero(environment.IDS_INFO_COMPLEMENTARIA_MUNICIPIOS, 'Municipio', 'Nombre')
     // const municipioAPIResults = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria_tercero/?query=InfoComplementariaId.Id:${environment.IDS_INFO_COMPLEMENTARIA_MUNICIPIOS},TerceroId.Id:${this.idPersonalInfo}`).toPromise();
@@ -133,6 +189,23 @@ export class InfoPersonalPage implements OnInit {
 
   }
 
+  async getICIdsByGIC(gicID){
+    const arrIC = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria/?query=GrupoInfoComplementariaId.Id:${gicID}`).toPromise();
+
+    let arrICIds = []
+
+    console.log('arrIC')
+    console.log(arrIC)
+    arrIC.forEach(ic => {
+      arrICIds.push(ic.Id)
+    })
+
+    console.log('arrICIds')
+    console.log(arrICIds)
+
+    return arrICIds;
+  }
+
   async getDataInfoComplementariaTercero(arrIds: any, fieldToSet: any, fieldToGet: any = 'Id'): Promise<any> {
     arrIds.forEach(async id => {
       let data = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria_tercero/?query=TerceroId.Id:${this.idPersonalInfo}` + `,InfoComplementariaId.Id:${id}`).toPromise();
@@ -146,7 +219,7 @@ export class InfoPersonalPage implements OnInit {
           this.dataInfo[fieldToSet] = data[0].InfoComplementariaId[fieldToGet]
         }
         // console.log('this.dataInfo', this.dataInfo)
-        return data[0].InfoComplementariaId.Nombre;
+        return data[0].InfoComplementariaId[fieldToGet]
       }
 
       console.error("Error con el campo " + fieldToSet)

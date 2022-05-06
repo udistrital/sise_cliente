@@ -18,7 +18,9 @@ export class DataInfoTercero {
   NombreColegio?: string = "";
   CiudadColegio?: string = "";
   Municipio?: string = "";
+  Localidad?: string = "";
   FechaGraduacionColegio?: string = "";
   Pais?: string = "";
+  Departamento?: string = "";
   Intereses?: Array<string> = [];
 }
