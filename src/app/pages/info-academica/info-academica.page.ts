@@ -40,6 +40,8 @@ export class InfoAcademicaPage implements OnInit {
     const Id = data[0].TerceroId.Id as number; // id del tercero
     this.idPersonalInfo = Id
 
+    this.dataInfo.NombreCompleto = data[0].TerceroId.NombreCompleto as string;
+
     // setear nombre colegio
     const nombreColegioAPIResults = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria_tercero/?query=InfoComplementariaId.Id:${environment.ID_INFO_COMPLEMENTARIA_NOMBRE_COLEGIO},TerceroId.Id:${this.idPersonalInfo}`).toPromise();
     this.dataInfo.NombreColegio = JSON.parse(nombreColegioAPIResults[0].Dato).Data

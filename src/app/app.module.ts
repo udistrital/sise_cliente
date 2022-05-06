@@ -16,12 +16,15 @@ import { ComponentsModule } from './@theme/components/components.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import { AgmCoreModule } from '@agm/core';
+import { InfoPersonalService } from './@core/services/infopersonal.service';
+import { IonicSelectableModule } from 'ionic-selectable';
 // import NgxDatatableModule from '@swimlane/ngx-datatable';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
+    IonicSelectableModule,
     BrowserModule,
     FormsModule,
     IonicModule.forRoot(),
@@ -38,6 +41,7 @@ import { AgmCoreModule } from '@agm/core';
     StatusBar,
     Camera,
     SplashScreen,
+    InfoPersonalService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     ImplicitAutenticationService,
     { provide: APP_BASE_HREF, useValue: '/' }

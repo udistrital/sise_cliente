@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import { Observable, throwError, of } from 'rxjs';
 import { ImplicitAutenticationService } from '../utils/implicit_autentication.service';
 import { environment } from 'src/environments/environment';
-
 
 export const handleError = (error: HttpErrorResponse) => {
   if (error.error instanceof ErrorEvent) {
@@ -54,6 +53,19 @@ export class InfoPersonalService {
     return this.httpClient.post(endpoint, data, this.getOptions())
   }
 
+  traerUserInfo(endpoint, data) {
+    return this.httpClient.post(endpoint, data, this.getOptions()).pipe(
+      catchError(error => {
+        return this.handleError(error, () => this.traerUserInfo(endpoint, data));
+      }));
+  }
+
+  protected handleError(error, continuation: () => Observable<any>) {
+    if (error.status == 404 || error.status == 400) {
+        return of(false);
+    }
+  }
+
   getDocumentIdByEmail(endpoint, data) {
     return this.httpClient.post(endpoint, data, this.getOptions())
   }
@@ -63,7 +75,7 @@ export class InfoPersonalService {
   }
 
   getInfoComplementariaTercero(endpoint, params) {
-    return this.httpClient.get(endpoint + params, this.getOptions())
+    return this.httpClient.get<any>(endpoint + params, this.getOptions())
   }
 
   getDocumentTypes(endpoint) {

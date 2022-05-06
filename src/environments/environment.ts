@@ -52,7 +52,6 @@ export const environment = {
     SIGN_OUT_URL: 'https://autenticacion.portaloas.udistrital.edu.co/oidc/logout',
     SIGN_OUT_REDIRECT_URL: 'http://localhost:4200/',
   },
-
   // OVARGAS
   API_GET_IDENTIFICATION: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/autenticacion_mid/v1/token/userRol',
   DATOS_IDENTIFICACION_TERCERO_ENDPOINT: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/terceros_crud/v1/datos_identificacion',
@@ -75,7 +74,10 @@ export const environment = {
   ID_INFO_COMPLEMENTARIA_FECHA_GRADUACION: 261,
   ID_INFO_COMPLEMENTARIA_INTERESES: 320,
   ID_INFO_COMPLEMENTARIA_PAIS: 321,
+  ID_INFO_COMPLEMENTARIA_DPTO: 323,
   IDS_INFO_COMPLEMENTARIA_MUNICIPIOS: [147, 148, 149],
   ID_GRUPO_INFO_COMPLEMENTARIA_MUNICIPIOS: 30,
-  API_ENDPOINT_UBICACIONES: "https://autenticacion.portaloas.udistrital.edu.co/apioas/ubicaciones_crud/v2/"
+  API_ENDPOINT_UBICACIONES: "https://autenticacion.portaloas.udistrital.edu.co/apioas/ubicaciones_crud/v2/",
+  EVENTOS_ENDPOINT: "https://autenticacion.portaloas.udistrital.edu.co/apioas/sesiones_crud/v2",
+  ID_GRUPO_INFO_COMPLEMENTARIA_LOCALIDADES: 29
 };
