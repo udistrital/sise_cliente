@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalneweventComponent } from '../../@theme/components/modals/modalsevents/modalnewevent/modalnewevent/modalnewevent.component';
-import { ModalService } from '../../@core/services/modal.service';
+import { ModalService } from '../../@core/services/notify/modal.service';
 import { InfoPersonalService } from '../../@core/services/infopersonal.service';
 import { environment } from '../../../environments/environment';
 import { ModalController } from '@ionic/angular';
+import { ToastService } from '../../@core/services/notify/toast.service';
 
 @Component({
   selector: 'app-creacioneventos',

@@ -1,12 +1,14 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ModalService } from '../../../../../../@core/services/modal.service';
+import { ModalService } from '../../../../../../@core/services/notify/modal.service';
 import { Event } from '../../../../../../@core/data/models/event';
 import { InfoPersonalService } from '../../../../../../@core/services/infopersonal.service';
 import { environment } from '../../../../../../../environments/environment';
 import { CreacioneventosService } from '../../../../../../@core/services/creacioneventos.service';
 import { IonicSelectableComponent } from 'ionic-selectable';
 import { Subscription } from 'rxjs';
+import { AlertService } from '../../../../../../@core/services/notify/alert.service';
+import { ToastService } from '../../../../../../@core/services/notify/toast.service';
 
 @Component({
   selector: 'app-modalnewevent',
@@ -24,13 +26,13 @@ export class ModalneweventComponent implements OnInit {
   userInfo: any
   tercerosSubscription: Subscription;
 
-  constructor(public modalService: ModalService, private readonly infoPersonalService: InfoPersonalService, private creacioneventosService: CreacioneventosService) {
+  constructor(public modalService: ModalService, public toastService: ToastService, public alertService: AlertService, private readonly infoPersonalService: InfoPersonalService, private creacioneventosService: CreacioneventosService) {
     this.selectedEvent = new Event(); // iNICIALIZANDO VARIABLE CON UNA TAREA
     // this.ports = [
     //   { id: 1, name: 'Tokai' },
     //   { id: 2, name: 'Vladivostok' },
     //   { id: 3, name: 'Navlakhi' }
-    // ];
+    // ]; 
     (async () => {
       const terceros = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/tercero?fields=UsuarioWSO2&limit=-1`).toPromise();
       this.terceros = terceros
@@ -40,7 +42,7 @@ export class ModalneweventComponent implements OnInit {
 
   async ngOnInit() {
 
-    if(this.eventRow && this.eventRow.Id) {
+    if (this.eventRow && this.eventRow.Id) {
 
       console.log('this.selectedEvent');
       console.log(this.selectedEvent);
@@ -89,6 +91,10 @@ export class ModalneweventComponent implements OnInit {
 
     let { Descripcion, FechaInicio, FechaFin, Lugar, TipoSesion, Invitados } = form.value
 
+    // if(!Descripcion || !FechaInicio || !FechaFin || !Lugar || !TipoSesion || !Invitados){
+
+    // }
+
     console.log(' \nDescripcion:' + Descripcion, ' \nFechaInicio:' + FechaInicio, ' \nFechaFin:' + FechaFin, ' \nLugar:' + Lugar, ' \nTipoSesion:' + TipoSesion, Invitados)
     console.log(typeof FechaInicio)
 
@@ -104,23 +110,24 @@ export class ModalneweventComponent implements OnInit {
       }
     }
 
-    if (this.eventRow.Id) {
+    if (this.eventRow && this.eventRow.Id) {
       const sesion = await this.infoPersonalService.getInfoComplementariaTercero(environment.EVENTOS_ENDPOINT, `/sesion/${this.eventRow.Id}`).toPromise();
-
-      console.log('sesion')
-      console.log(sesion)
-
       eventBody["FechaCreacion"] = sesion.FechaCreacion
       eventBody["FechaModificacion"] = sesion.FechaModificacion
       delete eventBody.Id
 
       res = await this.creacioneventosService.editEvent(eventBody, this.eventRow.Id).toPromise();
+
+      this.toastService.presentToast("Evento actualizado correctamente")
+
     } else {
       res = await this.creacioneventosService.createEvent(eventBody).toPromise();
+      this.toastService.presentToast("Evento creado correctamente")
     }
 
     console.log(res)
     this.dismissModal('modal-new-event')
+
   }
 
   specificGuestsChange(event: {

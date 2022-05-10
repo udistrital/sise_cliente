@@ -1,10 +1,14 @@
 .logo {
+  background: url() no-repeat top left;
+  background-size: contain;
+  width: 80px;
+  height: 35px;
+  margin: 20px auto 0 auto;
+}
 
-    background: url() no-repeat top left;
-    background-size: contain;
-    width: 80px;
-    height: 35px;
-    margin: 20px auto 0 auto;
+.inner-scroll {
+  overflow: inherit !important;
+  position: inherit !important;
 }
 
 ion-modal.fullscreen {
@@ -14,20 +18,18 @@ ion-modal.fullscreen {
 }
 
 ion-icon {
-    &[class*="custom-"] {
-      mask-size: contain;
-      mask-position: 50% 50%;
-      mask-repeat: no-repeat;
-      background: currentColor;
-      width: 1em;
-      height: 1em;
-    }
-  
-    &[class*="custom-carnet"] {
-      mask-image: url(../../src/assets/icon/carnet-de-identidad.svg);
-    }
-    
-  
+  &[class*="custom-"] {
+    mask-size: contain;
+    mask-position: 50% 50%;
+    mask-repeat: no-repeat;
+    background: currentColor;
+    width: 1em;
+    height: 1em;
+  }
+
+  &[class*="custom-carnet"] {
+    mask-image: url(../../src/assets/icon/carnet-de-identidad.svg);
+  }
 }
 
 .list-md {
@@ -40,5 +42,4 @@ ion-icon {
   padding-top: 0;
   padding-bottom: 0;
   background: var(--ion-item-background, var(--ion-background-color, #fff));
-
 }

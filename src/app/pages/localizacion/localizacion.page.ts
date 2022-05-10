@@ -1,6 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import { InfoPersonalService } from '../../@core/services/infopersonal.service';
 import { environment } from '../../../environments/environment';
+import { Routes } from '@angular/router';
+// import { TabsPage } from './tabs-page';
+
+// const routes: Routes = [
+//   {
+//     path: 'tabs',
+//     component: TabsPage,
+//     children: [
+//       {
+//         path: 'schedule',
+//         children: [
+//           {
+//             path: '',
+//             loadChildren: '../schedule/schedule.module#ScheduleModule'
+//           }
+//         ]
+//       },
+//       {
+//         path: '',
+//         redirectTo: '/app/tabs/schedule',
+//         pathMatch: 'full'
+//       }
+//     ]
+//   }
+// ];
 
 declare var $: any;
 //jquery declaration

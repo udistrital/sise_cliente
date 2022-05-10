@@ -8,8 +8,9 @@ import { ModalbasicinfoComponent } from '../../@theme/components/modals/modalbas
 import { HomeService } from '../../@core/services/home.service';
 import { DatosIdentificacionTercero } from '../../@core/data/models/datos_identificacion_tercero';
 import { ModalbirthdayComponent } from '../../@theme/components/modals/modalbirthday/modalbirthday.component';
-import { ModalService } from '../../@core/services/modal.service';
+import { ModalService } from '../../@core/services/notify/modal.service';
 import { Documento } from '../../@core/data/models/document';
+import { LoaderService } from '../../@core/services/notify/loader.service';
 
 @Component({
   selector: 'app-home',
@@ -30,6 +31,7 @@ export class HomePage implements OnInit {
     public homeService: HomeService,
     public modalService: ModalService,
     public photoService: PhotoService,
+    private loaderService: LoaderService,
     private readonly infoPersonalService: InfoPersonalService
   ) { }
 
