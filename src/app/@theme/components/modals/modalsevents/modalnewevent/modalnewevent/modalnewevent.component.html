@@ -21,27 +21,27 @@
   </ion-row>
 
   <form #newEventForm="ngForm" (ngSubmit)="submitEvent(newEventForm)">
-    <!-- <ion-input *ngIf="eventRow.Id;" hidden type="text" id="Id" name="Id" #Id="ngModel"  [(ngModel)]="selectedEvent.Id" class="border-0 border-none"></ion-input> -->
+    <!-- <ion-input *ngIf="eventRow.Id;" hidden type="text" id="Id" name="Id" #Id="ngModel"  required [(ngModel)]="selectedEvent.Id" class="border-0 border-none"></ion-input> -->
 
     <ion-row class="ion-justify-content-center ion-padding-horizontal">
       <ion-col size="12" class="ion-margin-vertical">
         <ion-item lines="full">
           <ion-label position="floating">Descripción</ion-label>
-          <ion-input type="text" id="Descripcion" name="Descripcion" #Descripcion="ngModel" [(ngModel)]="selectedEvent.Descripcion" class="border-0 border-none"></ion-input>
+          <ion-input type="text" id="Descripcion" name="Descripcion" #Descripcion="ngModel" required [(ngModel)]="selectedEvent.Descripcion" class="border-0 border-none"></ion-input>
         </ion-item>
       </ion-col>
 
       <ion-col size="6" style="text-align: center;">
         <ion-label fixed style="width: 100%;">Inicia</ion-label>
         <ion-item>
-          <ion-datetime displayFormat="MMM DD, h:mm A" style="width: 100%; text-align: right;" locale="es-CO" id="FechaInicio" name="FechaInicio" #FechaInicio="ngModel" [(ngModel)]="selectedEvent.FechaInicio"></ion-datetime>
+          <ion-datetime displayFormat="MMM DD, h:mm A" style="width: 100%; text-align: right;" locale="es-CO" id="FechaInicio" name="FechaInicio" #FechaInicio="ngModel" required [(ngModel)]="selectedEvent.FechaInicio"></ion-datetime>
         </ion-item>
       </ion-col>
 
       <ion-col size="6" style="text-align: center;">
         <ion-label fixed style="width: 100%;">Termina</ion-label>
         <ion-item>
-          <ion-datetime locale="es-CO" id="FechaFin" style="width: 100%; text-align: right;" name="FechaFin" #FechaFin="ngModel" [(ngModel)]="selectedEvent.FechaFin"></ion-datetime>
+          <ion-datetime locale="es-CO" id="FechaFin" style="width: 100%; text-align: right;" name="FechaFin" #FechaFin="ngModel" required [(ngModel)]="selectedEvent.FechaFin"></ion-datetime>
         </ion-item>
       </ion-col>
 
@@ -49,7 +49,7 @@
         <ion-item lines="full">
           <ion-label position="floating">Lugar</ion-label>
           <!-- <ion-icon name="location-outline"></ion-icon> -->
-          <ion-input type="text" id="Lugar" name="Lugar" #Lugar="ngModel" [(ngModel)]="selectedEvent.Lugar" class="border-0 border-none"></ion-input>
+          <ion-input type="text" id="Lugar" name="Lugar" #Lugar="ngModel" required [(ngModel)]="selectedEvent.Lugar" class="border-0 border-none"></ion-input>
         </ion-item>
       </ion-col>
 
@@ -57,7 +57,7 @@
         <ion-item lines="full">
           <ion-label position="floating">Tipo</ion-label>
           <!-- <ion-icon slot="start" name="people-outline"></ion-icon> -->
-          <ion-select interface="action-sheet" id="TipoSesion" name="TipoSesion" #TipoSesion="ngModel" [(ngModel)]="selectedEvent.TipoSesion">
+          <ion-select interface="action-sheet" id="TipoSesion" name="TipoSesion" #TipoSesion="ngModel" required [(ngModel)]="selectedEvent.TipoSesion">
             <ion-select-option *ngFor="let tipoevento of tipoeventos" value="{{tipoevento.Id}}">{{tipoevento.Nombre}}</ion-select-option>
           </ion-select>
         </ion-item>
@@ -67,7 +67,7 @@
         <ion-item lines="full">
           <ion-label position="floating">Invitados por rol</ion-label>
           <ion-icon slot="start" name="people-outline"></ion-icon>
-          <ion-select interface="action-sheet" id="Invitados" name="Invitados" #Invitados="ngModel" [(ngModel)]="selectedEvent.Invitados">
+          <ion-select interface="action-sheet" id="Invitados" name="Invitados" #Invitados="ngModel" required [(ngModel)]="selectedEvent.Invitados">
             <ion-select-option *ngFor="let rol of roles" value="{{rol}}">{{rol}}</ion-select-option>
           </ion-select>
         </ion-item>
@@ -79,7 +79,7 @@
           <ion-icon slot="start" name="people-outline"></ion-icon>
           <!-- item-content  -->
           <!-- (onChange)="specificGuestsChange($event)" -->
-          <ionic-selectable item-content [isMultiple]="true" [canSearch]="true" id="InvitadosEspecificos" name="InvitadosEspecificos" #InvitadosEspecificos="ngModel" (onChange)="specificGuestsChange($event)" [(ngModel)]="selectedEvent.InvitadosEspecificos" [items]="terceros" itemValueField="Id" itemTextField="UsuarioWSO2" [canSearch]="true" (onSearch)="searchTerceros($event)">
+          <ionic-selectable item-content [isMultiple]="true" [canSearch]="true" id="InvitadosEspecificos" name="InvitadosEspecificos" #InvitadosEspecificos="ngModel" (onChange)="specificGuestsChange($event)" required [(ngModel)]="selectedEvent.InvitadosEspecificos" [items]="terceros" itemValueField="Id" itemTextField="UsuarioWSO2" [canSearch]="true" (onSearch)="searchTerceros($event)">
           </ionic-selectable>
         </ion-item>
       </ion-col>
@@ -88,7 +88,7 @@
         <ion-label>Port</ion-label>
         <ionic-selectable
           item-content // Required for Ionic 3 only.
-          [(ngModel)]="port"
+          required [(ngModel)]="port"
           [items]="ports"
           itemValueField="id"
           itemTextField="name"

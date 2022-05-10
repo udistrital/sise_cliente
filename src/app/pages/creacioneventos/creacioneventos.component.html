@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content style="overflow: inherit;">
   <!-- <ion-card class="Inicio">
     <ion-card-header style="display: flex; justify-content: space-between;">
       <ion-card-title>Eventos</ion-card-title>
@@ -109,8 +109,8 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-content [fullscreen]="false">
-    <ngx-datatable [sorts]="[{prop: 'Id', dir: 'desc'}]" style="margin: 2rem; padding: 2rem;" [columnMode]="'force'" class="material" [limit]="7" [rows]="rows" [rowHeight]="60" [headerHeight]="60" [footerHeight]="60" [sortable]="true">
+  <ion-content [fullscreen]="false" class="scrollTable" style="overflow: inherit;">
+    <ngx-datatable class="eventTable" [sorts]="[{prop: 'Id', dir: 'desc'}]" style="overflow: inherit;" style="margin: 2rem; padding: 2rem;" [columnMode]="'force'" class="material" [limit]="7" [rows]="rows" [rowHeight]="60" [headerHeight]="60" [footerHeight]="60" [sortable]="true">
       <ngx-datatable-column name="Id"></ngx-datatable-column>
       <ngx-datatable-column name="Descripcion"></ngx-datatable-column>
       <ngx-datatable-column name="Inicio"></ngx-datatable-column>

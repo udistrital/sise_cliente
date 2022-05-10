@@ -45,7 +45,7 @@ export const environment = {
   MAPSKEY: 'AIzaSyB_TBcoCJNaFCJBiwMreM2PoHOkj19Gr00',
   TOKEN: {
     AUTORIZATION_URL: 'https://autenticacion.portaloas.udistrital.edu.co/oauth2/authorize',
-    CLIENTE_ID: 'e36v1MPQk2jbz9KM4SmKhk8Cyw0a',
+    CLIENTE_ID: 's2BR5hCyo1Bea2dCiMxx9usviQoa',
     RESPONSE_TYPE: 'id_token token',
     SCOPE: 'openid email role',
     REDIRECT_URL: 'http://localhost:4200/',
@@ -79,5 +79,6 @@ export const environment = {
   ID_GRUPO_INFO_COMPLEMENTARIA_MUNICIPIOS: 30,
   API_ENDPOINT_UBICACIONES: "https://autenticacion.portaloas.udistrital.edu.co/apioas/ubicaciones_crud/v2/",
   EVENTOS_ENDPOINT: "https://autenticacion.portaloas.udistrital.edu.co/apioas/sesiones_crud/v2",
-  ID_GRUPO_INFO_COMPLEMENTARIA_LOCALIDADES: 29
+  ID_GRUPO_INFO_COMPLEMENTARIA_LOCALIDADES: 29,
+  ID_GRUPO_INFO_COMPLEMENTARIA_ACADEMICA: 17
 };

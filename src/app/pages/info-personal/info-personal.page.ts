@@ -12,7 +12,7 @@ import { ImplicitAutenticationService } from '../../@core/utils/implicit_autenti
 import { InfoPersonalService } from '../../@core/services/infopersonal.service';
 import { Documento } from '../../@core/data/models/document';
 import { DataInfoTercero } from '../../@core/data/models/data_info_tercero';
-// import {}
+import { LoaderService } from '../../@core/services/notify/loader.service';
 
 @Component({
   selector: 'app-info-personal',
@@ -34,14 +34,18 @@ export class InfoPersonalPage implements OnInit {
   arrMunicipalities: any
   arrLocalities: any
   datosGenero: InfoComplementariaTercero;
-  dpts:any
+  dpts: any
 
   constructor(
     private terceroHerlper: TerceroHerlper,
-    private readonly infoPersonalService: InfoPersonalService
+    private readonly infoPersonalService: InfoPersonalService,
+    private loaderService: LoaderService
   ) { }
 
   async ngOnInit() {
+
+    let loader = await this.loaderService.presentLoading('Cargando información personal')
+
     this.dpts = [
       "Amazonas",
       "Antioquia",
@@ -99,11 +103,11 @@ export class InfoPersonalPage implements OnInit {
     let municipalities = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria/?query=GrupoInfoComplementariaId.Id:${environment.ID_GRUPO_INFO_COMPLEMENTARIA_MUNICIPIOS}` + `&fields=Id,Nombre`).toPromise();
     this.arrMunicipalities = municipalities
 
-     // Setear Localidades
-     let localities = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria/?query=GrupoInfoComplementariaId.Id:${environment.ID_GRUPO_INFO_COMPLEMENTARIA_LOCALIDADES}` + `&fields=Id,Nombre`).toPromise();
-     this.arrLocalities = localities
+    // Setear Localidades
+    let localities = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria/?query=GrupoInfoComplementariaId.Id:${environment.ID_GRUPO_INFO_COMPLEMENTARIA_LOCALIDADES}` + `&fields=Id,Nombre`).toPromise();
+    this.arrLocalities = localities
 
-      // Setear Municipios
+    // Setear Municipios
     // let municipalities = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria/?query=GrupoInfoComplementariaId.Id:${environment.ID_GRUPO_INFO_COMPLEMENTARIA_MUNICIPIOS}` + `&fields=Id,Nombre`).toPromise();
     // this.arrMunicipalities = municipalities
     // console.log('civul status', maritalStatus)
@@ -160,7 +164,7 @@ export class InfoPersonalPage implements OnInit {
     const dptoAPIResults = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria_tercero/?query=InfoComplementariaId.Id:${environment.ID_INFO_COMPLEMENTARIA_DPTO},TerceroId.Id:${this.idPersonalInfo}`).toPromise();
     this.dataInfo.Departamento = JSON.parse(dptoAPIResults[0].Dato).Data
 
-     // setear LOCALIDAD
+    // setear LOCALIDAD
     //  const localidadAPIResults = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria_tercero/?query=InfoComplementariaId.Id:${environment.ID_INFO_COMPLEMENTARIA_RED_SOCIAL_DOS},TerceroId.Id:${this.idPersonalInfo}`).toPromise();
     //  this.dataInfo.Localidad = JSON.parse(localidadAPIResults[0].Dato).Data
     const localitiesIDS = await this.getICIdsByGIC(environment.ID_GRUPO_INFO_COMPLEMENTARIA_LOCALIDADES)
@@ -187,9 +191,14 @@ export class InfoPersonalPage implements OnInit {
 
     await this.getDataInfoComplementariaTercero(environment.IDS_INFO_COMPLEMENTARIA_GENERO, 'Genero', 'Nombre')
 
+    const academicaIDS = await this.getICIdsByGIC(environment.ID_GRUPO_INFO_COMPLEMENTARIA_ACADEMICA)
+
+    console.log(academicaIDS)
+
+    loader.dismiss()
   }
 
-  async getICIdsByGIC(gicID){
+  async getICIdsByGIC(gicID) {
     const arrIC = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria/?query=GrupoInfoComplementariaId.Id:${gicID}`).toPromise();
 
     let arrICIds = []

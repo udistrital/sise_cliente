@@ -26,9 +26,37 @@
           <span class="price__unit" id="unit"></span>
         </div>
       </div>
-      <div class="map__wrap" id="mapContainer">
+      <div class="map__wrap" id="mapContainer" style="margin-bottom: 2rem;">
         <div class="map">Cargando mapa...</div>
       </div>
+      <!-- IN TESTING -->
+      <ion-tabs style="position:inherit; padding-bottom: 0.7rem">
+        <ion-tab-bar slot="bottom">
+          <ion-tab-button tab="schedule">
+            <ion-icon name="calendar"></ion-icon>
+            <ion-label>Mapael</ion-label>
+          </ion-tab-button>
+          
+          <ion-tab-button tab="map">
+            <ion-icon name="map"></ion-icon>
+            <ion-label>Google Maps</ion-label>
+            <ion-badge>6</ion-badge>
+          </ion-tab-button>
+
+          <ion-tab-button tab="speakers">
+            <ion-icon name="map"></ion-icon>
+            <ion-label>Colombia</ion-label>
+          </ion-tab-button>
+    
+          <ion-tab-button tab="about">
+            <ion-icon name="information-circle"></ion-icon>
+            <ion-label>Otro</ion-label>
+          </ion-tab-button>
+        </ion-tab-bar>
+      </ion-tabs>
+      <!-- END IN TESTING -->
     </div>
   </div>
+
+
 </ion-content>
