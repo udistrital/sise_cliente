@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ImplicitAutenticationService } from '../../@core/utils/implicit_autentication.service';
 import { PhotoService } from '../../@core/services/photo.service';
-import { InfoPersonalService } from '../../@core/services/infopersonal.service';  
+import { InfoPersonalService } from '../../@core/services/infopersonal.service';
 import { environment } from '../../../environments/environment';
 import { ModalController } from '@ionic/angular';
 import { ModalbasicinfoComponent } from '../../@theme/components/modals/modalbasicinfo/modalbasicinfo.component';
@@ -37,28 +37,39 @@ export class HomePage implements OnInit {
 
   async ngOnInit() {
 
-    console.log('HERE')
+    let loader = await this.loaderService.presentLoading('Cargando página principal')
+
     console.log(this.autenticacion.getPayload())
     const { email } = this.autenticacion.getPayload()
     const body = { "user": email };
     const { documento, documento_compuesto, ...rest } = await this.infoPersonalService.getDocumentIdByEmail(environment.API_GET_IDENTIFICATION, body).toPromise() as Documento;
 
+    console.log(documento)
     if (!documento) {
       console.log("Something went wrong, when try to get the identification");
       return
     }
 
     const data = await this.infoPersonalService.getInformationByDocument(environment.DATOS_IDENTIFICACION_TERCERO_ENDPOINT, documento).toPromise()
+    this.terceroPersonalData = data[0]
 
-    console.log('HELLO WEWE')
     setTimeout(() => {
       console.log(documento);
       console.log(data);
     }, 2000);
 
-    this.modalService.openModal(ModalbirthdayComponent, 'modal-birthday');
+    const hoy = new Date()
+    const fechaActual = hoy.getDate() + '-' + (hoy.getMonth() + 1) + '-' + hoy.getFullYear();
+    let fechaFormateada = fechaActual.slice(0, 4)
 
-    this.terceroPersonalData = data[0]
+    const diaNacimiento = new Date(this.terceroPersonalData.TerceroId?.FechaNacimiento)
+    const nacimiento = diaNacimiento.getDate() + '-' + (diaNacimiento.getMonth() + 1) + '-' + diaNacimiento.getFullYear();
+    let fechaCumpleaños = nacimiento.slice(0, 4)
+
+    if (fechaFormateada && fechaCumpleaños && (fechaFormateada == fechaCumpleaños)) {
+      this.modalService.openModal(ModalbirthdayComponent, 'modal-birthday');
+    }
+
     this.terceroPersonalData.TerceroId.FechaNacimiento = this.terceroPersonalData.TerceroId?.FechaNacimiento
       ? new Date(this.terceroPersonalData.TerceroId.FechaNacimiento).toISOString().replace(/T/, ' ').replace(/\..+/, '').slice(0, -9)
       : null
@@ -71,6 +82,8 @@ export class HomePage implements OnInit {
       this.eventos[index].FechaFin = new Date(evento.FechaFin).toISOString().replace(/T/, ' ').replace(/\..+/, '').slice(0, -9)
     })
     console.log(dataEventos)
+
+    loader.dismiss()
   }
 
   logout() {

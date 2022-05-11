@@ -4,6 +4,7 @@ import { DataInfoTercero } from '../../@core/data/models/data_info_tercero';
 import { environment } from '../../../environments/environment';
 import { ImplicitAutenticationService } from '../../@core/utils/implicit_autentication.service';
 import { Documento } from '../../@core/data/models/document';
+import { LoaderService } from '../../@core/services/notify/loader.service';
 
 @Component({
   selector: 'app-info-academica',
@@ -17,15 +18,15 @@ export class InfoAcademicaPage implements OnInit {
   dataInfo: DataInfoTercero = new DataInfoTercero();
 
   constructor(
-    private readonly infoPersonalService: InfoPersonalService
-
-  ) { }
-
-  //   COLEGIO
-  // _CIUDAD_COLEGIO
-  // _FECHA_GRADUACION
-  async ngOnInit() {
-
+    private readonly infoPersonalService: InfoPersonalService,
+    private loaderService: LoaderService,
+    ) { }
+    
+    //   COLEGIO
+    // _CIUDAD_COLEGIO
+    // _FECHA_GRADUACION
+    async ngOnInit() {
+    let loader = await this.loaderService.presentLoading('Cargando información academica')
 
     const { email } = this.autenticacion.getPayload()
     const body = { "user": email };
@@ -53,6 +54,9 @@ export class InfoAcademicaPage implements OnInit {
     // setear nombre colegio
     const fechaGraduacionColegioAPIResults = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria_tercero/?query=InfoComplementariaId.Id:${environment.ID_INFO_COMPLEMENTARIA_FECHA_GRADUACION},TerceroId.Id:${this.idPersonalInfo}`).toPromise();
     this.dataInfo.FechaGraduacionColegio = JSON.parse(fechaGraduacionColegioAPIResults[0].Dato).Data;
+
+    loader.dismiss()
+
   }
 
 }
