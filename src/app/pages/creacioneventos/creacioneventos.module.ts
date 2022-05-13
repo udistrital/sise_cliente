@@ -21,4 +21,5 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
   providers: [CreacioneventosService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class CreacioneventosPageModule {}
+
+export class CreacioneventosPageModule { }

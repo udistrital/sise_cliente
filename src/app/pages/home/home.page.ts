@@ -40,11 +40,14 @@ export class HomePage implements OnInit {
     let loader = await this.loaderService.presentLoading('Cargando página principal')
 
     console.log(this.autenticacion.getPayload())
+    const userDataTest = this.autenticacion.getPayload()
+    console.log(userDataTest);
+    
     const { email } = this.autenticacion.getPayload()
     const body = { "user": email };
     const { documento, documento_compuesto, ...rest } = await this.infoPersonalService.getDocumentIdByEmail(environment.API_GET_IDENTIFICATION, body).toPromise() as Documento;
 
-    console.log(documento)
+    console.log(documento, documento_compuesto)
     if (!documento) {
       console.log("Something went wrong, when try to get the identification");
       return
@@ -52,6 +55,7 @@ export class HomePage implements OnInit {
 
     const data = await this.infoPersonalService.getInformationByDocument(environment.DATOS_IDENTIFICACION_TERCERO_ENDPOINT, documento).toPromise()
     this.terceroPersonalData = data[0]
+    console.log(data);
 
     setTimeout(() => {
       console.log(documento);

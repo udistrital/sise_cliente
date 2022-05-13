@@ -15,17 +15,9 @@
           </ion-item>
         </ion-menu-toggle>
 
-
-
-        <!-- <ion-item>
-          <ion-icon name="information-circle-outline" slot="start"></ion-icon>
-          Actualizar Informacion
-          <ion-icon slot="end"></ion-icon>
-        </ion-item> -->
-
         <ion-item (click)="isRemainder === 1 ? isRemainder = 0 : isRemainder = 1" class="pointer">
           <ion-icon name="information-circle-outline" slot="start"></ion-icon>
-          Actualizar Informacion
+          Actualizar Información
           <ion-icon slot="end" [name]="isRemainder? 'arrow-down' : 'arrow-forward'"></ion-icon>
         </ion-item>
 
@@ -33,7 +25,7 @@
           <ion-list>
             <ion-item menuclose [hidden]="!isRemainder" [routerLink]="['/info-personal']" menuClose class="sub-menu pointer">
               <ion-icon name="person-outline" slot="start"></ion-icon>
-              Informacion Personal
+              Información Personal
             </ion-item>
           </ion-list>
         </ion-menu-toggle>
@@ -42,7 +34,7 @@
           <ion-list>
             <ion-item menuclose [hidden]="!isRemainder" [routerLink]="['/info-academica']" menuClose class="sub-menu pointer">
               <ion-icon name="school-outline" slot="start"></ion-icon>
-              Informacion Academica
+              Información Academica
             </ion-item>
           </ion-list>
         </ion-menu-toggle>
@@ -51,7 +43,7 @@
           <ion-list>
             <ion-item menuclose [hidden]="!isRemainder" [routerLink]="['/info-laboral']" menuClose class="sub-menu pointer">
               <ion-icon name="briefcase-outline" slot="start"></ion-icon>
-              Informacion Laboral
+              Información Laboral
             </ion-item>
           </ion-list>
         </ion-menu-toggle>
@@ -60,7 +52,7 @@
           <ion-list>
             <ion-item menuclose [hidden]="!isRemainder" [routerLink]="['/info-empresarial']" menuClose class="sub-menu pointer">
               <ion-icon name="business-outline" slot="start"></ion-icon>
-              Informacion Empresarial
+              Información Empresarial
             </ion-item>
           </ion-list>
         </ion-menu-toggle>
@@ -85,9 +77,9 @@
             <ion-label>Ubicar Egresado</ion-label>
           </ion-item>
         </ion-menu-toggle>
-        
+
         <ion-menu-toggle>
-          
+
           <ion-item class="pointer">
             <ion-icon slot="start" src='data:image/svg+xml;utf8,<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
           viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
@@ -177,7 +169,7 @@
       </ion-list>
 
       <ion-footer>
-        <ion-button  size="small" class="boton-cerrar" slot="start" (click)="logout()">Cerrar Sesion</ion-button>
+        <ion-button size="small" class="boton-cerrar" slot="start" (click)="logout()">Cerrar Sesion</ion-button>
       </ion-footer>
 
     </ion-content>

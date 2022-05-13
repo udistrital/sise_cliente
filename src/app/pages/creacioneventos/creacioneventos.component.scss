@@ -27,6 +27,14 @@ ion-modal.fullscreen {
   --border-radius: 0;
 }
 
+// .material {
+//   height: 550px
+// }
+
+:host ::ng-deep .ngx-datatable .datatable-body .datatable-scroll {
+  display: inherit;
+}
+
 @import "~@swimlane/ngx-datatable/index.css";
 @import "~@swimlane/ngx-datatable/themes/material.scss";
 @import "~@swimlane/ngx-datatable/assets/icons.css";

@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Informacion academica</ion-title>
+    <ion-title>Información academica</ion-title>
     <ion-buttons slot="start">
       <ion-menu-button menu="main-menu"></ion-menu-button>
     </ion-buttons>
@@ -42,6 +42,24 @@
           </ion-item>
         </ion-col>
         <ion-col>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <!-- DATOS DE POSGRADOS EN LA UD -->
+    <ion-card-header>
+      <ion-card-subtitle class="subtitulo">Datos de posgrados en la UD</ion-card-subtitle>
+    </ion-card-header>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-item lines="full">
+            <ion-label position="floating">Programas de posgrado titulados en la UD</ion-label>
+            <ion-icon slot="start" name="business-outline"></ion-icon>
+            <ion-select placeholder="Seleccionar" interface="popover">
+              <ion-select-option value="p">(Lista de posgrados de la UD)</ion-select-option>
+            </ion-select>
+          </ion-item>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -162,6 +180,6 @@
       </ion-row>
     </ion-grid>
     <ion-button class="boton" [routerLink]="['/']" type="submit" color="primary" expand="block">Agregar certificaciones</ion-button>
-    <ion-button class="boton" [routerLink]="['/home']" type="submit" color="primary" expand="block">Actualizar Informacion</ion-button>
+    <ion-button class="boton" [routerLink]="['/home']" type="submit" color="primary" expand="block">Actualizar Información</ion-button>
   </ion-card>
 </ion-content>

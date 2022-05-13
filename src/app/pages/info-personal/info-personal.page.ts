@@ -1,11 +1,6 @@
 import { TerceroHerlper } from './../../@core/helpers/Tercero/terceroHelper';
 import { Component, OnInit } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
-import { AlertController, LoadingController } from '@ionic/angular'
-import { ActionSheetController } from '@ionic/angular';
 import { __await } from 'tslib';
-import { MatIconRegistry } from '@angular/material/icon';
-import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { InfoComplementariaTercero } from '../../@core/data/models/info_complementaria_tercero';
 import { ImplicitAutenticationService } from '../../@core/utils/implicit_autentication.service';
@@ -23,7 +18,6 @@ import { LoaderService } from '../../@core/services/notify/loader.service';
 export class InfoPersonalPage implements OnInit {
 
   private autenticacion = new ImplicitAutenticationService;
-  // loadFormDataFunction: (...params) => Observable<any>;
   dataTercero: any[] = [];
   dataInfo: DataInfoTercero = new DataInfoTercero();
   dataInfoTercero: any;
@@ -90,6 +84,7 @@ export class InfoPersonalPage implements OnInit {
 
     const { documento, documento_compuesto, ...rest } = await this.infoPersonalService.getDocumentIdByEmail(environment.API_GET_IDENTIFICATION, body).toPromise() as Documento;
 
+    console.log(rest)
     if (!documento) {
       console.log("Something went wrong, when try to get the identification");
       return
@@ -107,18 +102,11 @@ export class InfoPersonalPage implements OnInit {
     let localities = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria/?query=GrupoInfoComplementariaId.Id:${environment.ID_GRUPO_INFO_COMPLEMENTARIA_LOCALIDADES}` + `&fields=Id,Nombre`).toPromise();
     this.arrLocalities = localities
 
-    // Setear Municipios
-    // let municipalities = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria/?query=GrupoInfoComplementariaId.Id:${environment.ID_GRUPO_INFO_COMPLEMENTARIA_MUNICIPIOS}` + `&fields=Id,Nombre`).toPromise();
-    // this.arrMunicipalities = municipalities
-    // console.log('civul status', maritalStatus)
-
     const data = await this.infoPersonalService.getInformationByDocument(environment.DATOS_IDENTIFICACION_TERCERO_ENDPOINT, documento).toPromise()
 
     const Id = data[0].TerceroId.Id as number; // id del tercero
     this.idPersonalInfo = Id
     this.arrPersonalInfo = data
-
-    // console.log(data, rest)
     console.log('data', data)
 
     this.dataInfo.NombreCompleto = data[0].TerceroId.NombreCompleto as string;
@@ -165,15 +153,11 @@ export class InfoPersonalPage implements OnInit {
     this.dataInfo.Departamento = JSON.parse(dptoAPIResults[0].Dato).Data
 
     // setear LOCALIDAD
-    //  const localidadAPIResults = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria_tercero/?query=InfoComplementariaId.Id:${environment.ID_INFO_COMPLEMENTARIA_RED_SOCIAL_DOS},TerceroId.Id:${this.idPersonalInfo}`).toPromise();
-    //  this.dataInfo.Localidad = JSON.parse(localidadAPIResults[0].Dato).Data
     const localitiesIDS = await this.getICIdsByGIC(environment.ID_GRUPO_INFO_COMPLEMENTARIA_LOCALIDADES)
     await this.getDataInfoComplementariaTercero(localitiesIDS, 'Localidad', 'Id')
 
     // setear Municipio
     await this.getDataInfoComplementariaTercero(environment.IDS_INFO_COMPLEMENTARIA_MUNICIPIOS, 'Municipio', 'Nombre')
-    // const municipioAPIResults = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria_tercero/?query=InfoComplementariaId.Id:${environment.IDS_INFO_COMPLEMENTARIA_MUNICIPIOS},TerceroId.Id:${this.idPersonalInfo}`).toPromise();
-    // this.dataInfo.LugarNacimiento = JSON.parse(municipioAPIResults[0].Dato).Data
     setTimeout(() => {
       console.log('this.dataInfo', this.dataInfo)
     }, 3000);
@@ -244,28 +228,6 @@ export class InfoPersonalPage implements OnInit {
     return o1?.Nombre === this.dataInfo?.EstadoCivil;
   }
 
-  private cleanInfoToUpdate({
-    Numero,
-    DigitoVerificacion,
-    FechaExpedicion,
-    CiudadExpedicion,
-    Activo,
-    DocumentoSoporte,
-    FechaCreacion,
-    FechaModificacion
-  }) {
-    return {
-      Numero,
-      DigitoVerificacion,
-      FechaExpedicion: new Date(FechaExpedicion).toISOString(),
-      CiudadExpedicion,
-      Activo,
-      DocumentoSoporte,
-      FechaCreacion: new Date(FechaCreacion).toISOString(),
-      FechaModificacion: new Date(FechaModificacion).toISOString()
-    }
-  }
-
   async getInfoTercero(id: any) {
     this.dataInfo = await this.terceroHerlper.getTerceros(id).toPromise();
     this.getDateBirth();
@@ -293,10 +255,3 @@ export class InfoPersonalPage implements OnInit {
     }
   }
 }
-
-
-
-
-
-
-
