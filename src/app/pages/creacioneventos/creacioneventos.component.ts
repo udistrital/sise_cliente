@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2  } from '@angular/core';
 import { ModalneweventComponent } from '../../@theme/components/modals/modalsevents/modalnewevent/modalnewevent/modalnewevent.component';
 import { ModalService } from '../../@core/services/notify/modal.service';
 import { InfoPersonalService } from '../../@core/services/infopersonal.service';
 import { environment } from '../../../environments/environment';
 import { ModalController } from '@ionic/angular';
 import { ToastService } from '../../@core/services/notify/toast.service';
+import { ImplicitAutenticationService } from '../../@core/utils/implicit_autentication.service';
+import { LoaderService } from '../../@core/services/notify/loader.service';
+import { Documento } from '../../@core/data/models/document';
 
 @Component({
   selector: 'app-creacioneventos',
@@ -16,10 +19,18 @@ export class CreacioneventosComponent implements OnInit {
 
   public rows: any;
   public col: any;
+  public arrRoleUserSession: any;
+  public isAdminSiseFlag: any;
   eventos: any
-  // tipoeventos: any
+  private autenticacion = new ImplicitAutenticationService;
 
-  constructor(public modalCtrl: ModalController, public modalService: ModalService, private readonly infoPersonalService: InfoPersonalService) {
+  constructor(
+    private renderer: Renderer2,
+    private loaderService: LoaderService,
+    public modalCtrl: ModalController,
+    public modalService: ModalService,
+    private readonly infoPersonalService: InfoPersonalService
+  ) {
 
     this.col = [
       { name: 'Id' },
@@ -31,7 +42,27 @@ export class CreacioneventosComponent implements OnInit {
   }
 
   async ngOnInit() {
+    let loader = await this.loaderService.presentLoading('Cargando eventos')
+
+    console.log(document.getElementById('background-content'))
+
+    const { email } = this.autenticacion.getPayload()
+    const body = { "user": email };
+    const { documento, documento_compuesto, ...rest } = await this.infoPersonalService.getDocumentIdByEmail(environment.API_GET_IDENTIFICATION, body).toPromise() as Documento;
+
+    this.arrRoleUserSession = rest["role"]
+
+    console.log(this.arrRoleUserSession)
+
+    this.arrRoleUserSession.forEach(role => {
+      if(role == 'ADMIN_SISE'){
+        this.isAdminSiseFlag = true
+      }
+    })
+
+    console.log(this.isAdminSiseFlag)
     await this.setEvents();
+    loader.dismiss()
   }
 
   async setEvents() {
