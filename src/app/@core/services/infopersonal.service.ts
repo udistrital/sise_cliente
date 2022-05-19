@@ -4,6 +4,7 @@ import { catchError } from 'rxjs/operators';
 import { Observable, throwError, of } from 'rxjs';
 import { ImplicitAutenticationService } from '../utils/implicit_autentication.service';
 import { environment } from 'src/environments/environment';
+import { FuncsService } from './funcs.service';
 
 export const handleError = (error: HttpErrorResponse) => {
   if (error.error instanceof ErrorEvent) {
@@ -36,25 +37,16 @@ export class InfoPersonalService {
   private autenticacion = new ImplicitAutenticationService;
 
   constructor(
-    private readonly httpClient: HttpClient
+    private readonly httpClient: HttpClient,
+    private funcsService: FuncsService
   ) { }
 
-  private getOptions() {
-    return {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'authorization': 'Bearer ' + window.localStorage.getItem('access_token'),
-      }),
-    };
-  }
-
   createTercero(endpoint, data) {
-    return this.httpClient.post(endpoint, data, this.getOptions())
+    return this.httpClient.post(endpoint, data, this.funcsService.openIDDefaultOptions())
   }
 
   traerUserInfo(endpoint, data) {
-    return this.httpClient.post(endpoint, data, this.getOptions()).pipe(
+    return this.httpClient.post(endpoint, data, this.funcsService.openIDDefaultOptions()).pipe(
       catchError(error => {
         return this.handleError(error, () => this.traerUserInfo(endpoint, data));
       }));
@@ -67,23 +59,23 @@ export class InfoPersonalService {
   }
 
   getDocumentIdByEmail(endpoint, data) {
-    return this.httpClient.post(endpoint, data, this.getOptions())
+    return this.httpClient.post(endpoint, data, this.funcsService.openIDDefaultOptions())
   }
 
   getInformationByDocument(endpoint, document) {
-    return this.httpClient.get(endpoint + `?query=Numero:${document}`, this.getOptions())
+    return this.httpClient.get(endpoint + `?query=Numero:${document}`, this.funcsService.openIDDefaultOptions())
   }
 
   getInfoComplementariaTercero(endpoint, params) {
-    return this.httpClient.get<any>(endpoint + params, this.getOptions())
+    return this.httpClient.get<any>(endpoint + params, this.funcsService.openIDDefaultOptions())
   }
 
   getDocumentTypes(endpoint) {
-    return this.httpClient.get(endpoint, this.getOptions())
+    return this.httpClient.get(endpoint, this.funcsService.openIDDefaultOptions())
   }
 
   updateInformation(endpoint, data) {
-    return this.httpClient.put(endpoint, data, this.getOptions())
+    return this.httpClient.put(endpoint, data, this.funcsService.openIDDefaultOptions())
   }
 
   async getTerceroId() {
