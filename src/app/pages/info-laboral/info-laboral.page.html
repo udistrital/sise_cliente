@@ -13,6 +13,11 @@
     <!-- Situación laboral -->
     <ion-card-header>
       <ion-card-subtitle class="subtitulo">Situación laboral</ion-card-subtitle>
+      <ion-text>
+        <p>
+          TRABAJO O ACTIVIDAD REMUNERADA ACTUAL
+        </p>
+      </ion-text>
     </ion-card-header>
     <ion-grid>
       <ion-row>
@@ -47,9 +52,9 @@
           </ion-item>
         </ion-col>
         <ion-col>
-          <ion-item>
+          <ion-item lines="full">
             <!-- Cantidad de horas (Satisfacción laboral) -->
-            <ion-label>Cantidad de horas (Satisfacción laboral)</ion-label>
+            <ion-label position="floating">Cantidad de horas (Satisfacción laboral)</ion-label>
             <ion-icon slot="start" name="people-outline"></ion-icon>
             <ion-range min="1" max="4" step="1" snaps color="primary" snaps="true" pin="true">
               <ion-icon slot="start" name="close-outline"></ion-icon>
@@ -62,8 +67,8 @@
 
       <ion-row>
         <ion-col>
-          <ion-item>
-            <ion-label>Aplicación de conocimientos de la carrera  (Satisfacción laboral)</ion-label>
+          <ion-item lines="full">
+            <ion-label position="floating">Aplicación de conocimientos de la carrera (Satisfacción laboral)</ion-label>
             <ion-icon slot="start" name="receipt-outline"></ion-icon>
             <ion-range min="1" max="4" step="1" snaps color="primary" snaps="true" pin="true">
               <ion-icon slot="start" name="close-outline"></ion-icon>
@@ -72,8 +77,8 @@
           </ion-item>
         </ion-col>
         <ion-col>
-          <ion-item>
-            <ion-label>Retos y desafíos intelectuales (Satisfacción laboral)</ion-label>
+          <ion-item lines="full">
+            <ion-label position="floating">Retos y desafíos intelectuales (Satisfacción laboral)</ion-label>
             <ion-icon slot="start" name="filter-outline"></ion-icon>
             <ion-range min="1" max="4" step="1" snaps color="primary" snaps="true" pin="true">
               <ion-icon slot="start" name="close-outline"></ion-icon>
@@ -85,12 +90,28 @@
       <ion-row>
         <ion-col>
           <ion-item lines="full">
-            <ion-label position="floating">Oportunidades de ascenso (Satisfacción laboral)
-              Estabilidad (Satisfacción laboral)"</ion-label>
-            <ion-icon slot="start" name="calendar-outline"></ion-icon>
-            <ion-input type="text" required></ion-input>
+            <ion-label position="floating">Oportunidades de ascenso (Satisfacción laboral)</ion-label>
+            <ion-icon slot="start" name="filter-outline"></ion-icon>
+            <ion-range min="1" max="4" step="1" snaps color="primary" snaps="true" pin="true">
+              <ion-icon slot="start" name="close-outline"></ion-icon>
+              <ion-icon slot="end" name="checkmark-outline"></ion-icon>
+            </ion-range>
+          </ion-item>
+          <!-- Estabilidad (Satisfacción laboral) -->
+        </ion-col>
+        <ion-col>
+          <ion-item lines="full">
+            <ion-label position="floating">Estabilidad (Satisfacción laboral)</ion-label>
+            <ion-icon slot="start" name="filter-outline"></ion-icon>
+            <ion-range min="1" max="4" step="1" snaps color="primary" snaps="true" pin="true">
+              <ion-icon slot="start" name="close-outline"></ion-icon>
+              <ion-icon slot="end" name="checkmark-outline"></ion-icon>
+            </ion-range>
           </ion-item>
         </ion-col>
+      </ion-row>
+
+      <ion-row>
         <ion-col>
           <ion-item>
             <ion-label>Rango salarial</ion-label>
@@ -101,6 +122,50 @@
               <ion-select-option value="3">Mayor a 3 millones y menor a 5 millones</ion-select-option>
               <ion-select-option value="4">Mayor a 5 millones </ion-select-option>
             </ion-select>
+          </ion-item>
+        </ion-col>
+
+        <ion-col>
+          <ion-item>
+            <ion-label>Razón de vinculación</ion-label>
+            <ion-icon slot="start" name="cash-outline"></ion-icon>
+            <ion-select placeholder="Seleccionar">
+              <ion-select-option value="1">Ingreso o salario</ion-select-option>
+              <ion-select-option value="2">Ganar experiencia</ion-select-option>
+              <ion-select-option value="3">Prestaciones y oportunidades de crecimiento</ion-select-option>
+              <ion-select-option value="4">Conveniencia de la ubicación</ion-select-option>
+              <ion-select-option value="5">No encontró otros empleos disponibles en su campo de estudio</ion-select-option>
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Otra: </ion-label>
+            <ion-input type="text" required></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label>Estado laboral</ion-label>
+            <ion-icon slot="start" name="cash-outline"></ion-icon>
+            <ion-select placeholder="Seleccionar">
+              <ion-select-option value="1">Contratista por prestación de servicios o cuenta propia</ion-select-option>
+              <ion-select-option value="2">Empleado</ion-select-option>
+              <ion-select-option value="3">Propietario de una empresa o negocio particular</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label>Actividades que realiza</ion-label>
+            <ion-input type="text" required></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -122,7 +187,13 @@
 
     <ion-card-header>
       <ion-card-subtitle class="subtitulo">Datos de empleo</ion-card-subtitle>
+      <ion-text>
+        <p>
+          INFORMACIÓN DE EMPLEADOS
+        </p>
+      </ion-text>
     </ion-card-header>
+
     <ion-grid>
       <ion-row>
         <ion-col>

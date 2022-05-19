@@ -79,7 +79,7 @@
           <ion-icon slot="start" name="people-outline"></ion-icon>
           <!-- item-content  -->
           <!-- (onChange)="specificGuestsChange($event)" -->
-          <ionic-selectable item-content [isMultiple]="true" [canSearch]="true" id="InvitadosEspecificos" name="InvitadosEspecificos" #InvitadosEspecificos="ngModel" (onChange)="specificGuestsChange($event)" required [(ngModel)]="selectedEvent.InvitadosEspecificos" [items]="terceros" itemValueField="Id" itemTextField="UsuarioWSO2" [canSearch]="true" (onSearch)="searchTerceros($event)">
+          <ionic-selectable item-content [isMultiple]="true" [canSearch]="true" id="InvitadosEspecificos" name="InvitadosEspecificos" #InvitadosEspecificos="ngModel" (onChange)="this.selectableUtils.specificGuestsChange($event)" required [(ngModel)]="selectedEvent.InvitadosEspecificos" [items]="terceros" itemValueField="Id" itemTextField="UsuarioWSO2" (onSearch)="this.selectableUtils.searchTerceros($event)">
           </ionic-selectable>
         </ion-item>
       </ion-col>

@@ -9,9 +9,11 @@ import { InfoPersonalPageRoutingModule } from './info-personal-routing.module';
 import { InfoPersonalPage } from './info-personal.page';
 import { HttpClientModule } from '@angular/common/http';
 import { InfoPersonalService } from '../../@core/services/infopersonal.service';
+import { IonicSelectableModule } from 'ionic-selectable';
 
 @NgModule({
   imports: [
+    IonicSelectableModule,
     CommonModule,
     FormsModule,
     IonicModule,

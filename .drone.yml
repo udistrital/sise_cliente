@@ -15,7 +15,9 @@ steps:
     commands:
      - node --version
      - npm i --force
-     - npm run build
+     - ng build --configuration=test --output-hashing none
+    #  npm run build
+    #  ng build --configuration=test --output-hashing none
     #  - ls -la
     when:
       branch: [release/*]

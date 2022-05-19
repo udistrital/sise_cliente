@@ -44,15 +44,15 @@ export class InfoAcademicaPage implements OnInit {
     this.dataInfo.NombreCompleto = data[0].TerceroId.NombreCompleto as string;
 
     // setear nombre colegio
-    const nombreColegioAPIResults = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria_tercero/?query=InfoComplementariaId.Id:${environment.ID_INFO_COMPLEMENTARIA_NOMBRE_COLEGIO},TerceroId.Id:${this.idPersonalInfo}`).toPromise();
+    const nombreColegioAPIResults = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria_tercero/?query=InfoComplementariaId.Id:${environment.INFO_COMPLEMENTARIA_IDS.NOMBRE_COLEGIO},TerceroId.Id:${this.idPersonalInfo}`).toPromise();
     this.dataInfo.NombreColegio = JSON.parse(nombreColegioAPIResults[0].Dato).Data
 
     // setear nombre colegio
-    const ciudadColegioAPIResults = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria_tercero/?query=InfoComplementariaId.Id:${environment.ID_INFO_COMPLEMENTARIA_CIUDAD_COLEGIO},TerceroId.Id:${this.idPersonalInfo}`).toPromise();
+    const ciudadColegioAPIResults = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria_tercero/?query=InfoComplementariaId.Id:${environment.INFO_COMPLEMENTARIA_IDS.CIUDAD_COLEGIO},TerceroId.Id:${this.idPersonalInfo}`).toPromise();
     this.dataInfo.CiudadColegio = JSON.parse(ciudadColegioAPIResults[0].Dato).Data
 
     // setear nombre colegio
-    const fechaGraduacionColegioAPIResults = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria_tercero/?query=InfoComplementariaId.Id:${environment.ID_INFO_COMPLEMENTARIA_FECHA_GRADUACION},TerceroId.Id:${this.idPersonalInfo}`).toPromise();
+    const fechaGraduacionColegioAPIResults = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria_tercero/?query=InfoComplementariaId.Id:${environment.INFO_COMPLEMENTARIA_IDS.FECHA_GRADUACION},TerceroId.Id:${this.idPersonalInfo}`).toPromise();
     this.dataInfo.FechaGraduacionColegio = JSON.parse(fechaGraduacionColegioAPIResults[0].Dato).Data;
 
     loader.dismiss()

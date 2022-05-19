@@ -5,10 +5,9 @@ import { Event } from '../../../../../../@core/data/models/event';
 import { InfoPersonalService } from '../../../../../../@core/services/infopersonal.service';
 import { environment } from '../../../../../../../environments/environment';
 import { CreacioneventosService } from '../../../../../../@core/services/creacioneventos.service';
-import { IonicSelectableComponent } from 'ionic-selectable';
-import { Subscription } from 'rxjs';
 import { AlertService } from '../../../../../../@core/services/notify/alert.service';
 import { ToastService } from '../../../../../../@core/services/notify/toast.service';
+import { SelectableService } from 'src/app/@core/services/search/selectable.service';
 
 @Component({
   selector: 'app-modalnewevent',
@@ -24,20 +23,16 @@ export class ModalneweventComponent implements OnInit {
   ports: any;
   roles: any
   userInfo: any
-  tercerosSubscription: Subscription;
+  selectableUtils:any
 
-  constructor(public modalService: ModalService, public toastService: ToastService, public alertService: AlertService, private readonly infoPersonalService: InfoPersonalService, private creacioneventosService: CreacioneventosService) {
+  constructor(public modalService: ModalService, public toastService: ToastService, public alertService: AlertService, private readonly infoPersonalService: InfoPersonalService, private creacioneventosService: CreacioneventosService, private selectableService: SelectableService) {
+    this.selectableUtils = this.selectableService
     this.selectedEvent = new Event(); // iNICIALIZANDO VARIABLE CON UNA TAREA
-    // this.ports = [
-    //   { id: 1, name: 'Tokai' },
-    //   { id: 2, name: 'Vladivostok' },
-    //   { id: 3, name: 'Navlakhi' }
-    // ]; 
+
     (async () => {
       const terceros = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/tercero?fields=UsuarioWSO2&limit=-1`).toPromise();
       this.terceros = terceros
     })
-    // this.terceros = this.modalService.getTerceros()
   }
 
   async ngOnInit() {
@@ -130,59 +125,7 @@ export class ModalneweventComponent implements OnInit {
 
   }
 
-  specificGuestsChange(event: {
-    component: IonicSelectableComponent,
-    value: any
-  }) {
-    console.log('VALUE SELECTABLE:', event.value);
-  }
-
   dismissModal(modalId: any) {
     this.modalService.dismiss(modalId);
   }
-
-  filterTerceros(terceros: any[], text: string) {
-    console.log(terceros)
-    return terceros.filter(tercero => {
-      return tercero.UsuarioWSO2.toLowerCase().indexOf(text) !== -1 ||
-        tercero.UsuarioWSO2.toLowerCase().indexOf(text) !== -1 ||
-        tercero.Id.toString().toLowerCase().indexOf(text) !== -1;
-    });
-  }
-
-  searchTerceros(event: {
-    component: IonicSelectableComponent,
-    text: string
-  }) {
-    console.log(event)
-    let text = event.text.trim().toLowerCase();
-    event.component.startSearch();
-
-    // Close any running subscription.
-    if (this.tercerosSubscription) {
-      this.tercerosSubscription.unsubscribe();
-    }
-
-    if (!text) {
-      // Close any running subscription.
-      if (this.tercerosSubscription) {
-        this.tercerosSubscription.unsubscribe();
-      }
-
-      event.component.items = [];
-      event.component.endSearch();
-      return;
-    }
-
-    this.tercerosSubscription = this.modalService.getTercerosAsync().subscribe(terceross => {
-      // Subscription will be closed when unsubscribed manually.
-      if (this.tercerosSubscription.closed) {
-        return;
-      }
-
-      event.component.items = this.filterTerceros(terceross, text);
-      event.component.endSearch();
-    });
-  }
-
 }
