@@ -27,9 +27,12 @@ steps:
   - name: nodejs_prod
     image: node:latest
     commands:
-     - node --version
-     - npm i --force
-     - npm run build
+      - npm install -g @angular/cli
+      - npm i --force
+      - ng build --configuration=test --output-hashing none
+    #  - node --version
+    #  - npm i --force
+    #  - npm run build
     #  - ls -la
     when:
       branch: [master]
