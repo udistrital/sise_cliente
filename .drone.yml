@@ -17,7 +17,6 @@ steps:
      - npm install -g @angular/cli
      - npm i --force
      - ng build --configuration=test --output-hashing none
-     - ng build --test
     #  - npm start
     #  npm run build
     #  ng build --configuration=test --output-hashing none
@@ -32,7 +31,7 @@ steps:
       - npm install -g @angular/cli
       - npm i --force
       - ng build --configuration=test --output-hashing none
-      - ng build --test
+
       # - npm start
     #  - node --version
     #  - npm i --force
