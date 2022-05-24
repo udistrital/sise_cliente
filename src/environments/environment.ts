@@ -4,7 +4,6 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 export const environment = {
-
   production: false,
   NUXEO: {
     PATH: 'https://documental.udistrital.edu.co/nuxeo/',

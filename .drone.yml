@@ -16,10 +16,10 @@ steps:
     #  - node --version
      - npm install -g @angular/cli
      - npm i --force
-     - ng build --configuration=test --output-hashing none
+     - ng build --configuration=test
     #  - npm start
     #  npm run build
-    #  ng build --configuration=test --output-hashing none
+    #  ng build --configuration=test
     #  - ls -la
     when:
       branch: [release/*]
@@ -30,7 +30,7 @@ steps:
     commands:
       - npm install -g @angular/cli
       - npm i --force
-      - ng build --configuration=test --output-hashing none
+      - ng build --configuration=test
 
       # - npm start
     #  - node --version
