@@ -260,7 +260,8 @@
               <ion-label>Tipo de población</ion-label>
               <ion-icon slot="start" name="person-outline"></ion-icon>
               <!-- value="{{dataInfo?.EstadoCivil}}" -->
-              <ion-select placeholder="Seleccione..." interface="popover" id="TipoPoblacion" name="TipoPoblacion" #TipoPoblacion="ngModel" required [(ngModel)]="selectedData.TipoPoblacion">
+              <ion-select multiple="true" 
+              okText="Ok" cancelText="Cancelar" placeholder="Seleccione..." interface="popover" id="TipoPoblacion" name="TipoPoblacion" #TipoPoblacion="ngModel" required [(ngModel)]="selectedData.TipoPoblacion">
                 <ion-select-option value="NINGUNO" id="NINGUNO">NINGUNO</ion-select-option>
                 <ion-select-option value="PUEBLO INDIGENA" id="PUEBLO INDIGENA">PUEBLO INDÍGENA</ion-select-option>
                 <ion-select-option value="POBLACION AFROCOLOMBIANA" id="POBLACION AFROCOLOMBIANA">POBLACIÓN AFROCOLOMBIANA</ion-select-option>
@@ -275,7 +276,8 @@
             <ion-item>
               <ion-label>Condiciones de discapacidad</ion-label>
               <ion-icon slot="start" name="person-outline"></ion-icon>
-              <ion-select placeholder="Seleccione..." interface="popover" id="CondicionesDiscapacidad" name="CondicionesDiscapacidad" #CondicionesDiscapacidad="ngModel" required [(ngModel)]="selectedData.CondicionesDiscapacidad">
+              <ion-select placeholder="Seleccione..." interface="popover" multiple="true" 
+              okText="Ok" cancelText="Cancelar" id="CondicionesDiscapacidad" name="CondicionesDiscapacidad" #CondicionesDiscapacidad="ngModel" required [(ngModel)]="selectedData.CondicionesDiscapacidad">
                 <ion-select-option value="NINGUNA" id="NINGUNA">NINGUNA</ion-select-option>
                 <ion-select-option value="AUDITIVA" id="AUDITIVA">AUDITIVA</ion-select-option>
                 <ion-select-option value="VISUAL" id="VISUAL">VISUAL</ion-select-option>

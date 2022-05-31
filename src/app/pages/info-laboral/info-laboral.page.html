@@ -8,9 +8,8 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-card class="Inicio">
+  <ion-card class="Inicio" style="margin-top: 1rem;margin-bottom: 1rem;">
 
-    <!-- Situación laboral -->
     <ion-card-header>
       <ion-card-subtitle class="subtitulo">Situación laboral</ion-card-subtitle>
       <ion-text>
@@ -20,464 +19,1226 @@
       </ion-text>
     </ion-card-header>
 
-    <ion-grid>
-      <ion-row>
+    <form #form="ngForm" (ngSubmit)="handleForm(form)">
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-item lines="full">
+              <ion-label position="floating ion-text-center">Situación laboral</ion-label>
+              <ion-icon slot="start" name="business-outline"></ion-icon>
+              <ion-select id="SituacionLaboral" name="SituacionLaboral" #SituacionLaboral="ngModel" required [(ngModel)]="selectedData.SituacionLaboral" placeholder="Seleccionar" interface="action-sheet" cancelText="Cancelar">
+                <ion-select-option value="conemple">Con empleo remunerado (Empleado, emprendedor, empresario, independiente, etc)</ion-select-option>
+                <ion-select-option value="sinemple">Sin empleo</ion-select-option>
+                <ion-select-option value="pensiona">Pensionado</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+
+          <ion-row [hidden]="this.selectedData.SituacionLaboral != 'conemple'">
+
+            <ion-col>
+              <ion-item lines="full">
+                <ion-label position="floating">¿Cuánto tiempo (en meses) lleva en esta actividad o trabajo?</ion-label>
+                <ion-icon slot="start" name="reader-outline"></ion-icon>
+                <ion-input type="text" required></ion-input>
+              </ion-item>
+            </ion-col>
+
+            <ion-col>
+              <ion-item lines="full">
+                <ion-label position="floating">Ingreso o salario (Satisfacción laboral)</ion-label>
+                <ion-icon slot="start" name="reader-outline"></ion-icon>
+                <ion-range min="1" max="4" step="1" snaps color="primary" snaps="true" pin="true">
+                  <ion-icon slot="start" name="close-outline"></ion-icon>
+                  <ion-icon slot="end" name="checkmark-outline"></ion-icon>
+                </ion-range>
+              </ion-item>
+            </ion-col>
+
+            <ion-col>
+              <ion-item lines="full">
+                <ion-label position="floating">Cantidad de horas (Satisfacción laboral)</ion-label>
+                <ion-icon slot="start" name="people-outline"></ion-icon>
+                <ion-range min="1" max="4" step="1" snaps color="primary" snaps="true" pin="true">
+                  <ion-icon slot="start" name="close-outline"></ion-icon>
+                  <ion-icon slot="end" name="checkmark-outline"></ion-icon>
+                </ion-range>
+              </ion-item>
+            </ion-col>
+
+            <ion-col>
+              <ion-item lines="full">
+                <ion-label position="floating">Aplicación de conocimientos de la carrera (Satisfacción laboral)</ion-label>
+                <ion-icon slot="start" name="receipt-outline"></ion-icon>
+                <ion-range min="1" max="4" step="1" snaps color="primary" snaps="true" pin="true">
+                  <ion-icon slot="start" name="close-outline"></ion-icon>
+                  <ion-icon slot="end" name="checkmark-outline"></ion-icon>
+                </ion-range>
+              </ion-item>
+            </ion-col>
+
+            <ion-col>
+              <ion-item lines="full">
+                <ion-label position="floating">Retos y desafíos intelectuales (Satisfacción laboral)</ion-label>
+                <ion-icon slot="start" name="filter-outline"></ion-icon>
+                <ion-range min="1" max="4" step="1" snaps color="primary" snaps="true" pin="true">
+                  <ion-icon slot="start" name="close-outline"></ion-icon>
+                  <ion-icon slot="end" name="checkmark-outline"></ion-icon>
+                </ion-range>
+              </ion-item>
+            </ion-col>
+
+            <ion-col>
+              <ion-item lines="full">
+                <ion-label position="floating">Oportunidades de ascenso (Satisfacción laboral)</ion-label>
+                <ion-icon slot="start" name="filter-outline"></ion-icon>
+                <ion-range min="1" max="4" step="1" snaps color="primary" snaps="true" pin="true">
+                  <ion-icon slot="start" name="close-outline"></ion-icon>
+                  <ion-icon slot="end" name="checkmark-outline"></ion-icon>
+                </ion-range>
+              </ion-item>
+            </ion-col>
+
+            <ion-col>
+              <ion-item lines="full">
+                <ion-label position="floating">Estabilidad (Satisfacción laboral)</ion-label>
+                <ion-icon slot="start" name="filter-outline"></ion-icon>
+                <ion-range min="1" max="4" step="1" snaps color="primary" snaps="true" pin="true">
+                  <ion-icon slot="start" name="close-outline"></ion-icon>
+                  <ion-icon slot="end" name="checkmark-outline"></ion-icon>
+                </ion-range>
+              </ion-item>
+            </ion-col>
+
+            <ion-col>
+              <ion-item>
+                <ion-label>Rango salarial</ion-label>
+                <ion-icon slot="start" name="cash-outline"></ion-icon>
+                <ion-select cancelText="Cancelar" placeholder="Seleccionar" interface="action-sheet">
+                  <ion-select-option value="1">Mayor a 1 millon y menor a 2 millones</ion-select-option>
+                  <ion-select-option value="2">Mayor a 2 millones y menor a 3 millones</ion-select-option>
+                  <ion-select-option value="3">Mayor a 3 millones y menor a 5 millones</ion-select-option>
+                  <ion-select-option value="4">Mayor a 5 millones </ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+
+            <ion-col>
+              <ion-item>
+                <ion-label>Razón de vinculación</ion-label>
+                <ion-icon slot="start" name="cash-outline"></ion-icon>
+                <ion-select placeholder="Seleccionar" interface="action-sheet" id="RazonVinculacion" cancelText="Cancelar" name="RazonVinculacion" #RazonVinculacion="ngModel" required [(ngModel)]="selectedData.RazonVinculacion">
+                  <ion-select-option value="1">Ingreso o salario</ion-select-option>
+                  <ion-select-option value="2">Ganar experiencia</ion-select-option>
+                  <ion-select-option value="3">Prestaciones y oportunidades de crecimiento</ion-select-option>
+                  <ion-select-option value="4">Conveniencia de la ubicación</ion-select-option>
+                  <ion-select-option value="5">No encontró otros empleos disponibles en su campo de estudio</ion-select-option>
+                  <ion-select-option value="6">Otra</ion-select-option>
+                </ion-select>
+              </ion-item>
+
+              <ion-item [hidden]="this.selectedData.RazonVinculacion != '6'">
+                <ion-label>¿Cuál?: </ion-label>
+                <ion-input placeholder="Ingrese otra razón de vinculación" type="text" required></ion-input>
+              </ion-item>
+            </ion-col>
+
+            <ion-col>
+              <ion-item>
+                <ion-label>Estado laboral</ion-label>
+                <ion-icon slot="start" name="cash-outline"></ion-icon>
+                <ion-select placeholder="Seleccionar" interface="action-sheet" cancelText="Cancelar" id="EstadoLaboral" name="EstadoLaboral" #EstadoLaboral="ngModel" required [(ngModel)]="selectedData.EstadoLaboral">
+                  <ion-select-option value="empleado">Empleado</ion-select-option>
+                  <ion-select-option value="contratista">Contratista por prestación de servicios o cuenta propia</ion-select-option>
+                  <ion-select-option value="empresario">Propietario de una empresa o negocio particular</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+
+
+            <!-- SUB CAPA -->
+            <ion-row [hidden]="this.selectedData.EstadoLaboral != 'empleado'">
+
+              <ion-col>
+                <ion-item>
+                  <ion-label>Actividades que realiza</ion-label>
+                  <ion-input type="text" required></ion-input>
+                </ion-item>
+              </ion-col>
+
+              <ion-col>
+                <ion-item>
+                  <ion-label>Tipo de contrato</ion-label>
+                  <ion-icon slot="start" name="receipt-outline"></ion-icon>
+                  <ion-select placeholder="Seleccionar" interface="action-sheet">
+                    <ion-select-option value="fsme">Término fijo a seis meses o menos</ion-select-option>
+                    <ion-select-option value="fsma">Término fijo a más de seis meses</ion-select-option>
+                    <ion-select-option value="i">Término indefinido</ion-select-option>
+                    <ion-select-option value="o">Obra labor</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+
+              <ion-col>
+                <ion-item>
+                  <ion-label>Sector</ion-label>
+                  <ion-icon slot="start" name="business-outline"></ion-icon>
+                  <ion-select placeholder="Seleccionar" interface="action-sheet" cancelText="Cancelar">
+                    <ion-select-option value="p">Público</ion-select-option>
+                    <ion-select-option value="e">Privado</ion-select-option>
+                    <ion-select-option value="e">ONG/entidades sin ánimo de lucro/fundaciones/</ion-select-option>
+                    <ion-select-option value="e">Economía mixta</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+
+              <ion-col>
+                <ion-item>
+                  <ion-label position="floating">Nombre de la empresa donde labora</ion-label>
+                  <ion-icon slot="start" name="business-outline"></ion-icon>
+                  <ion-input type="text" required></ion-input>
+                </ion-item>
+              </ion-col>
+
+              <ion-col>
+                <ion-item>
+                  <ion-label>Grupo de actividad económica</ion-label>
+                  <ion-icon slot="start" name="receipt-outline"></ion-icon>
+                  <ion-select placeholder="Seleccionar" interface="action-sheet" cancelText="Cancelar">
+                    <ion-select-option value="p">Ganadero</ion-select-option>
+                    <ion-select-option value="p">Pesquero</ion-select-option>
+                    <ion-select-option value="p">Agrícola</ion-select-option>
+                    <ion-select-option value="p">Minero</ion-select-option>
+                    <ion-select-option value="p">Forestal</ion-select-option>
+                    <ion-select-option value="p">Industrial</ion-select-option>
+                    <ion-select-option value="p">Energético</ion-select-option>
+                    <ion-select-option value="p">Construcción</ion-select-option>
+                    <ion-select-option value="e">Transporte</ion-select-option>
+                    <ion-select-option value="e">Comunicaciones</ion-select-option>
+                    <ion-select-option value="e">Comercial</ion-select-option>
+                    <ion-select-option value="e">Turístico</ion-select-option>
+                    <ion-select-option value="e">Sanitario</ion-select-option>
+                    <ion-select-option value="e">Educativo</ion-select-option>
+                    <ion-select-option value="e">Arte / Cultura/ Deporte</ion-select-option>
+                    <ion-select-option value="e">Financiero</ion-select-option>
+                    <ion-select-option value="e">Administración</ion-select-option>
+                    <ion-select-option value="e">Servicios relacionados con el conocimiento ( Investigación, desarrollo e innovación)</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+
+              <ion-col>
+                <ion-item>
+                  <ion-label>Canal de búsqueda de empleo</ion-label>
+                  <ion-icon slot="start" name="receipt-outline"></ion-icon>
+                  <ion-select placeholder="Seleccionar" interface="action-sheet" okText="Ok" cancelText="Cancelar" id="CanalEmpleo" name="CanalEmpleo" #CanalEmpleo="ngModel" required [(ngModel)]="selectedData.CanalEmpleo">
+                    <ion-select-option value="p">Bolsa o servicios de empleo de la institución donde estudió</ion-select-option>
+                    <ion-select-option value="p">Familiares, amigos o conocidos</ion-select-option>
+                    <ion-select-option value="p">Práctica universitaria</ion-select-option>
+                    <ion-select-option value="p">Unidad de Servicio Público de Empleo</ion-select-option>
+                    <ion-select-option value="p">Portal web (el empleo.com, computrabajo, etc)</ion-select-option>
+                    <ion-select-option value="p">Cajas de compensación</ion-select-option>
+                    <ion-select-option value="p">Redes sociales virtuales (Linkedln, Facebook, Twitter)</ion-select-option>
+                    <ion-select-option value="p">Otro</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+
+              <ion-row [hidden]="!this.selectedData.CanalEmpleo">
+                <ion-col>
+                  <ion-item>
+                    <ion-label>Problematicas donde ha aportado</ion-label>
+                    <ion-icon slot="start" name="cash-outline"></ion-icon>
+                    <ion-select placeholder="Seleccionar" multiple="true" okText="Ok" cancelText="Cancelar" id="ProblematicaAporte" name="ProblematicaAporte" #ProblematicaAporte="ngModel" required [(ngModel)]="selectedData.ProblematicaAporte" #mySelect (ionChange)="onChange(selectedData.ProblematicaAporte, 'ProblematicaAporte')">
+                      <ion-select-option value="probecon">Problemas económicos</ion-select-option>
+                      <ion-select-option value="probambi">Problemas ambientales</ion-select-option>
+                      <ion-select-option value="probsoci">Problemas sociales</ion-select-option>
+                      <ion-select-option value="probcult">Problemas culturales</ion-select-option>
+                      <ion-select-option value="probsoci">Problemas sociales</ion-select-option>
+                      <ion-select-option value="noheaport">No he aportado</ion-select-option>
+                      <ion-select-option value="aporotra">Otra</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+                </ion-col>
+
+                <ion-row [hidden]="!this.selectedData.ProblematicaAporte || this.selectedData.ProblematicaAporte == 'noheaport'">
+                  <ion-col>
+                    <ion-item>
+                      <ion-label>Detalles de sus aportes o contribuciones</ion-label>
+                      <ion-input placeholder="Detalles de aportes" type="text"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+              </ion-row>
+
+            </ion-row>
+
+            <!-- -----------------------------CONTRATISTA ----------------------------- -->
+            <ion-row [hidden]="this.selectedData.EstadoLaboral != 'contratista'">
+
+              <ion-col>
+                <ion-item>
+                  <ion-label>Actividades que realiza</ion-label>
+                  <ion-input type="text" required></ion-input>
+                </ion-item>
+              </ion-col>
+
+              <ion-col>
+                <ion-item>
+                  <ion-label>Formas de trabajo Independientes</ion-label>
+                  <ion-icon slot="start" name="receipt-outline"></ion-icon>
+                  <ion-select placeholder="Seleccionar" interface="action-sheet">
+                    <ion-select-option value="contser">Contrato por prestación de servicios</ion-select-option>
+                    <ion-select-option value="trabhono">Trabajo por honorarios</ion-select-option>
+                    <ion-select-option value="oficual">Un oficio no cualificado (taxista, servicio doméstico, plomero, etc)</ion-select-option>
+                    <ion-select-option value="porcom">Por comisión</ion-select-option>
+                    <ion-select-option value="otro">Otro</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+
+              <ion-col>
+                <ion-item>
+                  <ion-label>Sector</ion-label>
+                  <ion-icon slot="start" name="business-outline"></ion-icon>
+                  <ion-select placeholder="Seleccionar" interface="action-sheet" cancelText="Cancelar">
+                    <ion-select-option value="p">Público</ion-select-option>
+                    <ion-select-option value="e">Privado</ion-select-option>
+                    <ion-select-option value="e">ONG/entidades sin ánimo de lucro/fundaciones/</ion-select-option>
+                    <ion-select-option value="e">Economía mixta</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+
+              <ion-col>
+                <ion-item>
+                  <ion-label position="floating">Nombre de la empresa donde labora</ion-label>
+                  <ion-icon slot="start" name="business-outline"></ion-icon>
+                  <ion-input type="text" required></ion-input>
+                </ion-item>
+              </ion-col>
+
+              <ion-col>
+                <ion-item>
+                  <ion-label>Grupo de actividad económica</ion-label>
+                  <ion-icon slot="start" name="receipt-outline"></ion-icon>
+                  <ion-select placeholder="Seleccionar" interface="action-sheet" cancelText="Cancelar">
+                    <ion-select-option value="p">Ganadero</ion-select-option>
+                    <ion-select-option value="p">Pesquero</ion-select-option>
+                    <ion-select-option value="p">Agrícola</ion-select-option>
+                    <ion-select-option value="p">Minero</ion-select-option>
+                    <ion-select-option value="p">Forestal</ion-select-option>
+                    <ion-select-option value="p">Industrial</ion-select-option>
+                    <ion-select-option value="p">Energético</ion-select-option>
+                    <ion-select-option value="p">Construcción</ion-select-option>
+                    <ion-select-option value="e">Transporte</ion-select-option>
+                    <ion-select-option value="e">Comunicaciones</ion-select-option>
+                    <ion-select-option value="e">Comercial</ion-select-option>
+                    <ion-select-option value="e">Turístico</ion-select-option>
+                    <ion-select-option value="e">Sanitario</ion-select-option>
+                    <ion-select-option value="e">Educativo</ion-select-option>
+                    <ion-select-option value="e">Arte / Cultura/ Deporte</ion-select-option>
+                    <ion-select-option value="e">Financiero</ion-select-option>
+                    <ion-select-option value="e">Administración</ion-select-option>
+                    <ion-select-option value="e">Servicios relacionados con el conocimiento ( Investigación, desarrollo e innovación)</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+
+              <ion-col>
+                <ion-item>
+                  <ion-label>Canal de búsqueda de empleo</ion-label>
+                  <ion-icon slot="start" name="receipt-outline"></ion-icon>
+                  <ion-select placeholder="Seleccionar" interface="action-sheet" okText="Ok" cancelText="Cancelar" id="CanalEmpleo" name="CanalEmpleo" #CanalEmpleo="ngModel" required [(ngModel)]="selectedData.CanalEmpleo">
+                    <ion-select-option value="p">Bolsa o servicios de empleo de la institución donde estudió</ion-select-option>
+                    <ion-select-option value="p">Familiares, amigos o conocidos</ion-select-option>
+                    <ion-select-option value="p">Práctica universitaria</ion-select-option>
+                    <ion-select-option value="p">Unidad de Servicio Público de Empleo</ion-select-option>
+                    <ion-select-option value="p">Portal web (el empleo.com, computrabajo, etc)</ion-select-option>
+                    <ion-select-option value="p">Cajas de compensación</ion-select-option>
+                    <ion-select-option value="p">Redes sociales virtuales (Linkedln, Facebook, Twitter)</ion-select-option>
+                    <ion-select-option value="p">Otro</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+
+              <ion-row [hidden]="!this.selectedData.CanalEmpleo">
+                <ion-col>
+                  <ion-item>
+                    <ion-label>Problematicas donde ha aportado</ion-label>
+                    <ion-icon slot="start" name="cash-outline"></ion-icon>
+                    <ion-select placeholder="Seleccionar" multiple="true" okText="Ok" cancelText="Cancelar" id="ProblematicaAporte" name="ProblematicaAporte" #ProblematicaAporte="ngModel" required [(ngModel)]="selectedData.ProblematicaAporte">
+                      <ion-select-option value="probecon">Problemas económicos</ion-select-option>
+                      <ion-select-option value="probambi">Problemas ambientales</ion-select-option>
+                      <ion-select-option value="probsoci">Problemas sociales</ion-select-option>
+                      <ion-select-option value="probcult">Problemas culturales</ion-select-option>
+                      <ion-select-option value="probsoci">Problemas sociales</ion-select-option>
+                      <ion-select-option value="noheaport">No he aportado</ion-select-option>
+                      <ion-select-option value="aporotra">Otra</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+                </ion-col>
+
+                <ion-row [hidden]="!this.selectedData.ProblematicaAporte || this.selectedData.ProblematicaAporte == 'noheaport'">
+                  <ion-col>
+                    <ion-item>
+                      <ion-label>Detalles de sus aportes o contribuciones</ion-label>
+                      <ion-input placeholder="Detalles de aportes" type="text"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+              </ion-row>
+
+            </ion-row>
+
+            <ion-row [hidden]="this.selectedData.EstadoLaboral != 'empresario'">
+
+              <ion-col>
+                <ion-item>
+                  <ion-label>Actividades que realiza</ion-label>
+                  <ion-input type="text" required></ion-input>
+                </ion-item>
+              </ion-col>
+
+              <ion-col>
+                <ion-item>
+                  <ion-label position="floating">Nombre de la empresa donde labora</ion-label>
+                  <ion-icon slot="start" name="business-outline"></ion-icon>
+                  <ion-input type="text" required></ion-input>
+                </ion-item>
+              </ion-col>
+
+              <ion-col>
+                <ion-item>
+                  <ion-label>Grupo de actividad económica</ion-label>
+                  <ion-icon slot="start" name="receipt-outline"></ion-icon>
+                  <ion-select placeholder="Seleccionar" interface="action-sheet" cancelText="Cancelar">
+                    <ion-select-option value="p">Ganadero</ion-select-option>
+                    <ion-select-option value="p">Pesquero</ion-select-option>
+                    <ion-select-option value="p">Agrícola</ion-select-option>
+                    <ion-select-option value="p">Minero</ion-select-option>
+                    <ion-select-option value="p">Forestal</ion-select-option>
+                    <ion-select-option value="p">Industrial</ion-select-option>
+                    <ion-select-option value="p">Energético</ion-select-option>
+                    <ion-select-option value="p">Construcción</ion-select-option>
+                    <ion-select-option value="e">Transporte</ion-select-option>
+                    <ion-select-option value="e">Comunicaciones</ion-select-option>
+                    <ion-select-option value="e">Comercial</ion-select-option>
+                    <ion-select-option value="e">Turístico</ion-select-option>
+                    <ion-select-option value="e">Sanitario</ion-select-option>
+                    <ion-select-option value="e">Educativo</ion-select-option>
+                    <ion-select-option value="e">Arte / Cultura/ Deporte</ion-select-option>
+                    <ion-select-option value="e">Financiero</ion-select-option>
+                    <ion-select-option value="e">Administración</ion-select-option>
+                    <ion-select-option value="e">Servicios relacionados con el conocimiento ( Investigación, desarrollo e innovación)</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+
+              <ion-col>
+                <ion-item>
+                  <ion-label position="floating">¿Cuales son los productos o servicios?</ion-label>
+                  <ion-icon slot="start" name="business-outline"></ion-icon>
+                  <ion-input type="text" required></ion-input>
+                </ion-item>
+              </ion-col>
+
+              <ion-col>
+                <ion-item>
+                  <ion-label position="floating">Ciudad / municipio / provincia de ubicación de la empresa</ion-label>
+                  <ion-icon slot="start" name="business-outline"></ion-icon>
+                  <ion-input type="text" required></ion-input>
+                </ion-item>
+              </ion-col>
+
+              <ion-col>
+                <ion-item>
+                  <ion-label>Operación de la empresa</ion-label>
+                  <ion-icon slot="start" name="receipt-outline"></ion-icon>
+                  <ion-select placeholder="Seleccionar" interface="action-sheet" cancelText="Cancelar" multiple="true">
+                    <ion-select-option value="colombia">Colombia</ion-select-option>
+                    <ion-select-option value="sudamerica">Sudamérica</ion-select-option>
+                    <ion-select-option value="centamer">Centro América y el Caribe</ion-select-option>
+                    <ion-select-option value="nortamer">Norte América</ion-select-option>
+                    <ion-select-option value="europa">Europa</ion-select-option>
+                    <ion-select-option value="africa">África</ion-select-option>
+                    <ion-select-option value="asia">Asia</ion-select-option>
+                    <ion-select-option value="oceania">Oceanía</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+
+              <ion-col>
+                <ion-item>
+                  <ion-label>Etapa en que se encuentra la empresa</ion-label>
+                  <ion-icon slot="start" name="receipt-outline"></ion-icon>
+                  <ion-select placeholder="Seleccionar" interface="action-sheet" cancelText="Cancelar" multiple="true" okText="Ok" cancelText="Cancelar" id="EtapaEmpresa" name="EtapaEmpresa" #EtapaEmpresa="ngModel" required [(ngModel)]="selectedData.EtapaEmpresa">
+                    <ion-select-option value="colombia">Idea-Planeación</ion-select-option>
+                    <ion-select-option value="sudamerica">Creación</ion-select-option>
+                    <ion-select-option value="centamer">Puesta en marcha</ion-select-option>
+                    <ion-select-option value="nortamer">Supervivencia</ion-select-option>
+                    <ion-select-option value="europa">Crecimiento</ion-select-option>
+                    <ion-select-option value="africa">Madurez-consolidación-sostenibilidad</ion-select-option>
+                    <ion-select-option value="asia">Declive</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+
+              <ion-row [hidden]="!this.selectedData.EtapaEmpresa">
+                <ion-col>
+                  <ion-item>
+                    <ion-label>Problematicas donde ha aportado</ion-label>
+                    <ion-icon slot="start" name="cash-outline"></ion-icon>
+                    <ion-select placeholder="Seleccionar" multiple="true" okText="Ok" cancelText="Cancelar" id="ProblematicaAporte" name="ProblematicaAporte" #ProblematicaAporte="ngModel" required [(ngModel)]="selectedData.ProblematicaAporte" #mySelect (ionChange)="onChange(selectedData.ProblematicaAporte, 'ProblematicaAporte')">
+                      <ion-select-option value="probecon">Problemas económicos</ion-select-option>
+                      <ion-select-option value="probambi">Problemas ambientales</ion-select-option>
+                      <ion-select-option value="probsoci">Problemas sociales</ion-select-option>
+                      <ion-select-option value="probcult">Problemas culturales</ion-select-option>
+                      <ion-select-option value="probsoci">Problemas sociales</ion-select-option>
+                      <ion-select-option value="noheaport">No he aportado</ion-select-option>
+                      <ion-select-option value="aporotra">Otra</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+                </ion-col>
+
+                <ion-row [hidden]="!this.selectedData.ProblematicaAporte || this.selectedData.ProblematicaAporte == 'noheaport'">
+                  <ion-col>
+                    <ion-item>
+                      <ion-label>Detalles de sus aportes o contribuciones</ion-label>
+                      <ion-input placeholder="Detalles de aportes" type="text"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+              </ion-row>
+
+            </ion-row>
+          </ion-row>
+
+          <ion-row [hidden]="this.selectedData.SituacionLaboral != 'sinemple'">
+            <ion-col>
+              <ion-item>
+                <ion-label>En la actualidad, ¿en qué actividad ocupa la mayor parte de su tiempo?</ion-label>
+                <ion-icon slot="start" name="cash-outline"></ion-icon>
+                <ion-select cancelText="Cancelar" placeholder="Seleccionar" interface="action-sheet" id="ActividadActual" name="ActividadActual" #ActividadActual="ngModel" required [(ngModel)]="selectedData.ActividadActual" cancelText="Cancelar">
+                  <ion-select-option value="buscempl">Busca empleo</ion-select-option>
+                  <ion-select-option value="estudiar">Estudiar</ion-select-option>
+                  <ion-select-option value="labonore">Una actividad laboral no remunerada</ion-select-option>
+                  <ion-select-option value="otrosuti">Otro </ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+
+            <ion-row [hidden]="this.selectedData.ActividadActual != 'buscempl'">
+              <ion-col>
+                <ion-item>
+                  <ion-label>¿Hace cuántos meses ha estado buscando empleo?</ion-label>
+                  <ion-icon slot="start" name="cash-outline"></ion-icon>
+                  <ion-select cancelText="Cancelar" placeholder="Seleccionar" interface="action-sheet" cancelText="Cancelar">
+                    <ion-select-option value="1">1</ion-select-option>
+                    <ion-select-option value="2">2</ion-select-option>
+                    <ion-select-option value="3">3</ion-select-option>
+                    <ion-select-option value="4">4</ion-select-option>
+                    <ion-select-option value="5">5</ion-select-option>
+                    <ion-select-option value="6">6</ion-select-option>
+                    <ion-select-option value="7">7</ion-select-option>
+                    <ion-select-option value="8">8</ion-select-option>
+                    <ion-select-option value="9">9</ion-select-option>
+                    <ion-select-option value="10">10</ion-select-option>
+                    <ion-select-option value="11">11</ion-select-option>
+                    <ion-select-option value="12">12</ion-select-option>
+                    <ion-select-option value="13">13</ion-select-option>
+                    <ion-select-option value="14">14</ion-select-option>
+                    <ion-select-option value="15">15</ion-select-option>
+                    <ion-select-option value="16">16</ion-select-option>
+                    <ion-select-option value="17">17</ion-select-option>
+                    <ion-select-option value="mas de 18">mas de 18</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+
+              <ion-col>
+                <ion-item>
+                  <ion-label>¿Cuál considera la principal dificultad a la hora de conseguir trabajo?</ion-label>
+                  <ion-icon slot="start" name="cash-outline"></ion-icon>
+                  <ion-select cancelText="Cancelar" placeholder="Seleccionar" interface="action-sheet" cancelText="Cancelar">
+                    <ion-select-option value="expenece">Carece de la experiencia necesaria</ion-select-option>
+                    <ion-select-option value="nooptrab">No hay oportunidades de trabajo</ion-select-option>
+                    <ion-select-option value="salabajo">El salario que le ofrecen es muy bajo</ion-select-option>
+                    <ion-select-option value="trabnoen">No encuentra trabajo en su campo de estudio</ion-select-option>
+                    <ion-select-option value="nosabusc">No sabe cómo buscarlo</ion-select-option>
+                    <ion-select-option value="difiotr">Otro</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+
+              <ion-col>
+                <ion-item>
+                  <ion-label>Canal de búsqueda de empleo</ion-label>
+                  <ion-icon slot="start" name="receipt-outline"></ion-icon>
+                  <ion-select placeholder="Seleccionar" interface="action-sheet" okText="Ok" cancelText="Cancelar" id="CanalEmpleo" name="CanalEmpleo" #CanalEmpleo="ngModel" required [(ngModel)]="selectedData.CanalEmpleo">
+                    <ion-select-option value="bolsserv">Bolsa o servicios de empleo de la institución donde estudió</ion-select-option>
+                    <ion-select-option value="famiamig">Familiares, amigos o conocidos</ion-select-option>
+                    <ion-select-option value="pracuniv">Práctica universitaria</ion-select-option>
+                    <ion-select-option value="unidpubl">Unidad de Servicio Público de Empleo</ion-select-option>
+                    <ion-select-option value="portaweb">Portal web (el empleo.com, computrabajo, etc)</ion-select-option>
+                    <ion-select-option value="cajacomp">Cajas de compensación</ion-select-option>
+                    <ion-select-option value="redesoci">Redes sociales virtuales (Linkedln, Facebook, Twitter)</ion-select-option>
+                    <ion-select-option value="emplotro">Otro</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+
+              <ion-row [hidden]="!this.selectedData.CanalEmpleo">
+                <ion-col>
+                  <ion-item>
+                    <ion-label>Problematicas donde ha aportado</ion-label>
+                    <ion-icon slot="start" name="cash-outline"></ion-icon>
+                    <ion-select placeholder="Seleccionar" multiple="true" okText="Ok" cancelText="Cancelar" id="ProblematicaAporte" name="ProblematicaAporte" #ProblematicaAporte="ngModel" required [(ngModel)]="selectedData.ProblematicaAporte" #mySelect (ionChange)="onChange(selectedData.ProblematicaAporte, 'ProblematicaAporte')">
+                      <ion-select-option value="probecon">Problemas económicos</ion-select-option>
+                      <ion-select-option value="probambi">Problemas ambientales</ion-select-option>
+                      <ion-select-option value="probsoci">Problemas sociales</ion-select-option>
+                      <ion-select-option value="probcult">Problemas culturales</ion-select-option>
+                      <ion-select-option value="probsoci">Problemas sociales</ion-select-option>
+                      <ion-select-option value="noheaport">No he aportado</ion-select-option>
+                      <ion-select-option value="aporotra">Otra</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+                </ion-col>
+
+                <ion-row [hidden]="!this.selectedData.ProblematicaAporte || this.selectedData.ProblematicaAporte == 'noheaport'">
+                  <ion-col>
+                    <ion-item>
+                      <ion-label>Detalles de sus aportes o contribuciones</ion-label>
+                      <ion-icon slot="start" name="cash-outline"></ion-icon>
+                      <ion-input placeholder="Detalles de aportes" type="text"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+              </ion-row>
+
+            </ion-row>
+
+            <ion-row [hidden]="!['estudiar','labonore','otrosuti'].includes(this.selectedData.ActividadActual)">
+              <ion-col>
+                <ion-item>
+                  <ion-label>¿Desea conseguir un trabajo o realizar una actividad remunerada?</ion-label>
+                  <ion-icon slot="start" name="cash-outline"></ion-icon>
+                  <ion-toggle color="primary" id="DeseaTrabajo" name="DeseaTrabajo" #DeseaTrabajo="ngModel" required [(ngModel)]="selectedData.DeseaTrabajo"></ion-toggle>
+                </ion-item>
+              </ion-col>
+
+              <!-- SI -->
+              <ion-row [hidden]="!this.selectedData.DeseaTrabajo">
+
+                <ion-col>
+                  <ion-item>
+                    <ion-label>¿Durante el último mes, ¿hizo alguna diligencia para conseguir un trabajo o realizar una actividad remunerada?</ion-label>
+                    <ion-icon slot="start" name="cash-outline"></ion-icon>
+                    <ion-toggle color="primary" id="DiligenciaTrabajo" name="DiligenciaTrabajo" #DiligenciaTrabajo="ngModel" required [(ngModel)]="selectedData.DiligenciaTrabajo"></ion-toggle>
+                  </ion-item>
+                </ion-col>
+
+                <ion-row [hidden]="!this.selectedData.DiligenciaTrabajo">
+
+                  <ion-col>
+                    <ion-item>
+                      <ion-label>¿Hace cuántos meses ha estado buscando empleo?</ion-label>
+                      <ion-icon slot="start" name="cash-outline"></ion-icon>
+                      <ion-select cancelText="Cancelar" placeholder="Seleccionar" interface="action-sheet" cancelText="Cancelar">
+                        <ion-select-option value="1">1</ion-select-option>
+                        <ion-select-option value="2">2</ion-select-option>
+                        <ion-select-option value="3">3</ion-select-option>
+                        <ion-select-option value="4">4</ion-select-option>
+                        <ion-select-option value="5">5</ion-select-option>
+                        <ion-select-option value="6">6</ion-select-option>
+                        <ion-select-option value="7">7</ion-select-option>
+                        <ion-select-option value="8">8</ion-select-option>
+                        <ion-select-option value="9">9</ion-select-option>
+                        <ion-select-option value="10">10</ion-select-option>
+                        <ion-select-option value="11">11</ion-select-option>
+                        <ion-select-option value="12">12</ion-select-option>
+                        <ion-select-option value="13">13</ion-select-option>
+                        <ion-select-option value="14">14</ion-select-option>
+                        <ion-select-option value="15">15</ion-select-option>
+                        <ion-select-option value="16">16</ion-select-option>
+                        <ion-select-option value="17">17</ion-select-option>
+                        <ion-select-option value="mas de 18">mas de 18</ion-select-option>
+                      </ion-select>
+                    </ion-item>
+                  </ion-col>
+
+                  <ion-col>
+                    <ion-item>
+                      <ion-label>¿Cuál considera la principal dificultad a la hora de conseguir trabajo?</ion-label>
+                      <ion-icon slot="start" name="cash-outline"></ion-icon>
+                      <ion-select cancelText="Cancelar" placeholder="Seleccionar" interface="action-sheet" cancelText="Cancelar">
+                        <ion-select-option value="expenece">Carece de la experiencia necesaria</ion-select-option>
+                        <ion-select-option value="nooptrab">No hay oportunidades de trabajo</ion-select-option>
+                        <ion-select-option value="salabajo">El salario que le ofrecen es muy bajo</ion-select-option>
+                        <ion-select-option value="trabnoen">No encuentra trabajo en su campo de estudio</ion-select-option>
+                        <ion-select-option value="nosabusc">No sabe cómo buscarlo</ion-select-option>
+                        <ion-select-option value="difiotr">Otro</ion-select-option>
+                      </ion-select>
+                    </ion-item>
+                  </ion-col>
+
+                  <ion-col>
+                    <ion-item>
+                      <ion-label>Canal de búsqueda de empleo</ion-label>
+                      <ion-icon slot="start" name="receipt-outline"></ion-icon>
+                      <ion-select placeholder="Seleccionar" interface="action-sheet" okText="Ok" cancelText="Cancelar" id="CanalEmpleo" name="CanalEmpleo" #CanalEmpleo="ngModel" required [(ngModel)]="selectedData.CanalEmpleo">
+                        <ion-select-option value="bolsserv">Bolsa o servicios de empleo de la institución donde estudió</ion-select-option>
+                        <ion-select-option value="famiamig">Familiares, amigos o conocidos</ion-select-option>
+                        <ion-select-option value="pracuniv">Práctica universitaria</ion-select-option>
+                        <ion-select-option value="unidpubl">Unidad de Servicio Público de Empleo</ion-select-option>
+                        <ion-select-option value="portaweb">Portal web (el empleo.com, computrabajo, etc)</ion-select-option>
+                        <ion-select-option value="cajacomp">Cajas de compensación</ion-select-option>
+                        <ion-select-option value="redesoci">Redes sociales virtuales (Linkedln, Facebook, Twitter)</ion-select-option>
+                        <ion-select-option value="emplotro">Otro</ion-select-option>
+                      </ion-select>
+                    </ion-item>
+                  </ion-col>
+
+                  <ion-row [hidden]="!this.selectedData.CanalEmpleo">
+                    <ion-col>
+                      <ion-item>
+                        <ion-label>Problematicas donde ha aportado</ion-label>
+                        <ion-icon slot="start" name="cash-outline"></ion-icon>
+                        <ion-select placeholder="Seleccionar" multiple="true" okText="Ok" cancelText="Cancelar" id="ProblematicaAporte" name="ProblematicaAporte" #ProblematicaAporte="ngModel" required [(ngModel)]="selectedData.ProblematicaAporte" #mySelect (ionChange)="onChange(selectedData.ProblematicaAporte, 'ProblematicaAporte')">
+                          <ion-select-option value="probecon">Problemas económicos</ion-select-option>
+                          <ion-select-option value="probambi">Problemas ambientales</ion-select-option>
+                          <ion-select-option value="probsoci">Problemas sociales</ion-select-option>
+                          <ion-select-option value="probcult">Problemas culturales</ion-select-option>
+                          <ion-select-option value="probsoci">Problemas sociales</ion-select-option>
+                          <ion-select-option value="noheaport">No he aportado</ion-select-option>
+                          <ion-select-option value="aporotra">Otra</ion-select-option>
+                        </ion-select>
+                      </ion-item>
+                    </ion-col>
+
+                    <ion-row [hidden]="!this.selectedData.ProblematicaAporte || this.selectedData.ProblematicaAporte == 'noheaport'">
+                      <ion-col>
+                        <ion-item>
+                          <ion-label>Detalles de sus aportes o contribuciones</ion-label>
+                          <ion-icon slot="start" name="cash-outline"></ion-icon>
+                          <ion-input placeholder="Detalles de aportes" type="text"></ion-input>
+                        </ion-item>
+                      </ion-col>
+                    </ion-row>
+                  </ion-row>
+
+                </ion-row>
+              </ion-row>
+
+              <!-- NO -->
+              <ion-row [hidden]="this.selectedData.DeseaTrabajo">
+                <ion-col>
+                  <ion-item>
+                    <ion-label>Problematicas donde ha aportado</ion-label>
+                    <ion-icon slot="start" name="cash-outline"></ion-icon>
+                    <ion-select placeholder="Seleccionar" multiple="true" okText="Ok" cancelText="Cancelar" id="ProblematicaAporte" name="ProblematicaAporte" #ProblematicaAporte="ngModel" required [(ngModel)]="selectedData.ProblematicaAporte" #mySelect (ionChange)="onChange(selectedData.ProblematicaAporte, 'ProblematicaAporte')">
+                      <ion-select-option value="probecon">Problemas económicos</ion-select-option>
+                      <ion-select-option value="probambi">Problemas ambientales</ion-select-option>
+                      <ion-select-option value="probsoci">Problemas sociales</ion-select-option>
+                      <ion-select-option value="probcult">Problemas culturales</ion-select-option>
+                      <ion-select-option value="probsoci">Problemas sociales</ion-select-option>
+                      <ion-select-option value="noheaport">No he aportado</ion-select-option>
+                      <ion-select-option value="aporotra">Otra</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+                </ion-col>
+
+                <ion-row [hidden]="!this.selectedData.ProblematicaAporte || this.selectedData.ProblematicaAporte == 'noheaport'">
+                  <ion-col>
+                    <ion-item>
+                      <ion-label>Detalles de sus aportes o contribuciones</ion-label>
+                      <ion-icon slot="start" name="cash-outline"></ion-icon>
+                      <ion-input placeholder="Detalles de aportes" type="text"></ion-input>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+              </ion-row>
+            </ion-row>
+
+          </ion-row>
+
+          <ion-row [hidden]="this.selectedData.SituacionLaboral != 'pensiona'">
+            <ion-col>
+              <ion-item>
+                <ion-label>Problematicas donde ha aportado</ion-label>
+                <ion-icon slot="start" name="cash-outline"></ion-icon>
+                <ion-select placeholder="Seleccionar" multiple="true" okText="Ok" cancelText="Cancelar" id="ProblematicaAporte" name="ProblematicaAporte" #ProblematicaAporte="ngModel" required [(ngModel)]="selectedData.ProblematicaAporte" #mySelect (ionChange)="onChange(selectedData.ProblematicaAporte, 'ProblematicaAporte')">
+                  <ion-select-option value="probecon">Problemas económicos</ion-select-option>
+                  <ion-select-option value="probambi">Problemas ambientales</ion-select-option>
+                  <ion-select-option value="probsoci">Problemas sociales</ion-select-option>
+                  <ion-select-option value="probcult">Problemas culturales</ion-select-option>
+                  <ion-select-option value="probsoci">Problemas sociales</ion-select-option>
+                  <ion-select-option value="noheaport">No he aportado</ion-select-option>
+                  <ion-select-option value="aporotra">Otra</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+
+            <ion-row [hidden]="!this.selectedData.ProblematicaAporte || this.selectedData.ProblematicaAporte == 'noheaport'">
+              <ion-col>
+                <ion-item>
+                  <ion-label>Detalles de sus aportes o contribuciones</ion-label>
+                  <ion-input placeholder="Detalles de aportes" type="text"></ion-input>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-row>
+
+        </ion-row>
+        <!-- 
+        <ion-row>
+          <ion-col>
+            <ion-item lines="full">
+              <ion-label position="floating">Ingreso o salario (Satisfacción laboral)</ion-label>
+              <ion-icon slot="start" name="reader-outline"></ion-icon>
+              <ion-range min="1" max="4" step="1" snaps color="primary" snaps="true" pin="true">
+                <ion-icon slot="start" name="close-outline"></ion-icon>
+                <ion-icon slot="end" name="checkmark-outline"></ion-icon>
+              </ion-range>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item lines="full">
+              <ion-label position="floating">Cantidad de horas (Satisfacción laboral)</ion-label>
+              <ion-icon slot="start" name="people-outline"></ion-icon>
+              <ion-range min="1" max="4" step="1" snaps color="primary" snaps="true" pin="true">
+                <ion-icon slot="start" name="close-outline"></ion-icon>
+                <ion-icon slot="end" name="checkmark-outline"></ion-icon>
+              </ion-range>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+  
+        <ion-row>
+          <ion-col>
+            <ion-item lines="full">
+              <ion-label position="floating">Aplicación de conocimientos de la carrera (Satisfacción laboral)</ion-label>
+              <ion-icon slot="start" name="receipt-outline"></ion-icon>
+              <ion-range min="1" max="4" step="1" snaps color="primary" snaps="true" pin="true">
+                <ion-icon slot="start" name="close-outline"></ion-icon>
+                <ion-icon slot="end" name="checkmark-outline"></ion-icon>
+              </ion-range>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item lines="full">
+              <ion-label position="floating">Retos y desafíos intelectuales (Satisfacción laboral)</ion-label>
+              <ion-icon slot="start" name="filter-outline"></ion-icon>
+              <ion-range min="1" max="4" step="1" snaps color="primary" snaps="true" pin="true">
+                <ion-icon slot="start" name="close-outline"></ion-icon>
+                <ion-icon slot="end" name="checkmark-outline"></ion-icon>
+              </ion-range>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+  
+        <ion-row>
+          <ion-col>
+            <ion-item lines="full">
+              <ion-label position="floating">Oportunidades de ascenso (Satisfacción laboral)</ion-label>
+              <ion-icon slot="start" name="filter-outline"></ion-icon>
+              <ion-range min="1" max="4" step="1" snaps color="primary" snaps="true" pin="true">
+                <ion-icon slot="start" name="close-outline"></ion-icon>
+                <ion-icon slot="end" name="checkmark-outline"></ion-icon>
+              </ion-range>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item lines="full">
+              <ion-label position="floating">Estabilidad (Satisfacción laboral)</ion-label>
+              <ion-icon slot="start" name="filter-outline"></ion-icon>
+              <ion-range min="1" max="4" step="1" snaps color="primary" snaps="true" pin="true">
+                <ion-icon slot="start" name="close-outline"></ion-icon>
+                <ion-icon slot="end" name="checkmark-outline"></ion-icon>
+              </ion-range>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+  
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>Rango salarial</ion-label>
+              <ion-icon slot="start" name="cash-outline"></ion-icon>
+              <ion-select placeholder="Seleccionar" interface="action-sheet">
+                <ion-select-option value="1">Mayor a 1 millon y menor a 2 millones</ion-select-option>
+                <ion-select-option value="2">Mayor a 2 millones y menor a 3 millones</ion-select-option>
+                <ion-select-option value="3">Mayor a 3 millones y menor a 5 millones</ion-select-option>
+                <ion-select-option value="4">Mayor a 5 millones </ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+  
+          <ion-col>
+            <ion-item>
+              <ion-label>Razón de vinculación</ion-label>
+              <ion-icon slot="start" name="cash-outline"></ion-icon>
+              <ion-select placeholder="Seleccionar" interface="action-sheet">
+                <ion-select-option value="1">Ingreso o salario</ion-select-option>
+                <ion-select-option value="2">Ganar experiencia</ion-select-option>
+                <ion-select-option value="3">Prestaciones y oportunidades de crecimiento</ion-select-option>
+                <ion-select-option value="4">Conveniencia de la ubicación</ion-select-option>
+                <ion-select-option value="5">No encontró otros empleos disponibles en su campo de estudio</ion-select-option>
+              </ion-select>
+            </ion-item>
+  
+            <ion-item>
+              <ion-label>Otra: </ion-label>
+              <ion-input type="text" required></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+  
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>Estado laboral</ion-label>
+              <ion-icon slot="start" name="cash-outline"></ion-icon>
+              <ion-select placeholder="Seleccionar" interface="action-sheet">
+                <ion-select-option value="1">Contratista por prestación de servicios o cuenta propia</ion-select-option>
+                <ion-select-option value="2">Empleado</ion-select-option>
+                <ion-select-option value="3">Propietario de una empresa o negocio particular</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>Actividades que realiza</ion-label>
+              <ion-input type="text" required></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  
+      <ion-card-header>
+        <ion-card-subtitle class="subtitulo">Datos de empleo</ion-card-subtitle>
+        <ion-text>
+          <p>
+            INFORMACIÓN DE EMPLEADOS
+          </p>
+        </ion-text>
+      </ion-card-header>
+  
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>Tipo de contrato</ion-label>
+              <ion-icon slot="start" name="receipt-outline"></ion-icon>
+              <ion-select placeholder="Seleccionar" interface="action-sheet">
+                <ion-select-option value="fsme">Término fijo a seis meses o menos</ion-select-option>
+                <ion-select-option value="fsma">Término fijo a más de seis meses</ion-select-option>
+                <ion-select-option value="i">Término indefinido</ion-select-option>
+                <ion-select-option value="o">Obra labor</ion-select-option>
+              </ion-select>
+            </ion-item>
+  
+          </ion-col>
+  
+          <ion-col>
+            <ion-item>
+              <ion-label>Sector economico</ion-label>
+              <ion-icon slot="start" name="filter-outline"></ion-icon>
+              <ion-select placeholder="Seleccionar" interface="action-sheet">
+                <ion-select-option value="pub">Público</ion-select-option>
+                <ion-select-option value="priv">Privado</ion-select-option>
+                <ion-select-option value="ong">ONG/entidades sin ánimo de lucro/fundaciones/</ion-select-option>
+                <ion-select-option value="mixta">Economía mixta</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+  
+          <ion-col>
+            <ion-item>
+              <ion-label position="floating">Nombre de la empresa</ion-label>
+              <ion-icon slot="start" name="business-outline"></ion-icon>
+              <ion-input type="text" required></ion-input>
+            </ion-item>
+          </ion-col>
+  
+  
+          <ion-col>
+            <ion-item>
+              <ion-label>Grupo de actividad económica</ion-label>
+              <ion-icon slot="start" name="receipt-outline"></ion-icon>
+              <ion-select placeholder="Seleccionar" interface="action-sheet">
+                <ion-select-option value="p">Ganadero</ion-select-option>
+                <ion-select-option value="p">Pesquero</ion-select-option>
+                <ion-select-option value="p">Agrícola</ion-select-option>
+                <ion-select-option value="p">Minero</ion-select-option>
+                <ion-select-option value="p">Forestal</ion-select-option>
+                <ion-select-option value="p">Industrial</ion-select-option>
+                <ion-select-option value="p">Energético</ion-select-option>
+                <ion-select-option value="p">Construcción</ion-select-option>
+                <ion-select-option value="e">Transporte</ion-select-option>
+                <ion-select-option value="e">Comunicaciones</ion-select-option>
+                <ion-select-option value="e">Comercial</ion-select-option>
+                <ion-select-option value="e">Turístico</ion-select-option>
+                <ion-select-option value="e">Sanitario</ion-select-option>
+                <ion-select-option value="e">Educativo</ion-select-option>
+                <ion-select-option value="e">Arte / Cultura/ Deporte</ion-select-option>
+                <ion-select-option value="e">Financiero</ion-select-option>
+                <ion-select-option value="e">Administración</ion-select-option>
+                <ion-select-option value="e">Servicios relacionados con el conocimiento ( Investigación, desarrollo e innovación)</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+  
+          <ion-col>
+            <ion-item>
+              <ion-label>Canal de búsqueda de empleo</ion-label>
+              <ion-icon slot="start" name="receipt-outline"></ion-icon>
+              <ion-select placeholder="Seleccionar" interface="action-sheet">
+                <ion-select-option value="p">Bolsa o servicios de empleo de la institución donde estudió</ion-select-option>
+                <ion-select-option value="p">Familiares, amigos o conocidos</ion-select-option>
+                <ion-select-option value="p">Práctica universitaria</ion-select-option>
+                <ion-select-option value="p">Unidad de Servicio Público de Empleo</ion-select-option>
+                <ion-select-option value="p">Portal web (el empleo.com, computrabajo, etc)</ion-select-option>
+                <ion-select-option value="p">Cajas de compensación</ion-select-option>
+                <ion-select-option value="p">Redes sociales virtuales (Linkedln, Facebook, Twitter)</ion-select-option>
+                <ion-select-option value="p">Otro</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+  
+  
+  
+        </ion-row>
+  
+        <ion-card-header>
+          <ion-card-subtitle class="subtitulo">INFORMACIÓN INDEPENDIENTES</ion-card-subtitle>
+        </ion-card-header>
+  
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label position="floating">Actividades que realiza</ion-label>
+              <ion-icon slot="start" name="business-outline"></ion-icon>
+              <ion-input type="text" required></ion-input>
+            </ion-item>
+          </ion-col>
+  
+          <ion-col>
+            <ion-item>
+              <ion-label>Formas de trabajo Independientes</ion-label>
+              <ion-icon slot="start" name="receipt-outline"></ion-icon>
+              <ion-select placeholder="Seleccionar" interface="action-sheet">
+                <ion-select-option value="contser">Contrato por prestación de servicios</ion-select-option>
+                <ion-select-option value="trabhono">Trabajo por honorarios</ion-select-option>
+                <ion-select-option value="oficual">Un oficio no cualificado (taxista, servicio doméstico, plomero, etc)</ion-select-option>
+                <ion-select-option value="porcom">Por comisión</ion-select-option>
+                <ion-select-option value="otro">Otro</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+  
+          <ion-col>
+            <ion-item>
+              <ion-label>Sector</ion-label>
+              <ion-icon slot="start" name="business-outline"></ion-icon>
+              <ion-select placeholder="Seleccionar" interface="action-sheet">
+                <ion-select-option value="p">Público</ion-select-option>
+                <ion-select-option value="e">Privado</ion-select-option>
+                <ion-select-option value="e">ONG/entidades sin ánimo de lucro/fundaciones/</ion-select-option>
+                <ion-select-option value="e">Economía mixta</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+  
+          <ion-col>
+            <ion-item>
+              <ion-label>Grupo de actividad económica</ion-label>
+              <ion-icon slot="start" name="receipt-outline"></ion-icon>
+              <ion-select placeholder="Seleccionar" interface="action-sheet">
+                <ion-select-option value="p">Ganadero</ion-select-option>
+                <ion-select-option value="p">Pesquero</ion-select-option>
+                <ion-select-option value="p">Agrícola</ion-select-option>
+                <ion-select-option value="p">Minero</ion-select-option>
+                <ion-select-option value="p">Forestal</ion-select-option>
+                <ion-select-option value="p">Industrial</ion-select-option>
+                <ion-select-option value="p">Energético</ion-select-option>
+                <ion-select-option value="p">Construcción</ion-select-option>
+                <ion-select-option value="e">Transporte</ion-select-option>
+                <ion-select-option value="e">Comunicaciones</ion-select-option>
+                <ion-select-option value="e">Comercial</ion-select-option>
+                <ion-select-option value="e">Turístico</ion-select-option>
+                <ion-select-option value="e">Sanitario</ion-select-option>
+                <ion-select-option value="e">Educativo</ion-select-option>
+                <ion-select-option value="e">Arte / Cultura/ Deporte</ion-select-option>
+                <ion-select-option value="e">Financiero</ion-select-option>
+                <ion-select-option value="e">Administración</ion-select-option>
+                <ion-select-option value="e">Servicios relacionados con el conocimiento ( Investigación, desarrollo e innovación)</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+  
+          <ion-col>
+            <ion-item>
+              <ion-label>Canal de búsqueda de empleo</ion-label>
+              <ion-icon slot="start" name="receipt-outline"></ion-icon>
+              <ion-select placeholder="Seleccionar" interface="action-sheet">
+                <ion-select-option value="p">Bolsa o servicios de empleo de la institución donde estudió</ion-select-option>
+                <ion-select-option value="p">Familiares, amigos o conocidos</ion-select-option>
+                <ion-select-option value="p">Práctica universitaria</ion-select-option>
+                <ion-select-option value="p">Unidad de Servicio Público de Empleo</ion-select-option>
+                <ion-select-option value="p">Portal web (el empleo.com, computrabajo, etc)</ion-select-option>
+                <ion-select-option value="p">Cajas de compensación</ion-select-option>
+                <ion-select-option value="p">Redes sociales virtuales (Linkedln, Facebook, Twitter)</ion-select-option>
+                <ion-select-option value="p">Otro</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+  
+          <ion-col>
+            <ion-item>
+              <ion-label>Tipo de empresa</ion-label>
+              <ion-icon slot="start" name="business-outline"></ion-icon>
+              <ion-select placeholder="Seleccionar" interface="action-sheet">
+                <ion-select-option value="p">Publica</ion-select-option>
+                <ion-select-option value="e">Privada</ion-select-option>
+  
+              </ion-select>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>Ocupacion</ion-label>
+              <ion-icon slot="start" name="people-outline"></ion-icon>
+              <ion-select placeholder="Seleccionar" interface="action-sheet">
+                <ion-select-option value="p">Empleado(a)</ion-select-option>
+                <ion-select-option value="e">Independiente</ion-select-option>
+                <ion-select-option value="m">Pensionado(a)</ion-select-option>
+  
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+  
+        <ion-row>
+          <ion-col>
+            <ion-item lines="full">
+              <ion-label position="floating">Fecha de ingreso</ion-label>
+              <ion-icon slot="start" name="calendar-outline"></ion-icon>
+              <ion-input type="text" required></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label>Rango salarial</ion-label>
+              <ion-icon slot="start" name="cash-outline"></ion-icon>
+              <ion-select placeholder="Seleccionar">
+                <ion-select-option value="1">Mayor a 1 millon y menor a 2 millones</ion-select-option>
+                <ion-select-option value="2">Mayor a 2 millones y menor a 3 millones</ion-select-option>
+                <ion-select-option value="3">Mayor a 3 millones y menor a 5 millones</ion-select-option>
+                <ion-select-option value="4">Mayor a 5 millones </ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+  
+      <ion-card-header>
+        <ion-card-subtitle class="subtitulo">Datos de empleabilidad</ion-card-subtitle>
+      </ion-card-header>
+      
+      <ion-grid>
+  
         <ion-col>
-          <ion-item lines="full">
-            <ion-label position="floating ion-text-center">Situación laboral</ion-label>
-            <ion-icon slot="start" name="business-outline"></ion-icon>
-            <ion-select placeholder="Seleccionar" interface="popover">
-              <ion-select-option value="p">Con empleo remunerado (Empleado, emprendedor, empresario, independiente, etc)</ion-select-option>
-              <ion-select-option value="e">Sin empleo</ion-select-option>
-              <ion-select-option value="m">Pensionado</ion-select-option>
-            </ion-select>
+          <ion-item>
+            <ion-label>El empleo actual satisface sus necesidades profesionales</ion-label>
+            <ion-icon slot="start" name="happy-outline"></ion-icon>
+            <ion-toggle slot="end" name="blueberry" checked></ion-toggle>
           </ion-item>
         </ion-col>
         <ion-col>
+          <ion-item>
+            <ion-label>El empleo actual satisface sus necesidades económicas
+            </ion-label>
+            <ion-icon slot="start" name="happy-outline"></ion-icon>
+            <ion-toggle slot="end" name="blueberry" checked></ion-toggle>
+          </ion-item>
+        </ion-col>
+  
+        <ion-col>
+          <ion-item>
+            <ion-label>El empleo actual satisface sus promoción y desarrollo personal
+            </ion-label>
+            <ion-icon slot="start" name="happy-outline"></ion-icon>
+            <ion-toggle slot="end" name="blueberry" checked></ion-toggle>
+          </ion-item>
+        </ion-col>
+  
+        <ion-col>
+          <ion-item>
+            <ion-label>El empleo actual se relaciona con su formación dada </ion-label>
+            <ion-icon slot="start" name="happy-outline"></ion-icon>
+            <ion-toggle slot="end" name="blueberry" checked></ion-toggle>
+          </ion-item>
+        </ion-col>
+  
+        <ion-col>
+          <ion-item lines="full">
+            <ion-label position="floating">Indique el nivel de satisfacción con su empleo actual
+            </ion-label>
+            <ion-icon slot="start" name="happy-outline"></ion-icon>
+            <ion-range min="0" max="10" step="1" value="5" snaps color="primary" snaps="true" pin="true">
+              <ion-icon slot="start" name="close-outline"></ion-icon>
+              <ion-icon slot="end" name="checkmark-outline"></ion-icon>
+            </ion-range>
+          </ion-item>
+        </ion-col>
+  
+        <ion-col>
+          <ion-item lines="full">
+            <ion-label position="floating">indique el nivel de correspondencia entre la formación dada y su empleo actual</ion-label>
+            <ion-icon slot="start" name="options-outline"></ion-icon>
+            <ion-range min="0" max="10" step="1" value="5" snaps color="primary" snaps="true" pin="true">
+              <ion-icon slot="start" name="close-outline"></ion-icon>
+              <ion-icon slot="end" name="checkmark-outline"></ion-icon>
+            </ion-range>
+          </ion-item>
+        </ion-col>
+        
+        <ion-button class="boton" [routerLink]="['/home']" type="submit" color="primary" expand="block">Actualizar Información</ion-button> -->
+
+      </ion-grid>
+    </form>
+  </ion-card>
+</ion-content>
+
+<!-- <ion-col>
           <ion-item lines="full">
             <ion-label position="floating">¿Cuánto tiempo (en meses) lleva en esta actividad o trabajo?</ion-label>
             <ion-icon slot="start" name="reader-outline"></ion-icon>
             <ion-input type="text" required></ion-input>
           </ion-item>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <ion-item lines="full">
-            <ion-label position="floating">Ingreso o salario (Satisfacción laboral)</ion-label>
-            <ion-icon slot="start" name="reader-outline"></ion-icon>
-            <ion-range min="1" max="4" step="1" snaps color="primary" snaps="true" pin="true">
-              <ion-icon slot="start" name="close-outline"></ion-icon>
-              <ion-icon slot="end" name="checkmark-outline"></ion-icon>
-            </ion-range>
-          </ion-item>
-        </ion-col>
-        <ion-col>
-          <ion-item lines="full">
-            <!-- Cantidad de horas (Satisfacción laboral) -->
-            <ion-label position="floating">Cantidad de horas (Satisfacción laboral)</ion-label>
-            <ion-icon slot="start" name="people-outline"></ion-icon>
-            <ion-range min="1" max="4" step="1" snaps color="primary" snaps="true" pin="true">
-              <ion-icon slot="start" name="close-outline"></ion-icon>
-              <ion-icon slot="end" name="checkmark-outline"></ion-icon>
-            </ion-range>
-          </ion-item>
-        </ion-col>
-      </ion-row>
+        </ion-col> -->
 
-
-      <ion-row>
-        <ion-col>
-          <ion-item lines="full">
-            <ion-label position="floating">Aplicación de conocimientos de la carrera (Satisfacción laboral)</ion-label>
-            <ion-icon slot="start" name="receipt-outline"></ion-icon>
-            <ion-range min="1" max="4" step="1" snaps color="primary" snaps="true" pin="true">
-              <ion-icon slot="start" name="close-outline"></ion-icon>
-              <ion-icon slot="end" name="checkmark-outline"></ion-icon>
-            </ion-range>
-          </ion-item>
-        </ion-col>
-        <ion-col>
-          <ion-item lines="full">
-            <ion-label position="floating">Retos y desafíos intelectuales (Satisfacción laboral)</ion-label>
-            <ion-icon slot="start" name="filter-outline"></ion-icon>
-            <ion-range min="1" max="4" step="1" snaps color="primary" snaps="true" pin="true">
-              <ion-icon slot="start" name="close-outline"></ion-icon>
-              <ion-icon slot="end" name="checkmark-outline"></ion-icon>
-            </ion-range>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <ion-item lines="full">
-            <ion-label position="floating">Oportunidades de ascenso (Satisfacción laboral)</ion-label>
-            <ion-icon slot="start" name="filter-outline"></ion-icon>
-            <ion-range min="1" max="4" step="1" snaps color="primary" snaps="true" pin="true">
-              <ion-icon slot="start" name="close-outline"></ion-icon>
-              <ion-icon slot="end" name="checkmark-outline"></ion-icon>
-            </ion-range>
-          </ion-item>
-          <!-- Estabilidad (Satisfacción laboral) -->
-        </ion-col>
-        <ion-col>
-          <ion-item lines="full">
-            <ion-label position="floating">Estabilidad (Satisfacción laboral)</ion-label>
-            <ion-icon slot="start" name="filter-outline"></ion-icon>
-            <ion-range min="1" max="4" step="1" snaps color="primary" snaps="true" pin="true">
-              <ion-icon slot="start" name="close-outline"></ion-icon>
-              <ion-icon slot="end" name="checkmark-outline"></ion-icon>
-            </ion-range>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col>
-          <ion-item>
-            <ion-label>Rango salarial</ion-label>
-            <ion-icon slot="start" name="cash-outline"></ion-icon>
-            <ion-select placeholder="Seleccionar">
-              <ion-select-option value="1">Mayor a 1 millon y menor a 2 millones</ion-select-option>
-              <ion-select-option value="2">Mayor a 2 millones y menor a 3 millones</ion-select-option>
-              <ion-select-option value="3">Mayor a 3 millones y menor a 5 millones</ion-select-option>
-              <ion-select-option value="4">Mayor a 5 millones </ion-select-option>
-            </ion-select>
-          </ion-item>
-        </ion-col>
-
-        <ion-col>
-          <ion-item>
-            <ion-label>Razón de vinculación</ion-label>
-            <ion-icon slot="start" name="cash-outline"></ion-icon>
-            <ion-select placeholder="Seleccionar">
-              <ion-select-option value="1">Ingreso o salario</ion-select-option>
-              <ion-select-option value="2">Ganar experiencia</ion-select-option>
-              <ion-select-option value="3">Prestaciones y oportunidades de crecimiento</ion-select-option>
-              <ion-select-option value="4">Conveniencia de la ubicación</ion-select-option>
-              <ion-select-option value="5">No encontró otros empleos disponibles en su campo de estudio</ion-select-option>
-            </ion-select>
-          </ion-item>
-
-          <ion-item>
-            <ion-label>Otra: </ion-label>
-            <ion-input type="text" required></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col>
-          <ion-item>
-            <ion-label>Estado laboral</ion-label>
-            <ion-icon slot="start" name="cash-outline"></ion-icon>
-            <ion-select placeholder="Seleccionar">
-              <ion-select-option value="1">Contratista por prestación de servicios o cuenta propia</ion-select-option>
-              <ion-select-option value="2">Empleado</ion-select-option>
-              <ion-select-option value="3">Propietario de una empresa o negocio particular</ion-select-option>
-            </ion-select>
-          </ion-item>
-        </ion-col>
-        <ion-col>
-          <ion-item>
-            <ion-label>Actividades que realiza</ion-label>
-            <ion-input type="text" required></ion-input>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-
-    <!-- <ion-card-header>
-
-      <ion-card-title>Nombre del Egresado</ion-card-title>
-      <ion-item>
-        <ion-label>¿Esta trabajando actualmente?</ion-label>
-        <ion-icon slot="start" name="help-outline"></ion-icon>
-        <ion-select placeholder="Seleccionar" interface="popover">
-          <ion-select-option value="p">Si</ion-select-option>
-          <ion-select-option value="e">No</ion-select-option>
-
-        </ion-select>
-      </ion-item>
-    </ion-card-header> -->
-
-    <ion-card-header>
-      <ion-card-subtitle class="subtitulo">Datos de empleo</ion-card-subtitle>
-      <ion-text>
-        <p>
-          INFORMACIÓN DE EMPLEADOS
-        </p>
-      </ion-text>
-    </ion-card-header>
-
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-          <ion-item>
-            <ion-label>Tipo de contrato</ion-label>
-            <ion-icon slot="start" name="receipt-outline"></ion-icon>
-            <ion-select placeholder="Seleccionar" interface="popover">
-              <ion-select-option value="fsme">Término fijo a seis meses o menos</ion-select-option>
-              <ion-select-option value="fsma">Término fijo a más de seis meses</ion-select-option>
-              <ion-select-option value="i">Término indefinido</ion-select-option>
-              <ion-select-option value="o">Obra labor</ion-select-option>
-            </ion-select>
-          </ion-item>
-
-        </ion-col>
-
-        <ion-col>
-          <ion-item>
-            <ion-label>Sector economico</ion-label>
-            <ion-icon slot="start" name="filter-outline"></ion-icon>
-            <ion-select placeholder="Seleccionar" interface="popover">
-              <ion-select-option value="pub">Público</ion-select-option>
-              <ion-select-option value="priv">Privado</ion-select-option>
-              <ion-select-option value="ong">ONG/entidades sin ánimo de lucro/fundaciones/</ion-select-option>
-              <ion-select-option value="mixta">Economía mixta</ion-select-option>
-            </ion-select>
-          </ion-item>
-        </ion-col>
-
-        <ion-col>
-          <ion-item>
-            <ion-label position="floating">Nombre de la empresa</ion-label>
-            <ion-icon slot="start" name="business-outline"></ion-icon>
-            <ion-input type="text" required></ion-input>
-          </ion-item>
-        </ion-col>
-
-        <!-- Grupo de actividad económica -->
-        <ion-col>
-          <ion-item>
-            <ion-label>Grupo de actividad económica</ion-label>
-            <ion-icon slot="start" name="receipt-outline"></ion-icon>
-            <ion-select placeholder="Seleccionar" interface="popover">
-              <ion-select-option value="p">Ganadero</ion-select-option>
-              <ion-select-option value="p">Pesquero</ion-select-option>
-              <ion-select-option value="p">Agrícola</ion-select-option>
-              <ion-select-option value="p">Minero</ion-select-option>
-              <ion-select-option value="p">Forestal</ion-select-option>
-              <ion-select-option value="p">Industrial</ion-select-option>
-              <ion-select-option value="p">Energético</ion-select-option>
-              <ion-select-option value="p">Construcción</ion-select-option>
-              <ion-select-option value="e">Transporte</ion-select-option>
-              <ion-select-option value="e">Comunicaciones</ion-select-option>
-              <ion-select-option value="e">Comercial</ion-select-option>
-              <ion-select-option value="e">Turístico</ion-select-option>
-              <ion-select-option value="e">Sanitario</ion-select-option>
-              <ion-select-option value="e">Educativo</ion-select-option>
-              <ion-select-option value="e">Arte / Cultura/ Deporte</ion-select-option>
-              <ion-select-option value="e">Financiero</ion-select-option>
-              <ion-select-option value="e">Administración</ion-select-option>
-              <ion-select-option value="e">Servicios relacionados con el conocimiento ( Investigación, desarrollo e innovación)</ion-select-option>
-            </ion-select>
-          </ion-item>
-        </ion-col>
-
-        <ion-col>
-          <ion-item>
-            <ion-label>Canal de búsqueda de empleo</ion-label>
-            <ion-icon slot="start" name="receipt-outline"></ion-icon>
-            <ion-select placeholder="Seleccionar" interface="popover">
-              <ion-select-option value="p">Bolsa o servicios de empleo de la institución donde estudió</ion-select-option>
-              <ion-select-option value="p">Familiares, amigos o conocidos</ion-select-option>
-              <ion-select-option value="p">Práctica universitaria</ion-select-option>
-              <ion-select-option value="p">Unidad de Servicio Público de Empleo</ion-select-option>
-              <ion-select-option value="p">Portal web (el empleo.com, computrabajo, etc)</ion-select-option>
-              <ion-select-option value="p">Cajas de compensación</ion-select-option>
-              <ion-select-option value="p">Redes sociales virtuales (Linkedln, Facebook, Twitter)</ion-select-option>
-              <ion-select-option value="p">Otro</ion-select-option>
-            </ion-select>
-          </ion-item>
-        </ion-col>
-
-        
-        <!-- INFORMACIÓN INDEPENDIENTES -->
-        <!-- <ion-col>
+<!-- Grupo de actividad económica -->
+<!-- INFORMACIÓN INDEPENDIENTES -->
+<!-- <ion-col>
           <ion-item lines="full">
             <ion-label position="floating">NIT de la empresa</ion-label>
             <ion-icon slot="start" name="reader-outline"></ion-icon>
             <ion-input type="text" required></ion-input>
           </ion-item>
         </ion-col> -->
-      </ion-row>
-      
-      <ion-card-header>
-        <ion-card-subtitle class="subtitulo">INFORMACIÓN INDEPENDIENTES</ion-card-subtitle>
-      </ion-card-header>
 
-      <ion-row>
-        <ion-col>
-          <ion-item>
-            <ion-label position="floating">Actividades que realiza</ion-label>
-            <ion-icon slot="start" name="business-outline"></ion-icon>
-            <ion-input type="text" required></ion-input>
-          </ion-item>
-        </ion-col>
+<!-- <ion-card-header>
 
-        <ion-col>
-          <ion-item>
-            <ion-label>Formas de trabajo Independientes</ion-label>
-            <ion-icon slot="start" name="receipt-outline"></ion-icon>
-            <ion-select placeholder="Seleccionar" interface="popover">
-              <ion-select-option value="contser">Contrato por prestación de servicios</ion-select-option>
-              <ion-select-option value="trabhono">Trabajo por honorarios</ion-select-option>
-              <ion-select-option value="oficual">Un oficio no cualificado (taxista, servicio doméstico, plomero, etc)</ion-select-option>
-              <ion-select-option value="porcom">Por comisión</ion-select-option>
-              <ion-select-option value="otro">Otro</ion-select-option>
-            </ion-select>
-          </ion-item>
-        </ion-col>
+      <ion-card-title>Nombre del Egresado</ion-card-title>
+      <ion-item>
+        <ion-label>¿Esta trabajando actualmente?</ion-label>
+        <ion-icon slot="start" name="help-outline"></ion-icon>
+        <ion-select placeholder="Seleccionar" interface="action-sheet">
+          <ion-select-option value="p">Si</ion-select-option>
+          <ion-select-option value="e">No</ion-select-option>
 
-        <ion-col>
-          <ion-item>
-            <ion-label>Sector</ion-label>
-            <ion-icon slot="start" name="business-outline"></ion-icon>
-            <ion-select placeholder="Seleccionar" interface="popover">
-              <ion-select-option value="p">Público</ion-select-option>
-              <ion-select-option value="e">Privado</ion-select-option>
-              <ion-select-option value="e">ONG/entidades sin ánimo de lucro/fundaciones/</ion-select-option>
-              <ion-select-option value="e">Economía mixta</ion-select-option>
-            </ion-select>
-          </ion-item>
-        </ion-col>
-        
-        <ion-col>
-          <ion-item>
-            <ion-label>Grupo de actividad económica</ion-label>
-            <ion-icon slot="start" name="receipt-outline"></ion-icon>
-            <ion-select placeholder="Seleccionar" interface="popover">
-              <ion-select-option value="p">Ganadero</ion-select-option>
-              <ion-select-option value="p">Pesquero</ion-select-option>
-              <ion-select-option value="p">Agrícola</ion-select-option>
-              <ion-select-option value="p">Minero</ion-select-option>
-              <ion-select-option value="p">Forestal</ion-select-option>
-              <ion-select-option value="p">Industrial</ion-select-option>
-              <ion-select-option value="p">Energético</ion-select-option>
-              <ion-select-option value="p">Construcción</ion-select-option>
-              <ion-select-option value="e">Transporte</ion-select-option>
-              <ion-select-option value="e">Comunicaciones</ion-select-option>
-              <ion-select-option value="e">Comercial</ion-select-option>
-              <ion-select-option value="e">Turístico</ion-select-option>
-              <ion-select-option value="e">Sanitario</ion-select-option>
-              <ion-select-option value="e">Educativo</ion-select-option>
-              <ion-select-option value="e">Arte / Cultura/ Deporte</ion-select-option>
-              <ion-select-option value="e">Financiero</ion-select-option>
-              <ion-select-option value="e">Administración</ion-select-option>
-              <ion-select-option value="e">Servicios relacionados con el conocimiento ( Investigación, desarrollo e innovación)</ion-select-option>
-            </ion-select>
-          </ion-item>
-        </ion-col>
-
-        <ion-col>
-          <ion-item>
-            <ion-label>Canal de búsqueda de empleo</ion-label>
-            <ion-icon slot="start" name="receipt-outline"></ion-icon>
-            <ion-select placeholder="Seleccionar" interface="popover">
-              <ion-select-option value="p">Bolsa o servicios de empleo de la institución donde estudió</ion-select-option>
-              <ion-select-option value="p">Familiares, amigos o conocidos</ion-select-option>
-              <ion-select-option value="p">Práctica universitaria</ion-select-option>
-              <ion-select-option value="p">Unidad de Servicio Público de Empleo</ion-select-option>
-              <ion-select-option value="p">Portal web (el empleo.com, computrabajo, etc)</ion-select-option>
-              <ion-select-option value="p">Cajas de compensación</ion-select-option>
-              <ion-select-option value="p">Redes sociales virtuales (Linkedln, Facebook, Twitter)</ion-select-option>
-              <ion-select-option value="p">Otro</ion-select-option>
-            </ion-select>
-          </ion-item>
-        </ion-col>
-
-        <ion-col>
-          <ion-item>
-            <ion-label>Tipo de empresa</ion-label>
-            <ion-icon slot="start" name="business-outline"></ion-icon>
-            <ion-select placeholder="Seleccionar" interface="popover">
-              <ion-select-option value="p">Publica</ion-select-option>
-              <ion-select-option value="e">Privada</ion-select-option>
-
-            </ion-select>
-          </ion-item>
-        </ion-col>
-        <ion-col>
-          <ion-item>
-            <ion-label>Ocupacion</ion-label>
-            <ion-icon slot="start" name="people-outline"></ion-icon>
-            <ion-select placeholder="Seleccionar" interface="popover">
-              <ion-select-option value="p">Empleado(a)</ion-select-option>
-              <ion-select-option value="e">Independiente</ion-select-option>
-              <ion-select-option value="m">Pensionado(a)</ion-select-option>
-
-            </ion-select>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
-        <ion-col>
-          <ion-item lines="full">
-            <ion-label position="floating">Fecha de ingreso</ion-label>
-            <ion-icon slot="start" name="calendar-outline"></ion-icon>
-            <ion-input type="text" required></ion-input>
-          </ion-item>
-        </ion-col>
-        <ion-col>
-          <ion-item>
-            <ion-label>Rango salarial</ion-label>
-            <ion-icon slot="start" name="cash-outline"></ion-icon>
-            <ion-select placeholder="Seleccionar">
-              <ion-select-option value="1">Mayor a 1 millon y menor a 2 millones</ion-select-option>
-              <ion-select-option value="2">Mayor a 2 millones y menor a 3 millones</ion-select-option>
-              <ion-select-option value="3">Mayor a 3 millones y menor a 5 millones</ion-select-option>
-              <ion-select-option value="4">Mayor a 5 millones </ion-select-option>
-            </ion-select>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-
-    <ion-card-header>
-      <ion-card-subtitle class="subtitulo">Datos de empleabilidad</ion-card-subtitle>
-    </ion-card-header>
-    <ion-grid>
-
-      <ion-col>
-        <ion-item>
-          <ion-label>El empleo actual satisface sus necesidades profesionales</ion-label>
-          <ion-icon slot="start" name="happy-outline"></ion-icon>
-          <ion-toggle slot="end" name="blueberry" checked></ion-toggle>
-        </ion-item>
-      </ion-col>
-      <ion-col>
-        <ion-item>
-          <ion-label>El empleo actual satisface sus necesidades económicas
-          </ion-label>
-          <ion-icon slot="start" name="happy-outline"></ion-icon>
-          <ion-toggle slot="end" name="blueberry" checked></ion-toggle>
-        </ion-item>
-      </ion-col>
-
-      <ion-col>
-        <ion-item>
-          <ion-label>El empleo actual satisface sus promoción y desarrollo personal
-          </ion-label>
-          <ion-icon slot="start" name="happy-outline"></ion-icon>
-          <ion-toggle slot="end" name="blueberry" checked></ion-toggle>
-        </ion-item>
-      </ion-col>
-
-      <ion-col>
-        <ion-item>
-          <ion-label>El empleo actual se relaciona con su formación dada </ion-label>
-          <ion-icon slot="start" name="happy-outline"></ion-icon>
-          <ion-toggle slot="end" name="blueberry" checked></ion-toggle>
-        </ion-item>
-      </ion-col>
-
-      <ion-col>
-        <ion-item lines="full">
-          <ion-label position="floating">Indique el nivel de satisfacción con su empleo actual
-          </ion-label>
-          <ion-icon slot="start" name="happy-outline"></ion-icon>
-          <ion-range min="0" max="10" step="1" value="5" snaps color="primary" snaps="true" pin="true">
-            <ion-icon slot="start" name="close-outline"></ion-icon>
-            <ion-icon slot="end" name="checkmark-outline"></ion-icon>
-          </ion-range>
-        </ion-item>
-      </ion-col>
-
-      <ion-col>
-        <ion-item lines="full">
-          <ion-label position="floating">indique el nivel de correspondencia entre la formación dada y su empleo actual</ion-label>
-          <ion-icon slot="start" name="options-outline"></ion-icon>
-          <ion-range min="0" max="10" step="1" value="5" snaps color="primary" snaps="true" pin="true">
-            <ion-icon slot="start" name="close-outline"></ion-icon>
-            <ion-icon slot="end" name="checkmark-outline"></ion-icon>
-          </ion-range>
-        </ion-item>
-      </ion-col>
-    </ion-grid>
-
-    <ion-button class="boton" [routerLink]="['/home']" type="submit" color="primary" expand="block">Actualizar Información</ion-button>
-
-  </ion-card>
-</ion-content>
+        </ion-select>
+      </ion-item>
+    </ion-card-header> -->
