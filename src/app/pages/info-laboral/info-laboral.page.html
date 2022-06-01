@@ -638,6 +638,225 @@
                   </ion-item>
                 </ion-col>
 
+                <!-- NO -->
+                <ion-row [hidden]="this.selectedData.DiligenciaTrabajo">
+
+                  <ion-col>
+                    <ion-item>
+                      <ion-label>Aunque desea trabajar, ¿por qué motivo no hizo diligencias para buscar un trabajo en el último mes?</ion-label>
+                      <ion-icon slot="start" name="cash-outline"></ion-icon>
+                      <ion-select cancelText="Cancelar" placeholder="Seleccionar" interface="action-sheet" id="NoDiligencia" name="NoDiligencia" #NoDiligencia="ngModel" required [(ngModel)]="selectedData.NoDiligencia" cancelText="Cancelar">
+                        <ion-select-option value="encotrab">Ya encontró trabajo y está por iniciar</ion-select-option>
+                        <ion-select-option value="respfami">Responsabilidades familiares</ion-select-option>
+                        <ion-select-option value="probsalu">Problemas de salud</ion-select-option>
+                        <ion-select-option value="estaestu">Está estudiando</ion-select-option>
+                        <ion-select-option value="notrdisp">No hay trabajo disponible en la ciudad o región</ion-select-option>
+                        <ion-select-option value="noentrab">No encuentra trabajo en su oficio o profesión</ion-select-option>
+                        <ion-select-option value="nosabusc">No sabe cómo buscarlo</ion-select-option>
+                        <ion-select-option value="cansbusc">Está cansado de buscar</ion-select-option>
+                        <ion-select-option value="careexpe">Carece de la experiencia necesaria</ion-select-option>
+                        <ion-select-option value="deseotra">OTRA</ion-select-option>
+                      </ion-select>
+                    </ion-item>
+                  </ion-col>
+
+                  <ion-row [hidden]="!['encotrab', 'respfami', 'probsalu'].includes(selectedData.NoDiligencia)">
+                    <ion-col>
+                      <ion-item>
+                        <ion-label>Problematicas donde ha aportado</ion-label>
+                        <ion-icon slot="start" name="cash-outline"></ion-icon>
+                        <ion-select placeholder="Seleccionar" multiple="true" okText="Ok" cancelText="Cancelar" id="ProblematicaAporte" name="ProblematicaAporte" #ProblematicaAporte="ngModel" required [(ngModel)]="selectedData.ProblematicaAporte" #mySelect (ionChange)="onChange(selectedData.ProblematicaAporte, 'ProblematicaAporte')">
+                          <ion-select-option value="probecon">Problemas económicos</ion-select-option>
+                          <ion-select-option value="probambi">Problemas ambientales</ion-select-option>
+                          <ion-select-option value="probsoci">Problemas sociales</ion-select-option>
+                          <ion-select-option value="probcult">Problemas culturales</ion-select-option>
+                          <ion-select-option value="probsoci">Problemas sociales</ion-select-option>
+                          <ion-select-option value="noheaport">No he aportado</ion-select-option>
+                          <ion-select-option value="aporotra">Otra</ion-select-option>
+                        </ion-select>
+                      </ion-item>
+                    </ion-col>
+
+                    <ion-row [hidden]="!this.selectedData.ProblematicaAporte || this.selectedData.ProblematicaAporte == 'noheaport'">
+                      <ion-col>
+                        <ion-item>
+                          <ion-label>Detalles de sus aportes o contribuciones</ion-label>
+                          <ion-icon slot="start" name="cash-outline"></ion-icon>
+                          <ion-input placeholder="Detalles de aportes" type="text"></ion-input>
+                        </ion-item>
+                      </ion-col>
+                    </ion-row>
+                  </ion-row>
+
+                  <ion-row [hidden]="['encotrab', 'respfami', 'probsalu'].includes(selectedData.NoDiligencia)">
+
+                    <ion-col>
+                      <ion-item>
+                        <ion-label>Si le resultara algún trabajo remunerado ¿Está disponible para empezar a trabajar?</ion-label>
+                        <ion-icon slot="start" name="cash-outline"></ion-icon>
+                        <ion-toggle color="primary" id="DisponibleTrabajo" name="DisponibleTrabajo" #DisponibleTrabajo="ngModel" required [(ngModel)]="selectedData.DisponibleTrabajo"></ion-toggle>
+                      </ion-item>
+                    </ion-col>
+
+                    <!-- SI -->
+                    <ion-row [hidden]="!selectedData.DisponibleTrabajo">
+                      <ion-col>
+                        <ion-item>
+                          <ion-label>¿Hace cuántos meses ha estado buscando empleo?</ion-label>
+                          <ion-icon slot="start" name="cash-outline"></ion-icon>
+                          <ion-select cancelText="Cancelar" placeholder="Seleccionar" interface="action-sheet" cancelText="Cancelar">
+                            <ion-select-option value="1">1</ion-select-option>
+                            <ion-select-option value="2">2</ion-select-option>
+                            <ion-select-option value="3">3</ion-select-option>
+                            <ion-select-option value="4">4</ion-select-option>
+                            <ion-select-option value="5">5</ion-select-option>
+                            <ion-select-option value="6">6</ion-select-option>
+                            <ion-select-option value="7">7</ion-select-option>
+                            <ion-select-option value="8">8</ion-select-option>
+                            <ion-select-option value="9">9</ion-select-option>
+                            <ion-select-option value="10">10</ion-select-option>
+                            <ion-select-option value="11">11</ion-select-option>
+                            <ion-select-option value="12">12</ion-select-option>
+                            <ion-select-option value="13">13</ion-select-option>
+                            <ion-select-option value="14">14</ion-select-option>
+                            <ion-select-option value="15">15</ion-select-option>
+                            <ion-select-option value="16">16</ion-select-option>
+                            <ion-select-option value="17">17</ion-select-option>
+                            <ion-select-option value="mas de 18">mas de 18</ion-select-option>
+                          </ion-select>
+                        </ion-item>
+                      </ion-col>
+
+                      <ion-col>
+                        <ion-item>
+                          <ion-label>¿Cuál considera la principal dificultad a la hora de conseguir trabajo?</ion-label>
+                          <ion-icon slot="start" name="cash-outline"></ion-icon>
+                          <ion-select cancelText="Cancelar" placeholder="Seleccionar" interface="action-sheet" cancelText="Cancelar">
+                            <ion-select-option value="expenece">Carece de la experiencia necesaria</ion-select-option>
+                            <ion-select-option value="nooptrab">No hay oportunidades de trabajo</ion-select-option>
+                            <ion-select-option value="salabajo">El salario que le ofrecen es muy bajo</ion-select-option>
+                            <ion-select-option value="trabnoen">No encuentra trabajo en su campo de estudio</ion-select-option>
+                            <ion-select-option value="nosabusc">No sabe cómo buscarlo</ion-select-option>
+                            <ion-select-option value="difiotr">Otro</ion-select-option>
+                          </ion-select>
+                        </ion-item>
+                      </ion-col>
+
+                      <ion-col>
+                        <ion-item>
+                          <ion-label>Canal de búsqueda de empleo</ion-label>
+                          <ion-icon slot="start" name="receipt-outline"></ion-icon>
+                          <ion-select placeholder="Seleccionar" interface="action-sheet" okText="Ok" cancelText="Cancelar" id="CanalEmpleo" name="CanalEmpleo" #CanalEmpleo="ngModel" required [(ngModel)]="selectedData.CanalEmpleo">
+                            <ion-select-option value="bolsserv">Bolsa o servicios de empleo de la institución donde estudió</ion-select-option>
+                            <ion-select-option value="famiamig">Familiares, amigos o conocidos</ion-select-option>
+                            <ion-select-option value="pracuniv">Práctica universitaria</ion-select-option>
+                            <ion-select-option value="unidpubl">Unidad de Servicio Público de Empleo</ion-select-option>
+                            <ion-select-option value="portaweb">Portal web (el empleo.com, computrabajo, etc)</ion-select-option>
+                            <ion-select-option value="cajacomp">Cajas de compensación</ion-select-option>
+                            <ion-select-option value="redesoci">Redes sociales virtuales (Linkedln, Facebook, Twitter)</ion-select-option>
+                            <ion-select-option value="emplotro">Otro</ion-select-option>
+                          </ion-select>
+                        </ion-item>
+                      </ion-col>
+
+                      <ion-row [hidden]="!this.selectedData.CanalEmpleo">
+                        <ion-col>
+                          <ion-item>
+                            <ion-label>Problematicas donde ha aportado</ion-label>
+                            <ion-icon slot="start" name="cash-outline"></ion-icon>
+                            <ion-select placeholder="Seleccionar" multiple="true" okText="Ok" cancelText="Cancelar" id="ProblematicaAporte" name="ProblematicaAporte" #ProblematicaAporte="ngModel" required [(ngModel)]="selectedData.ProblematicaAporte" #mySelect (ionChange)="onChange(selectedData.ProblematicaAporte, 'ProblematicaAporte')">
+                              <ion-select-option value="probecon">Problemas económicos</ion-select-option>
+                              <ion-select-option value="probambi">Problemas ambientales</ion-select-option>
+                              <ion-select-option value="probsoci">Problemas sociales</ion-select-option>
+                              <ion-select-option value="probcult">Problemas culturales</ion-select-option>
+                              <ion-select-option value="probsoci">Problemas sociales</ion-select-option>
+                              <ion-select-option value="noheaport">No he aportado</ion-select-option>
+                              <ion-select-option value="aporotra">Otra</ion-select-option>
+                            </ion-select>
+                          </ion-item>
+                        </ion-col>
+
+                        <ion-row [hidden]="!this.selectedData.ProblematicaAporte || this.selectedData.ProblematicaAporte == 'noheaport'">
+                          <ion-col>
+                            <ion-item>
+                              <ion-label>Detalles de sus aportes o contribuciones</ion-label>
+                              <ion-icon slot="start" name="cash-outline"></ion-icon>
+                              <ion-input placeholder="Detalles de aportes" type="text"></ion-input>
+                            </ion-item>
+                          </ion-col>
+                        </ion-row>
+                      </ion-row>
+                    </ion-row>
+
+                    <!-- NO -->
+                    <ion-row [hidden]="selectedData.DisponibleTrabajo">
+
+                      <ion-col>
+                        <ion-item>
+                          <ion-label>¿Cuál considera la principal dificultad a la hora de conseguir trabajo?</ion-label>
+                          <ion-icon slot="start" name="cash-outline"></ion-icon>
+                          <ion-select cancelText="Cancelar" placeholder="Seleccionar" interface="action-sheet" cancelText="Cancelar">
+                            <ion-select-option value="expenece">Carece de la experiencia necesaria</ion-select-option>
+                            <ion-select-option value="nooptrab">No hay oportunidades de trabajo</ion-select-option>
+                            <ion-select-option value="salabajo">El salario que le ofrecen es muy bajo</ion-select-option>
+                            <ion-select-option value="trabnoen">No encuentra trabajo en su campo de estudio</ion-select-option>
+                            <ion-select-option value="nosabusc">No sabe cómo buscarlo</ion-select-option>
+                            <ion-select-option value="difiotr">Otro</ion-select-option>
+                          </ion-select>
+                        </ion-item>
+                      </ion-col>
+
+                      <ion-col>
+                        <ion-item>
+                          <ion-label>Canal de búsqueda de empleo</ion-label>
+                          <ion-icon slot="start" name="receipt-outline"></ion-icon>
+                          <ion-select placeholder="Seleccionar" interface="action-sheet" okText="Ok" cancelText="Cancelar" id="CanalEmpleo" name="CanalEmpleo" #CanalEmpleo="ngModel" required [(ngModel)]="selectedData.CanalEmpleo">
+                            <ion-select-option value="bolsserv">Bolsa o servicios de empleo de la institución donde estudió</ion-select-option>
+                            <ion-select-option value="famiamig">Familiares, amigos o conocidos</ion-select-option>
+                            <ion-select-option value="pracuniv">Práctica universitaria</ion-select-option>
+                            <ion-select-option value="unidpubl">Unidad de Servicio Público de Empleo</ion-select-option>
+                            <ion-select-option value="portaweb">Portal web (el empleo.com, computrabajo, etc)</ion-select-option>
+                            <ion-select-option value="cajacomp">Cajas de compensación</ion-select-option>
+                            <ion-select-option value="redesoci">Redes sociales virtuales (Linkedln, Facebook, Twitter)</ion-select-option>
+                            <ion-select-option value="emplotro">Otro</ion-select-option>
+                          </ion-select>
+                        </ion-item>
+                      </ion-col>
+
+                      <ion-row [hidden]="!this.selectedData.CanalEmpleo">
+                        <ion-col>
+                          <ion-item>
+                            <ion-label>Problematicas donde ha aportado</ion-label>
+                            <ion-icon slot="start" name="cash-outline"></ion-icon>
+                            <ion-select placeholder="Seleccionar" multiple="true" okText="Ok" cancelText="Cancelar" id="ProblematicaAporte" name="ProblematicaAporte" #ProblematicaAporte="ngModel" required [(ngModel)]="selectedData.ProblematicaAporte" #mySelect (ionChange)="onChange(selectedData.ProblematicaAporte, 'ProblematicaAporte')">
+                              <ion-select-option value="probecon">Problemas económicos</ion-select-option>
+                              <ion-select-option value="probambi">Problemas ambientales</ion-select-option>
+                              <ion-select-option value="probsoci">Problemas sociales</ion-select-option>
+                              <ion-select-option value="probcult">Problemas culturales</ion-select-option>
+                              <ion-select-option value="probsoci">Problemas sociales</ion-select-option>
+                              <ion-select-option value="noheaport">No he aportado</ion-select-option>
+                              <ion-select-option value="aporotra">Otra</ion-select-option>
+                            </ion-select>
+                          </ion-item>
+                        </ion-col>
+
+                        <ion-row [hidden]="!this.selectedData.ProblematicaAporte || this.selectedData.ProblematicaAporte == 'noheaport'">
+                          <ion-col>
+                            <ion-item>
+                              <ion-label>Detalles de sus aportes o contribuciones</ion-label>
+                              <ion-icon slot="start" name="cash-outline"></ion-icon>
+                              <ion-input placeholder="Detalles de aportes" type="text"></ion-input>
+                            </ion-item>
+                          </ion-col>
+                        </ion-row>
+                      </ion-row>
+                    </ion-row>
+
+                  </ion-row>
+
+                </ion-row>
+
+                <!-- SI -->
                 <ion-row [hidden]="!this.selectedData.DiligenciaTrabajo">
 
                   <ion-col>

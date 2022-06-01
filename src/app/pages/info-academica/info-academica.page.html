@@ -76,11 +76,25 @@
             <ion-input type="text" required value="Universidad Distrital Francisco José de Caldas"></ion-input>
           </ion-item>
         </ion-col>
+
         <ion-col>
           <ion-item lines="full">
-            <ion-label position="floating">Nombre de la carrera</ion-label>
+            <ion-label position="floating">Título obtenido</ion-label>
             <ion-icon slot="start" name="book-outline"></ion-icon>
             <ion-input type="text" required></ion-input>
+          </ion-item>
+        </ion-col>
+
+        <ion-col>
+          <ion-item>
+            <ion-label>Tipo de estudio</ion-label>
+            <ion-icon slot="start" name="school-outline"></ion-icon>
+            <ion-select placeholder="Seleccionar" interface="popover">
+              <ion-select-option value="p">Pregrado</ion-select-option>
+              <ion-select-option value="e">Especializacion</ion-select-option>
+              <ion-select-option value="m">Maestria</ion-select-option>
+              <ion-select-option value="d">Doctorado</ion-select-option>
+            </ion-select>
           </ion-item>
         </ion-col>
       </ion-row>
