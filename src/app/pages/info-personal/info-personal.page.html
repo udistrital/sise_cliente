@@ -338,18 +338,18 @@
           <ion-col>
             <ion-item lines="full">
               <ion-label position="floating">Código del país</ion-label>
-              <!-- <ion-icon slot="start" name="call"></ion-icon> -->
-              <!-- <ion-input type="number" required id="CodigoPais" name="CodigoPais" #CodigoPais="ngModel" required [(ngModel)]="selectedData.CodigoPais"></ion-input> -->
-              <!-- [canSearch]="true" [canSearch]="true" -->
-              <ionic-selectable item-content [items]="testSelectableData" [canSearch]="true"  itemValueField="Id" itemTextField="UsuarioWSO2"   id="CodigoPais" name="CodigoPais" #CodigoPais="ngModel" (onChange)="selectableUtils.specificGuestsChange($event)" required [(ngModel)]="selectedData.CodigoPais"  (onSearch)="selectableUtils.searchTerceros($event)">
-              </ionic-selectable>
+              <ion-icon slot="start" name="call"></ion-icon>
+              <ion-input type="text" maxlength="6" required id="{{env.CODIGO_PAIS}}" name="CodigoPais" #CodigoPais="ngModel" required [(ngModel)]="selectedData.CodigoPais"></ion-input>
+
+              <!-- <ionic-selectable item-content [items]="testSelectableData" [canSearch]="true"  itemValueField="Id" itemTextField="UsuarioWSO2"   id="CodigoPais" name="CodigoPais" #CodigoPais="ngModel" (onChange)="selectableUtils.specificGuestsChange($event)" required [(ngModel)]="selectedData.CodigoPais"  (onSearch)="selectableUtils.searchTerceros($event)">
+              </ionic-selectable> -->
             </ion-item>
           </ion-col>
           <ion-col>
             <ion-item lines="full">
               <ion-label position="floating">Teléfono celular</ion-label>
               <ion-icon slot="start" name="call"></ion-icon>
-              <ion-input type="text" required id="TelefonoCelular" name="TelefonoCelular" #TelefonoCelular="ngModel" required [(ngModel)]="selectedData.TelefonoCelular"></ion-input>
+              <ion-input type="text" required id="Celular" name="Celular" #Celular="ngModel" required [(ngModel)]="selectedData.Celular"></ion-input>
             </ion-item>
           </ion-col>
           <ion-col>
@@ -679,7 +679,7 @@
       <ion-grid>
         <ion-row>
           <ion-col size="12" style="display: flex; justify-content: center">
-            <ion-button class="boton" type="submit" color="primary" (click)="updatePersonalInfo()">
+            <ion-button class="boton" type="submit" color="primary">
               Actualizar Información</ion-button>
           </ion-col>
         </ion-row>
