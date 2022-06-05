@@ -6,33 +6,33 @@ export class InfoLaboral {
   CanalEmpleo: string;
   RazonVinculacion: string;
   ProblematicaAporte: any;
-  EtapaEmpresa: string;
-  ActividadActual: string;
-  NoDiligencia: string;
-  DetalleAportes: string;
-  DeseaTrabajo: boolean;
-  DiligenciaTrabajo: boolean;
-  DisponibleTrabajo: boolean;
-  TiempoActividad: string;
-  ActividadesRealiza: string;
-  satisala: string;
-  satihora: string;
-  saticono: string;
-  satidesa: string;
-  satiasce: string;
-  satiesta: string;
-  rangsala: string;
-  detaravi: string;
-  tipocont: string;
-  sectsoci: string;
-  emprlabo: string;
-  grupecon: string;
-  forminde: string;
-  prodserv: string;
-  ciudmuni: string;
-  operempr: string;
-  cuanempl: string;
-  difitrab: string;
+  EtapaEmpresa: any;
+  ActividadActual: any;
+  NoDiligencia: any;
+  DetalleAportes: any;
+  DeseaTrabajo: any;
+  DiligenciaTrabajo: any;
+  DisponibleTrabajo: any;
+  TiempoActividad: any;
+  ActividadesRealiza: any;
+  satisala: any;
+  satihora: any;
+  saticono: any;
+  satidesa: any;
+  satiasce: any;
+  satiesta: any;
+  rangsala: any;
+  detaravi: any;
+  tipocont: any;
+  sectsoci: any;
+  emprlabo: any;
+  grupecon: any;
+  forminde: any;
+  prodserv: any;
+  ciudmuni: any;
+  operempr: any;
+  cuanempl: any;
+  difitrab: any;
 
   constructor(
     Id = '',
@@ -46,9 +46,9 @@ export class InfoLaboral {
     ActividadActual = '',
     NoDiligencia = '',
     DetalleAportes = '',
-    DeseaTrabajo = false,
-    DiligenciaTrabajo = false,
-    DisponibleTrabajo = false,
+    DeseaTrabajo = '',
+    DiligenciaTrabajo = '',
+    DisponibleTrabajo = '',
     TiempoActividad = '',
     ActividadesRealiza = '',
     satisala = '',

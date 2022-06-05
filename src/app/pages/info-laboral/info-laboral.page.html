@@ -20,7 +20,7 @@
     </ion-card-header>
 
     <form #form="ngForm" #formElem (ngSubmit)="handleForm(form)">
-      <ion-grid>
+      <ion-grid style="overflow-x: scroll; width: 100%;">
         <ion-row>
           <ion-col>
             <ion-item lines="full">
@@ -627,23 +627,30 @@
                 <ion-item>
                   <ion-label>¿Desea conseguir un trabajo o realizar una actividad remunerada?</ion-label>
                   <ion-icon slot="start" name="cash-outline"></ion-icon>
-                  <ion-toggle color="primary" id="DeseaTrabajo" name="DeseaTrabajo{{env.DESEA_CONSEGUIR_UN_TRABAJO_O_REALIZAR_UNA_ACTIVIDAD_REMUNERADA}}" #DeseaTrabajo="ngModel" required [(ngModel)]="selectedData.DeseaTrabajo"></ion-toggle>
+                  <!-- <ion-toggle color="primary" id="DeseaTrabajo" name="DeseaTrabajo{{env.DESEA_CONSEGUIR_UN_TRABAJO_O_REALIZAR_UNA_ACTIVIDAD_REMUNERADA}}" #DeseaTrabajo="ngModel" required [(ngModel)]="selectedData.DeseaTrabajo" (ionChange)="onChange(selectedData.DeseaTrabajo, 'DeseaTrabajo')"></ion-toggle> -->
+                  <ion-select placeholder="Seleccionar" okText="Ok" cancelText="Cancelar" id="DeseaTrabajo" name="DeseaTrabajo{{env.DESEA_CONSEGUIR_UN_TRABAJO_O_REALIZAR_UNA_ACTIVIDAD_REMUNERADA}}" #DeseaTrabajo="ngModel" required [(ngModel)]="selectedData.DeseaTrabajo" #mySelect (ionChange)="onChange(selectedData.DeseaTrabajo, 'DeseaTrabajo')">
+                    <ion-select-option value="si">Si</ion-select-option>
+                    <ion-select-option value="no">No</ion-select-option>
+                  </ion-select>
                 </ion-item>
               </ion-col>
 
               <!-- SI -->
-              <ion-row [hidden]="!this.selectedData.DeseaTrabajo">
+              <ion-row [hidden]="this.selectedData.DeseaTrabajo != 'si'">
 
                 <ion-col>
                   <ion-item>
                     <ion-label>¿Durante el último mes, ¿hizo alguna diligencia para conseguir un trabajo o realizar una actividad remunerada?</ion-label>
                     <ion-icon slot="start" name="cash-outline"></ion-icon>
-                    <ion-toggle color="primary" id="DiligenciaTrabajo" name="DiligenciaTrabajo{{env.DURANTE_EL_ULTIMO_MES_HIZO_ALGUNA_DILIGENCIA_PARA_CONSEGUIR_UN_TRABAJO_O_REALIZAR_UNA_ACTIVIDAD}}" #DiligenciaTrabajo="ngModel" required [(ngModel)]="selectedData.DiligenciaTrabajo"></ion-toggle>
+                    <ion-select placeholder="Seleccionar" multiple="true" okText="Ok" cancelText="Cancelar" id="DiligenciaTrabajo" name="DiligenciaTrabajo{{env.DURANTE_EL_ULTIMO_MES_HIZO_ALGUNA_DILIGENCIA_PARA_CONSEGUIR_UN_TRABAJO_O_REALIZAR_UNA_ACTIVIDAD}}" #DiligenciaTrabajo="ngModel" required [(ngModel)]="selectedData.DiligenciaTrabajo" #mySelect (ionChange)="onChange(selectedData.DiligenciaTrabajo, 'DiligenciaTrabajo')">
+                      <ion-select-option value="si">Si</ion-select-option>
+                      <ion-select-option value="no">No</ion-select-option>
+                    </ion-select>
                   </ion-item>
                 </ion-col>
 
                 <!-- NO -->
-                <ion-row [hidden]="this.selectedData.DiligenciaTrabajo">
+                <ion-row [hidden]="this.selectedData.DiligenciaTrabajo != 'no'">
 
                   <ion-col>
                     <ion-item>
@@ -697,12 +704,16 @@
                       <ion-item>
                         <ion-label>Si le resultara algún trabajo remunerado ¿Está disponible para empezar a trabajar?</ion-label>
                         <ion-icon slot="start" name="cash-outline"></ion-icon>
-                        <ion-toggle color="primary" id="DisponibleTrabajo" name="DisponibleTrabajo{{env.SI_LE_RESULTARA_ALGUN_TRABAJO_REMUNERADO_EST_DISPONIBLE_PARA_EMPEZAR_A_TRABAJAR}}" #DisponibleTrabajo="ngModel" required [(ngModel)]="selectedData.DisponibleTrabajo"></ion-toggle>
+                        <ion-select placeholder="Seleccionar" okText="Ok" cancelText="Cancelar" id="DisponibleTrabajo" name="DisponibleTrabajo{{env.SI_LE_RESULTARA_ALGUN_TRABAJO_REMUNERADO_EST_DISPONIBLE_PARA_EMPEZAR_A_TRABAJAR}}" #DisponibleTrabajo="ngModel" required [(ngModel)]="selectedData.DisponibleTrabajo" #mySelect (ionChange)="onChange(selectedData.DisponibleTrabajo, 'DisponibleTrabajo')">
+                          <ion-select-option value="si">Si</ion-select-option>
+                          <ion-select-option value="no">No</ion-select-option>
+                        </ion-select>
+                        <!-- <ion-toggle color="primary" id="DisponibleTrabajo" name="DisponibleTrabajo{{env.SI_LE_RESULTARA_ALGUN_TRABAJO_REMUNERADO_EST_DISPONIBLE_PARA_EMPEZAR_A_TRABAJAR}}" #DisponibleTrabajo="ngModel" required [(ngModel)]="selectedData.DisponibleTrabajo"></ion-toggle> -->
                       </ion-item>
                     </ion-col>
 
                     <!-- SI -->
-                    <ion-row [hidden]="!selectedData.DisponibleTrabajo">
+                    <ion-row [hidden]="selectedData.DisponibleTrabajo != 'si'">
                       <ion-col>
                         <ion-item>
                           <ion-label>¿Hace cuántos meses ha estado buscando empleo?</ion-label>
@@ -791,7 +802,7 @@
                     </ion-row>
 
                     <!-- NO -->
-                    <ion-row [hidden]="selectedData.DisponibleTrabajo">
+                    <ion-row [hidden]="selectedData.DisponibleTrabajo != 'no'">
 
                       <ion-col>
                         <ion-item>
@@ -858,7 +869,7 @@
                 </ion-row>
 
                 <!-- SI -->
-                <ion-row [hidden]="!this.selectedData.DiligenciaTrabajo">
+                <ion-row [hidden]="this.selectedData.DiligenciaTrabajo != 'si'">
 
                   <ion-col>
                     <ion-item>
@@ -950,7 +961,7 @@
               </ion-row>
 
               <!-- NO -->
-              <ion-row [hidden]="this.selectedData.DeseaTrabajo">
+              <ion-row [hidden]="this.selectedData.DeseaTrabajo != 'no'">
                 <ion-col>
                   <ion-item>
                     <ion-label>Problematicas donde ha aportado</ion-label>

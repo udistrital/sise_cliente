@@ -24,7 +24,7 @@ export class InfoLaboralPage implements OnInit {
   env: any
   attr: any
   sessionTerceroID: any
-  test:any
+  test: any
 
   constructor(
     private readonly infoPersonalService: InfoPersonalService,
@@ -93,11 +93,16 @@ export class InfoLaboralPage implements OnInit {
           // if (Array.isArray(JSON.parse(node.value))) {
           //   fieldsData[fieldName] = JSON.parse(JSON.parse(data[0].Dato).Data)
           // } else {
-            if(flagMultipleIonSelect){
-              fieldsData[fieldName] = JSON.parse(data[0].Dato).Data.split(',')
-            }else{
-              fieldsData[fieldName] = JSON.parse(data[0].Dato).Data
-            }
+
+          let dato = JSON.parse(data[0].Dato).Data
+
+          if (flagMultipleIonSelect) {
+            fieldsData[fieldName] = dato.split(',')
+          } else {
+            if (dato == "on") dato = true
+            if (dato == "off") dato = false
+            fieldsData[fieldName] = dato
+          }
           // }
 
         }
@@ -119,7 +124,7 @@ export class InfoLaboralPage implements OnInit {
   onChange(selectValue, id) {
 
     // console.log(this.selectedData);
-    // console.log('selectValue selectValue',selectValue)
+    console.log('selectValue: ', selectValue)
   }
 
   async handleForm(formNg: NgForm) {
@@ -146,7 +151,7 @@ export class InfoLaboralPage implements OnInit {
         // JSON.parse(JSON.stringify(['probambi', 'probsoci'])).join(',')
         if (!node.value) return;
 
-        // console.log('NODE VALUEEEE', node.value)
+        console.log('NODE VALUEEEE', node.parentElement, node.parentNode, node.name)
 
         let bodyValue = node.value
         if (Array.isArray(JSON.parse(JSON.stringify(node.value)))) {
