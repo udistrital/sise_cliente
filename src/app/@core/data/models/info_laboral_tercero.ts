@@ -5,7 +5,7 @@ export class InfoLaboral {
   EstadoLaboral: string;
   CanalEmpleo: string;
   RazonVinculacion: string;
-  ProblematicaAporte: string;
+  ProblematicaAporte: any;
   EtapaEmpresa: string;
   ActividadActual: string;
   NoDiligencia: string;
@@ -41,7 +41,7 @@ export class InfoLaboral {
     EstadoLaboral = '',
     CanalEmpleo = '',
     RazonVinculacion = '',
-    ProblematicaAporte = '',
+    ProblematicaAporte = null,
     EtapaEmpresa = '',
     ActividadActual = '',
     NoDiligencia = '',

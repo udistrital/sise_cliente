@@ -22,7 +22,9 @@ export class InfoLaboralPage implements OnInit {
 
   selectedData: InfoLaboral
   env: any
+  attr: any
   sessionTerceroID: any
+  test:any
 
   constructor(
     private readonly infoPersonalService: InfoPersonalService,
@@ -31,6 +33,9 @@ export class InfoLaboralPage implements OnInit {
   ) {
     this.selectedData = new InfoLaboral();
     this.env = environment.INFO_COMPLEMENTARIA_IDS
+    this.test = [
+      "probecon", "probcult"
+    ]
   }
 
   async ngOnInit() {
@@ -45,7 +50,7 @@ export class InfoLaboralPage implements OnInit {
     const { documento, documento_compuesto, ...rest } = await this.infoPersonalService.getDocumentIdByEmail(environment.API_GET_IDENTIFICATION, body).toPromise() as Documento;
 
     if (!documento) {
-      console.log("Something went wrong, when try to get the identification");
+      // console.log("Something went wrong, when try to get the identification");
       return
     }
 
@@ -55,15 +60,22 @@ export class InfoLaboralPage implements OnInit {
 
     // SETEO DE VALORES DE LOS CAMPOS
     let onlyNumsRegex = /(\d+)/g
+    let numsGuion = /[0-9-]+$/g
+    let detectGuion = /[-]+$/g
     let terceroID = this.sessionTerceroID
     let infoPersonalServ = this.infoPersonalService
-    this.myFormElems.forEach(async (form: ElementRef) => {
+    let fieldsData = this.selectedData
+    this.myFormElems.forEach(async function (form: ElementRef) {
       const formElement = form.nativeElement;
 
       let filter = Array.prototype.filter
-      filter.call(formElement, async (node) => {
+      await filter.call(formElement, async function (node) {
 
-        let fieldName = node.name.replace(onlyNumsRegex, '')
+        console.log(node.multiple);
+        console.log(node);
+
+        let flagMultipleIonSelect = node.name.match(detectGuion)
+        let fieldName = node.name.replace(numsGuion, '').trim()
         if (!fieldName) return;
 
         let icID = node.name.match(onlyNumsRegex)
@@ -72,36 +84,42 @@ export class InfoLaboralPage implements OnInit {
 
         let data = await infoPersonalServ.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria_tercero/?query=TerceroId.Id:${terceroID}` + `,InfoComplementariaId.Id:${icID}`).toPromise();
 
-        console.log(data)
+        // console.log(data)
 
-        if (data && data.length > 0 && data[0] && Object.keys(data[0]).length > 0 && data[0].Data){
+        if (data && data.length > 0 && JSON.parse(data[0].Dato).Data && JSON.parse(data[0].Dato).Data != "\"") {
 
-          console.log(JSON.parse(data[0].Dato).Data)
-          console.log(fieldName)
-          this.selectedData[fieldName] = JSON.parse(data[0].Dato).Data
+          // console.log(JSON.parse(data[0].Dato).Data)
+          // console.log(fieldName)
+          // if (Array.isArray(JSON.parse(node.value))) {
+          //   fieldsData[fieldName] = JSON.parse(JSON.parse(data[0].Dato).Data)
+          // } else {
+            if(flagMultipleIonSelect){
+              fieldsData[fieldName] = JSON.parse(data[0].Dato).Data.split(',')
+            }else{
+              fieldsData[fieldName] = JSON.parse(data[0].Dato).Data
+            }
+          // }
 
         }
-      });
 
+        // console.log('HERERER ', fieldsData[fieldName], typeof fieldsData[fieldName]);
+        // if (Array.isArray(JSON.parse(node.value))) {
+        //   fieldsData[fieldName] = JSON.parse(JSON.parse(data[0].Dato).Data)
+        // }
+
+      });
     });
 
-    console.log(this.selectedData)
+    Object.assign({}, this.selectedData, fieldsData)
+
+    // console.log(this.selectedData)
     loader.dismiss()
   }
 
   onChange(selectValue, id) {
 
-    if (id == 'SituacionLaboral') {
-      if (selectValue == 'conemple') {
-
-      } else if (selectValue == 'sinemple') {
-
-      } else if (selectValue == 'pensiona') {
-
-      }
-    }
-    console.log(this.selectedData);
-    // console.log(selectValue)
+    // console.log(this.selectedData);
+    // console.log('selectValue selectValue',selectValue)
   }
 
   async handleForm(formNg: NgForm) {
@@ -118,24 +136,26 @@ export class InfoLaboralPage implements OnInit {
 
       let filter = Array.prototype.filter
       let filtered = filter.call(formElement, async function (node) {
-        console.log('this.sessionTerceroID', terceroID)
+        // console.log('this.sessionTerceroID', terceroID)
 
         let icID = node.name.match(onlyNumsRegex)
 
-        console.log('icID', icID, node.name)
+        // console.log('icID', icID, node.name)
         icID = icID && icID.length > 0 && icID[0] ? parseInt(icID[0]) : null
         if (!icID) return;
         // JSON.parse(JSON.stringify(['probambi', 'probsoci'])).join(',')
-        if(!node.value) return;
+        if (!node.value) return;
+
+        // console.log('NODE VALUEEEE', node.value)
 
         let bodyValue = node.value
-        if(Array.isArray(JSON.parse(JSON.stringify(node.value)))){
-          bodyValue = JSON.parse(JSON.stringify(node.value)).join(',')
+        if (Array.isArray(JSON.parse(JSON.stringify(node.value)))) {
+          bodyValue = JSON.stringify(node.value)
         } else if (Number(node.value)) {
           bodyValue = node.value.toString().trim()
         }
 
-        if(!bodyValue) return;
+        if (!bodyValue) return;
 
         let ictBody = {
           "Activo": true,
@@ -150,22 +170,23 @@ export class InfoLaboralPage implements OnInit {
           }
         }
 
-        console.log(ictBody)
+        // console.log(ictBody)
 
         let data = await infoPersonalServ.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria_tercero/?query=TerceroId.Id:${terceroID}` + `,InfoComplementariaId.Id:${icID}`).toPromise();
 
+        // console.log(data)
         if (data && data.length > 0 && data[0] && Object.keys(data[0]).length > 0) {
           // put
           let putICT = await infoPersonalServ.updateInformation(environment.TERCEROS_SERVICE + `/info_complementaria_tercero/${data[0].Id}`, ictBody).toPromise();
 
-          console.log('putICT', putICT);
+          // console.log('putICT', putICT);
         } else {
           // post
           let postICT = await infoTercero.saveDataTercero(`/info_complementaria_tercero`, ictBody).toPromise();
 
-          console.log('postICT', postICT);
+          // console.log('postICT', postICT);
         }
-        console.log(node.name, node.value)
+        // console.log(node.name, node.value)
 
       });
 
