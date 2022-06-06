@@ -15,8 +15,8 @@ export class InfoPersonal {
   CorreoPersonal: string;
   RedSocialUno: string;
   RedSocialDos: string;
-  CodigoPais: string;
-  TelefonoCelular: string;
+  CodigoPais: any;
+  Celular: string;
   PaisResidencia: string;
   DepartamentoResidencia: string;
   MunicipioResidencia: string;
@@ -41,8 +41,8 @@ export class InfoPersonal {
     CorreoPersonal = '',
     RedSocialUno = '',
     RedSocialDos = '',
-    CodigoPais = '',
-    TelefonoCelular = '',
+    CodigoPais = 0,
+    Celular = '',
     PaisResidencia = '',
     DepartamentoResidencia = '',
     MunicipioResidencia = '',
@@ -68,7 +68,7 @@ export class InfoPersonal {
     this.RedSocialUno = RedSocialUno
     this.RedSocialDos = RedSocialDos
     this.CodigoPais = CodigoPais
-    this.TelefonoCelular = TelefonoCelular
+    this.Celular = Celular
     this.PaisResidencia = PaisResidencia
     this.DepartamentoResidencia = DepartamentoResidencia
     this.MunicipioResidencia = MunicipioResidencia

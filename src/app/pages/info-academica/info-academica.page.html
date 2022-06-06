@@ -56,15 +56,15 @@
           <ion-item lines="full">
             <ion-label position="floating">Programas de posgrado titulados en la UD</ion-label>
             <ion-icon slot="start" name="business-outline"></ion-icon>
-            <ion-select placeholder="Seleccionar" interface="popover">
-              <ion-select-option value="p">(Lista de posgrados de la UD)</ion-select-option>
+            <ion-select placeholder="Seleccionar" multiple="true" style="width: 100% !important;">
+              <ion-select-option *ngFor="let posgrado of posgradosUD" value="{{posgrado.Id}}">{{posgrado.Nombre}}</ion-select-option>
             </ion-select>
           </ion-item>
         </ion-col>
       </ion-row>
     </ion-grid>
 
-    <ion-card-header>
+    <!-- <ion-card-header>
       <ion-card-subtitle class="subtitulo">Datos de educacion superior</ion-card-subtitle>
     </ion-card-header>
     <ion-grid>
@@ -76,14 +76,28 @@
             <ion-input type="text" required value="Universidad Distrital Francisco José de Caldas"></ion-input>
           </ion-item>
         </ion-col>
+
         <ion-col>
           <ion-item lines="full">
-            <ion-label position="floating">Nombre de la carrera</ion-label>
+            <ion-label position="floating">Título obtenido</ion-label>
             <ion-icon slot="start" name="book-outline"></ion-icon>
             <ion-input type="text" required></ion-input>
           </ion-item>
         </ion-col>
-      </ion-row>
+
+        <ion-col>
+          <ion-item>
+            <ion-label>Tipo de estudio</ion-label>
+            <ion-icon slot="start" name="school-outline"></ion-icon>
+            <ion-select placeholder="Seleccionar" interface="popover">
+              <ion-select-option value="p">Pregrado</ion-select-option>
+              <ion-select-option value="e">Especializacion</ion-select-option>
+              <ion-select-option value="m">Maestria</ion-select-option>
+              <ion-select-option value="d">Doctorado</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row> -->
       <!-- <ion-row>
         <ion-col>
           <ion-item lines="full">
@@ -140,7 +154,7 @@
           </ion-item>
         </ion-col> 
       </ion-row> -->
-    </ion-grid>
+    <!-- </ion-grid> -->
     <!-- <ion-button class="boton" [routerLink]="['/']" type="submit" color="primary" expand="block">Agregar estudios</ion-button> -->
     <!-- <ion-card-header>
       <ion-card-subtitle class="subtitulo">Datos de Certificaciones</ion-card-subtitle>

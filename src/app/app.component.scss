@@ -11,6 +11,10 @@
   position: inherit !important;
 }
 
+.alert-wrapper.sc-ion-alert-md {
+  max-width: max-content !important;
+}
+
 ion-modal.fullscreen {
   --width: 100%;
   --height: 100%;

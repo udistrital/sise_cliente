@@ -260,7 +260,8 @@
               <ion-label>Tipo de población</ion-label>
               <ion-icon slot="start" name="person-outline"></ion-icon>
               <!-- value="{{dataInfo?.EstadoCivil}}" -->
-              <ion-select placeholder="Seleccione..." interface="popover" id="TipoPoblacion" name="TipoPoblacion" #TipoPoblacion="ngModel" required [(ngModel)]="selectedData.TipoPoblacion">
+              <ion-select multiple="true" 
+              okText="Ok" cancelText="Cancelar" placeholder="Seleccione..." interface="popover" id="TipoPoblacion" name="TipoPoblacion" #TipoPoblacion="ngModel" required [(ngModel)]="selectedData.TipoPoblacion">
                 <ion-select-option value="NINGUNO" id="NINGUNO">NINGUNO</ion-select-option>
                 <ion-select-option value="PUEBLO INDIGENA" id="PUEBLO INDIGENA">PUEBLO INDÍGENA</ion-select-option>
                 <ion-select-option value="POBLACION AFROCOLOMBIANA" id="POBLACION AFROCOLOMBIANA">POBLACIÓN AFROCOLOMBIANA</ion-select-option>
@@ -275,7 +276,8 @@
             <ion-item>
               <ion-label>Condiciones de discapacidad</ion-label>
               <ion-icon slot="start" name="person-outline"></ion-icon>
-              <ion-select placeholder="Seleccione..." interface="popover" id="CondicionesDiscapacidad" name="CondicionesDiscapacidad" #CondicionesDiscapacidad="ngModel" required [(ngModel)]="selectedData.CondicionesDiscapacidad">
+              <ion-select placeholder="Seleccione..." interface="popover" multiple="true" 
+              okText="Ok" cancelText="Cancelar" id="CondicionesDiscapacidad" name="CondicionesDiscapacidad" #CondicionesDiscapacidad="ngModel" required [(ngModel)]="selectedData.CondicionesDiscapacidad">
                 <ion-select-option value="NINGUNA" id="NINGUNA">NINGUNA</ion-select-option>
                 <ion-select-option value="AUDITIVA" id="AUDITIVA">AUDITIVA</ion-select-option>
                 <ion-select-option value="VISUAL" id="VISUAL">VISUAL</ion-select-option>
@@ -336,18 +338,18 @@
           <ion-col>
             <ion-item lines="full">
               <ion-label position="floating">Código del país</ion-label>
-              <!-- <ion-icon slot="start" name="call"></ion-icon> -->
-              <!-- <ion-input type="number" required id="CodigoPais" name="CodigoPais" #CodigoPais="ngModel" required [(ngModel)]="selectedData.CodigoPais"></ion-input> -->
-              <!-- [canSearch]="true" [canSearch]="true" -->
-              <ionic-selectable item-content [items]="testSelectableData" [canSearch]="true"  itemValueField="Id" itemTextField="UsuarioWSO2"   id="CodigoPais" name="CodigoPais" #CodigoPais="ngModel" (onChange)="selectableUtils.specificGuestsChange($event)" required [(ngModel)]="selectedData.CodigoPais"  (onSearch)="selectableUtils.searchTerceros($event)">
-              </ionic-selectable>
+              <ion-icon slot="start" name="call"></ion-icon>
+              <ion-input type="text" maxlength="6" required id="{{env.CODIGO_PAIS}}" name="CodigoPais" #CodigoPais="ngModel" required [(ngModel)]="selectedData.CodigoPais"></ion-input>
+
+              <!-- <ionic-selectable item-content [items]="testSelectableData" [canSearch]="true"  itemValueField="Id" itemTextField="UsuarioWSO2"   id="CodigoPais" name="CodigoPais" #CodigoPais="ngModel" (onChange)="selectableUtils.specificGuestsChange($event)" required [(ngModel)]="selectedData.CodigoPais"  (onSearch)="selectableUtils.searchTerceros($event)">
+              </ionic-selectable> -->
             </ion-item>
           </ion-col>
           <ion-col>
             <ion-item lines="full">
               <ion-label position="floating">Teléfono celular</ion-label>
               <ion-icon slot="start" name="call"></ion-icon>
-              <ion-input type="text" required id="TelefonoCelular" name="TelefonoCelular" #TelefonoCelular="ngModel" required [(ngModel)]="selectedData.TelefonoCelular"></ion-input>
+              <ion-input type="text" required id="Celular" name="Celular" #Celular="ngModel" required [(ngModel)]="selectedData.Celular"></ion-input>
             </ion-item>
           </ion-col>
           <ion-col>
@@ -677,7 +679,7 @@
       <ion-grid>
         <ion-row>
           <ion-col size="12" style="display: flex; justify-content: center">
-            <ion-button class="boton" type="submit" color="primary" (click)="updatePersonalInfo()">
+            <ion-button class="boton" type="submit" color="primary">
               Actualizar Información</ion-button>
           </ion-col>
         </ion-row>

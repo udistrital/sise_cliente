@@ -13,4 +13,8 @@ export class TerceroService {
   getTercerosAsync(): any {
     return this.httpClient.get<any>(environment.TERCEROS_SERVICE + `/tercero?fields=UsuarioWSO2,Id&limit=-1`, this.funcsService.openIDDefaultOptions());
   }
+
+  saveDataTercero(endpoint, data): any {
+    return this.httpClient.post<any>(environment.TERCEROS_SERVICE + endpoint, data, this.funcsService.openIDDefaultOptions());
+  }
 }
