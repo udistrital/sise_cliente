@@ -8,6 +8,8 @@
 </ion-header>
 
 <ion-content>
+  <form #form="ngForm" #formElem (ngSubmit)="handleForm(form)">
+
   <ion-card class="Inicio">
     <ion-card-header class="center">
       <ion-avatar>
@@ -22,14 +24,15 @@
           <ion-item lines="full">
             <ion-label position="floating">Nombre del colegio</ion-label>
             <ion-icon slot="start" name="business-outline"></ion-icon>
-            <ion-input disabled="true" value="{{dataInfo?.NombreColegio}}"></ion-input>
+            <ion-input disabled="true" name="NombreColegio{{env.NOMBRE_COLEGIO}}" #NombreColegio="ngModel" required [(ngModel)]="selectedData.NombreColegio" type="text"></ion-input>
           </ion-item>
         </ion-col>
+
         <ion-col>
           <ion-item lines="full">
             <ion-label position="floating">Ciudad donde esta el colegio</ion-label>
             <ion-icon slot="start" name="flag-outline"></ion-icon>
-            <ion-input disabled="true" value="{{dataInfo?.CiudadColegio}}"></ion-input>
+            <ion-input disabled="true" name="CiudadColegio{{env.CIUDAD_COLEGIO}}" #CiudadColegio="ngModel" required [(ngModel)]="selectedData.CiudadColegio" type="text"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -38,7 +41,7 @@
           <ion-item lines="full">
             <ion-label position="floating">Fecha de graduacion</ion-label>
             <ion-icon slot="start" name="calendar-outline"></ion-icon>
-            <ion-input disabled="true" value="{{dataInfo?.FechaGraduacionColegio}}"></ion-input>
+            <ion-input disabled="true" name="FechaGraduacion{{env.FECHA_GRADUACION}}" #FechaGraduacion="ngModel" required [(ngModel)]="selectedData.FechaGraduacion" type="text"></ion-input>
           </ion-item>
         </ion-col>
         <ion-col>
@@ -51,15 +54,25 @@
       <ion-card-subtitle class="subtitulo">Datos de posgrados en la UD</ion-card-subtitle>
     </ion-card-header>
     <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-item lines="full">
+              <ion-label position="floating">Programas de posgrado titulados en la UD</ion-label>
+              <ion-icon slot="start" name="business-outline"></ion-icon>
+              <ion-select placeholder="Seleccionar" okText="Ok" cancelText="Cancelar" id="PosgradosTituladosUD"  multiple="true" name="PosgradosTituladosUD{{env.PROGRAMAS_DE_POSGRADO_TITULADOS_EN_LA_UD}}-" #PosgradosTituladosUD="ngModel" required [(ngModel)]="selectedData.PosgradosTituladosUD" (ionChange)="onChange(selectedData.PosgradosTituladosUD, 'PosgradosTituladosUD')" style="width: 100% !important;">
+                <ion-select-option *ngFor="let posgrado of posgradosUD" value="{{posgrado.Id.toString()}}">{{posgrado.Nombre}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <ion-grid>
       <ion-row>
-        <ion-col>
-          <ion-item lines="full">
-            <ion-label position="floating">Programas de posgrado titulados en la UD</ion-label>
-            <ion-icon slot="start" name="business-outline"></ion-icon>
-            <ion-select placeholder="Seleccionar" multiple="true" style="width: 100% !important;">
-              <ion-select-option *ngFor="let posgrado of posgradosUD" value="{{posgrado.Id}}">{{posgrado.Nombre}}</ion-select-option>
-            </ion-select>
-          </ion-item>
+        <ion-col size="12" style="display: flex; justify-content: center">
+          <ion-button class="boton" type="submit" color="primary">
+            Actualizar
+          </ion-button>
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -196,4 +209,6 @@
     <!-- <ion-button class="boton" [routerLink]="['/']" type="submit" color="primary" expand="block">Agregar certificaciones</ion-button>
     <ion-button class="boton" [routerLink]="['/home']" type="submit" color="primary" expand="block">Actualizar Información</ion-button> -->
   </ion-card>
+</form>
+
 </ion-content>

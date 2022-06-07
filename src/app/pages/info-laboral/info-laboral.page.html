@@ -20,7 +20,7 @@
     </ion-card-header>
 
     <form #form="ngForm" #formElem (ngSubmit)="handleForm(form)">
-      <ion-grid style="overflow-x: scroll; width: 100%;">
+      <ion-grid style="overflow-x: auto; width: 100%;">
         <ion-row>
           <ion-col>
             <ion-item lines="full">
@@ -29,8 +29,7 @@
 
               <!-- id="{{env.SITUACION_LABORAL}}" [attr.data-env]="env.SITUACION_LABORAL"   -->
               <!-- class="{{env.SITUACION_LABORAL}}" -->
-              <ion-select
-               name="SituacionLaboral{{env.SITUACION_LABORAL}}" #SituacionLaboral="ngModel" required [(ngModel)]="selectedData.SituacionLaboral" placeholder="Seleccionar" interface="action-sheet" cancelText="Cancelar">
+              <ion-select name="SituacionLaboral{{env.SITUACION_LABORAL}}" #SituacionLaboral="ngModel" required [(ngModel)]="selectedData.SituacionLaboral" placeholder="Seleccionar" interface="action-sheet" cancelText="Cancelar">
                 <ion-select-option value="conemple">Con empleo remunerado (Empleado, emprendedor, empresario, independiente, etc)</ion-select-option>
                 <ion-select-option value="sinemple">Sin empleo</ion-select-option>
                 <ion-select-option value="pensiona">Pensionado</ion-select-option>
@@ -47,6 +46,16 @@
                 <ion-input type="text" name="TiempoActividad{{env.CUNTO_TIEMPO_EN_MESES_LLEVA_EN_ESTA_ACTIVIDAD_O_TRABAJO}}" #TiempoActividad="ngModel" required [(ngModel)]="selectedData.TiempoActividad"></ion-input>
               </ion-item>
             </ion-col>
+
+            <!-- <ion-card-header>
+              <ion-card-subtitle class="subtitulo">Situación laboral</ion-card-subtitle>
+            </ion-card-header> -->
+
+            <ion-text style="display: flex; justify-content: center; align-items: center; text-align: center; width: 100%;">
+              <h1>
+                Satisfacción laboral
+              </h1>
+            </ion-text>
 
             <ion-col>
               <ion-item lines="full">
@@ -478,7 +487,7 @@
                 <ion-item>
                   <ion-label>Etapa en que se encuentra la empresa</ion-label>
                   <ion-icon slot="start" name="receipt-outline"></ion-icon>
-                  <ion-select placeholder="Seleccionar" interface="action-sheet" cancelText="Cancelar" multiple="true" okText="Ok" cancelText="Cancelar" id="EtapaEmpresa" name="EtapaEmpresa{{env.ETAPA_EN_QUE_SE_ENCUETRA_LA_EMPRESA}}" #EtapaEmpresa="ngModel" required [(ngModel)]="selectedData.EtapaEmpresa">
+                  <ion-select placeholder="Seleccionar" interface="action-sheet" cancelText="Cancelar" okText="Ok" cancelText="Cancelar" id="EtapaEmpresa" name="EtapaEmpresa{{env.ETAPA_EN_QUE_SE_ENCUETRA_LA_EMPRESA}}" #EtapaEmpresa="ngModel" required [(ngModel)]="selectedData.EtapaEmpresa">
                     <ion-select-option value="colombia">Idea-Planeación</ion-select-option>
                     <ion-select-option value="sudamerica">Creación</ion-select-option>
                     <ion-select-option value="centamer">Puesta en marcha</ion-select-option>
@@ -642,7 +651,7 @@
                   <ion-item>
                     <ion-label>¿Durante el último mes, ¿hizo alguna diligencia para conseguir un trabajo o realizar una actividad remunerada?</ion-label>
                     <ion-icon slot="start" name="cash-outline"></ion-icon>
-                    <ion-select placeholder="Seleccionar" multiple="true" okText="Ok" cancelText="Cancelar" id="DiligenciaTrabajo" name="DiligenciaTrabajo{{env.DURANTE_EL_ULTIMO_MES_HIZO_ALGUNA_DILIGENCIA_PARA_CONSEGUIR_UN_TRABAJO_O_REALIZAR_UNA_ACTIVIDAD}}" #DiligenciaTrabajo="ngModel" required [(ngModel)]="selectedData.DiligenciaTrabajo" #mySelect (ionChange)="onChange(selectedData.DiligenciaTrabajo, 'DiligenciaTrabajo')">
+                    <ion-select placeholder="Seleccionar" okText="Ok" cancelText="Cancelar" id="DiligenciaTrabajo" name="DiligenciaTrabajo{{env.DURANTE_EL_ULTIMO_MES_HIZO_ALGUNA_DILIGENCIA_PARA_CONSEGUIR_UN_TRABAJO_O_REALIZAR_UNA_ACTIVIDAD}}" #DiligenciaTrabajo="ngModel" required [(ngModel)]="selectedData.DiligenciaTrabajo" #mySelect (ionChange)="onChange(selectedData.DiligenciaTrabajo, 'DiligenciaTrabajo')">
                       <ion-select-option value="si">Si</ion-select-option>
                       <ion-select-option value="no">No</ion-select-option>
                     </ion-select>
@@ -1029,34 +1038,6 @@
           </ion-col>
         </ion-row>
       </ion-grid>
-
-      <!-- <ion-select placeholder="Seleccionar" multiple="true" okText="Ok" cancelText="Cancelar" required [value]="test">
-        <ion-select-option value="probecon">Problemas económicos</ion-select-option>
-        <ion-select-option value="probambi">Problemas ambientales</ion-select-option>
-        <ion-select-option value="probsoci">Problemas sociales</ion-select-option>
-        <ion-select-option value="probcult">Problemas culturales</ion-select-option>
-        <ion-select-option value="noheaport">No he aportado</ion-select-option>
-        <ion-select-option value="aporotra">Otra</ion-select-option>
-      </ion-select> -->
-
-      <!-- [value]="{{JSON.parse('[selectedData.ProblematicaAporte]'')}}"> -->
-      <!-- [value]="test" -->
-      <!-- <ion-col>
-        <ion-item>
-          <ion-label>Problematicas donde ha aportado</ion-label>
-          <ion-icon slot="start" name="cash-outline"></ion-icon>
-          <ion-select placeholder="Seleccionar" multiple="true" okText="Ok" cancelText="Cancelar" id="ProblematicaAporte" name="ProblematicaAporte{{env.PROBLEMTICAS_EN_DONDE_CONSIDERA_QUE_HA_APORTADO}}-"  required
-          [(ngModel)]="this.selectedData.ProblematicaAporte" #ProblematicaAporte="ngModel" 
-          >
-            <ion-select-option value="probecon">Problemas económicos</ion-select-option>
-            <ion-select-option value="probambi">Problemas ambientales</ion-select-option>
-            <ion-select-option value="probcult">Problemas culturales</ion-select-option>
-            <ion-select-option value="probsoci">Problemas sociales</ion-select-option>
-            <ion-select-option value="noheaport">No he aportado</ion-select-option>
-            <ion-select-option value="aporotra">Otra</ion-select-option>
-          </ion-select>
-        </ion-item>
-      </ion-col> -->
     </form>
   </ion-card>
 </ion-content>
