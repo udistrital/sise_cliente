@@ -23,4 +23,5 @@ export class DataInfoTercero {
   Pais?: string = "";
   Departamento?: string = "";
   Intereses?: Array<string> = [];
+  posgradosTituladosUD?: any = null;
 }

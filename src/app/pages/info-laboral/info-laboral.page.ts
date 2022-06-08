@@ -49,30 +49,21 @@ export class InfoLaboralPage implements OnInit {
     const body = { "user": email };
     const { documento, documento_compuesto, ...rest } = await this.infoPersonalService.getDocumentIdByEmail(environment.API_GET_IDENTIFICATION, body).toPromise() as Documento;
 
-    if (!documento) {
-      // console.log("Something went wrong, when try to get the identification");
+    if (!documento) 
       return
-    }
 
     const data = await this.infoPersonalService.getInformationByDocument(environment.DATOS_IDENTIFICACION_TERCERO_ENDPOINT, documento).toPromise()
 
     this.sessionTerceroID = data[0].TerceroId.Id as number;
 
     // SETEO DE VALORES DE LOS CAMPOS
-    let onlyNumsRegex = /(\d+)/g
-    let numsGuion = /[0-9-]+$/g
-    let detectGuion = /[-]+$/g
-    let terceroID = this.sessionTerceroID
-    let infoPersonalServ = this.infoPersonalService
-    let fieldsData = this.selectedData
+    let onlyNumsRegex = /(\d+)/g, numsGuion = /[0-9-]+$/g, detectGuion = /[-]+$/g, terceroID = this.sessionTerceroID, infoPersonalServ = this.infoPersonalService, fieldsData = this.selectedData
+    
     this.myFormElems.forEach(async function (form: ElementRef) {
       const formElement = form.nativeElement;
 
       let filter = Array.prototype.filter
       await filter.call(formElement, async function (node) {
-
-        console.log(node.multiple);
-        console.log(node);
 
         let flagMultipleIonSelect = node.name.match(detectGuion)
         let fieldName = node.name.replace(numsGuion, '').trim()
@@ -84,18 +75,9 @@ export class InfoLaboralPage implements OnInit {
 
         let data = await infoPersonalServ.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria_tercero/?query=TerceroId.Id:${terceroID}` + `,InfoComplementariaId.Id:${icID}`).toPromise();
 
-        // console.log(data)
-
-        if (data && data.length > 0 && JSON.parse(data[0].Dato).Data && JSON.parse(data[0].Dato).Data != "\"") {
-
-          // console.log(JSON.parse(data[0].Dato).Data)
-          // console.log(fieldName)
-          // if (Array.isArray(JSON.parse(node.value))) {
-          //   fieldsData[fieldName] = JSON.parse(JSON.parse(data[0].Dato).Data)
-          // } else {
+        if (data && data.length > 0 && data[0].Dato && typeof data[0].Dato == 'string' && JSON.parse(data[0].Dato).Data && JSON.parse(data[0].Dato).Data != "\"") {
 
           let dato = JSON.parse(data[0].Dato).Data
-
           if (flagMultipleIonSelect) {
             fieldsData[fieldName] = dato.split(',')
           } else {
@@ -103,21 +85,13 @@ export class InfoLaboralPage implements OnInit {
             if (dato == "off") dato = false
             fieldsData[fieldName] = dato
           }
-          // }
 
         }
-
-        // console.log('HERERER ', fieldsData[fieldName], typeof fieldsData[fieldName]);
-        // if (Array.isArray(JSON.parse(node.value))) {
-        //   fieldsData[fieldName] = JSON.parse(JSON.parse(data[0].Dato).Data)
-        // }
-
       });
     });
 
     Object.assign({}, this.selectedData, fieldsData)
 
-    // console.log(this.selectedData)
     loader.dismiss()
   }
 
@@ -133,25 +107,19 @@ export class InfoLaboralPage implements OnInit {
     let terceroID = this.sessionTerceroID
     let infoPersonalServ = this.infoPersonalService
     let infoTercero = this.terceroService
-    // console.log('this.sessionTerceroID', this.sessionTerceroID)
-    let valuesAndIDS = [], onlyNumsRegex = /(\d+)/g
+    let onlyNumsRegex = /(\d+)/g
 
     this.myFormElems.forEach(async function (form: ElementRef) {
       const formElement = form.nativeElement;
 
       let filter = Array.prototype.filter
-      let filtered = filter.call(formElement, async function (node) {
-        // console.log('this.sessionTerceroID', terceroID)
+      await filter.call(formElement, async function (node) {
 
         let icID = node.name.match(onlyNumsRegex)
 
-        // console.log('icID', icID, node.name)
         icID = icID && icID.length > 0 && icID[0] ? parseInt(icID[0]) : null
         if (!icID) return;
-        // JSON.parse(JSON.stringify(['probambi', 'probsoci'])).join(',')
         if (!node.value) return;
-
-        console.log('NODE VALUEEEE', node.parentElement, node.parentNode, node.name)
 
         let bodyValue = node.value
         if (Array.isArray(JSON.parse(JSON.stringify(node.value)))) {
@@ -175,24 +143,16 @@ export class InfoLaboralPage implements OnInit {
           }
         }
 
-        // console.log(ictBody)
-
         let data = await infoPersonalServ.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria_tercero/?query=TerceroId.Id:${terceroID}` + `,InfoComplementariaId.Id:${icID}`).toPromise();
 
-        // console.log(data)
         if (data && data.length > 0 && data[0] && Object.keys(data[0]).length > 0) {
           // put
-          let putICT = await infoPersonalServ.updateInformation(environment.TERCEROS_SERVICE + `/info_complementaria_tercero/${data[0].Id}`, ictBody).toPromise();
+          await infoPersonalServ.updateInformation(environment.TERCEROS_SERVICE + `/info_complementaria_tercero/${data[0].Id}`, ictBody).toPromise();
 
-          // console.log('putICT', putICT);
         } else {
           // post
-          let postICT = await infoTercero.saveDataTercero(`/info_complementaria_tercero`, ictBody).toPromise();
-
-          // console.log('postICT', postICT);
+          await infoTercero.saveDataTercero(`/info_complementaria_tercero`, ictBody).toPromise();
         }
-        // console.log(node.name, node.value)
-
       });
 
     });
