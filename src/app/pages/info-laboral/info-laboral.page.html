@@ -470,7 +470,7 @@
                 <ion-item>
                   <ion-label>Operación de la empresa</ion-label>
                   <ion-icon slot="start" name="receipt-outline"></ion-icon>
-                  <ion-select name="operempr{{env.OPERACION_DE_LA_EMPRESA}}" #operempr="ngModel" required [(ngModel)]="selectedData.operempr" placeholder="Seleccionar" interface="action-sheet" cancelText="Cancelar" multiple="true">
+                  <ion-select name="operempr{{env.OPERACION_DE_LA_EMPRESA}}-" #operempr="ngModel" required [(ngModel)]="selectedData.operempr" placeholder="Seleccionar" interface="action-sheet" cancelText="Cancelar" multiple="true">
                     <ion-select-option value="colombia">Colombia</ion-select-option>
                     <ion-select-option value="sudamerica">Sudamérica</ion-select-option>
                     <ion-select-option value="centamer">Centro América y el Caribe</ion-select-option>

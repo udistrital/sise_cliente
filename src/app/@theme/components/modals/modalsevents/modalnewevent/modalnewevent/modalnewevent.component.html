@@ -32,14 +32,14 @@
       </ion-col>
 
       <ion-col size="6" style="text-align: center;">
-        <ion-label fixed style="width: 100%;">Inicia</ion-label>
+        <ion-label fixed style="width: 100%; margin-bottom: 1rem;">Inicia</ion-label>
         <ion-item>
-          <ion-datetime displayFormat="MMM DD, h:mm A" style="width: 100%; text-align: right;" locale="es-CO" id="FechaInicio" name="FechaInicio" #FechaInicio="ngModel" required [(ngModel)]="selectedEvent.FechaInicio"></ion-datetime>
+          <ion-datetime displayFormat="MMM DD, h:mm A" style="width: 100%; text-align: right;" id="FechaInicio" name="FechaInicio" #FechaInicio="ngModel" required [(ngModel)]="selectedEvent.FechaInicio"></ion-datetime>
         </ion-item>
       </ion-col>
 
       <ion-col size="6" style="text-align: center;">
-        <ion-label fixed style="width: 100%;">Termina</ion-label>
+        <ion-label fixed style="width: 100%; margin-bottom: 1rem;">Termina</ion-label>
         <ion-item>
           <ion-datetime locale="es-CO" id="FechaFin" style="width: 100%; text-align: right;" name="FechaFin" #FechaFin="ngModel" required [(ngModel)]="selectedEvent.FechaFin"></ion-datetime>
         </ion-item>

@@ -79,6 +79,7 @@ export class CreacioneventosComponent implements OnInit {
 
       this.eventos[index]['fin'] = new Date(evento.FechaFin).toISOString().replace(/T/, ' ').replace(/\..+/, '').slice(0, -9)
 
+      this.eventos[index]['tipo'] = evento.TipoSesion
       this.eventos[index]['descripcion'] = evento.Descripcion
       this.eventos[index]['lugar'] = evento.Lugar
       this.eventos[index]['id'] = evento.Id
@@ -98,8 +99,9 @@ export class CreacioneventosComponent implements OnInit {
   }
 
   async openEventModal(eventRow: any = null) {
-    // console.log('rowId')
-    // console.log(rowId)
+
+    console.log('eventRow', eventRow)
+
     const modal = await this.modalCtrl.create({
       component: ModalneweventComponent,
       keyboardClose: false,
@@ -110,18 +112,17 @@ export class CreacioneventosComponent implements OnInit {
       cssClass: 'fullscreen'
     });
 
-    // modal.onDidDismiss(() => {
-    //   // This will be executed after the modal is dismissed...
-    //   console.log('Hi...');
-    // });
-
     modal.onDidDismiss().then(async (data) => {
       console.log(data)
       await this.setEvents();
     });
 
     return await modal.present();
-    // this.modalService.openModal(ModalneweventComponent, 'modal-new-event', rowId);
+
+  }
+
+  async inactivateEvent(row:any){
+
   }
 
 }

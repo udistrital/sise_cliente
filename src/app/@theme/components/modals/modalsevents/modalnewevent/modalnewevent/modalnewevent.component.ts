@@ -37,18 +37,20 @@ export class ModalneweventComponent implements OnInit {
 
   async ngOnInit() {
 
+    
     if (this.eventRow && this.eventRow.Id) {
 
-      console.log('this.selectedEvent');
-      console.log(this.selectedEvent);
-      // console.log(this.eventRow);
       this.selectedEvent = this.eventRow; // cargar la tarea en el formulario para poder editar
+      // console.log('this.selectedEvent["FechaInicio"]', this.selectedEvent);
+      // console.log('this.eventRow["FechaInicio"]', this.eventRow);
+      this.selectedEvent["FechaInicio"] = new Date(this.eventRow.inicio).toISOString();
+      this.selectedEvent["FechaFin"] = new Date(this.eventRow.fin).toISOString();
+      const dataTipoEventos = await this.infoPersonalService.getInfoComplementariaTercero(environment.EVENTOS_ENDPOINT, `/tipo_sesion?limit=-1`).toPromise();
+      this.tipoeventos = dataTipoEventos
+      this.selectedEvent["TipoSesion"] = this.eventRow.tipo.Id.toString();
+      console.log('this.selectedEvent', this.selectedEvent);
     }
-
-
-    const dataTipoEventos = await this.infoPersonalService.getInfoComplementariaTercero(environment.EVENTOS_ENDPOINT, `/tipo_sesion?limit=-1`).toPromise();
-    this.tipoeventos = dataTipoEventos
-
+    
     // TRAER TERCEROS
     const terceros = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/tercero?fields=UsuarioWSO2,Id&limit=-1`).toPromise();
     // this.terceros = terceros
