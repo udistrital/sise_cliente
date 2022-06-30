@@ -19,6 +19,8 @@ import { AgmCoreModule } from '@agm/core';
 import { InfoPersonalService } from './@core/services/infopersonal.service';
 import { IonicSelectableModule } from 'ionic-selectable';
 // import NgxDatatableModule from '@swimlane/ngx-datatable';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,6 +31,7 @@ import { IonicSelectableModule } from 'ionic-selectable';
     FormsModule,
     IonicModule.forRoot(),
     CommonModule,
+    Ng2SmartTableModule,
     HttpClientModule,
     AppRoutingModule,
     ComponentsModule, NoopAnimationsModule, MatIconModule,

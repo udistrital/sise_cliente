@@ -7,8 +7,9 @@ import { environment } from '../../../../../../../environments/environment';
 import { CreacioneventosService } from '../../../../../../@core/services/creacioneventos.service';
 import { AlertService } from '../../../../../../@core/services/notify/alert.service';
 import { ToastService } from '../../../../../../@core/services/notify/toast.service';
-import { SelectableService } from 'src/app/@core/services/search/selectable.service';
-
+import { SelectableService } from '../../../../../../@core/services/search/selectable.service';
+import moment from 'moment';
+import { FuncsService } from '../../../../../../@core/services/funcs.service';
 @Component({
   selector: 'app-modalnewevent',
   templateUrl: './modalnewevent.component.html',
@@ -23,9 +24,9 @@ export class ModalneweventComponent implements OnInit {
   ports: any;
   roles: any
   userInfo: any
-  selectableUtils:any
+  selectableUtils: any
 
-  constructor(public modalService: ModalService, public toastService: ToastService, public alertService: AlertService, private readonly infoPersonalService: InfoPersonalService, private creacioneventosService: CreacioneventosService, private selectableService: SelectableService) {
+  constructor(public modalService: ModalService, public toastService: ToastService, public alertService: AlertService, private readonly infoPersonalService: InfoPersonalService, private creacioneventosService: CreacioneventosService, private selectableService: SelectableService, private funcsService: FuncsService) {
     this.selectableUtils = this.selectableService
     this.selectedEvent = new Event(); // iNICIALIZANDO VARIABLE CON UNA TAREA
 
@@ -37,81 +38,85 @@ export class ModalneweventComponent implements OnInit {
 
   async ngOnInit() {
 
-    
+    console.log('here');
+    console.log(this.eventRow)
+
+    const dataTipoEventos = await this.infoPersonalService.getInfoComplementariaTercero(environment.EVENTOS_ENDPOINT, `/tipo_evento?limit=-1`).toPromise();
+    this.tipoeventos = dataTipoEventos
+
     if (this.eventRow && this.eventRow.Id) {
 
-      this.selectedEvent = this.eventRow; // cargar la tarea en el formulario para poder editar
-      // console.log('this.selectedEvent["FechaInicio"]', this.selectedEvent);
-      // console.log('this.eventRow["FechaInicio"]', this.eventRow);
-      this.selectedEvent["FechaInicio"] = new Date(this.eventRow.inicio).toISOString();
-      this.selectedEvent["FechaFin"] = new Date(this.eventRow.fin).toISOString();
-      const dataTipoEventos = await this.infoPersonalService.getInfoComplementariaTercero(environment.EVENTOS_ENDPOINT, `/tipo_sesion?limit=-1`).toPromise();
-      this.tipoeventos = dataTipoEventos
-      this.selectedEvent["TipoSesion"] = this.eventRow.tipo.Id.toString();
+      this.selectedEvent = this.eventRow;
+      this.selectedEvent["TipoSesion"] = this.eventRow.TipoEventoId.Id.toString();
+
+      // this.selectedEvent["FechaInicio"] =  new Date(this.eventRow.Inicio).toString()
+      // this.selectedEvent["FechaFin"] = new Date(this.eventRow.Fin).toISOString();
+
+      // let fechaInicio = new Date(this.eventRow.Inicio).toISOString()
+      // console.log('fechaInicio')
+      // console.log(fechaInicio)
+      // fechaInicio = this.funcsService.isoStrToYYYYMMDDHHSS(fechaInicio)
+      this.selectedEvent["FechaInicio"] = this.eventRow.Inicio.split(' ').join('T')
+
+      // let fechaFin = new Date(this.eventRow.Fin).toISOString()
+      // fechaFin = this.funcsService.isoStrToYYYYMMDDHHSS(fechaFin)
+      this.selectedEvent["FechaFin"] = this.eventRow.Fin.split(' ').join('T')
+
       console.log('this.selectedEvent', this.selectedEvent);
     }
-    
+
     // TRAER TERCEROS
     const terceros = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/tercero?fields=UsuarioWSO2,Id&limit=-1`).toPromise();
-    // this.terceros = terceros
-    // TERCEROS_SERVICE + '/tercero'
-    // console.log(terceros)
-    let roles = [], userInfoArr = [], userInfo;
-    // if (terceros && terceros.length > 0) {
-    //   terceros.map(async tercero => {
-    //     if (tercero.UsuarioWSO2) {
-    //       let body = {
-    //         "user": tercero.UsuarioWSO2
-    //       }
-    //       userInfo = await this.infoPersonalService.traerUserInfo(environment.API_GET_IDENTIFICATION, body).toPromise();
-    //       roles = roles.concat(userInfo.role)
-    //       userInfoArr.push(userInfo)
-    //     }
-    //   })
+  }
 
-    //   this.roles = [...new Set(roles)]
-    //   console.log('this.roles')
-    //   console.log(this.roles)
-    // }
-
-    // console.log('this.roles')
-    // console.log(this.roles)
-
-    // console.log('terceros')
-    // console.log(this.terceros)
-    // console.log(terceros)
-    // TRAER ROLES
+  init_worked_time() {
+    this.selectedEvent.FechaInicio = moment().subtract(50, 'minute').format();
   }
 
   async submitEvent(form: NgForm) {
     console.log(form);
 
-    let { Descripcion, FechaInicio, FechaFin, Lugar, TipoSesion, Invitados } = form.value
+    let { Nombre, Descripcion, FechaInicio, FechaFin, Lugar, TipoSesion, Invitados } = form.value
 
-    // if(!Descripcion || !FechaInicio || !FechaFin || !Lugar || !TipoSesion || !Invitados){
+    console.log(' \n Nombre:' + Nombre, ' \nDescripcion:' + Descripcion, ' \nFechaInicio:' + FechaInicio, ' \nFechaFin:' + FechaFin, ' \nLugar:' + Lugar, ' \nTipoSesion:' + TipoSesion, Invitados)
+    // console.log(typeof FechaInicio)
 
-    // }
+    console.log(typeof FechaInicio);
+    // console.log(FechaInicio.toString())
+    // console.log(FechaFin.toString().split('T'))
+    // console.log(FechaFin.toString().split('T').join(' '))
 
-    console.log(' \nDescripcion:' + Descripcion, ' \nFechaInicio:' + FechaInicio, ' \nFechaFin:' + FechaFin, ' \nLugar:' + Lugar, ' \nTipoSesion:' + TipoSesion, Invitados)
-    console.log(typeof FechaInicio)
+    // let test = FechaInicio.toString().split('T').join(' ')
+    // console.log(this.funcsService.strToDateTime(test.toString()));
+    // console.log(this.funcsService.strToDateTime(test));
+    // console.log(this.funcsService.strToDateTime(FechaInicio.toString().split('T').join(' ')).toISOString());
+    // return;
 
     let res: any;
+
     let eventBody = {
       "Id": null,
+      "Nombre": Nombre,
       "Descripcion": Descripcion,
-      "Lugar": Lugar,
-      "FechaInicio": new Date(FechaInicio).toISOString(),
-      "FechaFin": new Date(FechaFin).toISOString(),
-      "TipoSesion": {
+      "EventoPadreId": null,
+      // "FechaInicio": this.funcsService.strToDateTimeWithoutSeconds(FechaInicio.split('T').join(' ')).toISOString(),
+      // "FechaFin": this.funcsService.strToDateTimeWithoutSeconds(FechaFin.split('T').join(' ')).toISOString(),
+      "FechaInicio": this.funcsService.strToDateTimeWithoutSeconds(FechaInicio.split('T').join(' ')).toISOString(),
+      "FechaFin": this.funcsService.strToDateTimeWithoutSeconds(FechaFin.split('T').join(' ')).toISOString(),
+      "Activo": true,
+      "TipoEventoId": {
         "Id": parseInt(TipoSesion)
-      }
+      },
+      "UbicacionId": 0,
+      "PosterUrl": ""
     }
+    // traer ubicaciones
 
     if (this.eventRow && this.eventRow.Id) {
-      const sesion = await this.infoPersonalService.getInfoComplementariaTercero(environment.EVENTOS_ENDPOINT, `/sesion/${this.eventRow.Id}`).toPromise();
+      const sesion = await this.infoPersonalService.getInfoComplementariaTercero(environment.EVENTOS_ENDPOINT, `/calendario_evento/${this.eventRow.Id}`).toPromise();
       eventBody["FechaCreacion"] = sesion.FechaCreacion
       eventBody["FechaModificacion"] = sesion.FechaModificacion
-      delete eventBody.Id
+      eventBody["Id"] = this.eventRow.Id
 
       res = await this.creacioneventosService.editEvent(eventBody, this.eventRow.Id).toPromise();
 

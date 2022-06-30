@@ -10,7 +10,7 @@
 <ion-content>
 
 
-  <ion-header style="margin-right: 4rem; margin-left: 2rem;" [translucent]="false">
+  <ion-header style="margin-right: 4rem; margin-left: 2rem; margin-bottom: 3rem;" [translucent]="false">
     <ion-toolbar style="display: flex; justify-content: space-between; margin-top: 2rem;">
       <ion-title style="float:left;">
         Eventos
@@ -22,44 +22,9 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-content [fullscreen]="false" class="scrollTable" style="height: 800px;overflow:auto;">
-    <ngx-datatable [scrollbarH]="true" [fullscreen]="true" class="eventTable material" [sorts]="[{prop: 'Id', dir: 'desc'}]" style="margin: 2rem; padding: 2rem;" [columnMode]="'force'" [limit]="7" [rows]="rows" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'" [sortable]="true">
-      <ngx-datatable-column name="Id"></ngx-datatable-column>
-      <ngx-datatable-column name="Descripcion"></ngx-datatable-column>
-      <ngx-datatable-column name="Inicio"></ngx-datatable-column>
-      <ngx-datatable-column name="Fin"></ngx-datatable-column>
-      <!-- <ngx-datatable-column name="Tipo"></ngx-datatable-column> -->
-      <!-- <ngx-datatable-column name="Tipo" style="visibility: hidden !important;">
-        <ng-template let-value="Id" ngx-datatable-cell-template>
-          {{Id}}
-        </ng-template>
-      </ngx-datatable-column> -->
-      <ngx-datatable-column name="Lugar"></ngx-datatable-column>
-      <ngx-datatable-column name="test" [resizeable]="false">
-        <ng-template ngx-datatable-header-template></ng-template>
-        <ng-template ngx-datatable-cell-template let-row="row">
-          <!-- (click)="open(row)" -->
-          <!-- <button ion-button small outline color="light">
-            Detalles
-          </button> -->
+  <ion-content [fullscreen]="false" class="scrollTable" style="height: 800px;overflow:auto; margin: 2rem; padding: 3rem;">
 
-          <ion-button *ngIf="isAdminSiseFlag ; else notAdmin" color="warning" (click)="openEventModal(row)">
-            <ion-icon name="create-outline"></ion-icon>
-          </ion-button>
-
-          <ion-button *ngIf="isAdminSiseFlag ; else notAdmin" color="danger" (click)="inactivateEvent(row)">
-            <ion-icon name="trash"></ion-icon>
-          </ion-button>
-
-          <ng-template #notAdmin>
-            <ion-button>
-              Inscribirme
-              <ion-icon name="calendar" slot="end"></ion-icon>
-            </ion-button>
-          </ng-template>
-        </ng-template>
-      </ngx-datatable-column>
-    </ngx-datatable>
+    <ng2-smart-table [settings]="settings" [source]="rows" (createConfirm)="onCreateConfirm($event)" (custom)="onCustomAction($event)"></ng2-smart-table>
   </ion-content>
 
 </ion-content>

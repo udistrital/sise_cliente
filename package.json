@@ -42,6 +42,8 @@
     "jquery": "3.6.0",
     "jquery-autocomplete": "1.2.8",
     "jquery-mapael": "2.2.0",
+    "moment": "^2.29.3",
+    "ng2-smart-table": "^1.7.2",
     "oidc-auth": "0.6.0",
     "raphael": "2.3.0",
     "rxjs": "7.5.4",

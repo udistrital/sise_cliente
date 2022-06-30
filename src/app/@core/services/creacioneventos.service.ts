@@ -11,10 +11,10 @@ export class CreacioneventosService {
   constructor(private readonly httpClient: HttpClient, private funcsService: FuncsService) { }
 
   createEvent(data) {
-    return this.httpClient.post(environment.EVENTOS_ENDPOINT + '/sesion', data, this.funcsService.openIDDefaultOptions())
+    return this.httpClient.post(environment.EVENTOS_ENDPOINT + '/calendario_evento', data, this.funcsService.openIDDefaultOptions())
   }
 
   editEvent(data, sesionId) {
-    return this.httpClient.put(environment.EVENTOS_ENDPOINT + '/sesion/' + sesionId, data, this.funcsService.openIDDefaultOptions())
+    return this.httpClient.put(environment.EVENTOS_ENDPOINT + '/calendario_evento/' + sesionId, data, this.funcsService.openIDDefaultOptions())
   }
 }

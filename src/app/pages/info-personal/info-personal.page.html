@@ -9,14 +9,15 @@
 
 <ion-content>
   <form #form="ngForm" #formElem (ngSubmit)="handleForm(form)">
-    <ion-card class="inicio">
+    <ion-card class="inicio"  style="margin-top:2rem;">
       <ion-card-header class="center">
-        <ion-avatar>
+        <!-- <ion-avatar>
           <img alt="avatar" src="./assets/avatar.png">
         </ion-avatar>
-        <ion-card-title>{{dataInfo?.NombreCompleto}}</ion-card-title>
+        <ion-card-title>{{dataInfo?.NombreCompleto}}</ion-card-title> -->
         <ion-card-subtitle class="subtitulo">Datos personales</ion-card-subtitle>
       </ion-card-header>
+
       <ion-grid>
         <ion-row>
           <ion-col>
