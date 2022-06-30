@@ -15,31 +15,39 @@ export class AlertService {
       subHeader: '10% of battery remaining',
       buttons: ['Dismiss']
     });
-    
+
     await alert.present();
   }
 
-  async presentConfirm() {
+  async presentConfirm(msg = '¿Estás seguro de la acción que quieres ejecutar?', subHeader = '') {
+
+    let choice
+
     let alert = await this.alertCtrl.create({
-      message: 'Confirm purchase',
-      subHeader: 'Do you want to buy this book?',
+      message: msg,
+      subHeader: subHeader,
       buttons: [
         {
-          text: 'Cancel',
+          text: 'Cancelar',
           role: 'cancel',
           handler: () => {
-            console.log('Cancel clicked');
+            return false
           }
         },
         {
-          text: 'Buy',
+          text: 'Confirmar',
           handler: () => {
-            console.log('Buy clicked');
+            return true
           }
         }
       ]
     });
+
     await alert.present();
+    await alert.onDidDismiss().then((data) => {
+      choice = data
+    })
+    return choice
   }
 
   async presentPrompt() {

@@ -7,6 +7,7 @@ import { InfoPersonalService } from '../../@core/services/infopersonal.service';
 import { Documento } from '../../@core/data/models/document';
 import { LoaderService } from '../../@core/services/notify/loader.service';
 import { TerceroService } from '../../@core/services/tercero/tercero.service';
+import { DataInfoTercero } from '../../@core/data/models/data_info_tercero';
 
 @Component({
   selector: 'app-info-laboral',
@@ -24,7 +25,8 @@ export class InfoLaboralPage implements OnInit {
   env: any
   attr: any
   sessionTerceroID: any
-  test: any
+  dataInfo: DataInfoTercero = new DataInfoTercero();
+  // test: any
 
   constructor(
     private readonly infoPersonalService: InfoPersonalService,
@@ -33,9 +35,9 @@ export class InfoLaboralPage implements OnInit {
   ) {
     this.selectedData = new InfoLaboral();
     this.env = environment.INFO_COMPLEMENTARIA_IDS
-    this.test = [
-      "probecon", "probcult"
-    ]
+    // this.test = [
+    //   "probecon", "probcult"
+    // ]
   }
 
   async ngOnInit() {
@@ -54,6 +56,7 @@ export class InfoLaboralPage implements OnInit {
 
     const data = await this.infoPersonalService.getInformationByDocument(environment.DATOS_IDENTIFICACION_TERCERO_ENDPOINT, documento).toPromise()
 
+    this.dataInfo.NombreCompleto = data[0].TerceroId.NombreCompleto as string;
     this.sessionTerceroID = data[0].TerceroId.Id as number;
 
     // SETEO DE VALORES DE LOS CAMPOS
@@ -92,7 +95,9 @@ export class InfoLaboralPage implements OnInit {
 
     Object.assign({}, this.selectedData, fieldsData)
 
-    loader.dismiss()
+    setTimeout(() => {
+      loader.dismiss()
+    }, 1000);
   }
 
   onChange(selectValue, id) {

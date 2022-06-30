@@ -7,17 +7,19 @@ import { CreacioneventosComponent } from './creacioneventos.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CreacioneventosService } from '../../@core/services/creacioneventos.service';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { Ng2SmartTableModule } from 'ng2-smart-table';
 
 @NgModule({
+  declarations: [CreacioneventosComponent],
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     CreacioneventosPageRoutingModule,
     HttpClientModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+    Ng2SmartTableModule
   ],
-  declarations: [CreacioneventosComponent],
   providers: [CreacioneventosService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

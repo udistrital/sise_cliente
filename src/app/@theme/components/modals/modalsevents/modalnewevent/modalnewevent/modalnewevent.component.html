@@ -24,7 +24,15 @@
     <!-- <ion-input *ngIf="eventRow.Id;" hidden type="text" id="Id" name="Id" #Id="ngModel"  required [(ngModel)]="selectedEvent.Id" class="border-0 border-none"></ion-input> -->
 
     <ion-row class="ion-justify-content-center ion-padding-horizontal">
-      <ion-col size="12" class="ion-margin-vertical">
+
+      <ion-col size="6" class="ion-margin-vertical">
+        <ion-item lines="full">
+          <ion-label position="floating">Nombre</ion-label>
+          <ion-input type="text" id="Nombre" name="Nombre" #Nombre="ngModel" required [(ngModel)]="selectedEvent.Nombre" class="border-0 border-none"></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="6" class="ion-margin-vertical">
         <ion-item lines="full">
           <ion-label position="floating">Descripción</ion-label>
           <ion-input type="text" id="Descripcion" name="Descripcion" #Descripcion="ngModel" required [(ngModel)]="selectedEvent.Descripcion" class="border-0 border-none"></ion-input>
@@ -32,16 +40,22 @@
       </ion-col>
 
       <ion-col size="6" style="text-align: center;">
-        <ion-label fixed style="width: 100%; margin-bottom: 1rem;">Inicia</ion-label>
-        <ion-item>
-          <ion-datetime displayFormat="MMM DD, h:mm A" style="width: 100%; text-align: right;" id="FechaInicio" name="FechaInicio" #FechaInicio="ngModel" required [(ngModel)]="selectedEvent.FechaInicio"></ion-datetime>
+        <!-- <ion-label fixed style="width: 100%; margin-bottom: 1rem;">Inicia</ion-label> -->
+        <ion-item lines="full">
+          <ion-label position="floating">Inicio</ion-label>
+          <ion-input type="datetime-local" id="FechaInicio" name="FechaInicio" #FechaInicio="ngModel" required [(ngModel)]="selectedEvent.FechaInicio" class="border-0 border-none"></ion-input>
+          <!-- <ion-datetime displayFormat='YYYY-MM-DD HH:mm'  (tap)="init_worked_time()"
+          pickerFormat='YYYY-MM-DD HH:mm' style="width: 100%; text-align: right;" id="FechaInicio" name="FechaInicio" #FechaInicio="ngModel" required [(ngModel)]="selectedEvent.FechaInicio"></ion-datetime> -->
         </ion-item>
       </ion-col>
+      <!-- MMM DD, h:mm A -->
 
       <ion-col size="6" style="text-align: center;">
-        <ion-label fixed style="width: 100%; margin-bottom: 1rem;">Termina</ion-label>
-        <ion-item>
-          <ion-datetime locale="es-CO" id="FechaFin" style="width: 100%; text-align: right;" name="FechaFin" #FechaFin="ngModel" required [(ngModel)]="selectedEvent.FechaFin"></ion-datetime>
+        <!-- <ion-label fixed style="width: 100%; margin-bottom: 1rem;">Termina</ion-label> -->
+        <ion-item lines="full">
+          <ion-label position="floating">Culminación</ion-label>
+          <ion-input type="datetime-local" id="FechaFin" name="FechaFin" #FechaFin="ngModel" required [(ngModel)]="selectedEvent.FechaFin" class="border-0 border-none"></ion-input>
+          <!-- <ion-datetime locale="es-CO"  displayFormat="MMM DD, h:mm A"  id="FechaFin" style="width: 100%; text-align: right;" name="FechaFin" #FechaFin="ngModel" required [(ngModel)]="selectedEvent.FechaFin"></ion-datetime> -->
         </ion-item>
       </ion-col>
 

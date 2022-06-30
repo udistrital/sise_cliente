@@ -1,28 +1,31 @@
 export class Event {
   Id: string;
   Activo: boolean;
+  Nombre: string;
   Descripcion: string;
   Invitados: any;
   InvitadosEspecificos: any;
   FechaInicio: string;
   FechaFin: string;
-  TipoSesion: string;
+  TipoSesion: any;
   Lugar: string;
 
   constructor(
     Id = '',
     Activo = true,
+    Nombre = '',
     Descripcion = '',
     Invitados = [],
     InvitadosEspecificos = [],
     FechaInicio = '',
-    TipoSesion = '',
+    TipoSesion = 0,
     FechaFin = '',
     Lugar = '',
   ) {
 
     this.Id = Id
     this.Activo = Activo
+    this.Nombre = Nombre
     this.Descripcion = Descripcion
     this.Invitados = Invitados
     this.InvitadosEspecificos = InvitadosEspecificos

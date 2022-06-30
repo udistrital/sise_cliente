@@ -48,6 +48,15 @@
           </ion-list>
         </ion-menu-toggle>
 
+        <ion-menu-toggle auto-hide="false">
+          <ion-list>
+            <ion-item menuclose [hidden]="!isRemainder" [routerLink]="['/info-empresarial']" menuClose class="sub-menu pointer">
+              <ion-icon name="bulb-outline" slot="start"></ion-icon>
+              Emprendimiento
+            </ion-item>
+          </ion-list>
+        </ion-menu-toggle>
+
         <!-- <ion-menu-toggle auto-hide="false">
           <ion-list>
             <ion-item menuclose [hidden]="!isRemainder" [routerLink]="['/info-empresarial']" menuClose class="sub-menu pointer">
