@@ -10,6 +10,7 @@ import { ToastService } from '../../../../../../@core/services/notify/toast.serv
 import { SelectableService } from '../../../../../../@core/services/search/selectable.service';
 import moment from 'moment';
 import { FuncsService } from '../../../../../../@core/services/funcs.service';
+import { LoaderService } from '../../../../../../@core/services/notify/loader.service';
 @Component({
   selector: 'app-modalnewevent',
   templateUrl: './modalnewevent.component.html',
@@ -26,7 +27,7 @@ export class ModalneweventComponent implements OnInit {
   userInfo: any
   selectableUtils: any
 
-  constructor(public modalService: ModalService, public toastService: ToastService, public alertService: AlertService, private readonly infoPersonalService: InfoPersonalService, private creacioneventosService: CreacioneventosService, private selectableService: SelectableService, private funcsService: FuncsService) {
+  constructor(public modalService: ModalService, public toastService: ToastService, public alertService: AlertService, private readonly infoPersonalService: InfoPersonalService, private creacioneventosService: CreacioneventosService, private selectableService: SelectableService, private funcsService: FuncsService, private loaderService: LoaderService) {
     this.selectableUtils = this.selectableService
     this.selectedEvent = new Event(); // iNICIALIZANDO VARIABLE CON UNA TAREA
 
@@ -37,7 +38,7 @@ export class ModalneweventComponent implements OnInit {
   }
 
   async ngOnInit() {
-
+    let loader = await this.loaderService.presentLoading('Cargando')
     console.log('here');
     console.log(this.eventRow)
 
@@ -48,25 +49,16 @@ export class ModalneweventComponent implements OnInit {
 
       this.selectedEvent = this.eventRow;
       this.selectedEvent["TipoSesion"] = this.eventRow.TipoEventoId.Id.toString();
-
-      // this.selectedEvent["FechaInicio"] =  new Date(this.eventRow.Inicio).toString()
-      // this.selectedEvent["FechaFin"] = new Date(this.eventRow.Fin).toISOString();
-
-      // let fechaInicio = new Date(this.eventRow.Inicio).toISOString()
-      // console.log('fechaInicio')
-      // console.log(fechaInicio)
-      // fechaInicio = this.funcsService.isoStrToYYYYMMDDHHSS(fechaInicio)
       this.selectedEvent["FechaInicio"] = this.eventRow.Inicio.split(' ').join('T')
-
-      // let fechaFin = new Date(this.eventRow.Fin).toISOString()
-      // fechaFin = this.funcsService.isoStrToYYYYMMDDHHSS(fechaFin)
       this.selectedEvent["FechaFin"] = this.eventRow.Fin.split(' ').join('T')
 
       console.log('this.selectedEvent', this.selectedEvent);
     }
 
     // TRAER TERCEROS
-    const terceros = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/tercero?fields=UsuarioWSO2,Id&limit=-1`).toPromise();
+    // const terceros = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/tercero?fields=UsuarioWSO2,Id&limit=-1`).toPromise();
+    loader.dismiss()
+
   }
 
   init_worked_time() {
@@ -74,23 +66,24 @@ export class ModalneweventComponent implements OnInit {
   }
 
   async submitEvent(form: NgForm) {
+    let loader = await this.loaderService.presentLoading('Enviando')
+
     console.log(form);
 
     let { Nombre, Descripcion, FechaInicio, FechaFin, Lugar, TipoSesion, Invitados } = form.value
 
-    console.log(' \n Nombre:' + Nombre, ' \nDescripcion:' + Descripcion, ' \nFechaInicio:' + FechaInicio, ' \nFechaFin:' + FechaFin, ' \nLugar:' + Lugar, ' \nTipoSesion:' + TipoSesion, Invitados)
-    // console.log(typeof FechaInicio)
+    console.log(' \n Nombre:' + Nombre, ' \nDescripcion:' + Descripcion, ' \nFechaInicio:' + FechaInicio, ' \nFechaFin:' + FechaFin, ' \nLugar:' + Lugar, ' \nTipoSesion:' + TipoSesion, ' \nPoster:' + this.selectedEvent.Poster);
 
     console.log(typeof FechaInicio);
-    // console.log(FechaInicio.toString())
-    // console.log(FechaFin.toString().split('T'))
-    // console.log(FechaFin.toString().split('T').join(' '))
 
-    // let test = FechaInicio.toString().split('T').join(' ')
-    // console.log(this.funcsService.strToDateTime(test.toString()));
-    // console.log(this.funcsService.strToDateTime(test));
-    // console.log(this.funcsService.strToDateTime(FechaInicio.toString().split('T').join(' ')).toISOString());
-    // return;
+    let media;
+    if (this.selectedEvent.Poster) {
+      console.log(this.selectedEvent.Poster)
+      media = await this.funcsService.imageUpload(this.selectedEvent.Poster, {
+        preset_name: 'events',
+        cloud_name: 'sise'
+      });
+    }
 
     let res: any;
 
@@ -99,8 +92,6 @@ export class ModalneweventComponent implements OnInit {
       "Nombre": Nombre,
       "Descripcion": Descripcion,
       "EventoPadreId": null,
-      // "FechaInicio": this.funcsService.strToDateTimeWithoutSeconds(FechaInicio.split('T').join(' ')).toISOString(),
-      // "FechaFin": this.funcsService.strToDateTimeWithoutSeconds(FechaFin.split('T').join(' ')).toISOString(),
       "FechaInicio": this.funcsService.strToDateTimeWithoutSeconds(FechaInicio.split('T').join(' ')).toISOString(),
       "FechaFin": this.funcsService.strToDateTimeWithoutSeconds(FechaFin.split('T').join(' ')).toISOString(),
       "Activo": true,
@@ -108,9 +99,14 @@ export class ModalneweventComponent implements OnInit {
         "Id": parseInt(TipoSesion)
       },
       "UbicacionId": 0,
-      "PosterUrl": ""
     }
-    // traer ubicaciones
+
+    if (this.selectedEvent.Poster && media)
+      eventBody["PosterUrl"] = media[0].url
+    else {
+      const sesion = await this.infoPersonalService.getInfoComplementariaTercero(environment.EVENTOS_ENDPOINT, `/calendario_evento/${this.eventRow.Id}`).toPromise();
+      eventBody["PosterUrl"] = sesion.PosterUrl
+    }
 
     if (this.eventRow && this.eventRow.Id) {
       const sesion = await this.infoPersonalService.getInfoComplementariaTercero(environment.EVENTOS_ENDPOINT, `/calendario_evento/${this.eventRow.Id}`).toPromise();
@@ -129,10 +125,16 @@ export class ModalneweventComponent implements OnInit {
 
     console.log(res)
     this.dismissModal('modal-new-event')
-
+    loader.dismiss()
   }
 
   dismissModal(modalId: any) {
     this.modalService.dismiss(modalId);
+  }
+
+  getPoster(e) {
+    console.log(e.target.files);
+    console.log(e.target.files[0]);
+    this.selectedEvent.Poster = e.target.files;
   }
 }
