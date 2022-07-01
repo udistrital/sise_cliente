@@ -37,6 +37,14 @@
   overflow-y: inherit !important;
 }
 
+.posterImg:hover, .posterImg:active{
+  position: fixed;
+  width: 40rem;
+  right: 14rem;
+  bottom: 3rem;
+  z-index: 10000;
+}
+
 ion-item.item:hover a {
   background-color: slategray;
   box-shadow: inset 0px 0px 0px 1px red;

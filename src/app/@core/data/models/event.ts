@@ -9,6 +9,7 @@ export class Event {
   FechaFin: string;
   TipoSesion: any;
   Lugar: string;
+  Poster: any;
 
   constructor(
     Id = '',
@@ -21,6 +22,7 @@ export class Event {
     TipoSesion = 0,
     FechaFin = '',
     Lugar = '',
+    Poster = '',
   ) {
 
     this.Id = Id
@@ -33,5 +35,6 @@ export class Event {
     this.TipoSesion = TipoSesion
     this.FechaFin = FechaFin
     this.Lugar = Lugar
+    this.Poster = Poster
   }
 }

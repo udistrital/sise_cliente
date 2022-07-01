@@ -39,6 +39,14 @@ ion-modal.fullscreen {
   display: inherit;
 }
 
+.posterImg:hover, .posterImg:active{
+  position: fixed;
+  width: 40rem;
+  right: 14rem;
+  bottom: 3rem;
+  z-index: 10000;
+}
+
 @import "~@swimlane/ngx-datatable/index.css";
 @import "~@swimlane/ngx-datatable/themes/material.scss";
 @import "~@swimlane/ngx-datatable/assets/icons.css";

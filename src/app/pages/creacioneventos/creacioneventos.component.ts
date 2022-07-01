@@ -130,11 +130,18 @@ export class CreacioneventosComponent implements OnInit {
           valuePrepareFunction: (data) => {
             return data.Nombre;
           },
-          Lugar: {
-            title: 'Lugar',
-            editable: false,
-            addable: false,
-          },
+        },
+        Lugar: {
+          title: 'Lugar',
+          editable: false,
+          addable: false,
+        },
+        PosterUrl: {
+          title: 'Poster',
+          editable: false,
+          addable: false,
+          type: 'html',
+          valuePrepareFunction: (picture: string) => { return `<img width="50px" class="posterImg" style="display:flex; justify-content: center; text-align-center;" src="${picture}" />`; },
         },
         // Fin: {
         //   title: 'Fin'
@@ -182,12 +189,13 @@ export class CreacioneventosComponent implements OnInit {
       let fechaFin = new Date(evento.FechaFin).toISOString()
       this.eventos[index]['Fin'] = this.funcsService.isoStrToYYYYMMDDHHSSNormal(fechaFin)
 
+      this.eventos[index]['PosterUrl'] = evento.PosterUrl
       this.eventos[index]['tipo'] = evento.TipoSesion
       this.eventos[index]['descripcion'] = evento.Descripcion
       this.eventos[index]['lugar'] = evento.Lugar
       this.eventos[index]['id'] = evento.Id
     })
-    
+
     this.rows = this.eventos
   }
 

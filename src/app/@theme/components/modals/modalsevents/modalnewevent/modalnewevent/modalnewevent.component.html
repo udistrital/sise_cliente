@@ -20,7 +20,7 @@
     </ion-col>
   </ion-row>
 
-  <form #newEventForm="ngForm" (ngSubmit)="submitEvent(newEventForm)">
+  <form #newEventForm="ngForm" (ngSubmit)="submitEvent(newEventForm)" enctype="multipart/form-data">
     <!-- <ion-input *ngIf="eventRow.Id;" hidden type="text" id="Id" name="Id" #Id="ngModel"  required [(ngModel)]="selectedEvent.Id" class="border-0 border-none"></ion-input> -->
 
     <ion-row class="ion-justify-content-center ion-padding-horizontal">
@@ -77,7 +77,14 @@
         </ion-item>
       </ion-col>
 
-      <ion-col size="6" class="ion-margin-vertical">
+      <ion-col size="12" class="ion-margin-vertical">
+        <ion-item>
+          <ion-label>Poster | Pieza Grafica</ion-label>
+          <input type="file" id="Poster" name="Poster" required class="border-0 border-none" (change)="getPoster($event)"/>
+        </ion-item>
+      </ion-col>
+
+      <!-- <ion-col size="6" class="ion-margin-vertical">
         <ion-item lines="full">
           <ion-label position="floating">Invitados por rol</ion-label>
           <ion-icon slot="start" name="people-outline"></ion-icon>
@@ -91,25 +98,10 @@
         <ion-item lines="full">
           <ion-label position="floating">Invitados especificos</ion-label>
           <ion-icon slot="start" name="people-outline"></ion-icon>
-          <!-- item-content  -->
-          <!-- (onChange)="specificGuestsChange($event)" -->
           <ionic-selectable item-content [isMultiple]="true" [canSearch]="true" id="InvitadosEspecificos" name="InvitadosEspecificos" #InvitadosEspecificos="ngModel" (onChange)="this.selectableUtils.specificGuestsChange($event)" required [(ngModel)]="selectedEvent.InvitadosEspecificos" [items]="terceros" itemValueField="Id" itemTextField="UsuarioWSO2" (onSearch)="this.selectableUtils.searchTerceros($event)">
           </ionic-selectable>
         </ion-item>
-      </ion-col>
-
-      <!-- <ion-item>
-        <ion-label>Port</ion-label>
-        <ionic-selectable
-          item-content // Required for Ionic 3 only.
-          required [(ngModel)]="port"
-          [items]="ports"
-          itemValueField="id"
-          itemTextField="name"
-          [canSearch]="true"
-          (onChange)="portChange($event)">
-        </ionic-selectable>
-      </ion-item> -->
+      </ion-col> -->
     </ion-row>
 
     <ion-row class="ion-justify-content-center ion-text-center">
