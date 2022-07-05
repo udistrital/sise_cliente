@@ -21,6 +21,7 @@ export class ModalneweventComponent implements OnInit {
 
   selectedEvent: Event
   tipoeventos: any
+  ubicaciones: any
   terceros: any
   ports: any;
   roles: any
@@ -38,12 +39,15 @@ export class ModalneweventComponent implements OnInit {
   }
 
   async ngOnInit() {
-    let loader = await this.loaderService.presentLoading('Cargando')
+    // let loader = await this.loaderService.presentLoading('Cargando')
     console.log('here');
     console.log(this.eventRow)
 
     const dataTipoEventos = await this.infoPersonalService.getInfoComplementariaTercero(environment.EVENTOS_ENDPOINT, `/tipo_evento?limit=-1`).toPromise();
     this.tipoeventos = dataTipoEventos
+
+    const ubicaciones = await this.infoPersonalService.getInfoComplementariaTercero(environment.API_ENDPOINT_UBICACIONES, `/tipo_lugar?limit=-1`).toPromise();
+    this.ubicaciones = ubicaciones
 
     if (this.eventRow && this.eventRow.Id) {
 
@@ -57,7 +61,7 @@ export class ModalneweventComponent implements OnInit {
 
     // TRAER TERCEROS
     // const terceros = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/tercero?fields=UsuarioWSO2,Id&limit=-1`).toPromise();
-    loader.dismiss()
+    // loader.dismiss()
 
   }
 
