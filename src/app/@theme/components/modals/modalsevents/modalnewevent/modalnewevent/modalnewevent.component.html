@@ -61,7 +61,11 @@
 
       <ion-col size="6" class="ion-margin-vertical">
         <ion-item lines="full">
-          <ion-label position="floating">Lugar</ion-label>
+          <ion-label position="floating">Tipo de lugar</ion-label>
+
+          <!-- <ion-select interface="action-sheet" id="TipoLugar" name="TipoLugar" #TipoLugar="ngModel" required [(ngModel)]="selectedEvent.TipoLugar">
+            <ion-select-option *ngFor="let ubicacion of ubicaciones" value="{{ubicacion.Id}}">{{ubicacion.Nombre}}</ion-select-option>
+          </ion-select> -->
           <!-- <ion-icon name="location-outline"></ion-icon> -->
           <ion-input type="text" id="Lugar" name="Lugar" #Lugar="ngModel" required [(ngModel)]="selectedEvent.Lugar" class="border-0 border-none"></ion-input>
         </ion-item>
@@ -80,7 +84,7 @@
       <ion-col size="12" class="ion-margin-vertical">
         <ion-item>
           <ion-label>Poster | Pieza Grafica</ion-label>
-          <input type="file" id="Poster" name="Poster" required class="border-0 border-none" (change)="getPoster($event)"/>
+          <input type="file" id="Poster" name="Poster" required class="border-0 border-none" (change)="getPoster($event)" />
         </ion-item>
       </ion-col>
 
@@ -116,7 +120,7 @@
           </ion-button>
         </ng-template>
 
-        <ion-button color="primary" type="submit" (click)="dismissModal('modal-new-event')">
+        <ion-button color="primary" type="button" (click)="dismissModal('modal-new-event')">
           <ion-icon name="close-outline"></ion-icon> Cancelar
         </ion-button>
       </ion-col>
