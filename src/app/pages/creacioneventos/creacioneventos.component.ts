@@ -13,6 +13,8 @@ import { fromEvent } from 'rxjs';
 import { map, debounceTime } from 'rxjs/operators';
 import { CreacioneventosService } from '../../@core/services/creacioneventos.service';
 import { FuncsService } from '../../@core/services/funcs.service';
+import { SimpleComponent } from '../../@theme/components/enlargeImg/simple/simple/simple.component';
+// import { SimpleComponent } from '../../@theme/components/enlargeImg/simple/simple/simple.component';
 
 @Component({
   selector: 'app-creacioneventos',
@@ -102,6 +104,7 @@ export class CreacioneventosComponent implements OnInit {
           title: 'Id',
           editable: false,
           addable: false,
+          sortDirection: 'desc'
         },
         Nombre: {
           title: 'Nombre',
@@ -140,8 +143,20 @@ export class CreacioneventosComponent implements OnInit {
           title: 'Poster',
           editable: false,
           addable: false,
-          type: 'html',
-          valuePrepareFunction: (picture: string) => { return `<img width="50px" class="posterImg" style="display:flex; justify-content: center; text-align-center;" src="${picture}" />`; },
+          // type: 'html',
+          type: 'custom',
+          valuePrepareFunction: (picture) => 
+          {
+            return picture 
+          },
+          renderComponent: SimpleComponent
+          //   // return `<img width="50px" class="posterImg" style="display:flex; justify-content: center; text-align-center;" src="${picture}" />`; 
+
+          //   return `<app-simple></app-simple>`; 
+          // },
+          // <app-simple></app-simple>
+          // renderComponent: <SimpleComponent />
+          // renderComponent: <app-simple></app-simple>
         },
         // Fin: {
         //   title: 'Fin'
