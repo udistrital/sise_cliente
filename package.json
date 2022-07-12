@@ -1,6 +1,5 @@
 {
   "name": "sise_cliente",
-  "version": "0.0.1",
   "author": "Ionic Framework",
   "homepage": "https://ionicframework.com/",
   "scripts": {
@@ -17,10 +16,11 @@
     "@agm/core": "1.1.0",
     "@angular/animations": "14.0.5",
     "@angular/cdk": "14.0.4",
+    "@angular/cli": "14.0.5",
     "@angular/common": "14.0.5",
     "@angular/core": "14.0.5",
     "@angular/forms": "14.0.5",
-    "@angular/material": "^14.0.4",
+    "@angular/material": "14.0.4",
     "@angular/platform-browser": "14.0.5",
     "@angular/platform-browser-dynamic": "14.0.5",
     "@angular/router": "14.0.5",
@@ -43,25 +43,21 @@
     "jquery": "3.6.0",
     "jquery-autocomplete": "1.2.8",
     "jquery-mapael": "2.2.0",
-    "moment": "^2.29.4",
-    "ng2-smart-table": "^1.7.2",
+    "moment": "2.29.4",
+    "ng2-smart-table": "1.7.2",
     "oidc-auth": "0.6.0",
     "raphael": "2.3.0",
     "rxjs": "7.5.6",
     "sweetalert2": "11.4.20",
     "ts-md5": "1.2.11",
     "tslib": "2.4.0",
-    "zone.js": "0.11.6"
-  },
-  "devDependencies": {
+    "zone.js": "0.11.6",
     "@angular-devkit/build-angular": "14.0.5",
-    "@angular/cli": "14.0.5",
     "@angular/compiler": "14.0.5",
     "@angular/compiler-cli": "14.0.5",
     "@angular/language-service": "14.0.5",
     "@capacitor/cli": "3.6.0",
     "@ionic/angular-toolkit": "6.1.0",
-    "@types/googlemaps": "3.39.12",
     "@types/jasmine": "4.0.3",
     "@types/jasminewd2": "2.0.10",
     "@types/node": "18.0.3",
@@ -76,7 +72,7 @@
     "protractor": "7.0.0",
     "ts-node": "10.8.2",
     "tslint": "6.1.0",
-    "typescript": "^3.1.6"
+    "typescript": "3.1.6"
   },
   "description": "An Ionic project"
 }
