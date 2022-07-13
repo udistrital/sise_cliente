@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ModalService } from '../../../../../../@core/services/notify/modal.service';
 import { Event } from '../../../../../../@core/data/models/event';
@@ -11,17 +11,21 @@ import { SelectableService } from '../../../../../../@core/services/search/selec
 import moment from 'moment';
 import { FuncsService } from '../../../../../../@core/services/funcs.service';
 import { LoaderService } from '../../../../../../@core/services/notify/loader.service';
+// import { IonicSelectableComponent } from 'ionic-selectable';
+import { MatSelectModule } from '@angular/material/select';
 @Component({
   selector: 'app-modalnewevent',
   templateUrl: './modalnewevent.component.html',
   styleUrls: ['./modalnewevent.component.scss'],
 })
+
 export class ModalneweventComponent implements OnInit {
   @Input("eventRow") eventRow;
 
   selectedEvent: Event
   tipoeventos: any
   ubicaciones: any
+  ubicacionesTiposLugar: any
   terceros: any
   ports: any;
   roles: any
@@ -39,30 +43,29 @@ export class ModalneweventComponent implements OnInit {
   }
 
   async ngOnInit() {
-    // let loader = await this.loaderService.presentLoading('Cargando')
-    console.log('here');
-    console.log(this.eventRow)
 
     const dataTipoEventos = await this.infoPersonalService.getInfoComplementariaTercero(environment.EVENTOS_ENDPOINT, `/tipo_evento?limit=-1`).toPromise();
     this.tipoeventos = dataTipoEventos
 
-    const ubicaciones = await this.infoPersonalService.getInfoComplementariaTercero(environment.API_ENDPOINT_UBICACIONES, `/tipo_lugar?limit=-1`).toPromise();
-    this.ubicaciones = ubicaciones
+    const ubicacionesTiposLugar = await this.infoPersonalService.getInfoComplementariaTercero(environment.API_ENDPOINT_UBICACIONES, `tipo_lugar?limit=-1`).toPromise();
+
+    console.log(ubicacionesTiposLugar)
+    this.ubicacionesTiposLugar = ubicacionesTiposLugar
+
 
     if (this.eventRow && this.eventRow.Id) {
 
       this.selectedEvent = this.eventRow;
+      this.selectedEvent["TipoLugar"] = this.eventRow.TipoEventoId
       this.selectedEvent["TipoSesion"] = this.eventRow.TipoEventoId.Id.toString();
       this.selectedEvent["FechaInicio"] = this.eventRow.Inicio.split(' ').join('T')
       this.selectedEvent["FechaFin"] = this.eventRow.Fin.split(' ').join('T')
-
-      console.log('this.selectedEvent', this.selectedEvent);
     }
 
-    // TRAER TERCEROS
-    // const terceros = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/tercero?fields=UsuarioWSO2,Id&limit=-1`).toPromise();
-    // loader.dismiss()
+  }
 
+  setLocationsList(locationType: any) {
+    console.log(locationType)
   }
 
   init_worked_time() {

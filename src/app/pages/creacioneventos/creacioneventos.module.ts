@@ -8,9 +8,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { CreacioneventosService } from '../../@core/services/creacioneventos.service';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { SimpleComponent } from '../../@theme/components/enlargeImg/simple/simple/simple.component';
 
 @NgModule({
-  declarations: [CreacioneventosComponent],
+  declarations: [CreacioneventosComponent, SimpleComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -18,7 +19,7 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     CreacioneventosPageRoutingModule,
     HttpClientModule,
     NgxDatatableModule,
-    Ng2SmartTableModule
+    Ng2SmartTableModule,
   ],
   providers: [CreacioneventosService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

@@ -339,7 +339,7 @@
               <ion-icon slot="start" name="call"></ion-icon>
               <ion-input type="text" maxlength="6" required name="CodigoPais{{env.CODIGO_DEL_PAIS}}" #CodigoPais="ngModel" required [(ngModel)]="selectedData.CodigoPais"></ion-input>
 
-              <!-- <ionic-selectable item-content [items]="testSelectableData" [canSearch]="true"  itemValueField="Id" itemTextField="UsuarioWSO2"   id="CodigoPais" name="CodigoPais" #CodigoPais="ngModel" (onChange)="selectableUtils.specificGuestsChange($event)" required [(ngModel)]="selectedData.CodigoPais"  (onSearch)="selectableUtils.searchTerceros($event)">
+              <!-- <ionic-selectable item-content [items]="testSelectableData" [canSearch]="true"  itemValueField="Id" itemTextField="UsuarioWSO2"   id="CodigoPais" name="CodigoPais" #CodigoPais="ngModel" (onChange)="selectableUtils.specificGuestsChange($event)" required [(ngModel)]="selectedData.CodigoPais"  (onSearch)="this.selectableUtils.searchIonSelectable($event,terceros,'UsuarioWSO2')">
               </ionic-selectable> -->
             </ion-item>
           </ion-col>

@@ -63,11 +63,35 @@
         <ion-item lines="full">
           <ion-label position="floating">Tipo de lugar</ion-label>
 
-          <!-- <ion-select interface="action-sheet" id="TipoLugar" name="TipoLugar" #TipoLugar="ngModel" required [(ngModel)]="selectedEvent.TipoLugar">
-            <ion-select-option *ngFor="let ubicacion of ubicaciones" value="{{ubicacion.Id}}">{{ubicacion.Nombre}}</ion-select-option>
+          
+
+          <!-- <ion-select interface="action-sheet" id="TipoLugar" name="TipoLugar" #TipoLugar="ngModel" required [(ngModel)]="selectedEvent.TipoLugar" >
+            <ion-select-option *ngFor="let ubicaciontipos of ubicacionesTiposLugar" value="{{ubicaciontipos.Id}}" (ionChange)="setLocationsList(selectedEvent.TipoLugar)">{{ubicaciontipos.Nombre}}</ion-select-option>
           </ion-select> -->
+
+          <!-- <ionic-selectable  [canSearch]="true" id="TipoLugar" name="TipoLugar" #TipoLugar="ngModel" (onChange)="this.selectableUtils.specificGuestsChange($event)" required [(ngModel)]="selectedEvent.TipoLugar" [items]="ubicacionesTiposLugar" itemValueField="Id" itemTextField="Nombre" (onSearch)="this.selectableUtils.searchIonSelectable($event, ubicacionesTiposLugar, 'Nombre')" #ubicacionesTiposLugarComponent>
+
+            <ng-template ionicSelectableItemTemplate let-test="item">
+     
+            </ng-template>
+
+          </ionic-selectable> -->
+
+          <!-- <mat-form-field>
+            <mat-select  placeholder="Seleccione..." #singleSelect>
+              <mat-option>
+                <ngx-mat-select-search></ngx-mat-select-search>
+              </mat-option>
+        
+              <mat-option *ngFor="let ubicacion of ubicacionesTiposLugar | async" id="TipoLugar" name="TipoLugar" #TipoLugar="ngModel" (onChange)="this.selectableUtils.specificGuestsChange($event)" required [(ngModel)]="selectedEvent.TipoLugar"
+              #ubicacionesTiposLugarComponent>
+                {{ubicacion.Nombre}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field> -->
+
           <!-- <ion-icon name="location-outline"></ion-icon> -->
-          <ion-input type="text" id="Lugar" name="Lugar" #Lugar="ngModel" required [(ngModel)]="selectedEvent.Lugar" class="border-0 border-none"></ion-input>
+          <!-- <ion-input type="text" id="Lugar" name="Lugar" #Lugar="ngModel" required [(ngModel)]="selectedEvent.Lugar" class="border-0 border-none"></ion-input> -->
         </ion-item>
       </ion-col>
 
@@ -75,7 +99,7 @@
         <ion-item lines="full">
           <ion-label position="floating">Tipo</ion-label>
           <!-- <ion-icon slot="start" name="people-outline"></ion-icon> -->
-          <ion-select interface="action-sheet" id="TipoSesion" name="TipoSesion" #TipoSesion="ngModel" required [(ngModel)]="selectedEvent.TipoSesion">
+          <ion-select interface="action-sheet" id="TipoSesion" item-content name="TipoSesion" #TipoSesion="ngModel" required [(ngModel)]="selectedEvent.TipoSesion">
             <ion-select-option *ngFor="let tipoevento of tipoeventos" value="{{tipoevento.Id}}">{{tipoevento.Nombre}}</ion-select-option>
           </ion-select>
         </ion-item>
@@ -102,7 +126,7 @@
         <ion-item lines="full">
           <ion-label position="floating">Invitados especificos</ion-label>
           <ion-icon slot="start" name="people-outline"></ion-icon>
-          <ionic-selectable item-content [isMultiple]="true" [canSearch]="true" id="InvitadosEspecificos" name="InvitadosEspecificos" #InvitadosEspecificos="ngModel" (onChange)="this.selectableUtils.specificGuestsChange($event)" required [(ngModel)]="selectedEvent.InvitadosEspecificos" [items]="terceros" itemValueField="Id" itemTextField="UsuarioWSO2" (onSearch)="this.selectableUtils.searchTerceros($event)">
+          <ionic-selectable item-content [isMultiple]="true" [canSearch]="true" id="InvitadosEspecificos" name="InvitadosEspecificos" #InvitadosEspecificos="ngModel" (onChange)="this.selectableUtils.specificGuestsChange($event)" required [(ngModel)]="selectedEvent.InvitadosEspecificos" [items]="terceros" itemValueField="Id" itemTextField="UsuarioWSO2" (onSearch)="this.selectableUtils.searchIonSelectable($event,terceros,'UsuarioWSO2')">
           </ionic-selectable>
         </ion-item>
       </ion-col> -->

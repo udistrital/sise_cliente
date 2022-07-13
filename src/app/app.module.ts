@@ -17,16 +17,12 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
 import { AgmCoreModule } from '@agm/core';
 import { InfoPersonalService } from './@core/services/infopersonal.service';
-import { IonicSelectableModule } from 'ionic-selectable';
-// import NgxDatatableModule from '@swimlane/ngx-datatable';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
-
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
-    IonicSelectableModule,
     BrowserModule,
     FormsModule,
     IonicModule.forRoot(),
@@ -38,7 +34,6 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     AgmCoreModule.forRoot({
       apiKey: environment.MAPSKEY
     }),
-    // NgxDatatableModule
   ],
   providers: [
     StatusBar,

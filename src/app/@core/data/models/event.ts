@@ -9,7 +9,7 @@ export class Event {
   FechaFin: string;
   TipoSesion: any;
   Lugar: string;
-  TipoLugar: string;
+  TipoLugar: any;
   Poster: any;
 
   constructor(

@@ -19,19 +19,19 @@ export class SelectableService {
     console.log('VALUE SELECTABLE:', event.value);
   }
 
-  filterTerceros(terceros: any[], text: string) {
-    console.log(terceros)
-    return terceros.filter(tercero => {
-      return tercero.UsuarioWSO2.toLowerCase().indexOf(text) !== -1 ||
-        tercero.UsuarioWSO2.toLowerCase().indexOf(text) !== -1 ||
-        tercero.Id.toString().toLowerCase().indexOf(text) !== -1;
+  filterTerceros(data: any[], text: string, fieldTextKey:string) {
+    console.log(data)
+    return data.filter(dato => {
+      return dato[fieldTextKey].toLowerCase().indexOf(text) !== -1 ||
+        dato[fieldTextKey].toLowerCase().indexOf(text) !== -1 ||
+        dato.Id.toString().toLowerCase().indexOf(text) !== -1;
     });
   }
 
-  searchTerceros(event: {
+  searchIonSelectable(event: {
     component: IonicSelectableComponent,
     text: string
-  }) {
+  }, dataApi, fieldTextKey) {
     console.log(event)
     let text = event.text.trim().toLowerCase();
     event.component.startSearch();
@@ -52,14 +52,14 @@ export class SelectableService {
       return;
     }
 
-    this.tercerosSubscription = this.terceroService.getTercerosAsync().subscribe(terceross => {
-      // Subscription will be closed when unsubscribed manually.
-      if (this.tercerosSubscription.closed) {
-        return;
-      }
+    // this.tercerosSubscription = this.terceroService.getTercerosAsync().subscribe(terceross => {
+    // Subscription will be closed when unsubscribed manually.
+    // if (this.tercerosSubscription.closed) {
+    //   return;
+    // }
 
-      event.component.items = this.filterTerceros(terceross, text);
-      event.component.endSearch();
-    });
+    event.component.items = this.filterTerceros(dataApi, text, fieldTextKey);
+    event.component.endSearch();
+    // });
   }
 }
