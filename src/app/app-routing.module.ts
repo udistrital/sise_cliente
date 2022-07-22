@@ -39,11 +39,7 @@ const routes: Routes = [
   {
     path: 'localizacion',
     loadChildren: () => import('./pages/localizacion/localizacion.module').then(m => m.LocalizacionPageModule)
-  },
-  {
-    path: 'map',
-    loadChildren: () => import('./pages/map/map.module').then(m => m.MapPageModule)
-  },
+  }
 ];
 
 @NgModule({

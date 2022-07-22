@@ -70,7 +70,19 @@ export class InfoAcademicaPage implements OnInit {
     // Seteo de posgrados UD
     const posgrados = await this.infoPersonalService.getInfoComplementariaTercero(environment.OIKOS_SERVICE, `dependencia?query=DependenciaTipoDependencia.TipoDependenciaId.Id:${environment.OIKOS_POSGRADOS_ID}&limit=-1`).toPromise();
 
-    this.posgradosUD = posgrados
+    let posgradosArr = []
+
+    posgrados.forEach(posgrado => {
+      posgradosArr.push({
+        Id: posgrado.Id,
+        Nombre: posgrado.Nombre
+          .charAt(0)
+          .toUpperCase()
+          .concat(posgrado.Nombre.toLowerCase().substring(1, posgrado.Nombre.length))
+      })
+    })
+
+    this.posgradosUD = posgradosArr
     // TipoDependenciaId
     await this.setValueFields();
 

@@ -13,6 +13,7 @@ import { InfoPersonal } from '../../@core/data/models/info_personal_tercero';
 import { SelectableService } from '../../@core/services/search/selectable.service';
 import codigospaisesconcdn from '../../../assets/paises/codigospaisesconcdn.json';
 import { TerceroService } from '../../@core/services/tercero/tercero.service';
+import { ToastService } from '../../@core/services/notify/toast.service';
 
 @Component({
   selector: 'app-info-personal',
@@ -48,7 +49,8 @@ export class InfoPersonalPage implements OnInit {
     private selectableService: SelectableService,
     private terceroHerlper: TerceroHerlper,
     private readonly infoPersonalService: InfoPersonalService,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    public toastService: ToastService,
   ) {
     this.testSelectableData = [
       { id: 1, name: 'Tokai' },
@@ -117,7 +119,22 @@ export class InfoPersonalPage implements OnInit {
 
     // Setear generos
     let maritalStatus = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria/?query=GrupoInfoComplementariaId.Id:${environment.GRUPO_INFO_COMPLEMENTARIA_IDS.ESTADO_CIVIL}` + `&fields=Id,Nombre`).toPromise();
-    this.arrMaritalStatus = maritalStatus
+
+
+    let civilStatusArr = []
+
+    maritalStatus.forEach(civilStatus => {
+      civilStatusArr.push({
+        Id: civilStatus.Id,
+        Nombre: civilStatus.Nombre
+          .charAt(0)
+          .toUpperCase()
+          .concat(civilStatus.Nombre.toLowerCase().substring(1, civilStatus.Nombre.length))
+          .replace(/UnIon/ig,"Unión")
+      })
+    })
+
+    this.arrMaritalStatus = civilStatusArr
 
     // Setear Municipios
     let municipalities = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria/?query=GrupoInfoComplementariaId.Id:${environment.GRUPO_INFO_COMPLEMENTARIA_IDS.MUNICIPIOS}` + `&fields=Id,Nombre`).toPromise();
@@ -241,7 +258,7 @@ export class InfoPersonalPage implements OnInit {
         let fieldName = node.name.replace(numsGuion, '').trim()
         if (!fieldName || ["TipoIdentificacion", "NumeroDocumento", "Genero", "FechaNacimiento"].includes(fieldName)) return false;
 
-        console.log('fieldName',fieldName);
+        console.log('fieldName', fieldName);
 
         let icID = node.name.match(onlyNumsRegex)
         icID = icID && icID.length > 0 && icID[0] ? parseInt(icID[0]) : null
@@ -410,6 +427,7 @@ export class InfoPersonalPage implements OnInit {
     });
 
     loader.dismiss()
+    this.toastService.presentToast("Información personal actualizada con exito ✅")
     await this.setValueFields();
   }
 }

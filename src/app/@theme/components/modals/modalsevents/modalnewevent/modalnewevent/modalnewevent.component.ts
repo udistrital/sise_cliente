@@ -13,6 +13,8 @@ import { FuncsService } from '../../../../../../@core/services/funcs.service';
 import { LoaderService } from '../../../../../../@core/services/notify/loader.service';
 // import { IonicSelectableComponent } from 'ionic-selectable';
 import { MatSelectModule } from '@angular/material/select';
+declare var $: any;
+
 @Component({
   selector: 'app-modalnewevent',
   templateUrl: './modalnewevent.component.html',
@@ -26,13 +28,34 @@ export class ModalneweventComponent implements OnInit {
   tipoeventos: any
   ubicaciones: any
   ubicacionesTiposLugar: any
+  paisesTiposLugar: any
+  ciudadesTiposLugar: any
+  localidadesTiposLugar: any
+  dptosTiposLugar: any
   terceros: any
   ports: any;
   roles: any
   userInfo: any
   selectableUtils: any
+  selectedCar: number;
 
-  constructor(public modalService: ModalService, public toastService: ToastService, public alertService: AlertService, private readonly infoPersonalService: InfoPersonalService, private creacioneventosService: CreacioneventosService, private selectableService: SelectableService, private funcsService: FuncsService, private loaderService: LoaderService) {
+  cars = [
+    { id: 1, name: 'Volvo' },
+    { id: 2, name: 'Saab' },
+    { id: 3, name: 'Opel' },
+    { id: 4, name: 'Audi' },
+  ];
+
+  constructor(
+    public modalService: ModalService,
+    public toastService: ToastService,
+    public alertService: AlertService,
+    private readonly infoPersonalService: InfoPersonalService,
+    private creacioneventosService: CreacioneventosService,
+    private selectableService: SelectableService,
+    private funcsService: FuncsService,
+    private loaderService: LoaderService,
+  ) {
     this.selectableUtils = this.selectableService
     this.selectedEvent = new Event(); // iNICIALIZANDO VARIABLE CON UNA TAREA
 
@@ -44,14 +67,21 @@ export class ModalneweventComponent implements OnInit {
 
   async ngOnInit() {
 
-    const dataTipoEventos = await this.infoPersonalService.getInfoComplementariaTercero(environment.EVENTOS_ENDPOINT, `/tipo_evento?limit=-1`).toPromise();
+    let loader = await this.loaderService.presentLoading('Cargando formulario de eventos 📅')
+
+    const dataTipoEventos = await this.infoPersonalService
+      .getInfoComplementariaTercero(environment.EVENTOS_ENDPOINT, `/tipo_evento?limit=-1`)
+      .toPromise();
+
     this.tipoeventos = dataTipoEventos
 
-    const ubicacionesTiposLugar = await this.infoPersonalService.getInfoComplementariaTercero(environment.API_ENDPOINT_UBICACIONES, `tipo_lugar?limit=-1`).toPromise();
+    $('#TipoLugar').val("")
 
-    console.log(ubicacionesTiposLugar)
+    const ubicacionesTiposLugar = await this.infoPersonalService
+      .getInfoComplementariaTercero(environment.API_ENDPOINT_UBICACIONES, `tipo_lugar?limit=-1`)
+      .toPromise();
+
     this.ubicacionesTiposLugar = ubicacionesTiposLugar
-
 
     if (this.eventRow && this.eventRow.Id) {
 
@@ -61,6 +91,8 @@ export class ModalneweventComponent implements OnInit {
       this.selectedEvent["FechaInicio"] = this.eventRow.Inicio.split(' ').join('T')
       this.selectedEvent["FechaFin"] = this.eventRow.Fin.split(' ').join('T')
     }
+
+    loader.dismiss()
 
   }
 
@@ -143,5 +175,22 @@ export class ModalneweventComponent implements OnInit {
     console.log(e.target.files);
     console.log(e.target.files[0]);
     this.selectedEvent.Poster = e.target.files;
+  }
+
+  async validateEventPlace() {
+    console.log(this.selectedEvent.TipoLugar)
+    console.log($("#TipoLugarDataList option[value='" + $('#TipoLugar').val() + "']").attr('data-id'));
+    this.selectedEvent.TipoLugar = $("#TipoLugarDataList option[value='" + $('#TipoLugar').val() + "']").attr('data-id')
+
+    if(this.selectedEvent.TipoLugar == 2){
+      console.log('2 ciudades');
+      // const ciudadesTiposLugar = await this.infoPersonalService
+      // .getInfoComplementariaTercero(environment.API_ENDPOINT_UBICACIONES, `lugar?limit=-1&TipoLugarId.Id=${this.selectedEvent.TipoLugar}`)
+      // .toPromise();
+
+      // console.log('ciudadesTiposLugar', ciudadesTiposLugar);
+
+      // this.ciudadesTiposLugar = ciudadesTiposLugar
+    }
   }
 }

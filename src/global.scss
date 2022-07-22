@@ -28,7 +28,7 @@
 // @import '~@swimlane/ngx-datatable/index.css';
 // @import '~@swimlane/ngx-datatable/themes/material.scss';
 // @import '~@swimlane/ngx-datatable/assets/icons.css';
-@import "~@ng-select/ng-select/themes/default.theme.css";
+// @import "~@ng-select/ng-select/themes/default.theme.css";
 
 .pointer{
   cursor: pointer !important;
@@ -50,4 +50,10 @@
 ion-item.item:hover a {
   background-color: slategray;
   box-shadow: inset 0px 0px 0px 1px red;
+}
+
+.select2-container {
+  position: fixed !important;
+  top: auto !important;
+  left: auto !important;
 }

@@ -9,7 +9,7 @@
 
 <ion-content>
   <form #form="ngForm" #formElem (ngSubmit)="handleForm(form)">
-    <ion-card class="inicio"  style="margin-top:2rem;">
+    <ion-card class="inicio" style="margin-top:2rem;">
       <ion-card-header class="center">
         <!-- <ion-avatar>
           <img alt="avatar" src="./assets/avatar.png">
@@ -22,7 +22,7 @@
         <ion-row>
           <ion-col>
             <ion-item lines="center">
-              <ion-label position="floating">Tipo de identificacion</ion-label>
+              <ion-label position="floating">Tipo de identificación</ion-label>
               <ion-icon slot="start" src='data:image/svg+xml;utf8,<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
           viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
        <g>
@@ -108,7 +108,7 @@
           </ion-col>
           <ion-col>
             <ion-item lines="full">
-              <ion-label position="floating">Numero de documento</ion-label>
+              <ion-label position="floating">Número de documento</ion-label>
               <ion-icon slot="start" src='data:image/svg+xml;utf8,<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
           viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
        <g>
@@ -196,9 +196,9 @@
         <ion-row>
           <ion-col>
             <ion-item lines="full">
-              <ion-label position="floating">Genero</ion-label>
+              <ion-label position="floating">Género</ion-label>
               <ion-icon slot="start" name="people-outline"></ion-icon>
-              <ion-input disabled="true" id="Genero" name="Genero"  #Genero="ngModel" required [(ngModel)]="selectedData.Genero"></ion-input>
+              <ion-input disabled="true" id="Genero" name="Genero" #Genero="ngModel" required [(ngModel)]="selectedData.Genero"></ion-input>
             </ion-item>
           </ion-col>
 
@@ -232,7 +232,7 @@
         <ion-row>
           <ion-col>
             <ion-item>
-              <ion-label>Estrato socioeconomico</ion-label>
+              <ion-label>Estrato socioeconómico</ion-label>
               <ion-icon slot="start" src='data:image/svg+xml;utf8,<svg height="496pt" viewBox="0 0 496 496" width="496pt" xmlns="http://www.w3.org/2000/svg"><path d="m319.144531 197.976562c5.457031-5.746093 8.855469-13.457031 8.855469-21.976562 0-17.648438-14.351562-32-32-32s-32 14.351562-32 32c0 8.542969 3.414062 16.273438 8.886719 22.015625-5.445313 3-10.285157 7.039063-14.246094 11.945313-3.34375-1.191407-6.886719-1.960938-10.640625-1.960938s-7.296875.769531-10.640625 1.960938c-3.953125-4.90625-8.800781-8.945313-14.246094-11.945313 5.472657-5.742187 8.886719-13.472656 8.886719-22.015625 0-17.648438-14.351562-32-32-32s-32 14.351562-32 32c0 8.519531 3.398438 16.230469 8.855469 21.976562-14.808594 8.183594-24.855469 23.945313-24.855469 42.023438v40c0 4.414062 3.574219 8 8 8h42.800781c-1.777343 5.015625-2.800781 10.382812-2.800781 16v40c0 4.414062 3.574219 8 8 8h80c4.425781 0 8-3.585938 8-8v-40c0-5.617188-1.023438-10.984375-2.800781-16h42.800781c4.425781 0 8-3.585938 8-8v-40c0-18.078125-10.046875-33.839844-24.855469-42.023438zm-39.144531-21.976562c0-8.824219 7.175781-16 16-16s16 7.175781 16 16-7.175781 16-16 16-16-7.175781-16-16zm-16 64c0 8.824219-7.175781 16-16 16s-16-7.175781-16-16 7.175781-16 16-16 16 7.175781 16 16zm-80-64c0-8.824219 7.175781-16 16-16s16 7.175781 16 16-7.175781 16-16 16-16-7.175781-16-16zm-16 96v-32c0-17.648438 14.351562-32 32-32 9.296875 0 18.03125 4.128906 24.046875 11-4.941406 5.632812-8.046875 12.929688-8.046875 21 0 8.519531 3.398438 16.230469 8.855469 21.976562-4.726563 2.617188-8.945313 6.03125-12.527344 10.023438zm112 64h-64v-32c0-17.648438 14.351562-32 32-32s32 14.351562 32 32zm48-64h-44.320312c-3.582032-3.992188-7.800782-7.40625-12.527344-10.023438 5.449218-5.746093 8.847656-13.457031 8.847656-21.976562 0-8.070312-3.105469-15.367188-8.046875-21 6.015625-6.871094 14.75-11 24.046875-11 17.648438 0 32 14.351562 32 32zm0 0"/><path d="m64 80v16c17.648438 0 32-14.351562 32-32h-16c0 8.824219-7.175781 16-16 16zm0 0"/><path d="m64 448v16c17.648438 0 32-14.351562 32-32h-16c0 8.824219-7.175781 16-16 16zm0 0"/><path d="m432 368c-14.769531 0-28.335938 5.070312-39.183594 13.503906l-20.695312-20.695312c27.160156-29.847656 43.878906-69.367188 43.878906-112.808594s-16.71875-82.960938-43.871094-112.816406l20.695313-20.695313c10.839843 8.441407 24.40625 13.511719 39.175781 13.511719 35.289062 0 64-28.710938 64-64s-28.710938-64-64-64-64 28.710938-64 64c0 14.769531 5.070312 28.335938 13.503906 39.183594l-20.695312 20.695312c-29.847656-27.167968-69.367188-43.878906-112.808594-43.878906s-82.960938 16.710938-112.816406 43.871094l-20.695313-20.695313c8.441407-10.839843 13.511719-24.40625 13.511719-39.175781 0-35.289062-28.710938-64-64-64s-64 28.710938-64 64 28.710938 64 64 64c14.769531 0 28.335938-5.070312 39.183594-13.503906l20.695312 20.695312c-27.160156 29.847656-43.878906 69.367188-43.878906 112.808594s16.71875 82.960938 43.871094 112.816406l-20.695313 20.695313c-10.839843-8.441407-24.40625-13.511719-39.175781-13.511719-35.289062 0-64 28.710938-64 64s28.710938 64 64 64 64-28.710938 64-64c0-14.769531-5.070312-28.335938-13.503906-39.183594l20.695312-20.695312c29.847656 27.167968 69.367188 43.878906 112.808594 43.878906s82.960938-16.710938 112.816406-43.871094l20.695313 20.695313c-8.441407 10.839843-13.511719 24.40625-13.511719 39.175781 0 35.289062 28.710938 64 64 64s64-28.710938 64-64-28.710938-64-64-64zm0-352c26.472656 0 48 21.527344 48 48s-21.527344 48-48 48-48-21.527344-48-48 21.527344-48 48-48zm-368 96c-26.472656 0-48-21.527344-48-48s21.527344-48 48-48 48 21.527344 48 48-21.527344 48-48 48zm0 368c-26.472656 0-48-21.527344-48-48s21.527344-48 48-48 48 21.527344 48 48-21.527344 48-48 48zm32-232c0-83.816406 68.183594-152 152-152s152 68.183594 152 152-68.183594 152-152 152-152-68.183594-152-152zm336 232c-26.472656 0-48-21.527344-48-48s21.527344-48 48-48 48 21.527344 48 48-21.527344 48-48 48zm0 0"/><path d="m464 64h-16c0 8.824219-7.175781 16-16 16v16c17.648438 0 32-14.351562 32-32zm0 0"/><path d="m432 448v16c17.648438 0 32-14.351562 32-32h-16c0 8.824219-7.175781 16-16 16zm0 0"/></svg>'>
               </ion-icon>
               <ion-select placeholder="Seleccionar" interface="popover" id="Estrato" name="Estrato{{env.ESTRATO}}" #Estrato="ngModel" required [(ngModel)]="selectedData.Estrato">
@@ -248,10 +248,12 @@
 
           <ion-col>
             <ion-item>
-              <ion-label>Estado civil</ion-label>
+              <ion-label>Estado cívil</ion-label>
               <ion-icon slot="start" name="person-outline"></ion-icon>
-              <ion-select placeholder="Seleccione..." id="EstadoCivil" name="EstadoCivil{{env.ESTADO_CIVIL}}"   #EstadoCivil="ngModel" required [(ngModel)]="selectedData.EstadoCivil" interface="popover" value="{{selectedData?.EstadoCivil}}">
-                <ion-select-option *ngFor="let maritalStatus of arrMaritalStatus" value="{{maritalStatus.Id}}">{{maritalStatus.Nombre}}</ion-select-option>
+              <ion-select placeholder="Seleccione..." id="EstadoCivil" name="EstadoCivil{{env.ESTADO_CIVIL}}" #EstadoCivil="ngModel" required [(ngModel)]="selectedData.EstadoCivil" interface="popover" value="{{selectedData?.EstadoCivil}}">
+                <ion-select-option *ngFor="let maritalStatus of arrMaritalStatus" value="{{maritalStatus.Id}}">
+                  {{maritalStatus.Nombre}}
+                </ion-select-option>
               </ion-select>
             </ion-item>
           </ion-col>
@@ -261,13 +263,13 @@
               <ion-label>Tipo de población</ion-label>
               <ion-icon slot="start" name="person-outline"></ion-icon>
               <ion-select multiple="true" okText="Ok" cancelText="Cancelar" placeholder="Seleccione..." interface="popover" id="TipoPoblacion" name="TipoPoblacion{{env.TIPO_DE_POBLACION}}-" #TipoPoblacion="ngModel" required [(ngModel)]="selectedData.TipoPoblacion">
-                <ion-select-option value="NINGUNO" id="NINGUNO">NINGUNO</ion-select-option>
-                <ion-select-option value="PUEBLO INDIGENA" id="PUEBLO INDIGENA">PUEBLO INDÍGENA</ion-select-option>
-                <ion-select-option value="POBLACION AFROCOLOMBIANA" id="POBLACION AFROCOLOMBIANA">POBLACIÓN AFROCOLOMBIANA</ion-select-option>
-                <ion-select-option value="POBLACION RAIZAL" id="POBLACION RAIZAL">POBLACIÓN RAIZAL</ion-select-option>
-                <ion-select-option value="PUEBLO PALENQUERO" id="PUEBLO PALENQUERO">PUEBLO PALENQUERO</ion-select-option>
-                <ion-select-option value="PUEBLO ROM (GITANO)" id="PUEBLO ROM (GITANO)">PUEBLO ROM (GITANO)</ion-select-option>
-                <ion-select-option value="VÍCTIMA DEL CONFLICTO ARMADO" id="VÍCTIMA DEL CONFLICTO ARMADO">VÍCTIMA DEL CONFLICTO ARMADO</ion-select-option>
+                <ion-select-option value="NINGUNO" id="NINGUNO">Ninguno</ion-select-option>
+                <ion-select-option value="PUEBLO INDIGENA" id="PUEBLO INDIGENA">Pueblo indígena</ion-select-option>
+                <ion-select-option value="POBLACION AFROCOLOMBIANA" id="POBLACION AFROCOLOMBIANA">Población afrocolombiana</ion-select-option>
+                <ion-select-option value="POBLACION RAIZAL" id="POBLACION RAIZAL">Población raizal</ion-select-option>
+                <ion-select-option value="PUEBLO PALENQUERO" id="PUEBLO PALENQUERO">Pueblo palenquero</ion-select-option>
+                <ion-select-option value="PUEBLO ROM (GITANO)" id="PUEBLO ROM (GITANO)">Pueblo rom (gitano)</ion-select-option>
+                <ion-select-option value="VÍCTIMA DEL CONFLICTO ARMADO" id="VÍCTIMA DEL CONFLICTO ARMADO">Víctima del conflicto armado</ion-select-option>
               </ion-select>
             </ion-item>
           </ion-col>
@@ -275,15 +277,15 @@
             <ion-item>
               <ion-label>Condiciones de discapacidad</ion-label>
               <ion-icon slot="start" name="person-outline"></ion-icon>
-              <ion-select placeholder="Seleccione..." interface="popover" multiple="true" okText="Ok" cancelText="Cancelar" name="CondicionesDiscapacidad{{env.CONDICIONES_DISCAPACIDAD}}-" id="CondicionesDiscapacidad"  #CondicionesDiscapacidad="ngModel" required [(ngModel)]="selectedData.CondicionesDiscapacidad">
-                <ion-select-option value="NINGUNA" id="NINGUNA">NINGUNA</ion-select-option>
-                <ion-select-option value="AUDITIVA" id="AUDITIVA">AUDITIVA</ion-select-option>
-                <ion-select-option value="VISUAL" id="VISUAL">VISUAL</ion-select-option>
-                <ion-select-option value="SORDOCEGUERA" id="SORDOCEGUERA">SORDOCEGUERA</ion-select-option>
-                <ion-select-option value="FÍSICA" id="FÍSICA">FÍSICA</ion-select-option>
-                <ion-select-option value="MULTIPLE" id="MULTIPLE">MULTIPLE</ion-select-option>
-                <ion-select-option value="COGNITIVA" id="COGNITIVA">COGNITIVA</ion-select-option>
-                <ion-select-option value="PSICOSOCIAL" id="PSICOSOCIAL">PSICOSOCIAL</ion-select-option>
+              <ion-select placeholder="Seleccione..." interface="popover" multiple="true" okText="Ok" cancelText="Cancelar" name="CondicionesDiscapacidad{{env.CONDICIONES_DISCAPACIDAD}}-" id="CondicionesDiscapacidad" #CondicionesDiscapacidad="ngModel" required [(ngModel)]="selectedData.CondicionesDiscapacidad">
+                <ion-select-option value="NINGUNA" id="NINGUNA">Ninguna</ion-select-option>
+                <ion-select-option value="AUDITIVA" id="AUDITIVA">Auditiva</ion-select-option>
+                <ion-select-option value="VISUAL" id="VISUAL">Visual</ion-select-option>
+                <ion-select-option value="SORDOCEGUERA" id="SORDOCEGUERA">Sordoceguera</ion-select-option>
+                <ion-select-option value="FÍSICA" id="FÍSICA">Física</ion-select-option>
+                <ion-select-option value="MULTIPLE" id="MULTIPLE">Múltiple</ion-select-option>
+                <ion-select-option value="COGNITIVA" id="COGNITIVA">Cognitiva</ion-select-option>
+                <ion-select-option value="PSICOSOCIAL" id="PSICOSOCIAL">Psicosocial</ion-select-option>
               </ion-select>
             </ion-item>
           </ion-col>
@@ -301,7 +303,7 @@
             <ion-item lines="full">
               <ion-label position="floating">Correo institucional</ion-label>
               <ion-icon slot="start" name="at"></ion-icon>
-              <ion-input disabled="true" id="CorreoInstitucional" name="CorreoInstitucional{{env.CORREO_INSTITUCIONAL}}"  #CorreoInstitucional="ngModel" required [(ngModel)]="selectedData.CorreoInstitucional"></ion-input>
+              <ion-input disabled="true" id="CorreoInstitucional" name="CorreoInstitucional{{env.CORREO_INSTITUCIONAL}}" #CorreoInstitucional="ngModel" required [(ngModel)]="selectedData.CorreoInstitucional"></ion-input>
             </ion-item>
           </ion-col>
 
@@ -643,7 +645,7 @@
           </ion-col>
           <ion-col>
             <ion-item lines="full">
-              <ion-label position="floating">Direccion de residencia</ion-label>
+              <ion-label position="floating">Dirección de residencia</ion-label>
               <ion-icon slot="start" name="home-outline"></ion-icon>
               <ion-input type="text" required id="DireccionResidencia" name="DireccionResidencia{{env.DIRECCION_RESIDENCIA}}" #DireccionResidencia="ngModel" required [(ngModel)]="selectedData.DireccionResidencia"></ion-input>
             </ion-item>
@@ -662,9 +664,10 @@
               <ion-label position="floating">Intereses</ion-label>
               <ion-icon slot="start" name="happy-outline"></ion-icon>
               <ion-select placeholder="Seleccionar" name="Intereses{{env.INTERESES}}-" interface="popover" multiple="true" okText="Ok" cancelText="Cancelar" id="Intereses" name="Intereses" #Intereses="ngModel" required [(ngModel)]="selectedData.Intereses">
-                <ion-select-option value="inv">Investigacion</ion-select-option>
+                <ion-select-option value="inv">Investigación</ion-select-option>
+                <ion-select-option value="gru">Grupo de interés</ion-select-option>
                 <ion-select-option value="emp">Emprendimiento</ion-select-option>
-                <ion-select-option value="edu">Educacion</ion-select-option>
+                <ion-select-option value="edu">Educación</ion-select-option>
                 <ion-select-option value="empl">Empleabilidad</ion-select-option>
               </ion-select>
             </ion-item>

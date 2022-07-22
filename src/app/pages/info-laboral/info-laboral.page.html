@@ -21,8 +21,8 @@
 
     <form #form="ngForm" #formElem (ngSubmit)="handleForm(form)">
       <ion-grid style="overflow-x: auto; width: 100%;">
-        <ion-row>
-          <ion-col>
+        <ion-row size="12" style="width: 100%;">
+          <ion-col size="12">
             <ion-item lines="full">
               <ion-label position="floating ion-text-center">Situación laboral</ion-label>
               <ion-icon slot="start" name="business-outline"></ion-icon>
@@ -37,12 +37,12 @@
             </ion-item>
           </ion-col>
 
-          <ion-row [hidden]="this.selectedData.SituacionLaboral != 'conemple'">
+          <ion-row size="12" style="width: 100%;" [hidden]="this.selectedData.SituacionLaboral != 'conemple'">
 
-            <ion-col>
+            <ion-col size="12">
               <ion-item lines="full">
                 <ion-label position="floating">¿Cuánto tiempo (en meses) lleva en esta actividad o trabajo?</ion-label>
-                <ion-icon slot="start" name="reader-outline"></ion-icon>
+                
                 <ion-input type="text" name="TiempoActividad{{env.CUNTO_TIEMPO_EN_MESES_LLEVA_EN_ESTA_ACTIVIDAD_O_TRABAJO}}" #TiempoActividad="ngModel" required [(ngModel)]="selectedData.TiempoActividad"></ion-input>
               </ion-item>
             </ion-col>
@@ -57,10 +57,10 @@
               </h1>
             </ion-text>
 
-            <ion-col>
+            <ion-col size="12">
               <ion-item lines="full">
                 <ion-label position="floating">Ingreso o salario (Satisfacción laboral)</ion-label>
-                <ion-icon slot="start" name="reader-outline"></ion-icon>
+                
                 <ion-range name="satisala{{env.INGRESO_O_SALARIO_SATISFACCION_LABORAL}}" #satisala="ngModel" required [(ngModel)]="selectedData.satisala" min="1" max="4" step="1" snaps color="primary" snaps="true" pin="true">
                   <ion-icon slot="start" name="close-outline"></ion-icon>
                   <ion-icon slot="end" name="checkmark-outline"></ion-icon>
@@ -68,7 +68,7 @@
               </ion-item>
             </ion-col>
 
-            <ion-col>
+            <ion-col size="12">
               <ion-item lines="full">
                 <ion-label position="floating">Cantidad de horas (Satisfacción laboral)</ion-label>
                 <ion-icon slot="start" name="people-outline"></ion-icon>
@@ -79,7 +79,7 @@
               </ion-item>
             </ion-col>
 
-            <ion-col>
+            <ion-col size="12">
               <ion-item lines="full">
                 <ion-label position="floating">Aplicación de conocimientos de la carrera (Satisfacción laboral)</ion-label>
                 <ion-icon slot="start" name="receipt-outline"></ion-icon>
@@ -90,7 +90,7 @@
               </ion-item>
             </ion-col>
 
-            <ion-col>
+            <ion-col size="12">
               <ion-item lines="full">
                 <ion-label position="floating">Retos y desafíos intelectuales (Satisfacción laboral)</ion-label>
                 <ion-icon slot="start" name="filter-outline"></ion-icon>
@@ -101,7 +101,7 @@
               </ion-item>
             </ion-col>
 
-            <ion-col>
+            <ion-col size="12">
               <ion-item lines="full">
                 <ion-label position="floating">Oportunidades de ascenso (Satisfacción laboral)</ion-label>
                 <ion-icon slot="start" name="filter-outline"></ion-icon>
@@ -112,7 +112,7 @@
               </ion-item>
             </ion-col>
 
-            <ion-col>
+            <ion-col size="12">
               <ion-item lines="full">
                 <ion-label position="floating">Estabilidad (Satisfacción laboral)</ion-label>
                 <ion-icon slot="start" name="filter-outline"></ion-icon>
@@ -123,10 +123,10 @@
               </ion-item>
             </ion-col>
 
-            <ion-col>
+            <ion-col size="12">
               <ion-item>
                 <ion-label>Rango salarial</ion-label>
-                <ion-icon slot="start" name="cash-outline"></ion-icon>
+                
                 <ion-select name="rangsala{{env.INGRESO_O_SALARIO}}" #rangsala="ngModel" required [(ngModel)]="selectedData.rangsala" cancelText="Cancelar" placeholder="Seleccionar" interface="action-sheet">
                   <ion-select-option value="1">Mayor a 1 millon y menor a 2 millones</ion-select-option>
                   <ion-select-option value="2">Mayor a 2 millones y menor a 3 millones</ion-select-option>
@@ -136,10 +136,10 @@
               </ion-item>
             </ion-col>
 
-            <ion-col>
+            <ion-col size="12">
               <ion-item>
                 <ion-label>Razón de vinculación</ion-label>
-                <ion-icon slot="start" name="cash-outline"></ion-icon>
+                
                 <ion-select placeholder="Seleccionar" interface="action-sheet" id="RazonVinculacion" cancelText="Cancelar" name="RazonVinculacion{{env.RAZON_DE_VINCULACION}}" #RazonVinculacion="ngModel" required [(ngModel)]="selectedData.RazonVinculacion">
                   <ion-select-option value="1">Ingreso o salario</ion-select-option>
                   <ion-select-option value="2">Ganar experiencia</ion-select-option>
@@ -156,10 +156,10 @@
               </ion-item>
             </ion-col>
 
-            <ion-col>
+            <ion-col size="12">
               <ion-item>
                 <ion-label>Estado laboral</ion-label>
-                <ion-icon slot="start" name="cash-outline"></ion-icon>
+                
                 <ion-select placeholder="Seleccionar" interface="action-sheet" cancelText="Cancelar" id="EstadoLaboral" name="EstadoLaboral{{env.ESTATUS_LABORAL}}" #EstadoLaboral="ngModel" required [(ngModel)]="selectedData.EstadoLaboral">
                   <ion-select-option value="empleado">Empleado</ion-select-option>
                   <ion-select-option value="contratista">Contratista por prestación de servicios o cuenta propia</ion-select-option>
@@ -170,16 +170,16 @@
 
 
             <!-- SUB CAPA -->
-            <ion-row [hidden]="this.selectedData.EstadoLaboral != 'empleado'">
+            <ion-row size="12" style="width: 100%;" [hidden]="this.selectedData.EstadoLaboral != 'empleado'">
 
-              <ion-col>
+              <ion-col size="12">
                 <ion-item>
                   <ion-label>Actividades que realiza</ion-label>
                   <ion-input type="text" required name="ActividadesRealiza{{env.ACTIVIDADES_QUE_REALIZA}}" #ActividadesRealiza="ngModel" required [(ngModel)]="selectedData.ActividadesRealiza"></ion-input>
                 </ion-item>
               </ion-col>
 
-              <ion-col>
+              <ion-col size="12">
                 <ion-item>
                   <ion-label>Tipo de contrato</ion-label>
                   <ion-icon slot="start" name="receipt-outline"></ion-icon>
@@ -192,7 +192,7 @@
                 </ion-item>
               </ion-col>
 
-              <ion-col>
+              <ion-col size="12">
                 <ion-item>
                   <ion-label>Sector</ion-label>
                   <ion-icon slot="start" name="business-outline"></ion-icon>
@@ -205,7 +205,7 @@
                 </ion-item>
               </ion-col>
 
-              <ion-col>
+              <ion-col size="12">
                 <ion-item>
                   <ion-label position="floating">Nombre de la empresa donde labora</ion-label>
                   <ion-icon slot="start" name="business-outline"></ion-icon>
@@ -213,7 +213,7 @@
                 </ion-item>
               </ion-col>
 
-              <ion-col>
+              <ion-col size="12">
                 <ion-item>
                   <ion-label>Grupo de actividad económica</ion-label>
                   <ion-icon slot="start" name="receipt-outline"></ion-icon>
@@ -240,7 +240,7 @@
                 </ion-item>
               </ion-col>
 
-              <ion-col>
+              <ion-col size="12">
                 <ion-item>
                   <ion-label>Canal de búsqueda de empleo</ion-label>
                   <ion-icon slot="start" name="receipt-outline"></ion-icon>
@@ -257,11 +257,11 @@
                 </ion-item>
               </ion-col>
 
-              <ion-row [hidden]="!this.selectedData.CanalEmpleo">
-                <ion-col>
+              <ion-row size="12" style="width: 100%;" [hidden]="!this.selectedData.CanalEmpleo">
+                <ion-col size="12">
                   <ion-item>
                     <ion-label>Problematicas donde ha aportado</ion-label>
-                    <ion-icon slot="start" name="cash-outline"></ion-icon>
+                    
                     <ion-select placeholder="Seleccionar" multiple="true" okText="Ok" cancelText="Cancelar" id="ProblematicaAporte" name="ProblematicaAporte{{env.PROBLEMTICAS_EN_DONDE_CONSIDERA_QUE_HA_APORTADO}}-" #ProblematicaAporte="ngModel" required [(ngModel)]="selectedData.ProblematicaAporte" #mySelect (ionChange)="onChange(selectedData.ProblematicaAporte, 'ProblematicaAporte')">
                       <ion-select-option value="probecon">Problemas económicos</ion-select-option>
                       <ion-select-option value="probambi">Problemas ambientales</ion-select-option>
@@ -273,8 +273,8 @@
                   </ion-item>
                 </ion-col>
 
-                <ion-row [hidden]="!this.selectedData.ProblematicaAporte || this.selectedData.ProblematicaAporte == 'noheaport'">
-                  <ion-col>
+                <ion-row size="12" style="width: 100%;" [hidden]="!this.selectedData.ProblematicaAporte || this.selectedData.ProblematicaAporte == 'noheaport'">
+                  <ion-col size="12">
                     <ion-item>
                       <ion-label>Detalles de sus aportes o contribuciones</ion-label>
                       <ion-input name="DetalleAportes{{env.OTRA_PROBLEMTICA_EN_DONDE_CONSIDERA_QUE_HA_APORTADO}}" #DetalleAportes="ngModel" required [(ngModel)]="selectedData.DetalleAportes" placeholder="Detalles de aportes" type="text"></ion-input>
@@ -286,20 +286,20 @@
             </ion-row>
 
             <!-- -----------------------------CONTRATISTA ----------------------------- -->
-            <ion-row [hidden]="this.selectedData.EstadoLaboral != 'contratista'">
+            <ion-row size="12" style="width: 100%;" [hidden]="this.selectedData.EstadoLaboral != 'contratista'">
 
               <ion-card-header>
                 <ion-card-subtitle class="subtitulo">INFORMACIÓN INDEPENDIENTES</ion-card-subtitle>
               </ion-card-header>
 
-              <ion-col>
+              <ion-col size="12">
                 <ion-item>
                   <ion-label>Actividades que realiza</ion-label>
                   <ion-input name="ActividadesRealiza{{env.ACTIVIDADES_QUE_REALIZA}}" #ActividadesRealiza="ngModel" required [(ngModel)]="selectedData.ActividadesRealiza" type="text" required></ion-input>
                 </ion-item>
               </ion-col>
 
-              <ion-col>
+              <ion-col size="12">
                 <ion-item>
                   <ion-label>Formas de trabajo Independientes</ion-label>
                   <ion-icon slot="start" name="receipt-outline"></ion-icon>
@@ -313,7 +313,7 @@
                 </ion-item>
               </ion-col>
 
-              <ion-col>
+              <ion-col size="12">
                 <ion-item>
                   <ion-label>Sector</ion-label>
                   <ion-icon slot="start" name="business-outline"></ion-icon>
@@ -326,7 +326,7 @@
                 </ion-item>
               </ion-col>
 
-              <ion-col>
+              <ion-col size="12">
                 <ion-item>
                   <ion-label position="floating">Nombre de la empresa donde labora</ion-label>
                   <ion-icon slot="start" name="business-outline"></ion-icon>
@@ -334,7 +334,7 @@
                 </ion-item>
               </ion-col>
 
-              <ion-col>
+              <ion-col size="12">
                 <ion-item>
                   <ion-label>Grupo de actividad económica</ion-label>
                   <ion-icon slot="start" name="receipt-outline"></ion-icon>
@@ -361,7 +361,7 @@
                 </ion-item>
               </ion-col>
 
-              <ion-col>
+              <ion-col size="12">
                 <ion-item>
                   <ion-label>Canal de búsqueda de empleo</ion-label>
                   <ion-icon slot="start" name="receipt-outline"></ion-icon>
@@ -378,11 +378,11 @@
                 </ion-item>
               </ion-col>
 
-              <ion-row [hidden]="!this.selectedData.CanalEmpleo">
-                <ion-col>
+              <ion-row size="12" style="width: 100%;" [hidden]="!this.selectedData.CanalEmpleo">
+                <ion-col size="12">
                   <ion-item>
                     <ion-label>Problematicas donde ha aportado</ion-label>
-                    <ion-icon slot="start" name="cash-outline"></ion-icon>
+                    
                     <ion-select placeholder="Seleccionar" multiple="true" okText="Ok" cancelText="Cancelar" id="ProblematicaAporte" name="ProblematicaAporte{{env.PROBLEMTICAS_EN_DONDE_CONSIDERA_QUE_HA_APORTADO}}-" #ProblematicaAporte="ngModel" required [(ngModel)]="selectedData.ProblematicaAporte">
                       <ion-select-option value="probecon">Problemas económicos</ion-select-option>
                       <ion-select-option value="probambi">Problemas ambientales</ion-select-option>
@@ -394,8 +394,8 @@
                   </ion-item>
                 </ion-col>
 
-                <ion-row [hidden]="!this.selectedData.ProblematicaAporte || this.selectedData.ProblematicaAporte == 'noheaport'">
-                  <ion-col>
+                <ion-row size="12" style="width: 100%;" [hidden]="!this.selectedData.ProblematicaAporte || this.selectedData.ProblematicaAporte == 'noheaport'">
+                  <ion-col size="12">
                     <ion-item>
                       <ion-label>Detalles de sus aportes o contribuciones</ion-label>
                       <ion-input name="DetalleAportes{{env.OTRA_PROBLEMTICA_EN_DONDE_CONSIDERA_QUE_HA_APORTADO}}" #DetalleAportes="ngModel" required [(ngModel)]="selectedData.DetalleAportes" placeholder="Detalles de aportes" type="text"></ion-input>
@@ -406,16 +406,16 @@
 
             </ion-row>
 
-            <ion-row [hidden]="this.selectedData.EstadoLaboral != 'empresario'">
+            <ion-row size="12" style="width: 100%;" [hidden]="this.selectedData.EstadoLaboral != 'empresario'">
 
-              <ion-col>
+              <ion-col size="12">
                 <ion-item>
                   <ion-label>Actividades que realiza</ion-label>
                   <ion-input name="ActividadesRealiza{{env.ACTIVIDADES_QUE_REALIZA}}" #ActividadesRealiza="ngModel" required [(ngModel)]="selectedData.ActividadesRealiza" type="text" required></ion-input>
                 </ion-item>
               </ion-col>
 
-              <ion-col>
+              <ion-col size="12">
                 <ion-item>
                   <ion-label position="floating">Nombre de la empresa donde labora</ion-label>
                   <ion-icon slot="start" name="business-outline"></ion-icon>
@@ -423,7 +423,7 @@
                 </ion-item>
               </ion-col>
 
-              <ion-col>
+              <ion-col size="12">
                 <ion-item>
                   <ion-label>Grupo de actividad económica</ion-label>
                   <ion-icon slot="start" name="receipt-outline"></ion-icon>
@@ -450,7 +450,7 @@
                 </ion-item>
               </ion-col>
 
-              <ion-col>
+              <ion-col size="12">
                 <ion-item>
                   <ion-label position="floating">¿Cuales son los productos o servicios?</ion-label>
                   <ion-icon slot="start" name="business-outline"></ion-icon>
@@ -458,7 +458,7 @@
                 </ion-item>
               </ion-col>
 
-              <ion-col>
+              <ion-col size="12">
                 <ion-item>
                   <ion-label position="floating">Ciudad / municipio / provincia de ubicación de la empresa</ion-label>
                   <ion-icon slot="start" name="business-outline"></ion-icon>
@@ -466,7 +466,7 @@
                 </ion-item>
               </ion-col>
 
-              <ion-col>
+              <ion-col size="12">
                 <ion-item>
                   <ion-label>Operación de la empresa</ion-label>
                   <ion-icon slot="start" name="receipt-outline"></ion-icon>
@@ -483,7 +483,7 @@
                 </ion-item>
               </ion-col>
 
-              <ion-col>
+              <ion-col size="12">
                 <ion-item>
                   <ion-label>Etapa en que se encuentra la empresa</ion-label>
                   <ion-icon slot="start" name="receipt-outline"></ion-icon>
@@ -499,11 +499,11 @@
                 </ion-item>
               </ion-col>
 
-              <ion-row [hidden]="!this.selectedData.EtapaEmpresa">
-                <ion-col>
+              <ion-row size="12" style="width: 100%;" [hidden]="!this.selectedData.EtapaEmpresa">
+                <ion-col size="12">
                   <ion-item>
                     <ion-label>Problematicas donde ha aportado</ion-label>
-                    <ion-icon slot="start" name="cash-outline"></ion-icon>
+                    
                     <ion-select placeholder="Seleccionar" multiple="true" okText="Ok" cancelText="Cancelar" id="ProblematicaAporte" name="ProblematicaAporte{{env.PROBLEMTICAS_EN_DONDE_CONSIDERA_QUE_HA_APORTADO}}-" #ProblematicaAporte="ngModel" required [(ngModel)]="selectedData.ProblematicaAporte" #mySelect (ionChange)="onChange(selectedData.ProblematicaAporte, 'ProblematicaAporte')">
                       <ion-select-option value="probecon">Problemas económicos</ion-select-option>
                       <ion-select-option value="probambi">Problemas ambientales</ion-select-option>
@@ -515,8 +515,8 @@
                   </ion-item>
                 </ion-col>
 
-                <ion-row [hidden]="!this.selectedData.ProblematicaAporte || this.selectedData.ProblematicaAporte == 'noheaport'">
-                  <ion-col>
+                <ion-row size="12" style="width: 100%;" [hidden]="!this.selectedData.ProblematicaAporte || this.selectedData.ProblematicaAporte == 'noheaport'">
+                  <ion-col size="12">
                     <ion-item>
                       <ion-label>Detalles de sus aportes o contribuciones</ion-label>
                       <ion-input name="DetalleAportes{{env.OTRA_PROBLEMTICA_EN_DONDE_CONSIDERA_QUE_HA_APORTADO}}" #DetalleAportes="ngModel" required [(ngModel)]="selectedData.DetalleAportes" placeholder="Detalles de aportes" type="text"></ion-input>
@@ -528,11 +528,11 @@
             </ion-row>
           </ion-row>
 
-          <ion-row [hidden]="this.selectedData.SituacionLaboral != 'sinemple'">
-            <ion-col>
+          <ion-row size="12" style="width: 100%;" [hidden]="this.selectedData.SituacionLaboral != 'sinemple'">
+            <ion-col size="12">
               <ion-item>
                 <ion-label>En la actualidad, ¿en qué actividad ocupa la mayor parte de su tiempo?</ion-label>
-                <ion-icon slot="start" name="cash-outline"></ion-icon>
+                
                 <ion-select cancelText="Cancelar" placeholder="Seleccionar" interface="action-sheet" id="ActividadActual" name="ActividadActual{{env.EN_LA_ACTUALIDAD_EN_QU_ACTIVIDAD_OCUPA_LA_MAYOR_PARTE_DE_SU_TIEMPO}}" #ActividadActual="ngModel" required [(ngModel)]="selectedData.ActividadActual" cancelText="Cancelar">
                   <ion-select-option value="buscempl">Busca empleo</ion-select-option>
                   <ion-select-option value="estudiar">Estudiar</ion-select-option>
@@ -542,11 +542,11 @@
               </ion-item>
             </ion-col>
 
-            <ion-row [hidden]="this.selectedData.ActividadActual != 'buscempl'">
-              <ion-col>
+            <ion-row size="12" style="width: 100%;" [hidden]="this.selectedData.ActividadActual != 'buscempl'">
+              <ion-col size="12">
                 <ion-item>
                   <ion-label>¿Hace cuántos meses ha estado buscando empleo?</ion-label>
-                  <ion-icon slot="start" name="cash-outline"></ion-icon>
+                  
                   <ion-select name="cuanempl{{env.HACE_CUNTOS_MESES_HA_ESTADO_BUSCANDO_EMPLEO}}" #cuanempl="ngModel" required [(ngModel)]="selectedData.cuanempl" cancelText="Cancelar" placeholder="Seleccionar" interface="action-sheet" cancelText="Cancelar">
                     <ion-select-option value="1">1</ion-select-option>
                     <ion-select-option value="2">2</ion-select-option>
@@ -570,10 +570,10 @@
                 </ion-item>
               </ion-col>
 
-              <ion-col>
+              <ion-col size="12">
                 <ion-item>
                   <ion-label>¿Cuál considera la principal dificultad a la hora de conseguir trabajo?</ion-label>
-                  <ion-icon slot="start" name="cash-outline"></ion-icon>
+                  
                   <ion-select name="difitrab{{env.PRINCIPAL_DIFICULTAD_A_LA_HORA_DE_CONSEGUIR_TRABAJO}}" #difitrab="ngModel" required [(ngModel)]="selectedData.difitrab" cancelText="Cancelar" placeholder="Seleccionar" interface="action-sheet" cancelText="Cancelar">
                     <ion-select-option value="expenece">Carece de la experiencia necesaria</ion-select-option>
                     <ion-select-option value="nooptrab">No hay oportunidades de trabajo</ion-select-option>
@@ -585,7 +585,7 @@
                 </ion-item>
               </ion-col>
 
-              <ion-col>
+              <ion-col size="12">
                 <ion-item>
                   <ion-label>Canal de búsqueda de empleo</ion-label>
                   <ion-icon slot="start" name="receipt-outline"></ion-icon>
@@ -602,11 +602,11 @@
                 </ion-item>
               </ion-col>
 
-              <ion-row [hidden]="!this.selectedData.CanalEmpleo">
-                <ion-col>
+              <ion-row size="12" style="width: 100%;" [hidden]="!this.selectedData.CanalEmpleo">
+                <ion-col size="12">
                   <ion-item>
                     <ion-label>Problematicas donde ha aportado</ion-label>
-                    <ion-icon slot="start" name="cash-outline"></ion-icon>
+                    
                     <ion-select placeholder="Seleccionar" multiple="true" okText="Ok" cancelText="Cancelar" id="ProblematicaAporte" name="ProblematicaAporte{{env.PROBLEMTICAS_EN_DONDE_CONSIDERA_QUE_HA_APORTADO}}-" #ProblematicaAporte="ngModel" required [(ngModel)]="selectedData.ProblematicaAporte" #mySelect (ionChange)="onChange(selectedData.ProblematicaAporte, 'ProblematicaAporte')">
                       <ion-select-option value="probecon">Problemas económicos</ion-select-option>
                       <ion-select-option value="probambi">Problemas ambientales</ion-select-option>
@@ -618,11 +618,11 @@
                   </ion-item>
                 </ion-col>
 
-                <ion-row [hidden]="!this.selectedData.ProblematicaAporte || this.selectedData.ProblematicaAporte == 'noheaport'">
-                  <ion-col>
+                <ion-row size="12" style="width: 100%;" [hidden]="!this.selectedData.ProblematicaAporte || this.selectedData.ProblematicaAporte == 'noheaport'">
+                  <ion-col size="12">
                     <ion-item>
                       <ion-label>Detalles de sus aportes o contribuciones</ion-label>
-                      <ion-icon slot="start" name="cash-outline"></ion-icon>
+                      
                       <ion-input name="DetalleAportes{{env.OTRA_PROBLEMTICA_EN_DONDE_CONSIDERA_QUE_HA_APORTADO}}" #DetalleAportes="ngModel" required [(ngModel)]="selectedData.DetalleAportes" placeholder="Detalles de aportes" type="text"></ion-input>
                     </ion-item>
                   </ion-col>
@@ -631,11 +631,11 @@
 
             </ion-row>
 
-            <ion-row [hidden]="!['estudiar','labonore','otrosuti'].includes(this.selectedData.ActividadActual)">
-              <ion-col>
+            <ion-row size="12" style="width: 100%;" [hidden]="!['estudiar','labonore','otrosuti'].includes(this.selectedData.ActividadActual)">
+              <ion-col size="12">
                 <ion-item>
                   <ion-label>¿Desea conseguir un trabajo o realizar una actividad remunerada?</ion-label>
-                  <ion-icon slot="start" name="cash-outline"></ion-icon>
+                  
                   <!-- <ion-toggle color="primary" id="DeseaTrabajo" name="DeseaTrabajo{{env.DESEA_CONSEGUIR_UN_TRABAJO_O_REALIZAR_UNA_ACTIVIDAD_REMUNERADA}}" #DeseaTrabajo="ngModel" required [(ngModel)]="selectedData.DeseaTrabajo" (ionChange)="onChange(selectedData.DeseaTrabajo, 'DeseaTrabajo')"></ion-toggle> -->
                   <ion-select placeholder="Seleccionar" okText="Ok" cancelText="Cancelar" id="DeseaTrabajo" name="DeseaTrabajo{{env.DESEA_CONSEGUIR_UN_TRABAJO_O_REALIZAR_UNA_ACTIVIDAD_REMUNERADA}}" #DeseaTrabajo="ngModel" required [(ngModel)]="selectedData.DeseaTrabajo" #mySelect (ionChange)="onChange(selectedData.DeseaTrabajo, 'DeseaTrabajo')">
                     <ion-select-option value="si">Si</ion-select-option>
@@ -645,12 +645,12 @@
               </ion-col>
 
               <!-- SI -->
-              <ion-row [hidden]="this.selectedData.DeseaTrabajo != 'si'">
+              <ion-row size="12" style="width: 100%;" [hidden]="this.selectedData.DeseaTrabajo != 'si'">
 
-                <ion-col>
+                <ion-col size="12">
                   <ion-item>
                     <ion-label>¿Durante el último mes, ¿hizo alguna diligencia para conseguir un trabajo o realizar una actividad remunerada?</ion-label>
-                    <ion-icon slot="start" name="cash-outline"></ion-icon>
+                    
                     <ion-select placeholder="Seleccionar" okText="Ok" cancelText="Cancelar" id="DiligenciaTrabajo" name="DiligenciaTrabajo{{env.DURANTE_EL_ULTIMO_MES_HIZO_ALGUNA_DILIGENCIA_PARA_CONSEGUIR_UN_TRABAJO_O_REALIZAR_UNA_ACTIVIDAD}}" #DiligenciaTrabajo="ngModel" required [(ngModel)]="selectedData.DiligenciaTrabajo" #mySelect (ionChange)="onChange(selectedData.DiligenciaTrabajo, 'DiligenciaTrabajo')">
                       <ion-select-option value="si">Si</ion-select-option>
                       <ion-select-option value="no">No</ion-select-option>
@@ -659,12 +659,12 @@
                 </ion-col>
 
                 <!-- NO -->
-                <ion-row [hidden]="this.selectedData.DiligenciaTrabajo != 'no'">
+                <ion-row size="12" style="width: 100%;" [hidden]="this.selectedData.DiligenciaTrabajo != 'no'">
 
-                  <ion-col>
+                  <ion-col size="12">
                     <ion-item>
                       <ion-label>Aunque desea trabajar, ¿por qué motivo no hizo diligencias para buscar un trabajo en el último mes?</ion-label>
-                      <ion-icon slot="start" name="cash-outline"></ion-icon>
+                      
                       <ion-select cancelText="Cancelar" placeholder="Seleccionar" interface="action-sheet" id="NoDiligencia" name="NoDiligencia{{env.AUNQUE_DESEA_TRABAJAR_POR_QU_MOTIVO_NO_HIZO_DILIGENCIAS_PARA_BUSCAR_UN_TRABAJO_EN_EL_ULTIMO_MES}}" #NoDiligencia="ngModel" required [(ngModel)]="selectedData.NoDiligencia" cancelText="Cancelar">
                         <ion-select-option value="encotrab">Ya encontró trabajo y está por iniciar</ion-select-option>
                         <ion-select-option value="respfami">Responsabilidades familiares</ion-select-option>
@@ -680,11 +680,11 @@
                     </ion-item>
                   </ion-col>
 
-                  <ion-row [hidden]="!['encotrab', 'respfami', 'probsalu'].includes(selectedData.NoDiligencia)">
-                    <ion-col>
+                  <ion-row size="12" style="width: 100%;" [hidden]="!['encotrab', 'respfami', 'probsalu'].includes(selectedData.NoDiligencia)">
+                    <ion-col size="12">
                       <ion-item>
                         <ion-label>Problematicas donde ha aportado</ion-label>
-                        <ion-icon slot="start" name="cash-outline"></ion-icon>
+                        
                         <ion-select placeholder="Seleccionar" multiple="true" okText="Ok" cancelText="Cancelar" id="ProblematicaAporte" name="ProblematicaAporte{{env.PROBLEMTICAS_EN_DONDE_CONSIDERA_QUE_HA_APORTADO}}-" #ProblematicaAporte="ngModel" required [(ngModel)]="selectedData.ProblematicaAporte" #mySelect (ionChange)="onChange(selectedData.ProblematicaAporte, 'ProblematicaAporte')">
                           <ion-select-option value="probecon">Problemas económicos</ion-select-option>
                           <ion-select-option value="probambi">Problemas ambientales</ion-select-option>
@@ -696,23 +696,23 @@
                       </ion-item>
                     </ion-col>
 
-                    <ion-row [hidden]="!this.selectedData.ProblematicaAporte || this.selectedData.ProblematicaAporte == 'noheaport'">
-                      <ion-col>
+                    <ion-row size="12" style="width: 100%;" [hidden]="!this.selectedData.ProblematicaAporte || this.selectedData.ProblematicaAporte == 'noheaport'">
+                      <ion-col size="12">
                         <ion-item>
                           <ion-label>Detalles de sus aportes o contribuciones</ion-label>
-                          <ion-icon slot="start" name="cash-outline"></ion-icon>
+                          
                           <ion-input name="DetalleAportes{{env.OTRA_PROBLEMTICA_EN_DONDE_CONSIDERA_QUE_HA_APORTADO}}" #DetalleAportes="ngModel" required [(ngModel)]="selectedData.DetalleAportes" placeholder="Detalles de aportes" type="text"></ion-input>
                         </ion-item>
                       </ion-col>
                     </ion-row>
                   </ion-row>
 
-                  <ion-row [hidden]="['encotrab', 'respfami', 'probsalu'].includes(selectedData.NoDiligencia)">
+                  <ion-row size="12" style="width: 100%;" [hidden]="['encotrab', 'respfami', 'probsalu'].includes(selectedData.NoDiligencia)">
 
-                    <ion-col>
+                    <ion-col size="12">
                       <ion-item>
                         <ion-label>Si le resultara algún trabajo remunerado ¿Está disponible para empezar a trabajar?</ion-label>
-                        <ion-icon slot="start" name="cash-outline"></ion-icon>
+                        
                         <ion-select placeholder="Seleccionar" okText="Ok" cancelText="Cancelar" id="DisponibleTrabajo" name="DisponibleTrabajo{{env.SI_LE_RESULTARA_ALGUN_TRABAJO_REMUNERADO_EST_DISPONIBLE_PARA_EMPEZAR_A_TRABAJAR}}" #DisponibleTrabajo="ngModel" required [(ngModel)]="selectedData.DisponibleTrabajo" #mySelect (ionChange)="onChange(selectedData.DisponibleTrabajo, 'DisponibleTrabajo')">
                           <ion-select-option value="si">Si</ion-select-option>
                           <ion-select-option value="no">No</ion-select-option>
@@ -722,11 +722,11 @@
                     </ion-col>
 
                     <!-- SI -->
-                    <ion-row [hidden]="selectedData.DisponibleTrabajo != 'si'">
-                      <ion-col>
+                    <ion-row size="12" style="width: 100%;" [hidden]="selectedData.DisponibleTrabajo != 'si'">
+                      <ion-col size="12">
                         <ion-item>
                           <ion-label>¿Hace cuántos meses ha estado buscando empleo?</ion-label>
-                          <ion-icon slot="start" name="cash-outline"></ion-icon>
+                          
                           <ion-select name="cuanempl{{env.HACE_CUNTOS_MESES_HA_ESTADO_BUSCANDO_EMPLEO}}" #cuanempl="ngModel" required [(ngModel)]="selectedData.cuanempl" cancelText="Cancelar" placeholder="Seleccionar" interface="action-sheet" cancelText="Cancelar">
                             <ion-select-option value="1">1</ion-select-option>
                             <ion-select-option value="2">2</ion-select-option>
@@ -750,10 +750,10 @@
                         </ion-item>
                       </ion-col>
 
-                      <ion-col>
+                      <ion-col size="12">
                         <ion-item>
                           <ion-label>¿Cuál considera la principal dificultad a la hora de conseguir trabajo?</ion-label>
-                          <ion-icon slot="start" name="cash-outline"></ion-icon>
+                          
                           <ion-select name="difitrab{{env.PRINCIPAL_DIFICULTAD_A_LA_HORA_DE_CONSEGUIR_TRABAJO}}" #difitrab="ngModel" required [(ngModel)]="selectedData.difitrab" cancelText="Cancelar" placeholder="Seleccionar" interface="action-sheet" cancelText="Cancelar">
                             <ion-select-option value="expenece">Carece de la experiencia necesaria</ion-select-option>
                             <ion-select-option value="nooptrab">No hay oportunidades de trabajo</ion-select-option>
@@ -765,7 +765,7 @@
                         </ion-item>
                       </ion-col>
 
-                      <ion-col>
+                      <ion-col size="12">
                         <ion-item>
                           <ion-label>Canal de búsqueda de empleo</ion-label>
                           <ion-icon slot="start" name="receipt-outline"></ion-icon>
@@ -782,11 +782,11 @@
                         </ion-item>
                       </ion-col>
 
-                      <ion-row [hidden]="!this.selectedData.CanalEmpleo">
-                        <ion-col>
+                      <ion-row size="12" style="width: 100%;" [hidden]="!this.selectedData.CanalEmpleo">
+                        <ion-col size="12">
                           <ion-item>
                             <ion-label>Problematicas donde ha aportado</ion-label>
-                            <ion-icon slot="start" name="cash-outline"></ion-icon>
+                            
                             <ion-select placeholder="Seleccionar" multiple="true" okText="Ok" cancelText="Cancelar" id="ProblematicaAporte" name="ProblematicaAporte{{env.PROBLEMTICAS_EN_DONDE_CONSIDERA_QUE_HA_APORTADO}}-" #ProblematicaAporte="ngModel" required [(ngModel)]="selectedData.ProblematicaAporte" #mySelect (ionChange)="onChange(selectedData.ProblematicaAporte, 'ProblematicaAporte')">
                               <ion-select-option value="probecon">Problemas económicos</ion-select-option>
                               <ion-select-option value="probambi">Problemas ambientales</ion-select-option>
@@ -798,11 +798,11 @@
                           </ion-item>
                         </ion-col>
 
-                        <ion-row [hidden]="!this.selectedData.ProblematicaAporte || this.selectedData.ProblematicaAporte == 'noheaport'">
-                          <ion-col>
+                        <ion-row size="12" style="width: 100%;" [hidden]="!this.selectedData.ProblematicaAporte || this.selectedData.ProblematicaAporte == 'noheaport'">
+                          <ion-col size="12">
                             <ion-item>
                               <ion-label>Detalles de sus aportes o contribuciones</ion-label>
-                              <ion-icon slot="start" name="cash-outline"></ion-icon>
+                              
                               <ion-input name="DetalleAportes{{env.OTRA_PROBLEMTICA_EN_DONDE_CONSIDERA_QUE_HA_APORTADO}}" #DetalleAportes="ngModel" required [(ngModel)]="selectedData.DetalleAportes" placeholder="Detalles de aportes" type="text"></ion-input>
                             </ion-item>
                           </ion-col>
@@ -811,12 +811,12 @@
                     </ion-row>
 
                     <!-- NO -->
-                    <ion-row [hidden]="selectedData.DisponibleTrabajo != 'no'">
+                    <ion-row size="12" style="width: 100%;" [hidden]="selectedData.DisponibleTrabajo != 'no'">
 
-                      <ion-col>
+                      <ion-col size="12">
                         <ion-item>
                           <ion-label>¿Cuál considera la principal dificultad a la hora de conseguir trabajo?</ion-label>
-                          <ion-icon slot="start" name="cash-outline"></ion-icon>
+                          
                           <ion-select name="difitrab{{env.PRINCIPAL_DIFICULTAD_A_LA_HORA_DE_CONSEGUIR_TRABAJO}}" #difitrab="ngModel" required [(ngModel)]="selectedData.difitrab" cancelText="Cancelar" placeholder="Seleccionar" interface="action-sheet" cancelText="Cancelar">
                             <ion-select-option value="expenece">Carece de la experiencia necesaria</ion-select-option>
                             <ion-select-option value="nooptrab">No hay oportunidades de trabajo</ion-select-option>
@@ -828,7 +828,7 @@
                         </ion-item>
                       </ion-col>
 
-                      <ion-col>
+                      <ion-col size="12">
                         <ion-item>
                           <ion-label>Canal de búsqueda de empleo</ion-label>
                           <ion-icon slot="start" name="receipt-outline"></ion-icon>
@@ -845,11 +845,11 @@
                         </ion-item>
                       </ion-col>
 
-                      <ion-row [hidden]="!this.selectedData.CanalEmpleo">
-                        <ion-col>
+                      <ion-row size="12" style="width: 100%;" [hidden]="!this.selectedData.CanalEmpleo">
+                        <ion-col size="12">
                           <ion-item>
                             <ion-label>Problematicas donde ha aportado</ion-label>
-                            <ion-icon slot="start" name="cash-outline"></ion-icon>
+                            
                             <ion-select placeholder="Seleccionar" multiple="true" okText="Ok" cancelText="Cancelar" id="ProblematicaAporte" name="ProblematicaAporte{{env.PROBLEMTICAS_EN_DONDE_CONSIDERA_QUE_HA_APORTADO}}-" #ProblematicaAporte="ngModel" required [(ngModel)]="selectedData.ProblematicaAporte" #mySelect (ionChange)="onChange(selectedData.ProblematicaAporte, 'ProblematicaAporte')">
                               <ion-select-option value="probecon">Problemas económicos</ion-select-option>
                               <ion-select-option value="probambi">Problemas ambientales</ion-select-option>
@@ -861,11 +861,11 @@
                           </ion-item>
                         </ion-col>
 
-                        <ion-row [hidden]="!this.selectedData.ProblematicaAporte || this.selectedData.ProblematicaAporte == 'noheaport'">
-                          <ion-col>
+                        <ion-row size="12" style="width: 100%;" [hidden]="!this.selectedData.ProblematicaAporte || this.selectedData.ProblematicaAporte == 'noheaport'">
+                          <ion-col size="12">
                             <ion-item>
                               <ion-label>Detalles de sus aportes o contribuciones</ion-label>
-                              <ion-icon slot="start" name="cash-outline"></ion-icon>
+                              
                               <ion-input name="DetalleAportes{{env.OTRA_PROBLEMTICA_EN_DONDE_CONSIDERA_QUE_HA_APORTADO}}" #DetalleAportes="ngModel" required [(ngModel)]="selectedData.DetalleAportes" placeholder="Detalles de aportes" type="text"></ion-input>
                             </ion-item>
                           </ion-col>
@@ -878,12 +878,12 @@
                 </ion-row>
 
                 <!-- SI -->
-                <ion-row [hidden]="this.selectedData.DiligenciaTrabajo != 'si'">
+                <ion-row size="12" style="width: 100%;" [hidden]="this.selectedData.DiligenciaTrabajo != 'si'">
 
-                  <ion-col>
+                  <ion-col size="12">
                     <ion-item>
                       <ion-label>¿Hace cuántos meses ha estado buscando empleo?</ion-label>
-                      <ion-icon slot="start" name="cash-outline"></ion-icon>
+                      
                       <ion-select name="cuanempl{{env.HACE_CUNTOS_MESES_HA_ESTADO_BUSCANDO_EMPLEO}}" #cuanempl="ngModel" required [(ngModel)]="selectedData.cuanempl" cancelText="Cancelar" placeholder="Seleccionar" interface="action-sheet" cancelText="Cancelar">
                         <ion-select-option value="1">1</ion-select-option>
                         <ion-select-option value="2">2</ion-select-option>
@@ -907,10 +907,10 @@
                     </ion-item>
                   </ion-col>
 
-                  <ion-col>
+                  <ion-col size="12">
                     <ion-item>
                       <ion-label>¿Cuál considera la principal dificultad a la hora de conseguir trabajo?</ion-label>
-                      <ion-icon slot="start" name="cash-outline"></ion-icon>
+                      
                       <ion-select name="difitrab{{env.PRINCIPAL_DIFICULTAD_A_LA_HORA_DE_CONSEGUIR_TRABAJO}}" #difitrab="ngModel" required [(ngModel)]="selectedData.difitrab" cancelText="Cancelar" placeholder="Seleccionar" interface="action-sheet" cancelText="Cancelar">
                         <ion-select-option value="expenece">Carece de la experiencia necesaria</ion-select-option>
                         <ion-select-option value="nooptrab">No hay oportunidades de trabajo</ion-select-option>
@@ -922,7 +922,7 @@
                     </ion-item>
                   </ion-col>
 
-                  <ion-col>
+                  <ion-col size="12">
                     <ion-item>
                       <ion-label>Canal de búsqueda de empleo</ion-label>
                       <ion-icon slot="start" name="receipt-outline"></ion-icon>
@@ -939,11 +939,11 @@
                     </ion-item>
                   </ion-col>
 
-                  <ion-row [hidden]="!this.selectedData.CanalEmpleo">
-                    <ion-col>
+                  <ion-row size="12" style="width: 100%;" [hidden]="!this.selectedData.CanalEmpleo">
+                    <ion-col size="12">
                       <ion-item>
                         <ion-label>Problematicas donde ha aportado</ion-label>
-                        <ion-icon slot="start" name="cash-outline"></ion-icon>
+                        
                         <ion-select placeholder="Seleccionar" multiple="true" okText="Ok" cancelText="Cancelar" id="ProblematicaAporte" name="ProblematicaAporte{{env.PROBLEMTICAS_EN_DONDE_CONSIDERA_QUE_HA_APORTADO}}-" #ProblematicaAporte="ngModel" required [(ngModel)]="selectedData.ProblematicaAporte" #mySelect (ionChange)="onChange(selectedData.ProblematicaAporte, 'ProblematicaAporte')">
                           <ion-select-option value="probecon">Problemas económicos</ion-select-option>
                           <ion-select-option value="probambi">Problemas ambientales</ion-select-option>
@@ -955,11 +955,11 @@
                       </ion-item>
                     </ion-col>
 
-                    <ion-row [hidden]="!this.selectedData.ProblematicaAporte || this.selectedData.ProblematicaAporte == 'noheaport'">
-                      <ion-col>
+                    <ion-row size="12" style="width: 100%;" [hidden]="!this.selectedData.ProblematicaAporte || this.selectedData.ProblematicaAporte == 'noheaport'">
+                      <ion-col size="12">
                         <ion-item>
                           <ion-label>Detalles de sus aportes o contribuciones</ion-label>
-                          <ion-icon slot="start" name="cash-outline"></ion-icon>
+                          
                           <ion-input name="DetalleAportes{{env.OTRA_PROBLEMTICA_EN_DONDE_CONSIDERA_QUE_HA_APORTADO}}" #DetalleAportes="ngModel" required [(ngModel)]="selectedData.DetalleAportes" placeholder="Detalles de aportes" type="text"></ion-input>
                         </ion-item>
                       </ion-col>
@@ -970,11 +970,11 @@
               </ion-row>
 
               <!-- NO -->
-              <ion-row [hidden]="this.selectedData.DeseaTrabajo != 'no'">
-                <ion-col>
+              <ion-row size="12" style="width: 100%;" [hidden]="this.selectedData.DeseaTrabajo != 'no'">
+                <ion-col size="12">
                   <ion-item>
                     <ion-label>Problematicas donde ha aportado</ion-label>
-                    <ion-icon slot="start" name="cash-outline"></ion-icon>
+                    
                     <ion-select placeholder="Seleccionar" multiple="true" okText="Ok" cancelText="Cancelar" id="ProblematicaAporte" name="ProblematicaAporte{{env.PROBLEMTICAS_EN_DONDE_CONSIDERA_QUE_HA_APORTADO}}-" #ProblematicaAporte="ngModel" required [(ngModel)]="selectedData.ProblematicaAporte" #mySelect (ionChange)="onChange(selectedData.ProblematicaAporte, 'ProblematicaAporte')">
                       <ion-select-option value="probecon">Problemas económicos</ion-select-option>
                       <ion-select-option value="probambi">Problemas ambientales</ion-select-option>
@@ -986,11 +986,11 @@
                   </ion-item>
                 </ion-col>
 
-                <ion-row [hidden]="!this.selectedData.ProblematicaAporte || this.selectedData.ProblematicaAporte == 'noheaport'">
-                  <ion-col>
+                <ion-row size="12" style="width: 100%;" [hidden]="!this.selectedData.ProblematicaAporte || this.selectedData.ProblematicaAporte == 'noheaport'">
+                  <ion-col size="12">
                     <ion-item>
                       <ion-label>Detalles de sus aportes o contribuciones</ion-label>
-                      <ion-icon slot="start" name="cash-outline"></ion-icon>
+                      
                       <ion-input name="DetalleAportes{{env.OTRA_PROBLEMTICA_EN_DONDE_CONSIDERA_QUE_HA_APORTADO}}" #DetalleAportes="ngModel" required [(ngModel)]="selectedData.DetalleAportes" placeholder="Detalles de aportes" type="text"></ion-input>
                     </ion-item>
                   </ion-col>
@@ -1000,11 +1000,11 @@
 
           </ion-row>
 
-          <ion-row [hidden]="this.selectedData.SituacionLaboral != 'pensiona'">
-            <ion-col>
+          <ion-row size="12" style="width: 100%;" [hidden]="this.selectedData.SituacionLaboral != 'pensiona'">
+            <ion-col size="12">
               <ion-item>
                 <ion-label>Problematicas donde ha aportado</ion-label>
-                <ion-icon slot="start" name="cash-outline"></ion-icon>
+                
                 <ion-select placeholder="Seleccionar" multiple="true" okText="Ok" cancelText="Cancelar" id="ProblematicaAporte" name="ProblematicaAporte{{env.PROBLEMTICAS_EN_DONDE_CONSIDERA_QUE_HA_APORTADO}}-" #ProblematicaAporte="ngModel" required [(ngModel)]="selectedData.ProblematicaAporte" #mySelect (ionChange)="onChange(selectedData.ProblematicaAporte, 'ProblematicaAporte')">
                   <ion-select-option value="probecon">Problemas económicos</ion-select-option>
                   <ion-select-option value="probambi">Problemas ambientales</ion-select-option>
@@ -1016,8 +1016,8 @@
               </ion-item>
             </ion-col>
 
-            <ion-row [hidden]="!this.selectedData.ProblematicaAporte || this.selectedData.ProblematicaAporte == 'noheaport'">
-              <ion-col>
+            <ion-row size="12" style="width: 100%;" [hidden]="!this.selectedData.ProblematicaAporte || this.selectedData.ProblematicaAporte == 'noheaport'">
+              <ion-col size="12">
                 <ion-item>
                   <ion-label>Detalles de sus aportes o contribuciones</ion-label>
                   <ion-input name="DetalleAportes{{env.OTRA_PROBLEMTICA_EN_DONDE_CONSIDERA_QUE_HA_APORTADO}}" #DetalleAportes="ngModel" required [(ngModel)]="selectedData.DetalleAportes" placeholder="Detalles de aportes" type="text"></ion-input>
@@ -1030,7 +1030,7 @@
       </ion-grid>
 
       <ion-grid>
-        <ion-row>
+        <ion-row size="12" style="width: 100%;">
           <ion-col size="12" style="display: flex; justify-content: center">
             <ion-button class="boton" type="submit" color="primary">
               Actualizar
