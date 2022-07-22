@@ -59,40 +59,78 @@
         </ion-item>
       </ion-col>
 
-      <ion-col size="6" class="ion-margin-vertical">
-        <ion-item lines="full">
-          <ion-label position="floating">Tipo de lugar</ion-label>
+      <ion-col size="6" class="ion-margin-vertical" style="padding: 0.6rem;">
+        <label for="TipoLugar">Lugar</label>
 
-          
+        <input autocomplete="false" onfocus="this.value=''" onchange="this.blur();" id="TipoLugar" placeholder="Buscar y seleccionar..." list="TipoLugarDataList" style="width: 100%; margin-top: 0.4rem;" (change)="validateEventPlace()">
 
-          <!-- <ion-select interface="action-sheet" id="TipoLugar" name="TipoLugar" #TipoLugar="ngModel" required [(ngModel)]="selectedEvent.TipoLugar" >
-            <ion-select-option *ngFor="let ubicaciontipos of ubicacionesTiposLugar" value="{{ubicaciontipos.Id}}" (ionChange)="setLocationsList(selectedEvent.TipoLugar)">{{ubicaciontipos.Nombre}}</ion-select-option>
-          </ion-select> -->
+        <datalist id="TipoLugarDataList">
+          <ng-container *ngFor="let ubicacion of ubicacionesTiposLugar">
+            <option *ngIf="![1,2,3,4].includes(ubicacion.Id)" label="{{ubicacion.Nombre}}" value="{{ubicacion.Nombre}}" [attr.data-id]="ubicacion.Id">
+          </ng-container>
+        </datalist>
+      </ion-col>
 
-          <!-- <ionic-selectable  [canSearch]="true" id="TipoLugar" name="TipoLugar" #TipoLugar="ngModel" (onChange)="this.selectableUtils.specificGuestsChange($event)" required [(ngModel)]="selectedEvent.TipoLugar" [items]="ubicacionesTiposLugar" itemValueField="Id" itemTextField="Nombre" (onSearch)="this.selectableUtils.searchIonSelectable($event, ubicacionesTiposLugar, 'Nombre')" #ubicacionesTiposLugarComponent>
+      <!-- <ion-col size="6" class="ion-margin-vertical" style="padding: 0.6rem;" [hidden]="selectedEvent.TipoLugar != '1'">
+        <label for="TipoLugarPais">País</label>
 
-            <ng-template ionicSelectableItemTemplate let-test="item">
-     
-            </ng-template>
+        <input id="TipoLugarPais" placeholder="Buscar y seleccionar..." list="TipoLugarPaisDataList" style="width: 100%; margin-top: 0.4rem;" (change)="validateEventPlace()">
 
-          </ionic-selectable> -->
+        <datalist id="TipoLugarPaisDataList">
+          <option *ngFor="let ubicacion of ubicacionesTiposLugar" label="{{ubicacion.Nombre}}" value="{{ubicacion.Nombre}}" [attr.data-id]="ubicacion.Id">
+        </datalist>
+      </ion-col>
 
-          <!-- <mat-form-field>
-            <mat-select  placeholder="Seleccione..." #singleSelect>
-              <mat-option>
-                <ngx-mat-select-search></ngx-mat-select-search>
-              </mat-option>
-        
-              <mat-option *ngFor="let ubicacion of ubicacionesTiposLugar | async" id="TipoLugar" name="TipoLugar" #TipoLugar="ngModel" (onChange)="this.selectableUtils.specificGuestsChange($event)" required [(ngModel)]="selectedEvent.TipoLugar"
-              #ubicacionesTiposLugarComponent>
-                {{ubicacion.Nombre}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field> -->
+      <ion-col size="6" class="ion-margin-vertical" style="padding: 0.6rem;" [hidden]="selectedEvent.TipoLugar != '2'">
+        <label for="TipoLugarCiudad">Ciudad</label>
 
-          <!-- <ion-icon name="location-outline"></ion-icon> -->
-          <!-- <ion-input type="text" id="Lugar" name="Lugar" #Lugar="ngModel" required [(ngModel)]="selectedEvent.Lugar" class="border-0 border-none"></ion-input> -->
-        </ion-item>
+        <input id="TipoLugarCiudad" placeholder="Buscar y seleccionar..." list="TipoLugarCiudadDataList" style="width: 100%; margin-top: 0.4rem;" (change)="validateEventPlace()">
+
+        <datalist id="TipoLugarCiudadDataList">
+          <option *ngFor="let ciudad of ciudadesTiposLugar" label="{{ciudad.Nombre}}" value="{{ciudad.Nombre}}" [attr.data-id]="ciudad.Id">
+        </datalist>
+      </ion-col>
+
+      <ion-col size="6" class="ion-margin-vertical" style="padding: 0.6rem;" [hidden]="selectedEvent.TipoLugar != '3'">
+        <label for="TipoLugarLocalidad">Localidad</label>
+
+        <input id="TipoLugarLocalidad" placeholder="Buscar y seleccionar..." list="TipoLugarLocalidadDataList" style="width: 100%; margin-top: 0.4rem;" (change)="validateEventPlace()">
+
+        <datalist id="TipoLugarLocalidadDataList">
+          <option *ngFor="let ubicacion of ubicacionesTiposLugar" label="{{ubicacion.Nombre}}" value="{{ubicacion.Nombre}}" [attr.data-id]="ubicacion.Id">
+        </datalist>
+      </ion-col>
+
+      <ion-col size="6" class="ion-margin-vertical" style="padding: 0.6rem;" [hidden]="selectedEvent.TipoLugar != '4'">
+        <label for="TipoLugarDpto">Departamento</label>
+
+        <input id="TipoLugarDpto" placeholder="Buscar y seleccionar..." list="TipoLugarDptoDataList" style="width: 100%; margin-top: 0.4rem;" (change)="validateEventPlace()">
+
+        <datalist id="TipoLugarDptoDataList">
+          <option *ngFor="let ubicacion of ubicacionesTiposLugar" label="{{ubicacion.Nombre}}" value="{{ubicacion.Nombre}}" [attr.data-id]="ubicacion.Id">
+        </datalist>
+      </ion-col> -->
+
+      <!-- 
+        <ion-col size="6" class="ion-margin-vertical" style="padding: 0.6rem;" [hidden]="selectedEvent.TipoLugar != '5'">
+        <label for="TipoLugarMeet">Google Meet</label>
+
+        <input id="TipoLugarMeet" placeholder="Buscar y seleccionar..." list="TipoLugarMeetDataList" style="width: 100%; margin-top: 0.4rem;" (change)="validateEventPlace()">
+
+        <datalist id="TipoLugarMeetDataList">
+          <option *ngFor="let ubicacion of ubicacionesTiposLugar" label="{{ubicacion.Nombre}}" value="{{ubicacion.Nombre}}" [attr.data-id]="ubicacion.Id">
+        </datalist>
+      </ion-col>
+     -->
+
+      <ion-col size="6" class="ion-margin-vertical" style="padding: 0.6rem;" [hidden]="selectedEvent.TipoLugar != '7'">
+        <label for="TipoLugarDireccion">Dirección</label>
+
+        <input id="TipoLugarDireccion" placeholder="Buscar o escribir la dirección" list="TipoLugarDireccionDataList" style="width: 100%; margin-top: 0.4rem;" (change)="validateEventPlace()">
+
+        <datalist id="TipoLugarDireccionDataList">
+          <option *ngFor="let ubicacion of ubicacionesTiposLugar" label="{{ubicacion.Nombre}}" value="{{ubicacion.Nombre}}" [attr.data-id]="ubicacion.Id">
+        </datalist>
       </ion-col>
 
       <ion-col size="6" class="ion-margin-vertical">

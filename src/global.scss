@@ -51,3 +51,9 @@ ion-item.item:hover a {
   background-color: slategray;
   box-shadow: inset 0px 0px 0px 1px red;
 }
+
+.select2-container {
+  position: fixed !important;
+  top: auto !important;
+  left: auto !important;
+}

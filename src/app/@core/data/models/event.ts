@@ -11,6 +11,12 @@ export class Event {
   Lugar: string;
   TipoLugar: any;
   Poster: any;
+  TipoLugarDireccion: string
+  TipoLugarPais: string
+  TipoLugarCiudad: string
+  TipoLugarLocalidad: string
+  TipoLugarDpto: string
+  TipoLugarMeet: string
 
   constructor(
     Id = '',
@@ -25,6 +31,12 @@ export class Event {
     Lugar = '',
     TipoLugar = '',
     Poster = '',
+    TipoLugarDireccion = '',
+    TipoLugarPais = '',
+    TipoLugarCiudad = '',
+    TipoLugarLocalidad = '',
+    TipoLugarDpto = '',
+    TipoLugarMeet = '',
   ) {
 
     this.Id = Id
@@ -39,5 +51,11 @@ export class Event {
     this.Lugar = Lugar
     this.TipoLugar = TipoLugar
     this.Poster = Poster
+    this.TipoLugarDireccion = TipoLugarDireccion
+    this.TipoLugarPais = TipoLugarPais
+    this.TipoLugarCiudad = TipoLugarCiudad
+    this.TipoLugarLocalidad = TipoLugarLocalidad
+    this.TipoLugarDpto = TipoLugarDpto
+    this.TipoLugarMeet = TipoLugarMeet
   }
 }

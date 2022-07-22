@@ -36,7 +36,8 @@ export class ImplicitAutenticationService {
     // localStorage.removeItem('expires_at')
     // localStorage.clear();
     // window.location.href = "/"
-    auth.clearStorage()
+    // auth.clearStorage()
+    auth.logout();
     // auth.logout()
     // localStorage.clear();
     // window.location.href = "/"
