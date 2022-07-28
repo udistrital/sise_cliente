@@ -28,10 +28,8 @@ export class ModalneweventComponent implements OnInit {
   tipoeventos: any
   ubicaciones: any
   ubicacionesTiposLugar: any
-  paisesTiposLugar: any
-  ciudadesTiposLugar: any
-  localidadesTiposLugar: any
-  dptosTiposLugar: any
+  direccionesTiposLugar: any
+  typeEventPlace: any
   terceros: any
   ports: any;
   roles: any
@@ -78,7 +76,7 @@ export class ModalneweventComponent implements OnInit {
     $('#TipoLugar').val("")
 
     const ubicacionesTiposLugar = await this.infoPersonalService
-      .getInfoComplementariaTercero(environment.API_ENDPOINT_UBICACIONES, `tipo_lugar?limit=-1`)
+      .getInfoComplementariaTercero(environment.API_ENDPOINT_UBICACIONES, `tipo_lugar?query=limit=-1`)
       .toPromise();
 
     this.ubicacionesTiposLugar = ubicacionesTiposLugar
@@ -124,7 +122,34 @@ export class ModalneweventComponent implements OnInit {
       });
     }
 
-    let res: any;
+    // Event place creation
+    let locationValue, ubicacionId;
+    if (this.typeEventPlace == 5) {
+      locationValue = this.selectedEvent.TipoLugarDireccion
+    } else if (this.typeEventPlace == 7) {
+      locationValue = this.selectedEvent.TipoLugarMeet
+    }
+
+    if (locationValue) {
+      const respLocationCreation: any = await this.funcsService.postData(environment.API_ENDPOINT_UBICACIONES, {
+        "Id": null,
+        "Nombre": locationValue,
+        "TipoLugarId": {
+          "Id": this.typeEventPlace
+        },
+        "Activo": true
+      })
+        .toPromise();
+
+      console.log('respLocationCreation: ', respLocationCreation);
+      ubicacionId = respLocationCreation.Id;
+    }
+
+    // .subscribe((res: any) => {
+    //   console.log('Res creacion tercero', res);
+    // })
+
+    let response: any;
 
     let eventBody = {
       "Id": null,
@@ -137,7 +162,7 @@ export class ModalneweventComponent implements OnInit {
       "TipoEventoId": {
         "Id": parseInt(TipoSesion)
       },
-      "UbicacionId": 0,
+      "UbicacionId": ubicacionId ? ubicacionId : 0,
     }
 
     if (this.selectedEvent.Poster && media)
@@ -153,16 +178,16 @@ export class ModalneweventComponent implements OnInit {
       eventBody["FechaModificacion"] = sesion.FechaModificacion
       eventBody["Id"] = this.eventRow.Id
 
-      res = await this.creacioneventosService.editEvent(eventBody, this.eventRow.Id).toPromise();
+      response = await this.creacioneventosService.editEvent(eventBody, this.eventRow.Id).toPromise();
 
       this.toastService.presentToast("Evento actualizado correctamente")
 
     } else {
-      res = await this.creacioneventosService.createEvent(eventBody).toPromise();
+      response = await this.creacioneventosService.createEvent(eventBody).toPromise();
       this.toastService.presentToast("Evento creado correctamente")
     }
 
-    console.log(res)
+    console.log(response)
     this.dismissModal('modal-new-event')
     loader.dismiss()
   }
@@ -182,15 +207,26 @@ export class ModalneweventComponent implements OnInit {
     console.log($("#TipoLugarDataList option[value='" + $('#TipoLugar').val() + "']").attr('data-id'));
     this.selectedEvent.TipoLugar = $("#TipoLugarDataList option[value='" + $('#TipoLugar').val() + "']").attr('data-id')
 
-    if(this.selectedEvent.TipoLugar == 2){
-      console.log('2 ciudades');
-      // const ciudadesTiposLugar = await this.infoPersonalService
-      // .getInfoComplementariaTercero(environment.API_ENDPOINT_UBICACIONES, `lugar?limit=-1&TipoLugarId.Id=${this.selectedEvent.TipoLugar}`)
-      // .toPromise();
+    if (this.selectedEvent.TipoLugar == 7) {
+      this.typeEventPlace = 7
+      // const direccionesTiposLugar = await this.infoPersonalService
+      //   .getInfoComplementariaTercero(environment.API_ENDPOINT_UBICACIONES, `lugar?query=TipoLugarId.Id:7`)
+      //   .toPromise();
 
-      // console.log('ciudadesTiposLugar', ciudadesTiposLugar);
+      // console.log('direccionesTiposLugar', direccionesTiposLugar);
 
-      // this.ciudadesTiposLugar = ciudadesTiposLugar
+      // this.eventPlace = direccionesTiposLugar
+    }
+    else if (this.selectedEvent.TipoLugar == 5) {
+      //   const googleMeetLink = await this.infoPersonalService
+      //   .getInfoComplementariaTercero(environment.API_ENDPOINT_UBICACIONES, `lugar?query=TipoLugarId.Id:7`)
+      //   .toPromise();
+
+      // console.log('googleMeetLink', googleMeetLink);
+
+      // this.eventPlace = googleMeetLink
+      this.typeEventPlace = 5
+
     }
   }
 }

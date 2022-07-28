@@ -66,71 +66,23 @@
 
         <datalist id="TipoLugarDataList">
           <ng-container *ngFor="let ubicacion of ubicacionesTiposLugar">
-            <option *ngIf="![1,2,3,4].includes(ubicacion.Id)" label="{{ubicacion.Nombre}}" value="{{ubicacion.Nombre}}" [attr.data-id]="ubicacion.Id">
+            <option *ngIf="ubicacion.Id == 5" label="{{ubicacion.Nombre}}" value="{{ubicacion.Nombre}}" [attr.data-id]="ubicacion.Id">
           </ng-container>
         </datalist>
       </ion-col>
 
-      <!-- <ion-col size="6" class="ion-margin-vertical" style="padding: 0.6rem;" [hidden]="selectedEvent.TipoLugar != '1'">
-        <label for="TipoLugarPais">País</label>
-
-        <input id="TipoLugarPais" placeholder="Buscar y seleccionar..." list="TipoLugarPaisDataList" style="width: 100%; margin-top: 0.4rem;" (change)="validateEventPlace()">
-
-        <datalist id="TipoLugarPaisDataList">
-          <option *ngFor="let ubicacion of ubicacionesTiposLugar" label="{{ubicacion.Nombre}}" value="{{ubicacion.Nombre}}" [attr.data-id]="ubicacion.Id">
-        </datalist>
+      <ion-col size="6" class="ion-margin-vertical"  [hidden]="selectedEvent.TipoLugar != '7'">
+        <ion-item lines="full">
+          <ion-label position="floating">Dirección del lugar</ion-label>
+          <ion-input type="text" id="TipoLugarDireccion" name="TipoLugarDireccion" #TipoLugarDireccion="ngModel" required [(ngModel)]="selectedEvent.TipoLugarDireccion" class="border-0 border-none"></ion-input>
+        </ion-item>
       </ion-col>
 
-      <ion-col size="6" class="ion-margin-vertical" style="padding: 0.6rem;" [hidden]="selectedEvent.TipoLugar != '2'">
-        <label for="TipoLugarCiudad">Ciudad</label>
-
-        <input id="TipoLugarCiudad" placeholder="Buscar y seleccionar..." list="TipoLugarCiudadDataList" style="width: 100%; margin-top: 0.4rem;" (change)="validateEventPlace()">
-
-        <datalist id="TipoLugarCiudadDataList">
-          <option *ngFor="let ciudad of ciudadesTiposLugar" label="{{ciudad.Nombre}}" value="{{ciudad.Nombre}}" [attr.data-id]="ciudad.Id">
-        </datalist>
-      </ion-col>
-
-      <ion-col size="6" class="ion-margin-vertical" style="padding: 0.6rem;" [hidden]="selectedEvent.TipoLugar != '3'">
-        <label for="TipoLugarLocalidad">Localidad</label>
-
-        <input id="TipoLugarLocalidad" placeholder="Buscar y seleccionar..." list="TipoLugarLocalidadDataList" style="width: 100%; margin-top: 0.4rem;" (change)="validateEventPlace()">
-
-        <datalist id="TipoLugarLocalidadDataList">
-          <option *ngFor="let ubicacion of ubicacionesTiposLugar" label="{{ubicacion.Nombre}}" value="{{ubicacion.Nombre}}" [attr.data-id]="ubicacion.Id">
-        </datalist>
-      </ion-col>
-
-      <ion-col size="6" class="ion-margin-vertical" style="padding: 0.6rem;" [hidden]="selectedEvent.TipoLugar != '4'">
-        <label for="TipoLugarDpto">Departamento</label>
-
-        <input id="TipoLugarDpto" placeholder="Buscar y seleccionar..." list="TipoLugarDptoDataList" style="width: 100%; margin-top: 0.4rem;" (change)="validateEventPlace()">
-
-        <datalist id="TipoLugarDptoDataList">
-          <option *ngFor="let ubicacion of ubicacionesTiposLugar" label="{{ubicacion.Nombre}}" value="{{ubicacion.Nombre}}" [attr.data-id]="ubicacion.Id">
-        </datalist>
-      </ion-col> -->
-
-      <!-- 
-        <ion-col size="6" class="ion-margin-vertical" style="padding: 0.6rem;" [hidden]="selectedEvent.TipoLugar != '5'">
-        <label for="TipoLugarMeet">Google Meet</label>
-
-        <input id="TipoLugarMeet" placeholder="Buscar y seleccionar..." list="TipoLugarMeetDataList" style="width: 100%; margin-top: 0.4rem;" (change)="validateEventPlace()">
-
-        <datalist id="TipoLugarMeetDataList">
-          <option *ngFor="let ubicacion of ubicacionesTiposLugar" label="{{ubicacion.Nombre}}" value="{{ubicacion.Nombre}}" [attr.data-id]="ubicacion.Id">
-        </datalist>
-      </ion-col>
-     -->
-
-      <ion-col size="6" class="ion-margin-vertical" style="padding: 0.6rem;" [hidden]="selectedEvent.TipoLugar != '7'">
-        <label for="TipoLugarDireccion">Dirección</label>
-
-        <input id="TipoLugarDireccion" placeholder="Buscar o escribir la dirección" list="TipoLugarDireccionDataList" style="width: 100%; margin-top: 0.4rem;" (change)="validateEventPlace()">
-
-        <datalist id="TipoLugarDireccionDataList">
-          <option *ngFor="let ubicacion of ubicacionesTiposLugar" label="{{ubicacion.Nombre}}" value="{{ubicacion.Nombre}}" [attr.data-id]="ubicacion.Id">
-        </datalist>
+      <ion-col size="6" class="ion-margin-vertical"  [hidden]="selectedEvent.TipoLugar != '5'">
+        <ion-item lines="full">
+          <ion-label position="floating">Link de Google Meet</ion-label>
+          <ion-input type="text" id="TipoLugarMeet" name="TipoLugarMeet" #TipoLugarMeet="ngModel" required [(ngModel)]="selectedEvent.TipoLugarMeet" class="border-0 border-none"></ion-input>
+        </ion-item>
       </ion-col>
 
       <ion-col size="6" class="ion-margin-vertical">

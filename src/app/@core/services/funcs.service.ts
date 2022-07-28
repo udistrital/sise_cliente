@@ -7,7 +7,11 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 
 export class FuncsService {
 
-  constructor() { }
+  constructor(private readonly httpClient: HttpClient, private funcsService: FuncsService) { }
+
+  postData(endpoint, data) {
+    return this.httpClient.post(endpoint, data, this.funcsService.openIDDefaultOptions())
+  }
 
   renameProp(obj, keyToRemove, newKey) {
     // Verificas si la propiedad existe y si el nuevo nombre es distinto
@@ -61,26 +65,26 @@ export class FuncsService {
     return imgArr
   }
 
-  isoStrToYYYYMMDDHHSS(isostrdate){
+  isoStrToYYYYMMDDHHSS(isostrdate) {
     let [yyyy, mm, dd, hh, mi] = isostrdate.split(/[/:\-T]/);
     // return `${yyyy}-${mm}-${dd} ${isostrdate.getHours()}:${isostrdate.getMinutes}`
     return `${yyyy}-${mm}-${dd} ${isostrdate.getHours()}:${isostrdate.getMinutes()}`
   }
 
-  isoStrToYYYYMMDDHHSSNormal(isostrdate){
+  isoStrToYYYYMMDDHHSSNormal(isostrdate) {
     let [yyyy, mm, dd, hh, mi] = isostrdate.split(/[/:\-T]/);
     // return `${yyyy}-${mm}-${dd} ${isostrdate.getHours()}:${isostrdate.getMinutes}`
     return `${yyyy}-${mm}-${dd} ${hh}:${mi}`
   }
 
-  strToDateTimeWithoutSeconds(str){
+  strToDateTimeWithoutSeconds(str) {
     const [dateValues, timeValues] = str.split(' ');
     // console.log(dateValues); // 👉️ "2022-05-21"
     // console.log(timeValues); // 👉️ "07:30:14"
-    
+
     const [year, month, day] = dateValues.split('-');
     const [hours, minutes] = timeValues.split(':');
-    
+
     const date = new Date(+year, +month - 1, +day, +hours, +minutes);
 
     return date;

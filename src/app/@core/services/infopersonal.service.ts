@@ -34,9 +34,9 @@ export const handleError = (error: HttpErrorResponse) => {
 })
 
 export class InfoPersonalService {
-  private autenticacion = new ImplicitAutenticationService;
-
+  
   constructor(
+    private autenticacion: ImplicitAutenticationService,
     private readonly httpClient: HttpClient,
     private funcsService: FuncsService
   ) { }

@@ -8,6 +8,7 @@ import { InfoAcademica } from '../../@core/data/models/info_academica_tercero';
 import { DataInfoTercero } from '../../@core/data/models/data_info_tercero';
 import { TerceroService } from '../../@core/services/tercero/tercero.service';
 import { NgForm } from '@angular/forms';
+import { ToastService } from '../../@core/services/notify/toast.service';
 
 @Component({
   selector: 'app-info-academica',
@@ -31,13 +32,14 @@ export class InfoAcademicaPage implements OnInit {
     private readonly terceroService: TerceroService,
     private readonly infoPersonalService: InfoPersonalService,
     private loaderService: LoaderService,
+    public toastService: ToastService
   ) { 
     this.selectedData = new InfoAcademica();
     this.env = environment.INFO_COMPLEMENTARIA_IDS
   }
 
   async ngOnInit() {
-    let loader = await this.loaderService.presentLoading('Cargando información academica')
+    let loader = await this.loaderService.presentLoading('Cargando información academica 🎓')
 
     const { email } = this.autenticacion.getPayload()
     const body = { "user": email };
@@ -91,7 +93,7 @@ export class InfoAcademicaPage implements OnInit {
   }
   
   async setValueFields() {
-    let loader = await this.loaderService.presentLoading('Cargando información academica')
+    let loader = await this.loaderService.presentLoading('Cargando información academica 🎓')
 
     const { email } = this.autenticacion.getPayload()
     const body = { "user": email };
@@ -152,7 +154,7 @@ export class InfoAcademicaPage implements OnInit {
 
   async handleForm(formNg: NgForm) {
 
-    let loader = await this.loaderService.presentLoading('Enviando información academica')
+    let loader = await this.loaderService.presentLoading('Enviando información academica 🎓')
     let terceroID = this.sessionTerceroID
     let infoPersonalServ = this.infoPersonalService
     let infoTercero = this.terceroService
@@ -207,6 +209,8 @@ export class InfoAcademicaPage implements OnInit {
     });
 
     loader.dismiss()
+    this.toastService.presentToast("Información academica actualizada con exito ✅")
+
     await this.setValueFields();
   }
 

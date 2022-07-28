@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Información empresarial</ion-title>
+    <ion-title>Información de emprendimiento</ion-title>
     <ion-buttons slot="start">
       <ion-menu-button menu="main-menu"></ion-menu-button>
     </ion-buttons>
@@ -32,7 +32,7 @@
           <ion-col>
             <ion-item>
               <ion-label>¿Cuál ha sido o es su principal motivación para emprender?</ion-label>
-              <ion-icon slot="start" name="receipt-outline"></ion-icon>
+              
               <ion-select placeholder="Seleccionar" interface="action-sheet" okText="Ok" cancelText="Cancelar" id="motiempr" name="motiempr{{env.MOTIVACION_EMPRENDER}}" #motiempr="ngModel" required [(ngModel)]="selectedData.motiempr">
                 <ion-select-option value="aproopor">Aprovechar la oportunidad de aplicar conocimientos para el desarrollo de idea innovadora</ion-select-option>
                 <ion-select-option value="desaproy">Desarrollar un proyecto académico</ion-select-option>
@@ -48,7 +48,7 @@
           <ion-col>
             <ion-item>
               <ion-label>¿Ha desarrollado un prototipo de su producto o servicio que haya probado en el mercado?</ion-label>
-              <ion-icon slot="start" name="cash-outline"></ion-icon>
+              
               <ion-select placeholder="Seleccionar" okText="Ok" cancelText="Cancelar" id="desaprot" name="desaprot{{env.DESARROLLADO_PROTOTIPO_MERCADO}}" #desaprot="ngModel" required [(ngModel)]="selectedData.desaprot">
                 <ion-select-option value="si">Si</ion-select-option>
                 <ion-select-option value="no">No</ion-select-option>
@@ -59,7 +59,7 @@
           <ion-col [hidden]="this.selectedData.desaprot != 'no'">
             <ion-item>
               <ion-label>Para validar su producto o servicio en el mercado ¿Tiene interés en desarrollar un prototipo?</ion-label>
-              <ion-icon slot="start" name="cash-outline"></ion-icon>
+              
               <ion-select placeholder="Seleccionar" okText="Ok" cancelText="Cancelar" id="valiprod" name="valiprod{{env.TIENE_INTERES_DESARROLLAR_PROTOTIPO}}" #valiprod="ngModel" required [(ngModel)]="selectedData.valiprod">
                 <ion-select-option value="si">Si</ion-select-option>
                 <ion-select-option value="no">No</ion-select-option>
@@ -70,7 +70,7 @@
           <ion-col [hidden]="this.selectedData.desaprot != 'si'">
             <ion-item>
               <ion-label>Los productos o servicios que tiene o proyecta son:</ion-label>
-              <ion-icon slot="start" name="receipt-outline"></ion-icon>
+              
               <ion-select placeholder="Seleccionar" interface="action-sheet" okText="Ok" cancelText="Cancelar" id="prodserv" name="prodserv{{env.PRODUCTOS_SERVICIOS_PROYECTA_SON}}" #prodserv="ngModel" required [(ngModel)]="selectedData.prodserv">
                 <ion-select-option value="aproopor">Aprovechar la oportunidad de aplicar conocimientos para el desarrollo de idea innovadora</ion-select-option>
                 <ion-select-option value="innodife">Innovadores diferenciados de los que hay en el mercado</ion-select-option>
@@ -84,7 +84,7 @@
           <ion-col>
             <ion-item>
               <ion-label>Actualmente, ¿que tanto interés tiene en crear empresa?:</ion-label>
-              <ion-icon slot="start" name="receipt-outline"></ion-icon>
+              
               <ion-select placeholder="Seleccionar" interface="action-sheet" okText="Ok" cancelText="Cancelar" id="inteempr" name="inteempr{{env.QUE__TANTO_INTERES_CREAR_EMPRESA}}" #inteempr="ngModel" required [(ngModel)]="selectedData.inteempr">
                 <ion-select-option value="mucho">Mucho</ion-select-option>
                 <ion-select-option value="medio">Medio</ion-select-option>
@@ -96,7 +96,7 @@
           <ion-col>
             <ion-item>
               <ion-label>¿Cuánto tiempo está dispuesto a dedicarle a su proyecto de negocio?</ion-label>
-              <ion-icon slot="start" name="receipt-outline"></ion-icon>
+              
               <ion-select placeholder="Seleccionar" interface="action-sheet" okText="Ok" cancelText="Cancelar" id="dispproy" name="dispproy{{env.CUANTO_TIEMPO_DEDICAR_PROYECTO_NEGOCIO}}" #dispproy="ngModel" required [(ngModel)]="selectedData.dispproy">
                 <ion-select-option value="dispcomp">Disponibilidad completa</ion-select-option>
                 <ion-select-option value="meditiem">Medio tiempo</ion-select-option>
@@ -109,7 +109,7 @@
           <ion-col>
             <ion-item>
               <ion-label>Seleccione su tipo emprendimiento</ion-label>
-              <ion-icon slot="start" name="receipt-outline"></ion-icon>
+              
               <ion-select placeholder="Seleccionar" interface="action-sheet" okText="Ok" cancelText="Cancelar" id="tipoempr" name="tipoempr{{env.TIPO_EMPRENDIMIENTO}}" #tipoempr="ngModel" required [(ngModel)]="selectedData.tipoempr">
                 <ion-select-option value="ingetecn">Ingeniería / Tecnología</ion-select-option>
                 <ion-select-option value="consserv">Consultoría / servicios técnicos</ion-select-option>
@@ -128,7 +128,7 @@
             <ion-col>
               <ion-item>
                 <ion-label>Seleccione las tecnologías que involucra su proyecto de emprendimiento</ion-label>
-                <ion-icon slot="start" name="cash-outline"></ion-icon>
+                
                 <ion-select placeholder="Seleccionar" multiple="true" okText="Ok" cancelText="Cancelar" id="seletecn" name="seletecn{{env.TECNOLOGIAS_PROYECTO}}-" #seletecn="ngModel" required [(ngModel)]="selectedData.seletecn">
                   <ion-select-option value="probecon">Inteligencia artificial</ion-select-option>
                   <ion-select-option value="probambi">Automatización y robótica</ion-select-option>
@@ -147,7 +147,7 @@
             <ion-col [hidden]="this.selectedData.seletecn != 'aporotra'">
               <ion-item>
                 <ion-label>Especifique la tecnología</ion-label>
-                <ion-icon slot="start" name="cash-outline"></ion-icon>
+                
                 <ion-input name="tecnotro{{env.TECNOLOGIAS_PROYECTO_OTRO}}" #tecnotro="ngModel" required [(ngModel)]="selectedData.tecnotro" placeholder="Especifique la tecnología" type="text"></ion-input>
               </ion-item>
             </ion-col>
@@ -157,7 +157,7 @@
             <ion-col>
               <ion-item>
                 <ion-label>¿Que herramientas o recursos digitales aplica en en su emprendimiento?</ion-label>
-                <ion-icon slot="start" name="cash-outline"></ion-icon>
+                
                 <ion-select placeholder="Seleccionar" multiple="true" okText="Ok" cancelText="Cancelar" id="recudigi" name="recudigi{{env.HERRAMIENTAS_RECURSOS_EMPRENDIMIENTO}}-" #recudigi="ngModel" required [(ngModel)]="selectedData.recudigi">
                   <ion-select-option value="probecon">Redes sociales</ion-select-option>
                   <ion-select-option value="probambi">Página web</ion-select-option>
@@ -172,7 +172,7 @@
             <ion-col [hidden]="this.selectedData.recudigi != 'aporotra'">
               <ion-item>
                 <ion-label>Especifique el recurso</ion-label>
-                <ion-icon slot="start" name="cash-outline"></ion-icon>
+                
                 <ion-input name="recuotro{{env.HERRAMIENTAS_RECURSOS_EMPRENDIMIENTO_OTRO}}" #recuotro="ngModel" required [(ngModel)]="selectedData.recuotro" placeholder="Especifique el recurso" type="text"></ion-input>
               </ion-item>
             </ion-col>
@@ -181,7 +181,7 @@
           <ion-col>
             <ion-item>
               <ion-label>¿En cuales temáticas le guistaría recibir orientación?</ion-label>
-              <ion-icon slot="start" name="cash-outline"></ion-icon>
+              
               <ion-select placeholder="Seleccionar" multiple="true" okText="Ok" cancelText="Cancelar" id="temaorie" name="temaorie{{env.CUALES_TEMATICAS_ORIENTACION}}-" #temaorie="ngModel" required [(ngModel)]="selectedData.temaorie">
                 <ion-select-option value="marcperd">Marca personal y de negocio</ion-select-option>
                 <ion-select-option value="defiidea">Definir la idea del negocio</ion-select-option>
@@ -207,7 +207,7 @@
           <ion-col>
             <ion-item>
               <ion-label>¿Ya ha vendido su producto o prestado su servicio?</ion-label>
-              <ion-icon slot="start" name="receipt-outline"></ion-icon>
+              
               <ion-select placeholder="Seleccionar" interface="action-sheet" okText="Ok" cancelText="Cancelar" id="vendprod" name="vendprod{{env.HA_VENDIDO_PRODUCTO_SERVICIO}}" #vendprod="ngModel" required [(ngModel)]="selectedData.vendprod">
                 <ion-select-option value="sicoseis">Sí, continuamente en los últimos 6 meses</ion-select-option>
                 <ion-select-option value="siocasio">Si, ocasionalmente</ion-select-option>
@@ -220,7 +220,7 @@
             <ion-col>
               <ion-item>
                 <ion-label>¿A quien ha vendido el producto o servicio?</ion-label>
-                <ion-icon slot="start" name="receipt-outline"></ion-icon>
+                
                 <ion-select placeholder="Seleccionar" interface="action-sheet" okText="Ok" cancelText="Cancelar" id="quieserv" name="quieserv{{env.QUIEN_VENDIDO_PRODUCTO_SERVICIO}}" #quieserv="ngModel" required [(ngModel)]="selectedData.quieserv">
                   <ion-select-option value="famiamig">Familiares y amigos</ion-select-option>
                   <ion-select-option value="conorela">Conocidos y relacionados</ion-select-option>
@@ -233,7 +233,7 @@
             <ion-col>
               <ion-item>
                 <ion-label>¿Qué canales ha empleado para vender su producto o servicio?</ion-label>
-                <ion-icon slot="start" name="receipt-outline"></ion-icon>
+                
                 <ion-select placeholder="Seleccionar" interface="action-sheet" okText="Ok" cancelText="Cancelar" id="veprserv" name="veprserv{{env.CANALES_EMPLEO_VENDER_PRODUCTO}}" #veprserv="ngModel" required [(ngModel)]="selectedData.veprserv">
                   <ion-select-option value="puntvent">Punto de venta físico</ion-select-option>
                   <ion-select-option value="redesoci">Redes sociales (Facebook, Instagram, TikTok, etc.)</ion-select-option>
@@ -247,7 +247,7 @@
             <ion-col [hidden]="this.selectedData.veprserv != 'otroabie'">
               <ion-item>
                 <ion-label>Especifique el canal</ion-label>
-                <ion-icon slot="start" name="cash-outline"></ion-icon>
+                
                 <ion-input name="especana{{env.CANALES_EMPLEO_VENDER_PRODUCTO_OTRO}}" #especana="ngModel" required [(ngModel)]="selectedData.especana" placeholder="Especifique el canal" type="text"></ion-input>
               </ion-item>
             </ion-col>
@@ -255,7 +255,7 @@
             <ion-col>
               <ion-item>
                 <ion-label>¿Como ha obtenido el capital necesario para vender?</ion-label>
-                <ion-icon slot="start" name="cash-outline"></ion-icon>
+                
                 <ion-select placeholder="Seleccionar" multiple="true" okText="Ok" cancelText="Cancelar" id="capivend" name="capivend{{env.COMO_OBTUVO_CAPITAL_VENDER}}-" #capivend="ngModel" required [(ngModel)]="selectedData.capivend">
                   <ion-select-option value="prestamo">Préstamo</ion-select-option>
                   <ion-select-option value="famiamig">Familiares / amigos</ion-select-option>
@@ -271,7 +271,7 @@
             <ion-col [hidden]="this.selectedData.capivend != 'otreabie'">
               <ion-item>
                 <ion-label>Especifique la fuente de capital</ion-label>
-                <ion-icon slot="start" name="cash-outline"></ion-icon>
+                
                 <ion-input name="fuencapi{{env.COMO_OBTUVO_CAPITAL_VENDER_OTRO}}" #fuencapi="ngModel" required [(ngModel)]="selectedData.fuencapi" placeholder="Especifique la fuente de capital" type="text"></ion-input>
               </ion-item>
             </ion-col>
@@ -288,7 +288,7 @@
           <ion-col>
             <ion-item>
               <ion-label>¿Conoce los trámites y permisos que apliquen para operar su emprendimiento? (Cámara de Comercio, trámites ambientales, sanitarios, uso del suelo, entre otros)</ion-label>
-              <ion-icon slot="start" name="cash-outline"></ion-icon>
+              
               <ion-select placeholder="Seleccionar" okText="Ok" cancelText="Cancelar" id="conotram" name="conotram{{env.CONOCE_TRAMITES_PARA_EMPRENDIMIENTO}}" #conotram="ngModel" required [(ngModel)]="selectedData.conotram">
                 <ion-select-option value="si">Si</ion-select-option>
                 <ion-select-option value="no">No</ion-select-option>
@@ -299,7 +299,7 @@
           <ion-col>
             <ion-item>
               <ion-label>¿Conoce cuales son los aspectos tributarios que le aplicarán a su proyecto?</ion-label>
-              <ion-icon slot="start" name="cash-outline"></ion-icon>
+              
               <ion-select placeholder="Seleccionar" okText="Ok" cancelText="Cancelar" id="conotrib" name="conotrib{{env.CONOCE_ASPECTOS_TRIBUTARIOS_PROYECTO}}" #conotrib="ngModel" required [(ngModel)]="selectedData.conotrib">
                 <ion-select-option value="si">Si</ion-select-option>
                 <ion-select-option value="no">No</ion-select-option>
@@ -310,7 +310,7 @@
           <ion-col>
             <ion-item>
               <ion-label>¿Tiene conocimiento de como es el proceso de contratación con sus clientes y proveedores?</ion-label>
-              <ion-icon slot="start" name="cash-outline"></ion-icon>
+              
               <ion-select placeholder="Seleccionar" okText="Ok" cancelText="Cancelar" id="conocont" name="conocont{{env.PROCESO_CONTRATACION_CLIENTES_PROVEEDORES}}" #conocont="ngModel" required [(ngModel)]="selectedData.conocont">
                 <ion-select-option value="si">Sí</ion-select-option>
                 <ion-select-option value="no">No</ion-select-option>
@@ -322,7 +322,7 @@
           <ion-col>
             <ion-item>
               <ion-label>¿Tiene conocimiento de como es el proceso de contratación con sus empleados?</ion-label>
-              <ion-icon slot="start" name="cash-outline"></ion-icon>
+              
               <ion-select placeholder="Seleccionar" okText="Ok" cancelText="Cancelar" id="conoempl" name="conoempl{{env.PROCESO_CONTRATACION_EMPLEADOS}}" #conoempl="ngModel" required [(ngModel)]="selectedData.conoempl">
                 <ion-select-option value="si">Sí</ion-select-option>
                 <ion-select-option value="no">No</ion-select-option>
@@ -340,7 +340,7 @@
           <ion-col>
             <ion-item>
               <ion-label>Con cuales de los siguientes recursos cuenta para iniciar la empresa:</ion-label>
-              <ion-icon slot="start" name="cash-outline"></ion-icon>
+              
               <ion-select placeholder="Seleccionar" multiple="true" okText="Ok" cancelText="Cancelar" id="inicempr" name="inicempr{{env.RECURSOS_INICIAR_EMPRESA}}-" #inicempr="ngModel" required [(ngModel)]="selectedData.inicempr">
                 <ion-select-option value="dinero">Dinero</ion-select-option>
                 <ion-select-option value="activos">Activos</ion-select-option>
@@ -355,7 +355,7 @@
           <ion-col [hidden]="this.selectedData.inicempr != 'otroerta'">
             <ion-item>
               <ion-label>Especifique el recurso para iniciar la empresa</ion-label>
-              <ion-icon slot="start" name="cash-outline"></ion-icon>
+              
               <ion-input name="espeinic{{env.RECURSOS_INICIAR_EMPRESA_OTRO}}" #espeinic="ngModel" required [(ngModel)]="selectedData.espeinic" placeholder="Especifique el recurso para iniciar la empresa" type="text"></ion-input>
             </ion-item>
           </ion-col>
@@ -369,7 +369,7 @@
           <ion-col>
             <ion-item>
               <ion-label>Con respecto a su estructura de costos, ingresos y gastos, ¿cuáles de los siguientes aspectos tiene definidos?</ion-label>
-              <ion-icon slot="start" name="cash-outline"></ion-icon>
+              
               <ion-select placeholder="Seleccionar" multiple="true" okText="Ok" cancelText="Cancelar" id="respestr" name="respestr{{env.ESTRUCTURA_COSTOS_INGRESOS}}-" #respestr="ngModel" required [(ngModel)]="selectedData.respestr">
                 <ion-select-option value="costvari">Costos variables o de producción</ion-select-option>
                 <ion-select-option value="costfijo">Costos Fijos</ion-select-option>
@@ -385,7 +385,7 @@
           <ion-col>
             <ion-item>
               <ion-label>Con respecto a su emprendimiento, ¿cuáles de los siguientes aspectos tiene definidos?</ion-label>
-              <ion-icon slot="start" name="cash-outline"></ion-icon>
+              
               <ion-select placeholder="Seleccionar" multiple="true" okText="Ok" cancelText="Cancelar" id="respempr" name="respempr{{env.ASPECTOS_DEFINIDOS_EMPRENDIMIENTO}}-" #respempr="ngModel" required [(ngModel)]="selectedData.respempr">
                 <ion-select-option value="proccomp">Procesos de compras</ion-select-option>
                 <ion-select-option value="procprod">Proceso de producción/prestación de servicio</ion-select-option>

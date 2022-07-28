@@ -19,9 +19,10 @@ export class ModalbasicinfoComponent implements OnInit {
 
   selectedBasicUserData: Tercero
   public documentTypes: any
-  private autenticacion = new ImplicitAutenticationService;
 
   constructor(
+    private autenticacion: ImplicitAutenticationService,
+
     private readonly infoPersonalService: InfoPersonalService,
     // public homeService: HomeService,
     private modalCtrl: ModalController,

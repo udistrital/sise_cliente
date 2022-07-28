@@ -11,10 +11,14 @@ import { ModalController } from '@ionic/angular';
 })
 export class ModalbirthdayComponent implements OnInit {
 
-  private autenticacion = new ImplicitAutenticationService;
   terceroPersonalData: any
 
-  constructor(private readonly infoPersonalService: InfoPersonalService, private modalCtrl: ModalController,) { }
+    constructor(
+      private readonly infoPersonalService: InfoPersonalService, 
+      private modalCtrl: ModalController,
+    private autenticacion: ImplicitAutenticationService,
+
+      ) { }
 
   async ngOnInit() {
     const { email, documento } = this.autenticacion.getPayload()
