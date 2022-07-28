@@ -16,16 +16,14 @@ if (environment.production) {
   enableProdMode();
 }
 
-const autenticacion = new ImplicitAutenticationService();
-
+const autenticacion = new ImplicitAutenticationService;
 const isButtonLogin = false;
 
-// console.log('MAIN.TS')
-// alert('MAIN.TS')
 if (!autenticacion.getAuthorizationUrl(isButtonLogin)) {
 } else {
   autenticacion.live();
 }
+
 
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));

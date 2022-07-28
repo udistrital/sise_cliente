@@ -8,6 +8,7 @@ import { Documento } from '../../@core/data/models/document';
 import { LoaderService } from '../../@core/services/notify/loader.service';
 import { TerceroService } from '../../@core/services/tercero/tercero.service';
 import { DataInfoTercero } from '../../@core/data/models/data_info_tercero';
+import { ToastService } from '../../@core/services/notify/toast.service';
 
 @Component({
   selector: 'app-info-laboral',
@@ -31,7 +32,8 @@ export class InfoLaboralPage implements OnInit {
   constructor(
     private readonly infoPersonalService: InfoPersonalService,
     private readonly terceroService: TerceroService,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    public toastService: ToastService
   ) {
     this.selectedData = new InfoLaboral();
     this.env = environment.INFO_COMPLEMENTARIA_IDS
@@ -163,6 +165,7 @@ export class InfoLaboralPage implements OnInit {
     });
 
     loader.dismiss()
+    this.toastService.presentToast("Información laboral actualizada con exito ✅")
     await this.setValueFields();
   }
 

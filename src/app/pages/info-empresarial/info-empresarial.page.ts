@@ -8,6 +8,7 @@ import { DataInfoTercero } from '../../@core/data/models/data_info_tercero';
 import { InfoEmpresarial } from '../../@core/data/models/info_empresarial_tercero';
 import { NgForm } from '@angular/forms';
 import { TerceroService } from '../../@core/services/tercero/tercero.service';
+import { ToastService } from '../../@core/services/notify/toast.service';
 
 @Component({
   selector: 'app-info-empresarial',
@@ -27,6 +28,7 @@ export class InfoEmpresarialPage implements OnInit {
     private readonly terceroService: TerceroService,
     private readonly infoPersonalService: InfoPersonalService,
     private loaderService: LoaderService,
+    public toastService: ToastService
   ) {
     this.selectedData = new InfoEmpresarial();
     this.env = environment.INFO_COMPLEMENTARIA_IDS
@@ -94,7 +96,7 @@ export class InfoEmpresarialPage implements OnInit {
 
   async handleForm(formNg: NgForm) {
 
-    let loader = await this.loaderService.presentLoading('Enviando información empresarial')
+    let loader = await this.loaderService.presentLoading('Enviando información de emprendimiento 💪')
     let terceroID = this.sessionTerceroID
     let infoPersonalServ = this.infoPersonalService
     let infoTercero = this.terceroService
@@ -149,6 +151,8 @@ export class InfoEmpresarialPage implements OnInit {
     });
 
     loader.dismiss()
+    this.toastService.presentToast("Información de emprendimiento actualizada con exito ✅")
+
     await this.setValueFields();
   }
 

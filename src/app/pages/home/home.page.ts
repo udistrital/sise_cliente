@@ -11,6 +11,7 @@ import { ModalbirthdayComponent } from '../../@theme/components/modals/modalbirt
 import { ModalService } from '../../@core/services/notify/modal.service';
 import { Documento } from '../../@core/data/models/document';
 import { LoaderService } from '../../@core/services/notify/loader.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -26,14 +27,31 @@ export class HomePage implements OnInit {
   terceroPersonalData: any
   eventos: any
   dataInfo: DatosIdentificacionTercero = new DatosIdentificacionTercero();
+  liveTokenValue: boolean = false;
+  username = '';
 
   constructor(
     public homeService: HomeService,
     public modalService: ModalService,
     public photoService: PhotoService,
     private loaderService: LoaderService,
-    private readonly infoPersonalService: InfoPersonalService
-  ) { }
+    private readonly infoPersonalService: InfoPersonalService,
+    private router: Router
+  ) {
+    this.liveToken();
+  }
+
+  liveToken() {
+    if (this.autenticacion.live()) {
+      this.liveTokenValue = this.autenticacion.live();
+      this.username = (this.autenticacion.getPayload()).sub;
+    }
+    return this.autenticacion.live();
+  }
+
+  logout() {
+    this.autenticacion.logout();
+  }
 
   async ngOnInit() {
 
@@ -42,7 +60,7 @@ export class HomePage implements OnInit {
     console.log(this.autenticacion.getPayload())
     const userDataTest = this.autenticacion.getPayload()
     console.log(userDataTest);
-    
+
     const { email } = this.autenticacion.getPayload()
     const body = { "user": email };
     const { documento, documento_compuesto, ...rest } = await this.infoPersonalService.getDocumentIdByEmail(environment.API_GET_IDENTIFICATION, body).toPromise() as Documento;
@@ -89,11 +107,6 @@ export class HomePage implements OnInit {
 
     loader.dismiss()
   }
-
-  logout() {
-    this.autenticacion.logout();
-  }
-
   addPhotoToGallery() {
     this.photoService.addNewToGallery();
   }
