@@ -49,14 +49,14 @@ steps:
         from_secret: aws_access_key_id
       secret_key:
         from_secret: aws_secret_access_key
-      region: "us-east-1"    
+      region: "us-east-1"
       bucket: "cliente-pruebas"
       source: www/**/*
       target: /${DRONE_REPO_NAME}
       strip_prefix: www/
     when:
       branch: [release/*]
-      event: [push, pull_request] 
+      event: [push, pull_request]
 
  # upload app.zip to s3 bucket for CodePipline
   - name: publish_s3_prod
@@ -66,14 +66,14 @@ steps:
         from_secret: aws_access_key_id
       secret_key:
         from_secret: aws_secret_access_key
-      region: "us-east-1"    
+      region: "us-east-1"
       bucket: "cliente-prod"
       source: www/**/*
       target: /${DRONE_REPO_NAME}
       strip_prefix: www/
     when:
       branch: [master]
-      event: [push, pull_request] 
+      event: [push, pull_request]
 
   #Notify results to telegram
   - name: notify_telegram
@@ -102,5 +102,5 @@ steps:
         {{/success}}
     when:
       status: [success, failure]
-      branch: [master, release/*] 
+      branch: [master, release/*]
       event: [push, pull_request]
