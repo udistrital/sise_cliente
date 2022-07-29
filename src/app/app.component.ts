@@ -1,27 +1,36 @@
-import { Component } from '@angular/core';
-
-import { Platform } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { AfterViewInit, Component } from '@angular/core';
+import { environment } from './../../src/environments/environment';
+import { MenuService } from './services/menu.service';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: 'app.component.html',
-  styleUrls: ['app.component.scss']
+  selector: 'ng-uui-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  constructor(
-    private platform: Platform,
-    private splashScreen: SplashScreen,
-    private statusBar: StatusBar
-  ) {
-    this.initializeApp();
+
+export class AppComponent implements AfterViewInit {
+  opened: boolean = false;
+  userData = {user: null, userService: null}
+  environment = environment;
+  constructor(private menuService: MenuService) {
+    this.menuService.sidebar$.subscribe((opened) => (this.opened = opened))
   }
 
-  initializeApp() {
-    this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
-    });
+  ngAfterViewInit() {
   }
+
+  userEvent(event) {
+    const {user, userService} = event;
+    if(userService && user && !this.userData.user && !this.userData.userService){
+      this.userData.user = user;
+      this.userData.userService = userService;
+    }
+  }
+
+  optionEvent(event) {
+    const {Url} = event;
+    if(Url) {
+    }
+  }
+
 }

@@ -9,25 +9,42 @@ kind: pipeline
 name: cliente_deploy
 
 steps:
+  - name: install-deps
+    volumes:
+      - name: cypress-cache
+        path: /root/.cache/Cypress
+    image: cypress/base:13.3.0
+    commands:
+      - npm install
   # build and test the go program
   - name: nodejs
-    image: node:12.6.0
+    image: node:latest
     commands:
      - node --version
-     - npm i
+     - npm install -g @angular/cli
+
+    #  - npm install -g cross-env
+     - npm install
+     - export NODE_OPTIONS=--openssl-legacy-provider
      - npm run build
-     - ls -la
+    #  - cross-env NODE_OPTIONS='--openssl-legacy-provider'
+    #  - ng build --configuration=test
     when:
       branch: [release/*]
       event: [push]
 
   - name: nodejs_prod
-    image: node:12.6.0
+    image: node:latest
     commands:
      - node --version
-     - npm i
+     - npm install -g @angular/cli
+
+    #  - npm install -g cross-env
+     - npm install
+     - export NODE_OPTIONS=--openssl-legacy-provider
      - npm run build
-     - ls -la
+    #  - cross-env NODE_OPTIONS='--openssl-legacy-provider'
+    #  - ng build --configuration=test
     when:
       branch: [master]
       event: [push, pull_request]
@@ -40,14 +57,14 @@ steps:
         from_secret: aws_access_key_id
       secret_key:
         from_secret: aws_secret_access_key
-      region: "us-east-1"    
+      region: "us-east-1"
       bucket: "cliente-pruebas"
       source: www/**/*
       target: /${DRONE_REPO_NAME}
       strip_prefix: www/
     when:
       branch: [release/*]
-      event: [push, pull_request] 
+      event: [push, pull_request]
 
  # upload app.zip to s3 bucket for CodePipline
   - name: publish_s3_prod
@@ -57,14 +74,14 @@ steps:
         from_secret: aws_access_key_id
       secret_key:
         from_secret: aws_secret_access_key
-      region: "us-east-1"    
+      region: "us-east-1"
       bucket: "cliente-prod"
       source: www/**/*
       target: /${DRONE_REPO_NAME}
       strip_prefix: www/
     when:
       branch: [master]
-      event: [push, pull_request] 
+      event: [push, pull_request]
 
   #Notify results to telegram
   - name: notify_telegram
@@ -93,5 +110,5 @@ steps:
         {{/success}}
     when:
       status: [success, failure]
-      branch: [master, release/*] 
+      branch: [master, release/*]
       event: [push, pull_request]
