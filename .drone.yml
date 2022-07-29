@@ -15,6 +15,7 @@ steps:
     commands:
      - node --version
      - npm install -g @angular/cli
+     - npm install -g cross-env
      - npm i
      - cross-env NODE_OPTIONS='--openssl-legacy-provider'
      - ng build --configuration=test
@@ -25,9 +26,12 @@ steps:
   - name: nodejs_prod
     image: node:latest
     commands:
-      - npm install -g @angular/cli
-      - npm i
-      - ng build --configuration=test
+     - node --version
+     - npm install -g @angular/cli
+     - npm install -g cross-env
+     - npm i
+     - cross-env NODE_OPTIONS='--openssl-legacy-provider'
+     - ng build --configuration=test
     when:
       branch: [master]
       event: [push, pull_request]
