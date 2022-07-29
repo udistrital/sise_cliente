@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { Injector, NgModule } from '@angular/core';
-import { createCustomElement } from '@angular/elements';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
