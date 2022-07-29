@@ -112,8 +112,3 @@ steps:
       status: [success, failure]
       branch: [master, release/*]
       event: [push, pull_request]
-
-volumes:
-  - name: cypress-cache
-    host:
-      path: /tmp/cypress-cache
