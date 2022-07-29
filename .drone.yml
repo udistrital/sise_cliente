@@ -15,10 +15,11 @@ steps:
     commands:
      - node --version
      - npm install -g @angular/cli
-     - npm install -g cross-env
-     - npm i
-     - cross-env NODE_OPTIONS='--openssl-legacy-provider'
-     - ng build --configuration=test
+    #  - npm install -g cross-env
+     - npm install
+     - npm run build
+    #  - cross-env NODE_OPTIONS='--openssl-legacy-provider'
+    #  - ng build --configuration=test
     when:
       branch: [release/*]
       event: [push]
@@ -28,10 +29,11 @@ steps:
     commands:
      - node --version
      - npm install -g @angular/cli
-     - npm install -g cross-env
-     - npm i
-     - cross-env NODE_OPTIONS='--openssl-legacy-provider'
-     - ng build --configuration=test
+    #  - npm install -g cross-env
+     - npm install
+     - npm run build
+    #  - cross-env NODE_OPTIONS='--openssl-legacy-provider'
+    #  - ng build --configuration=test
     when:
       branch: [master]
       event: [push, pull_request]
