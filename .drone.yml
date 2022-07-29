@@ -9,6 +9,13 @@ kind: pipeline
 name: cliente_deploy
 
 steps:
+  - name: install-deps
+    volumes:
+      - name: cypress-cache
+        path: /root/.cache/Cypress
+    image: cypress/base:13.3.0
+    commands:
+      - npm install
   # build and test the go program
   - name: nodejs
     image: node:latest
