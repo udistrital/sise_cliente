@@ -1,70 +1,36 @@
-import { Component, Input } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { Platform } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { ImplicitAutenticationService } from './@core/utils/implicit_autentication.service';
-import { Router } from '@angular/router';
+import { AfterViewInit, Component } from '@angular/core';
+import { environment } from './../../src/environments/environment';
+import { MenuService } from './services/menu.service';
+
 @Component({
-  selector: 'app-root',
-  templateUrl: 'app.component.html',
-  styleUrls: ['app.component.scss']
+  selector: 'ng-uui-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
 })
 
-export class AppComponent {
-
-  public isRemainder: any;
-  private autenticacion = new ImplicitAutenticationService;
-  @Input() position = 'normal';
-  itemClick: Subscription;
-  liveTokenValue: boolean = false;
-  user: any;
-  title: any;
-  username = '';
-  userMenu = [{ title: 'ver todas', icon: 'fa fa-list' }];
-  public noNotify: any = '0';
-
-
-  constructor(
-    private platform: Platform,
-    private splashScreen: SplashScreen,
-    private statusBar: StatusBar,
-
-    //   private sidebarService: NbSidebarService,
-    //  private menuService: NbMenuService,
-    //  private analyticsService: AnalyticsService,
-    private router: Router,
-    //  public notificacionService: NotificacionesService,
-    //  public translate: TranslateService
-
-  ) {
-    this.isRemainder = 0
-    this.initializeApp();
-    this.liveToken();
+export class AppComponent implements AfterViewInit {
+  opened: boolean = false;
+  userData = {user: null, userService: null}
+  environment = environment;
+  constructor(private menuService: MenuService) {
+    this.menuService.sidebar$.subscribe((opened) => (this.opened = opened))
   }
 
-  liveToken() {
-    if (this.autenticacion.live()) {
-      this.liveTokenValue = this.autenticacion.live();
-      this.username = (this.autenticacion.getPayload()).sub;
-    }
-    return this.autenticacion.live();
+  ngAfterViewInit() {
   }
- 
-  onContecxtItemSelection(title) {
-    if (title === 'ver todas') {
-      this.router.navigate(['/pages/notificacion/listado']);
+
+  userEvent(event) {
+    const {user, userService} = event;
+    if(userService && user && !this.userData.user && !this.userData.userService){
+      this.userData.user = user;
+      this.userData.userService = userService;
     }
   }
- 
-  logout() {
-    this.autenticacion.logout();
+
+  optionEvent(event) {
+    const {Url} = event;
+    if(Url) {
+    }
   }
 
-  initializeApp() {
-    this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
-    });
-  }
 }
