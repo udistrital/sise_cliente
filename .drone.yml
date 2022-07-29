@@ -15,8 +15,10 @@ steps:
     commands:
      - node --version
      - npm install -g @angular/cli
+
     #  - npm install -g cross-env
      - npm install
+     - SET NODE_OPTIONS=--openssl-legacy-provider
      - npm run build
     #  - cross-env NODE_OPTIONS='--openssl-legacy-provider'
     #  - ng build --configuration=test
@@ -29,8 +31,10 @@ steps:
     commands:
      - node --version
      - npm install -g @angular/cli
+
     #  - npm install -g cross-env
      - npm install
+     - SET NODE_OPTIONS=--openssl-legacy-provider
      - npm run build
     #  - cross-env NODE_OPTIONS='--openssl-legacy-provider'
     #  - ng build --configuration=test
