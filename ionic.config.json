@@ -1,8 +1,0 @@
-{
-  "name": "sise_cliente",
-  "integrations": {
-    "cordova": {},
-    "capacitor": {}
-  },
-  "type": "angular"
-}
