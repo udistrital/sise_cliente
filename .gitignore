@@ -4,9 +4,11 @@
 /dist
 /tmp
 /out-tsc
-# Only exists if Bazel was run
-/bazel-out
+.angular/cache
 .angular
+www/
+www
+
 # dependencies
 /node_modules
 .dist

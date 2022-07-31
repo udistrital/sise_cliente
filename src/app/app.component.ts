@@ -7,9 +7,9 @@ import { NavigationEnd, Router } from '@angular/router';
 import { ImplicitAutenticationService } from './@core/utils/implicit_autentication.service';
 declare let gtag: Function;
 @Component({
-  selector: 'ng-uui-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  selector: 'app-root',
+  templateUrl: 'app.component.html',
+  styleUrls: ['app.component.scss']
 })
 
 export class AppComponent {

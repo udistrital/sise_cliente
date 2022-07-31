@@ -1,1 +1,55 @@
-@import url("https://pruebasassets.portaloas.udistrital.edu.co/urano-style.css");
+.logo {
+  background: url() no-repeat top left;
+  background-size: contain;
+  width: 80px;
+  height: 35px;
+  margin: 20px auto 0 auto;
+}
+
+.inner-scroll {
+  overflow: inherit !important;
+  position: inherit !important;
+}
+
+.alert-wrapper.sc-ion-alert-md {
+  max-width: max-content !important;
+}
+
+ion-modal.fullscreen {
+  --width: 100%;
+  --height: 100%;
+  --border-radius: 0;
+}
+
+ion-icon {
+  &[class*="custom-"] {
+    mask-size: contain;
+    mask-position: 50% 50%;
+    mask-repeat: no-repeat;
+    background: currentColor;
+    width: 1em;
+    height: 1em;
+  }
+
+  &[class*="custom-carnet"] {
+    mask-image: url(../../src/assets/icon/carnet-de-identidad.svg);
+  }
+}
+
+.list-md {
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  background: var(--ion-item-background, var(--ion-background-color, #fff));
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

@@ -20,15 +20,14 @@ steps:
   - name: nodejs
     image: node:latest
     commands:
-     - node --version
+    #  - node --version
      - npm install -g @angular/cli
-
-    #  - npm install -g cross-env
-     - npm install
-     - export NODE_OPTIONS=--openssl-legacy-provider
-     - npm run build
-    #  - cross-env NODE_OPTIONS='--openssl-legacy-provider'
-    #  - ng build --configuration=test
+     - npm i --force
+     - ng build --configuration=test
+    #  - npm start
+    #  npm run build
+    #  ng build --configuration=test
+    #  - ls -la
     when:
       branch: [release/*]
       event: [push]
@@ -36,15 +35,15 @@ steps:
   - name: nodejs_prod
     image: node:latest
     commands:
-     - node --version
-     - npm install -g @angular/cli
+      - npm install -g @angular/cli
+      - npm i --force
+      - ng build --configuration=test
 
-    #  - npm install -g cross-env
-     - npm install
-     - export NODE_OPTIONS=--openssl-legacy-provider
-     - npm run build
-    #  - cross-env NODE_OPTIONS='--openssl-legacy-provider'
-    #  - ng build --configuration=test
+      # - npm start
+    #  - node --version
+    #  - npm i --force
+    #  - npm run build
+    #  - ls -la
     when:
       branch: [master]
       event: [push, pull_request]
