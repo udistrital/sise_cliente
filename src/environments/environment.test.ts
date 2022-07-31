@@ -48,8 +48,8 @@
 //   // OVARGAS
 //   TERCEROS_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/terceros_crud/v1',
 //   INFO_COMPLEMENTARIA_IDS: {
-//     ESTADO_CIVIL: [8, 9, 10, 11, 12], // 32 -> F, 33 -> M, 34 -> no aplica,
-//     GENERO: [32, 33, 34], // 32 -> F, 33 -> M, 34 -> no aplica,
+//     ESTADO_CIVIL: [8, 9, 10, 11, 12], // 32 -> F, 33 -> M, 34 -> no aplica, 
+//     GENERO: [32, 33, 34], // 32 -> F, 33 -> M, 34 -> no aplica, 
 //     CELULAR: 52,
 //     CORREO_PERSONAL: 53, // o 253
 //     DIRECCION: 54,
@@ -136,8 +136,8 @@ export const environment = {
   INFO_COMPLEMENTARIA_IDS: {
     // NOTA: LOS campos o datos CON DISABLED HAY QUE BUSCARLES EL ID
 
-    // ESTADO_CIVIL: [8, 9, 10, 11, 12], // 32 -> F, 33 -> M, 34 -> no aplica,
-    GENERO: [32, 33, 34], // 32 -> F, 33 -> M, 34 -> no aplica,
+    // ESTADO_CIVIL: [8, 9, 10, 11, 12], // 32 -> F, 33 -> M, 34 -> no aplica, 
+    GENERO: [32, 33, 34], // 32 -> F, 33 -> M, 34 -> no aplica, 
     // CELULAR: 52,
     // CORREO_PERSONAL: 53, // o 253
     // DIRECCION: 54,
