@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-// import { HomePage } from '../../../pages/home/home.page';
+// import { HomeComponent } from '../../../pages/home/home.page';
 // import { HomeService } from '../../../@core/services/home.service';
 import { Tercero } from '../../../../@core/data/models/tercero';
 import { NgForm } from '@angular/forms';
@@ -12,7 +12,7 @@ import { ImplicitAutenticationService } from '../../../../@core/utils/implicit_a
   selector: 'app-modalbasicinfo',
   templateUrl: './modalbasicinfo.component.html',
   styleUrls: ['./modalbasicinfo.component.scss'],
-  // providers: [HomePage]
+  // providers: [HomeComponent]
 })
 
 export class ModalbasicinfoComponent implements OnInit {
@@ -26,7 +26,7 @@ export class ModalbasicinfoComponent implements OnInit {
     private readonly infoPersonalService: InfoPersonalService,
     // public homeService: HomeService,
     private modalCtrl: ModalController,
-    // public homePage: HomePage,
+    // public HomeComponent: HomeComponent,
   ) {
     this.selectedBasicUserData = new Tercero(); // iNICIALIZANDO VARIABLE CON UNA TAREA
   }

@@ -1,4 +1,4 @@
-import { TerceroHerlper } from './../../@core/helpers/Tercero/terceroHelper';
+import { TerceroHerlper } from '../../@core/helpers/Tercero/terceroHelper';
 import { Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { __await } from 'tslib';
 import { environment } from '../../../environments/environment';
@@ -17,11 +17,11 @@ import { ToastService } from '../../@core/services/notify/toast.service';
 
 @Component({
   selector: 'app-info-personal',
-  templateUrl: './info-personal.page.html',
-  styleUrls: ['./info-personal.page.scss'],
+  templateUrl: './info-personal.component.html',
+  styleUrls: ['./info-personal.component.scss'],
 })
 
-export class InfoPersonalPage implements OnInit {
+export class InfoPersonalComponent implements OnInit {
 
   private autenticacion = new ImplicitAutenticationService;
   dataTercero: any[] = [];
@@ -429,5 +429,7 @@ export class InfoPersonalPage implements OnInit {
     loader.dismiss()
     this.toastService.presentToast("Información personal actualizada con exito ✅")
     await this.setValueFields();
+
+    
   }
 }

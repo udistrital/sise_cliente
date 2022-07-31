@@ -4,7 +4,8 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { ImplicitAutenticationService } from './@core/utils/implicit_autentication.service';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
+declare let gtag: Function;
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -38,6 +39,16 @@ export class AppComponent {
     //  public translate: TranslateService
 
   ) {
+    this.router.events.subscribe(event => {
+      if(event instanceof NavigationEnd){
+        gtag('config', 'G-RBY2GQV40M', 
+                {
+                  'page_path': event.urlAfterRedirects
+                }
+               );
+       }
+    }
+ )
     this.isRemainder = 0
     this.initializeApp();
     this.liveToken();

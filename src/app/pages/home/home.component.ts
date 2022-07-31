@@ -15,12 +15,12 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  templateUrl: 'home.component.html',
+  styleUrls: ['home.component.scss'],
   providers: [HomeService, InfoPersonalService, PhotoService, ModalService]
 })
 
-export class HomePage implements OnInit {
+export class HomeComponent implements OnInit {
 
   private autenticacion = new ImplicitAutenticationService;
   sessionUser: any

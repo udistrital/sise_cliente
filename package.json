@@ -1,7 +1,7 @@
 {
   "name": "sise_cliente",
   "author": "Ionic Framework",
-  "homepage": "https://ionicframework.com/",
+  "homepage": ".",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --port=4200 -o",
