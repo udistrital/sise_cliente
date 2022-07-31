@@ -1,8 +1,3 @@
-/**
- * @license
- * Copyright Akveo. All Rights Reserved.
- * Licensed under the MIT License. See License.txt in the project root for license information.
- */
 export const environment = {
   production: true,
   NUXEO: {
@@ -34,8 +29,8 @@ export const environment = {
   ID_GRUPO_INFO_PERSONAL: 70,
   ID_GRUPO_INFO_CONTACTO: 10,
   ID_GRUPO_ESTADO_CIVIL: 2,
-  IDS_INFO_COMPLEMENTARIA_ESTADO_CIVIL: [8, 9, 10, 11, 12], // 32 -> F, 33 -> M, 34 -> no aplica, 
-  IDS_INFO_COMPLEMENTARIA_GENERO: [32, 33, 34], // 32 -> F, 33 -> M, 34 -> no aplica, 
+  IDS_INFO_COMPLEMENTARIA_ESTADO_CIVIL: [8, 9, 10, 11, 12], // 32 -> F, 33 -> M, 34 -> no aplica,
+  IDS_INFO_COMPLEMENTARIA_GENERO: [32, 33, 34], // 32 -> F, 33 -> M, 34 -> no aplica,
   ID_INFO_COMPLEMENTARIA_CELULAR: 52,
   ID_INFO_COMPLEMENTARIA_CORREO_PERSONAL: 53, // o 253
   ID_INFO_COMPLEMENTARIA_DIRECCION: 54,

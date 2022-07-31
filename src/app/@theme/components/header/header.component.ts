@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'header-root',
   templateUrl: 'header.component.html',
-  styleUrls: ['header.component.scss']
+  // styleUrls: ['header.component.scss']
 })
 
 export class HeaderComponent {
@@ -50,13 +50,13 @@ export class HeaderComponent {
     }
     return this.autenticacion.live();
   }
- 
+
   onContecxtItemSelection(title) {
     if (title === 'ver todas') {
       this.router.navigate(['/pages/notificacion/listado']);
     }
   }
- 
+
   logout() {
     this.autenticacion.logout();
   }

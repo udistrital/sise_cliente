@@ -3,8 +3,8 @@ import { Subscription } from 'rxjs';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { ImplicitAutenticationService } from './@core/utils/implicit_autentication.service';
 import { NavigationEnd, Router } from '@angular/router';
+import { ImplicitAutenticationService } from './@core/utils/implicit_autentication.service';
 declare let gtag: Function;
 @Component({
   selector: 'app-root',
@@ -41,7 +41,7 @@ export class AppComponent {
   ) {
     this.router.events.subscribe(event => {
       if(event instanceof NavigationEnd){
-        gtag('config', 'G-RBY2GQV40M', 
+        gtag('config', 'G-RBY2GQV40M',
                 {
                   'page_path': event.urlAfterRedirects
                 }
@@ -50,7 +50,6 @@ export class AppComponent {
     }
  )
     this.isRemainder = 0
-    this.initializeApp();
     this.liveToken();
   }
 
@@ -61,21 +60,18 @@ export class AppComponent {
     }
     return this.autenticacion.live();
   }
- 
+
   onContecxtItemSelection(title) {
     if (title === 'ver todas') {
       this.router.navigate(['/pages/notificacion/listado']);
     }
   }
- 
+
   logout() {
     this.autenticacion.logout();
   }
 
-  initializeApp() {
-    this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
-    });
+  ngAfterViewInit() {
   }
+
 }
