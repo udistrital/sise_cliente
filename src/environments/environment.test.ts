@@ -48,8 +48,8 @@
 //   // OVARGAS
 //   TERCEROS_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/terceros_crud/v1',
 //   INFO_COMPLEMENTARIA_IDS: {
-//     ESTADO_CIVIL: [8, 9, 10, 11, 12], // 32 -> F, 33 -> M, 34 -> no aplica, 
-//     GENERO: [32, 33, 34], // 32 -> F, 33 -> M, 34 -> no aplica, 
+//     ESTADO_CIVIL: [8, 9, 10, 11, 12], // 32 -> F, 33 -> M, 34 -> no aplica,
+//     GENERO: [32, 33, 34], // 32 -> F, 33 -> M, 34 -> no aplica,
 //     CELULAR: 52,
 //     CORREO_PERSONAL: 53, // o 253
 //     DIRECCION: 54,
@@ -121,10 +121,12 @@ export const environment = {
     AUTORIZATION_URL: 'https://autenticacion.portaloas.udistrital.edu.co/oauth2/authorize',
     CLIENTE_ID: 's2BR5hCyo1Bea2dCiMxx9usviQoa',
     RESPONSE_TYPE: 'id_token token',
-    SCOPE: 'openid email role',
+    // SCOPE: 'openid email role',
+    SCOPE: 'openid email',
     REDIRECT_URL: 'https://pruebassise.portaloas.udistrital.edu.co',
     SIGN_OUT_URL: 'https://autenticacion.portaloas.udistrital.edu.co/oidc/logout',
     SIGN_OUT_REDIRECT_URL: 'https://pruebassise.portaloas.udistrital.edu.co',
+    SIGN_OUT_APPEND_TOKEN:  "true",
   },
   API_GET_IDENTIFICATION: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/autenticacion_mid/v1/token/userRol',
   DATOS_IDENTIFICACION_TERCERO_ENDPOINT: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/terceros_crud/v1/datos_identificacion',
@@ -134,8 +136,8 @@ export const environment = {
   INFO_COMPLEMENTARIA_IDS: {
     // NOTA: LOS campos o datos CON DISABLED HAY QUE BUSCARLES EL ID
 
-    // ESTADO_CIVIL: [8, 9, 10, 11, 12], // 32 -> F, 33 -> M, 34 -> no aplica, 
-    GENERO: [32, 33, 34], // 32 -> F, 33 -> M, 34 -> no aplica, 
+    // ESTADO_CIVIL: [8, 9, 10, 11, 12], // 32 -> F, 33 -> M, 34 -> no aplica,
+    GENERO: [32, 33, 34], // 32 -> F, 33 -> M, 34 -> no aplica,
     // CELULAR: 52,
     // CORREO_PERSONAL: 53, // o 253
     // DIRECCION: 54,
