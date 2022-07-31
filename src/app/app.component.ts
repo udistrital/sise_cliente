@@ -7,9 +7,9 @@ import { ImplicitAutenticationService } from './@core/utils/implicit_autenticati
 import { NavigationEnd, Router } from '@angular/router';
 declare let gtag: Function;
 @Component({
-  selector: 'app-root',
-  templateUrl: 'app.component.html',
-  styleUrls: ['app.component.scss']
+  selector: 'ng-uui-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss']
 })
 
 export class AppComponent {
@@ -41,7 +41,7 @@ export class AppComponent {
   ) {
     this.router.events.subscribe(event => {
       if(event instanceof NavigationEnd){
-        gtag('config', 'G-RBY2GQV40M', 
+        gtag('config', 'G-RBY2GQV40M',
                 {
                   'page_path': event.urlAfterRedirects
                 }
@@ -54,28 +54,21 @@ export class AppComponent {
     this.liveToken();
   }
 
-  liveToken() {
-    if (this.autenticacion.live()) {
-      this.liveTokenValue = this.autenticacion.live();
-      this.username = (this.autenticacion.getPayload()).sub;
-    }
-    return this.autenticacion.live();
-  }
- 
-  onContecxtItemSelection(title) {
-    if (title === 'ver todas') {
-      this.router.navigate(['/pages/notificacion/listado']);
-    }
-  }
- 
-  logout() {
-    this.autenticacion.logout();
+  ngAfterViewInit() {
   }
 
-  initializeApp() {
-    this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
-    });
+  userEvent(event) {
+    const {user, userService} = event;
+    if(userService && user && !this.userData.user && !this.userData.userService){
+      this.userData.user = user;
+      this.userData.userService = userService;
+    }
   }
+
+  optionEvent(event) {
+    const {Url} = event;
+    if(Url) {
+    }
+  }
+
 }

@@ -1,5 +1,3 @@
-import { FormsModule } from '@angular/forms';
-import { ErrorHandler, NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { APP_BASE_HREF, CommonModule, HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
@@ -18,16 +16,48 @@ import { InfoPersonalService } from './@core/services/infopersonal.service';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 // import { NgSelectModule } from '@ng-select/ng-select';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+// services
+import { ConfiguracionService } from './services/configuracion.service';
+import { NotioasService } from './services/notioas.service';
+import { MenuAplicacionesService } from './services/menuAplicaciones.service';
+import { MenuService } from './services/menu.service'
+
+// local Components
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
+import { MenuAplicacionesComponent } from './menu-aplicaciones/menu-aplicaciones.component';
+import { NotioasComponent } from './notioas/notioas.component';
+import { LoadComponent } from './load/load.component';
+import { MenuComponent } from './menu/menu.component';
+import { AppComponent } from './app.component';
+
+// material modules
+import { MatListModule } from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { LoginComponent } from './login/login.component';
+import { OasComponent } from './oas/oas.component';
+import { TercerosFormComponent } from './terceros-form/terceros-form.component';
+
+// end material modules
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    FooterComponent,
+    MenuAplicacionesComponent,
+    NotioasComponent,
+    LoadComponent,
+    MenuComponent,
+    SidebarComponent,
+    LoginComponent,
+    OasComponent,
+    TercerosFormComponent
+  ],
   imports: [
-    // NgSelectModule,
-    BrowserModule,
-    FormsModule,
-    IonicModule.forRoot(),
-    CommonModule,
-    Ng2SmartTableModule,
     HttpClientModule,
     AppRoutingModule,
     NoopAnimationsModule,
@@ -36,6 +66,7 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     //   apiKey: environment.MAPSKEY
     // }),
   ],
+  entryComponents: [],
   providers: [
     StatusBar,
     Camera,
@@ -47,7 +78,13 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     // { provide: APP_BASE_HREF, useValue: '/' }
     // ImplicitAutenticationService,
   ],
-  bootstrap: [AppComponent],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  exports: [],
+  bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  constructor(
+    private injector: Injector
+  ) {
+  }
+  ngDoBootstrap() { }
+}
