@@ -7,7 +7,6 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { CreacioneventosComponent } from './creacioneventos/creacioneventos.component';
 import { CreacioneventosService } from '../@core/services/creacioneventos.service';
-import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { SimpleComponent } from '../@theme/components/enlargeImg/simple/simple/simple.component';
 import { ImplicitAutenticationService } from '../@core/utils/implicit_autentication.service';
@@ -80,8 +79,6 @@ const pagesComponents = [
     PagesRoutingModule,
     Ng2SmartTableModule,
     IonicModule,
-    NgxDatatableModule
-    // ...materialModules
   ],
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
