@@ -61,4 +61,8 @@ import 'zone.js/dist/zone';  // Included with Angular CLI.
 /***************************************************************************************************
  * APPLICATION IMPORTS
  */
-import 'document-register-element';
+
+
+if (typeof SVGElement.prototype.contains === 'undefined') {
+  SVGElement.prototype.contains = HTMLDivElement.prototype.contains;
+}

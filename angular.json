@@ -98,9 +98,7 @@
               "src/favicon.ico",
               "src/assets"
             ],
-            "styles": [
-              "src/styles.scss"
-            ],
+            "styles": [],
             "scripts": []
           }
         },
@@ -132,5 +130,16 @@
       }
     }
   },
-  "defaultProject": "webcomponents"
+  "cli": {
+    "defaultCollection": "@ionic/angular-toolkit",
+    "analytics": "5b86d7c3-e65c-48ee-b163-624a7cb2b436"
+  },
+  "schematics": {
+    "@ionic/angular-toolkit:component": {
+      "styleext": "scss"
+    },
+    "@ionic/angular-toolkit:page": {
+      "styleext": "scss"
+    }
+  }
 }

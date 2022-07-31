@@ -8,13 +8,9 @@ import { Camera } from '@ionic-native/camera/ngx';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { ImplicitAutenticationService } from './@core/utils/implicit_autentication.service';
-// import { ComponentsModule } from './@theme/components/components.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatIconModule } from '@angular/material/icon';
-import { InfoPersonalService } from './@core/services/infopersonal.service';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
-// import { NgSelectModule } from '@ng-select/ng-select';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -58,6 +54,11 @@ import { TercerosFormComponent } from './terceros-form/terceros-form.component';
     TercerosFormComponent
   ],
   imports: [
+    BrowserModule,
+    FormsModule,
+    IonicModule.forRoot(),
+    CommonModule,
+    Ng2SmartTableModule,
     HttpClientModule,
     AppRoutingModule,
     NoopAnimationsModule,
@@ -71,12 +72,10 @@ import { TercerosFormComponent } from './terceros-form/terceros-form.component';
     StatusBar,
     Camera,
     SplashScreen,
-    // InfoPersonalService,
     { provide: LocationStrategy, useClass: HashLocationStrategy },
     // { provide: LocationStrategy, useClass: PathLocationStrategy },
     // { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     // { provide: APP_BASE_HREF, useValue: '/' }
-    // ImplicitAutenticationService,
   ],
   exports: [],
   bootstrap: [AppComponent]

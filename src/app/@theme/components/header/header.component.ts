@@ -3,16 +3,15 @@ import { Subscription } from 'rxjs';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { NavigationEnd, Router } from '@angular/router';
-import { ImplicitAutenticationService } from './@core/utils/implicit_autentication.service';
-declare let gtag: Function;
+import { ImplicitAutenticationService } from '../../../@core/utils/implicit_autentication.service';
+import { Router } from '@angular/router';
 @Component({
-  selector: 'ng-uui-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  selector: 'header-root',
+  templateUrl: 'header.component.html',
+  // styleUrls: ['header.component.scss']
 })
 
-export class AppComponent {
+export class HeaderComponent {
 
   public isRemainder: any;
   private autenticacion = new ImplicitAutenticationService;
@@ -39,17 +38,8 @@ export class AppComponent {
     //  public translate: TranslateService
 
   ) {
-    this.router.events.subscribe(event => {
-      if(event instanceof NavigationEnd){
-        gtag('config', 'G-RBY2GQV40M',
-                {
-                  'page_path': event.urlAfterRedirects
-                }
-               );
-       }
-    }
- )
     this.isRemainder = 0
+    this.initializeApp();
     this.liveToken();
   }
 
@@ -71,7 +61,10 @@ export class AppComponent {
     this.autenticacion.logout();
   }
 
-  ngAfterViewInit() {
+  initializeApp() {
+    this.platform.ready().then(() => {
+      this.statusBar.styleDefault();
+      this.splashScreen.hide();
+    });
   }
-
 }
