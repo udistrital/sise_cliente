@@ -122,6 +122,7 @@ export const environment = {
     CLIENTE_ID: 's2BR5hCyo1Bea2dCiMxx9usviQoa',
     RESPONSE_TYPE: 'id_token token',
     // SCOPE: 'openid email role',
+    BUTTON_CLASS:  "btn btn-warning btn-sm",
     SCOPE: 'openid email',
     REDIRECT_URL: 'https://pruebassise.portaloas.udistrital.edu.co',
     SIGN_OUT_URL: 'https://autenticacion.portaloas.udistrital.edu.co/oidc/logout',
