@@ -23,7 +23,6 @@ import { ToastService } from '../../@core/services/notify/toast.service';
 
 export class InfoPersonalComponent implements OnInit {
 
-  private autenticacion = new ImplicitAutenticationService;
   dataTercero: any[] = [];
   dataInfo: DataInfoTercero = new DataInfoTercero();
   dataInfoTercero: any;
@@ -50,6 +49,7 @@ export class InfoPersonalComponent implements OnInit {
     private terceroHerlper: TerceroHerlper,
     private readonly infoPersonalService: InfoPersonalService,
     private loaderService: LoaderService,
+    private autenticacion: ImplicitAutenticationService,
     public toastService: ToastService,
   ) {
     this.testSelectableData = [
@@ -430,6 +430,6 @@ export class InfoPersonalComponent implements OnInit {
     this.toastService.presentToast("Información personal actualizada con exito ✅")
     await this.setValueFields();
 
-    
+
   }
 }

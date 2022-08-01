@@ -5,17 +5,21 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { NavigationEnd, Router } from '@angular/router';
 import { ImplicitAutenticationService } from './@core/utils/implicit_autentication.service';
+import { environment } from 'src/environments/environment';
 declare let gtag: Function;
+declare global {
+  interface Window { Auth: any; }
+}
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss']
 })
 
+
 export class AppComponent {
 
   public isRemainder: any;
-  private autenticacion = new ImplicitAutenticationService;
   @Input() position = 'normal';
   itemClick: Subscription;
   liveTokenValue: boolean = false;
@@ -30,6 +34,7 @@ export class AppComponent {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
+    private autenticacion: ImplicitAutenticationService,
 
     //   private sidebarService: NbSidebarService,
     //  private menuService: NbMenuService,
@@ -39,6 +44,17 @@ export class AppComponent {
     //  public translate: TranslateService
 
   ) {
+    window.Auth = window.Auth || {};
+    window.Auth = autenticacion;
+    window.Auth.init(environment.TOKEN);
+    if(environment.autenticacion) {
+      this.autenticacion.init(environment.TOKEN);
+    }
+    const isButtonLogin = false;
+    if (window.Auth.login(isButtonLogin)) {
+      window.Auth.live();
+    }
+
     this.router.events.subscribe(event => {
       if(event instanceof NavigationEnd){
         gtag('config', 'G-RBY2GQV40M',

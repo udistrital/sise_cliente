@@ -18,7 +18,7 @@ import { ToastService } from '../../@core/services/notify/toast.service';
 export class InfoEmpresarialPage implements OnInit {
 
   @ViewChildren('formElem', { read: ElementRef }) myFormElems: QueryList<ElementRef>;
-  private autenticacion = new ImplicitAutenticationService;
+
   dataInfo: DataInfoTercero = new DataInfoTercero();
   env: any
   selectedData: InfoEmpresarial
@@ -28,6 +28,7 @@ export class InfoEmpresarialPage implements OnInit {
     private readonly terceroService: TerceroService,
     private readonly infoPersonalService: InfoPersonalService,
     private loaderService: LoaderService,
+    private autenticacion: ImplicitAutenticationService,
     public toastService: ToastService
   ) {
     this.selectedData = new InfoEmpresarial();
@@ -45,7 +46,7 @@ export class InfoEmpresarialPage implements OnInit {
     const body = { "user": email };
     const { documento, documento_compuesto, ...rest } = await this.infoPersonalService.getDocumentIdByEmail(environment.API_GET_IDENTIFICATION, body).toPromise() as Documento;
 
-    if (!documento) 
+    if (!documento)
       return
 
     const data = await this.infoPersonalService.getInformationByDocument(environment.DATOS_IDENTIFICACION_TERCERO_ENDPOINT, documento).toPromise()
@@ -55,7 +56,7 @@ export class InfoEmpresarialPage implements OnInit {
 
     // SETEO DE VALORES DE LOS CAMPOS
     let onlyNumsRegex = /(\d+)/g, numsGuion = /[0-9-]+$/g, detectGuion = /[-]+$/g, terceroID = this.sessionTerceroID, infoPersonalServ = this.infoPersonalService, fieldsData = this.selectedData
-    
+
     this.myFormElems.forEach(async function (form: ElementRef) {
       const formElement = form.nativeElement;
 

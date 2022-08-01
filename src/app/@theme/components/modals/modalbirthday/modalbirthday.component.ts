@@ -14,7 +14,7 @@ export class ModalbirthdayComponent implements OnInit {
   terceroPersonalData: any
 
     constructor(
-      private readonly infoPersonalService: InfoPersonalService, 
+      private readonly infoPersonalService: InfoPersonalService,
       private modalCtrl: ModalController,
     private autenticacion: ImplicitAutenticationService,
 

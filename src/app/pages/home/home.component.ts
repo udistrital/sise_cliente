@@ -22,7 +22,7 @@ import { Router } from '@angular/router';
 
 export class HomeComponent implements OnInit {
 
-  private autenticacion = new ImplicitAutenticationService;
+
   sessionUser: any
   terceroPersonalData: any
   eventos: any
@@ -34,6 +34,7 @@ export class HomeComponent implements OnInit {
     public homeService: HomeService,
     public modalService: ModalService,
     public photoService: PhotoService,
+    private autenticacion: ImplicitAutenticationService,
     private loaderService: LoaderService,
     private readonly infoPersonalService: InfoPersonalService,
     private router: Router
