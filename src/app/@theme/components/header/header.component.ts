@@ -14,7 +14,6 @@ import { Router } from '@angular/router';
 export class HeaderComponent {
 
   public isRemainder: any;
-  private autenticacion = new ImplicitAutenticationService;
   @Input() position = 'normal';
   itemClick: Subscription;
   liveTokenValue: boolean = false;
@@ -29,7 +28,7 @@ export class HeaderComponent {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-
+    private autenticacion: ImplicitAutenticationService,
     //   private sidebarService: NbSidebarService,
     //  private menuService: NbMenuService,
     //  private analyticsService: AnalyticsService,

@@ -29,7 +29,6 @@ export class CreacioneventosComponent implements OnInit {
   public arrRoleUserSession: any;
   public isAdminSiseFlag: any;
   eventos: any
-  private autenticacion = new ImplicitAutenticationService;
   name = 'Ngx Datatables Filter All Columns';
   public temp: Array<object> = [];
   settings: any
@@ -40,6 +39,7 @@ export class CreacioneventosComponent implements OnInit {
     private loaderService: LoaderService,
     public modalCtrl: ModalController,
     public modalService: ModalService,
+    private autenticacion: ImplicitAutenticationService,
     private readonly infoPersonalService: InfoPersonalService,
     public alertService: AlertService,
     private creacioneventosService: CreacioneventosService,
@@ -145,14 +145,14 @@ export class CreacioneventosComponent implements OnInit {
           addable: false,
           // type: 'html',
           type: 'custom',
-          valuePrepareFunction: (picture) => 
+          valuePrepareFunction: (picture) =>
           {
-            return picture 
+            return picture
           },
           renderComponent: SimpleComponent
-          //   // return `<img width="50px" class="posterImg" style="display:flex; justify-content: center; text-align-center;" src="${picture}" />`; 
+          //   // return `<img width="50px" class="posterImg" style="display:flex; justify-content: center; text-align-center;" src="${picture}" />`;
 
-          //   return `<app-simple></app-simple>`; 
+          //   return `<app-simple></app-simple>`;
           // },
           // <app-simple></app-simple>
           // renderComponent: <SimpleComponent />

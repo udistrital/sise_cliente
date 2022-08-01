@@ -11,13 +11,13 @@ if (environment.production) {
   enableProdMode();
 }
 
-const autenticacion = new ImplicitAutenticationService;
-const isButtonLogin = false;
+// const autenticacion = new ImplicitAutenticationService;
+// const isButtonLogin = false;
 
-if (!autenticacion.getAuthorizationUrl(isButtonLogin)) {
-} else {
-  autenticacion.live();
-}
+// if (!autenticacion.getAuthorizationUrl(isButtonLogin)) {
+// } else {
+//   autenticacion.live();
+// }
 
 
 platformBrowserDynamic().bootstrapModule(AppModule)

@@ -34,7 +34,7 @@ export const handleError = (error: HttpErrorResponse) => {
 })
 
 export class InfoPersonalService {
-  
+
   constructor(
     private autenticacion: ImplicitAutenticationService,
     private readonly httpClient: HttpClient,
