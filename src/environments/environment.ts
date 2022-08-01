@@ -4,8 +4,6 @@ export const environment = {
   autenticacion: true,
   notificaciones: false,
   menuApps: false,
-  appname: 'sga',
-  appMenu: 'SGA',
   assets: 'https://pruebasassets.portaloas.udistrital.edu.co/',
   NUXEO: {
     PATH: 'https://documental.udistrital.edu.co/nuxeo/',
