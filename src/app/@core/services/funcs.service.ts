@@ -10,7 +10,7 @@ export class FuncsService {
   constructor(private readonly httpClient: HttpClient, private funcsService: FuncsService) { }
 
   postData(endpoint, data) {
-    return this.httpClient.post(endpoint, data, this.funcsService.openIDDefaultOptions())
+    return this.httpClient.post(endpoint, data, this.openIDDefaultOptions())
   }
 
   renameProp(obj, keyToRemove, newKey) {
@@ -78,9 +78,9 @@ export class FuncsService {
   }
 
   strToDateTimeWithoutSeconds(str) {
-    const [dateValues, timeValues] = str.split(' ');
     // console.log(dateValues); // 👉️ "2022-05-21"
     // console.log(timeValues); // 👉️ "07:30:14"
+    const [dateValues, timeValues] = str.split(' ');
 
     const [year, month, day] = dateValues.split('-');
     const [hours, minutes] = timeValues.split(':');

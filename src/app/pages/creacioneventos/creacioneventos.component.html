@@ -22,7 +22,7 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-content [fullscreen]="false" class="scrollTable" style="height: 800px;overflow:auto; margin: 2rem; padding: 3rem;">
+  <ion-content [fullscreen]="false" class="scrollTable" style="height: 800px;overflow:auto; margin: 2rem; padding: 3rem; margin-bottom: 3rem;">
 
     <ng2-smart-table [settings]="settings" [source]="rows" (createConfirm)="onCreateConfirm($event)" (custom)="onCustomAction($event)"></ng2-smart-table>
   </ion-content>

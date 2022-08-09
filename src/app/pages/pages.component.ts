@@ -4,7 +4,7 @@ import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-pages',
-  template: `<div style="height:100%;"><router-outlet></router-outlet></div>`,
+  template: `<div style="height:90%;"><router-outlet></router-outlet></div>`,
 })
 
 export class PagesComponent implements OnInit {

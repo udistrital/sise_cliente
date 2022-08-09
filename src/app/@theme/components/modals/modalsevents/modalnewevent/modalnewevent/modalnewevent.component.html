@@ -62,11 +62,11 @@
       <ion-col size="6" class="ion-margin-vertical" style="padding: 0.6rem;">
         <label for="TipoLugar">Lugar</label>
 
-        <input autocomplete="false" onfocus="this.value=''" onchange="this.blur();" id="TipoLugar" placeholder="Buscar y seleccionar..." list="TipoLugarDataList" style="width: 100%; margin-top: 0.4rem;" (change)="validateEventPlace()">
+        <input autocomplete="off" onfocus="this.value=''" onchange="this.blur();" id="TipoLugar" placeholder="Buscar y seleccionar..." list="TipoLugarDataList" style="width: 100%; margin-top: 0.4rem;" (change)="validateEventPlace()">
 
-        <datalist id="TipoLugarDataList">
+        <datalist id="TipoLugarDataList" autocomplete="off">
           <ng-container *ngFor="let ubicacion of ubicacionesTiposLugar">
-            <option *ngIf="ubicacion.Id == 5" label="{{ubicacion.Nombre}}" value="{{ubicacion.Nombre}}" [attr.data-id]="ubicacion.Id">
+            <option *ngIf="ubicacion.Id == 5 || ubicacion.Id == 7" label="{{ubicacion.Nombre}}" value="{{ubicacion.Nombre}}" [attr.data-id]="ubicacion.Id">
           </ng-container>
         </datalist>
       </ion-col>

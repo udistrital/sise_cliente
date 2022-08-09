@@ -76,8 +76,10 @@ export class ModalneweventComponent implements OnInit {
     $('#TipoLugar').val("")
 
     const ubicacionesTiposLugar = await this.infoPersonalService
-      .getInfoComplementariaTercero(environment.API_ENDPOINT_UBICACIONES, `tipo_lugar?query=limit=-1`)
+      .getInfoComplementariaTercero(environment.API_ENDPOINT_UBICACIONES, `tipo_lugar?limit=-1`)
       .toPromise();
+
+    console.log('ubicacionesTiposLugar', ubicacionesTiposLugar)
 
     this.ubicacionesTiposLugar = ubicacionesTiposLugar
 
@@ -107,15 +109,19 @@ export class ModalneweventComponent implements OnInit {
 
     console.log(form);
 
-    let { Nombre, Descripcion, FechaInicio, FechaFin, Lugar, TipoSesion, Invitados } = form.value
+    let { Nombre, Descripcion, FechaInicio, FechaFin, Lugar, TipoSesion } = form.value
+
+    if(!Nombre || !Descripcion || !FechaInicio || !FechaFin || !Lugar || !TipoSesion)
+     return this.toastService.presentToast("Debes diligenciar los campos obligatorios")
 
     console.log(' \n Nombre:' + Nombre, ' \nDescripcion:' + Descripcion, ' \nFechaInicio:' + FechaInicio, ' \nFechaFin:' + FechaFin, ' \nLugar:' + Lugar, ' \nTipoSesion:' + TipoSesion, ' \nPoster:' + this.selectedEvent.Poster);
 
-    console.log(typeof FechaInicio);
+    console.log('this.selectedEvent.',this.selectedEvent);
+    console.log('this.typeEventPlace', this.typeEventPlace);
 
     let media;
     if (this.selectedEvent.Poster) {
-      console.log(this.selectedEvent.Poster)
+      // console.log(this.selectedEvent.Poster)
       media = await this.funcsService.imageUpload(this.selectedEvent.Poster, {
         preset_name: 'events',
         cloud_name: 'sise'
@@ -125,13 +131,15 @@ export class ModalneweventComponent implements OnInit {
     // Event place creation
     let locationValue, ubicacionId;
     if (this.typeEventPlace == 5) {
-      locationValue = this.selectedEvent.TipoLugarDireccion
-    } else if (this.typeEventPlace == 7) {
       locationValue = this.selectedEvent.TipoLugarMeet
+    } else if (this.typeEventPlace == 7) {
+      locationValue = this.selectedEvent.TipoLugarDireccion
     }
 
+    console.log('locationValue: ', locationValue);
+
     if (locationValue) {
-      const respLocationCreation: any = await this.funcsService.postData(environment.API_ENDPOINT_UBICACIONES, {
+      const respLocationCreation: any = await this.funcsService.postData(environment.API_ENDPOINT_UBICACIONES + '/lugar', {
         "Id": null,
         "Nombre": locationValue,
         "TipoLugarId": {
@@ -210,7 +218,7 @@ export class ModalneweventComponent implements OnInit {
     if (this.selectedEvent.TipoLugar == 7) {
       this.typeEventPlace = 7
       // const direccionesTiposLugar = await this.infoPersonalService
-      //   .getInfoComplementariaTercero(environment.API_ENDPOINT_UBICACIONES, `lugar?query=TipoLugarId.Id:7`)
+      //   .getInfoComplementariaTercero(environment.API_ENDPOINT_UBICACIONES + '/lugar', `lugar?query=TipoLugarId.Id:7`)
       //   .toPromise();
 
       // console.log('direccionesTiposLugar', direccionesTiposLugar);
@@ -219,7 +227,7 @@ export class ModalneweventComponent implements OnInit {
     }
     else if (this.selectedEvent.TipoLugar == 5) {
       //   const googleMeetLink = await this.infoPersonalService
-      //   .getInfoComplementariaTercero(environment.API_ENDPOINT_UBICACIONES, `lugar?query=TipoLugarId.Id:7`)
+      //   .getInfoComplementariaTercero(environment.API_ENDPOINT_UBICACIONES + '/lugar', `lugar?query=TipoLugarId.Id:7`)
       //   .toPromise();
 
       // console.log('googleMeetLink', googleMeetLink);
