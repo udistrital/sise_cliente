@@ -52,7 +52,7 @@ export class CreacioneventosComponent implements OnInit {
       { prop: 'descripcion', name: 'Descripcion' },
       { prop: 'inicio', name: 'Inicio' },
       { prop: 'fin', name: 'Fin' },
-      { prop: 'lugar', name: 'Lugar' },
+      { prop: 'ubicacion', name: 'Lugar' },
       { prop: 'test', name: 'test' },
     ]
 
@@ -138,6 +138,10 @@ export class CreacioneventosComponent implements OnInit {
           title: 'Lugar',
           editable: false,
           addable: false,
+          // valuePrepareFunction: (data) => {
+          //   console.log(data);
+          //   return data;
+          // },
         },
         PosterUrl: {
           title: 'Poster',
@@ -145,8 +149,7 @@ export class CreacioneventosComponent implements OnInit {
           addable: false,
           // type: 'html',
           type: 'custom',
-          valuePrepareFunction: (picture) =>
-          {
+          valuePrepareFunction: (picture) => {
             return picture
           },
           renderComponent: SimpleComponent
@@ -195,7 +198,9 @@ export class CreacioneventosComponent implements OnInit {
   async setEvents() {
 
     const dataEventos = await this.infoPersonalService.getInfoComplementariaTercero(environment.EVENTOS_ENDPOINT, `/calendario_evento?query=Activo:true&limit=-1`).toPromise();
+
     this.eventos = dataEventos
+
     this.eventos.forEach((evento, index) => {
 
       let fechaInicio = new Date(evento.FechaInicio).toISOString()
@@ -207,9 +212,24 @@ export class CreacioneventosComponent implements OnInit {
       this.eventos[index]['PosterUrl'] = evento.PosterUrl
       this.eventos[index]['tipo'] = evento.TipoSesion
       this.eventos[index]['descripcion'] = evento.Descripcion
-      this.eventos[index]['lugar'] = evento.Lugar
       this.eventos[index]['id'] = evento.Id
+      // this.eventos[index]['ubicacionId'] = evento.UbicacionId
+      // this.eventos[index]['UbicacionId'] = evento.UbicacionId
+      // this.eventos[index]['Lugar'] = evento.UbicacionId
     })
+
+    await Promise.all(this.eventos.map(async (evento, index) => {
+      if (evento.UbicacionId) {
+        let ubicacion = await this.infoPersonalService
+          .getInfoComplementariaTercero(environment.API_ENDPOINT_UBICACIONES, `lugar/?query=Id:${evento.UbicacionId}&fields=Nombre&limit=1`)
+          .toPromise();
+
+        console.log(ubicacion[0].Nombre);
+
+        this.eventos[index]['Lugar'] = ubicacion[0].Nombre
+      }
+      // this.eventos[index]['place'] = ubicacion[0].Nombre
+    }));
 
     this.rows = this.eventos
   }

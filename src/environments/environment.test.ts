@@ -130,7 +130,7 @@ export const environment = {
     SCOPE: 'openid email',
     REDIRECT_URL: 'https://pruebassise.portaloas.udistrital.edu.co',
     SIGN_OUT_URL: 'https://autenticacion.portaloas.udistrital.edu.co/oidc/logout',
-    SIGN_OUT_REDIRECT_URL: 'https://pruebassise.portaloas.udistrital.edu.co/',
+    SIGN_OUT_REDIRECT_URL: 'https://pruebassise.portaloas.udistrital.edu.co',
     SIGN_OUT_APPEND_TOKEN:  'true',
     AUTENTICACION_MID: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/autenticacion_mid/v1/token/userRol',
   },

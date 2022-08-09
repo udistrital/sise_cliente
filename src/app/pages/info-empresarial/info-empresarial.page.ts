@@ -137,15 +137,22 @@ export class InfoEmpresarialPage implements OnInit {
           }
         }
 
-        let data = await infoPersonalServ.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria_tercero/?query=TerceroId.Id:${terceroID}` + `,InfoComplementariaId.Id:${icID}`).toPromise();
+        let data = await infoPersonalServ
+          .getInfoComplementariaTercero(
+            environment.TERCEROS_SERVICE,
+            `/info_complementaria_tercero/?query=TerceroId.Id:${terceroID}` + `,InfoComplementariaId.Id:${icID}`)
+          .toPromise();
 
         if (data && data.length > 0 && data[0] && Object.keys(data[0]).length > 0) {
           // put
-          await infoPersonalServ.updateInformation(environment.TERCEROS_SERVICE + `/info_complementaria_tercero/${data[0].Id}`, ictBody).toPromise();
+          await infoPersonalServ
+            .updateInformation(environment.TERCEROS_SERVICE + `/info_complementaria_tercero/${data[0].Id}`, ictBody)
+            .toPromise();
 
         } else {
           // post
-          await infoTercero.saveDataTercero(`/info_complementaria_tercero`, ictBody).toPromise();
+          await infoTercero
+            .saveDataTercero(`/info_complementaria_tercero`, ictBody).toPromise();
         }
       });
 
