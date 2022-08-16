@@ -35,10 +35,7 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     StatusBar,
     Camera,
     SplashScreen,
-    { provide: LocationStrategy, useClass: HashLocationStrategy },
-    // { provide: LocationStrategy, useClass: PathLocationStrategy },
-    // { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    // { provide: APP_BASE_HREF, useValue: '/' }
+    { provide: LocationStrategy, useClass: HashLocationStrategy }
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

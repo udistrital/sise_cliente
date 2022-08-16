@@ -47,7 +47,8 @@ import { InscripcionaeventosComponent } from './inscripcionaeventos/inscripciona
 import { HeaderComponent } from '../@theme/components/header/header.component';
 import { ModalneweventComponent } from '../@theme/components/modals/modalsevents/modalnewevent/modalnewevent/modalnewevent.component';
 import { LocalizacionPage } from './localizacion/localizacion.page';
-// import { LocalizacionPage } from './localizacion/localizacion.page';
+import { IonicSelectableModule } from 'ionic-selectable';
+
 declare var $: any;
 
 const pagesComponents = [
@@ -79,6 +80,7 @@ const pagesComponents = [
     PagesRoutingModule,
     Ng2SmartTableModule,
     IonicModule,
+    IonicSelectableModule
   ],
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
