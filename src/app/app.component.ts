@@ -12,7 +12,7 @@ export class AppComponent {
 
   constructor() {
     this.isRemainder = 0
-    this.autenticacion.live();
+    // this.autenticacion.live();
   }
 
   logout() {

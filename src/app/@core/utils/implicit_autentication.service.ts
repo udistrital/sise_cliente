@@ -13,10 +13,8 @@ export class ImplicitAutenticationService {
   init(): void {
   }
 
-  private params: any;
   public session = null;
   public payload: any;
-  public logOut: any;
 
   constructor() {
     this.bearer = {
@@ -26,23 +24,30 @@ export class ImplicitAutenticationService {
       }),
     }
     auth.setGeneral(environment.TOKEN);
-    this.logOut = '';
   }
 
   public logout() {
-
-
     auth.logout();
+    localStorage.clear();
+    this.redirectToLogin(false);
+    localStorage.clear();
+    this.getAuthorizationUrl();
+    localStorage.clear();
   }
 
+  public redirectToLogin(bool) {
+    auth.live(bool) // false redirige al login
+  }
+
+  getAuthorizationUrl(){
+    return auth.getAuthorizationUrl();
+  }
 
   getPayload() {
-
     return auth.getPayload();
-
   }
 
-  public live() {
+  public liveToken() {
     if (auth.live(true)) {
       auth.liveToken();
       return true;
@@ -52,9 +57,8 @@ export class ImplicitAutenticationService {
 
   }
 
-  public getAuthorizationUrl(button): string {
-
-    return auth.live(button);
+  public live(bool) {
+    return auth.live(bool);
   }
 
 }
