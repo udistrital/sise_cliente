@@ -47,16 +47,16 @@ export class HomeComponent implements OnInit {
     private funcsService: FuncsService,
     private router: Router,
   ) {
-    this.liveToken();
+    // this.liveToken();
   }
 
-  liveToken() {
-    if (this.autenticacion.live()) {
-      this.liveTokenValue = this.autenticacion.live();
-      this.username = (this.autenticacion.getPayload()).sub;
-    }
-    return this.autenticacion.live();
-  }
+  // liveToken() {
+  //   if (this.autenticacion.live()) {
+  //     this.liveTokenValue = this.autenticacion.live();
+  //     this.username = (this.autenticacion.getPayload()).sub;
+  //   }
+  //   return this.autenticacion.live();
+  // }
 
   logout() {
     this.autenticacion.logout();

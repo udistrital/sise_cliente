@@ -39,17 +39,17 @@ export class HeaderComponent {
   ) {
     this.isRemainder = 0
     this.initializeApp();
-    this.liveToken();
+    // this.liveToken();
   }
 
-  liveToken() {
-    if (this.autenticacion.live()) {
-      this.liveTokenValue = this.autenticacion.live();
-      this.username = (this.autenticacion.getPayload()).sub;
-    }
-    return this.autenticacion.live();
-  }
-
+  // liveToken() {
+  //   if (this.autenticacion.live()) {
+  //     this.liveTokenValue = this.autenticacion.live();
+  //     this.username = (this.autenticacion.getPayload()).sub;
+  //   }
+  //   return this.autenticacion.live();
+  // }
+  //
   onContecxtItemSelection(title) {
     if (title === 'ver todas') {
       this.router.navigate(['/pages/notificacion/listado']);
