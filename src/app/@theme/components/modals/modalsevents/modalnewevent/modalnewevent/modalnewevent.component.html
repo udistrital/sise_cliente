@@ -71,14 +71,14 @@
         </datalist>
       </ion-col>
 
-      <ion-col size="6" class="ion-margin-vertical"  [hidden]="selectedEvent.TipoLugar != '7'">
+      <ion-col size="6" class="ion-margin-vertical" [hidden]="selectedEvent.TipoLugar != '7'">
         <ion-item lines="full">
           <ion-label position="floating">Dirección del lugar</ion-label>
           <ion-input type="text" id="TipoLugarDireccion" name="TipoLugarDireccion" #TipoLugarDireccion="ngModel" required [(ngModel)]="selectedEvent.TipoLugarDireccion" class="border-0 border-none"></ion-input>
         </ion-item>
       </ion-col>
 
-      <ion-col size="6" class="ion-margin-vertical"  [hidden]="selectedEvent.TipoLugar != '5'">
+      <ion-col size="6" class="ion-margin-vertical" [hidden]="selectedEvent.TipoLugar != '5'">
         <ion-item lines="full">
           <ion-label position="floating">Link de Google Meet</ion-label>
           <ion-input type="text" id="TipoLugarMeet" name="TipoLugarMeet" #TipoLugarMeet="ngModel" required [(ngModel)]="selectedEvent.TipoLugarMeet" class="border-0 border-none"></ion-input>
@@ -102,7 +102,18 @@
         </ion-item>
       </ion-col>
 
-      <!-- <ion-col size="6" class="ion-margin-vertical">
+      <ion-col size="12" class="ion-margin-vertical">
+        <ion-item>
+          <!-- <ion-label position="floating">Invitados especificos</ion-label>
+          <ion-icon slot="start" name="people-outline"></ion-icon> -->
+          <ionic-selectable item-content [isMultiple]="true" [canSearch]="true" id="InvitadosEspecificos" name="InvitadosEspecificos" #InvitadosEspecificos="ngModel" (onChange)="this.selectableUtils.specificGuestsChange($event)"
+          required [(ngModel)]="selectedEvent.InvitadosEspecificos" [items]="terceros" itemValueField="Id" itemTextField="UsuarioWSO2" (onSearch)="this.selectableUtils.searchIonSelectable($event,terceros,'UsuarioWSO2')">
+          </ionic-selectable>
+        </ion-item>
+      </ion-col>
+
+      <!--
+        <ion-col size="6" class="ion-margin-vertical">
         <ion-item lines="full">
           <ion-label position="floating">Invitados por rol</ion-label>
           <ion-icon slot="start" name="people-outline"></ion-icon>
