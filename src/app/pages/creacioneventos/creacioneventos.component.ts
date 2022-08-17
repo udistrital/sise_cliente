@@ -14,7 +14,6 @@ import { map, debounceTime } from 'rxjs/operators';
 import { CreacioneventosService } from '../../@core/services/creacioneventos.service';
 import { FuncsService } from '../../@core/services/funcs.service';
 import { SimpleComponent } from '../../@theme/components/enlargeImg/simple/simple/simple.component';
-// import { SimpleComponent } from '../../@theme/components/enlargeImg/simple/simple/simple.component';
 
 @Component({
   selector: 'app-creacioneventos',
@@ -23,7 +22,6 @@ import { SimpleComponent } from '../../@theme/components/enlargeImg/simple/simpl
 })
 
 export class CreacioneventosComponent implements OnInit {
-  // @ViewChild('search', { static: false }) search: any;
   public rows: any;
   public cols: any;
   public arrRoleUserSession: any;
@@ -35,7 +33,6 @@ export class CreacioneventosComponent implements OnInit {
   confirm: any
 
   constructor(
-    private renderer: Renderer2,
     private loaderService: LoaderService,
     public modalCtrl: ModalController,
     public modalService: ModalService,
@@ -84,21 +81,6 @@ export class CreacioneventosComponent implements OnInit {
         cancelButtonContent: 'Cancelar',
         confirmCreate: true,
       },
-      // hideSubHeader: true,
-      // actions: false,
-      // delete: {
-      //   confirmDelete: true,
-
-      //   deleteButtonContent: 'Delete data',
-      //   saveButtonContent: 'save',
-      //   cancelButtonContent: 'cancel'
-      // },
-      // add: {
-      //   confirmCreate: true,
-      // },
-      // edit: {
-      //   confirmSave: true,
-      // },
       columns: {
         Id: {
           title: 'Id',
@@ -213,9 +195,6 @@ export class CreacioneventosComponent implements OnInit {
       this.eventos[index]['tipo'] = evento.TipoSesion
       this.eventos[index]['descripcion'] = evento.Descripcion
       this.eventos[index]['id'] = evento.Id
-      // this.eventos[index]['ubicacionId'] = evento.UbicacionId
-      // this.eventos[index]['UbicacionId'] = evento.UbicacionId
-      // this.eventos[index]['Lugar'] = evento.UbicacionId
     })
 
     await Promise.all(this.eventos.map(async (evento, index) => {

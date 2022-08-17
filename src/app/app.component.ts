@@ -8,15 +8,14 @@ import { ImplicitAutenticationService } from './@core/utils/implicit_autenticati
 
 export class AppComponent {
   public isRemainder: any;
-  private autenticacion = new ImplicitAutenticationService;
 
-  constructor() {
+  constructor(private autenticacion: ImplicitAutenticationService) {
     this.isRemainder = 0
     // this.autenticacion.live();
   }
 
   logout() {
-    this.autenticacion.logout();
+    this.autenticacion.logout('from header');
   }
 
 }

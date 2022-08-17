@@ -3,8 +3,6 @@ import { ImplicitAutenticationService } from '../../@core/utils/implicit_autenti
 import { PhotoService } from '../../@core/services/photo.service';
 import { InfoPersonalService } from '../../@core/services/infopersonal.service';
 import { environment } from '../../../environments/environment';
-import { ModalController } from '@ionic/angular';
-import { ModalbasicinfoComponent } from '../../@theme/components/modals/modalbasicinfo/modalbasicinfo.component';
 import { HomeService } from '../../@core/services/home.service';
 import { DatosIdentificacionTercero } from '../../@core/data/models/datos_identificacion_tercero';
 import { ModalbirthdayComponent } from '../../@theme/components/modals/modalbirthday/modalbirthday.component';
@@ -47,19 +45,16 @@ export class HomeComponent implements OnInit {
     private funcsService: FuncsService,
     private router: Router,
   ) {
-    // this.liveToken();
+    this.autenticacion.user$.subscribe((data: any) => {
+      const { user, userService } = data;
+      console.log({ user, userService });
+      this.username = typeof user.email !== 'undefined' ? user.email : typeof userService.email !== 'undefined' ? userService.email : '';
+      this.liveTokenValue = this.username !== '';
+    })
   }
 
-  // liveToken() {
-  //   if (this.autenticacion.live()) {
-  //     this.liveTokenValue = this.autenticacion.live();
-  //     this.username = (this.autenticacion.getPayload()).sub;
-  //   }
-  //   return this.autenticacion.live();
-  // }
-
   logout() {
-    this.autenticacion.logout();
+    this.autenticacion.logout('from header');
   }
 
   async ngOnInit() {
