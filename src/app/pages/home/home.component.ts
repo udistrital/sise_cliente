@@ -61,13 +61,9 @@ export class HomeComponent implements OnInit {
 
     let loader = await this.loaderService.presentLoading('Cargando página principal')
 
-    console.log(this.autenticacion.getPayload())
-    const userDataTest = this.autenticacion.getPayload()
-    console.log(userDataTest);
-
     const { email } = this.autenticacion.getPayload()
     const body = { "user": email };
-    const { documento, documento_compuesto, ...rest } = await this.infoPersonalService.getDocumentIdByEmail(environment.API_GET_IDENTIFICATION, body).toPromise() as Documento;
+    const { documento, documento_compuesto } = await this.infoPersonalService.getDocumentIdByEmail(environment.API_GET_IDENTIFICATION, body).toPromise() as Documento;
 
     console.log(documento, documento_compuesto)
     if (!documento) {
@@ -106,8 +102,6 @@ export class HomeComponent implements OnInit {
     this.eventos = dataEventos
     this.eventos.forEach((evento, index) => {
 
-
-
       this.eventos[index].FechaInicio = new Date(evento.FechaInicio).toISOString().replace(/T/, ' ').replace(/\..+/, '').slice(0, -9)
       this.eventos[index].FechaFin = new Date(evento.FechaFin).toISOString().replace(/T/, ' ').replace(/\..+/, '').slice(0, -9)
     })
@@ -123,10 +117,8 @@ export class HomeComponent implements OnInit {
         this.eventos[index]['Lugar'] = ubicacion[0].Nombre
       }
     }));
-    console.log(dataEventos)
 
     await this.getProfilePicture();
-
     loader.dismiss()
   }
 

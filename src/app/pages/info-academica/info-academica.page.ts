@@ -57,18 +57,6 @@ export class InfoAcademicaPage implements OnInit {
 
     this.dataInfo.NombreCompleto = data[0].TerceroId.NombreCompleto as string;
 
-    // setear nombre colegio
-    // const nombreColegioAPIResults = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria_tercero/?query=InfoComplementariaId.Id:${environment.INFO_COMPLEMENTARIA_IDS.NOMBRE_COLEGIO},TerceroId.Id:${this.idPersonalInfo}`).toPromise();
-    // this.selectedData.NombreColegio = JSON.parse(nombreColegioAPIResults[0].Dato).Data
-
-    // setear nombre colegio
-    // const ciudadColegioAPIResults = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria_tercero/?query=InfoComplementariaId.Id:${environment.INFO_COMPLEMENTARIA_IDS.CIUDAD_COLEGIO},TerceroId.Id:${this.idPersonalInfo}`).toPromise();
-    // this.selectedData.CiudadColegio = JSON.parse(ciudadColegioAPIResults[0].Dato).Data
-
-    // setear nombre colegio
-    // const fechaGraduacionColegioAPIResults = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria_tercero/?query=InfoComplementariaId.Id:${environment.INFO_COMPLEMENTARIA_IDS.FECHA_GRADUACION},TerceroId.Id:${this.idPersonalInfo}`).toPromise();
-    // this.selectedData.FechaGraduacion = JSON.parse(fechaGraduacionColegioAPIResults[0].Dato).Data;
-
     // Seteo de posgrados UD
     const posgrados = await this.infoPersonalService.getInfoComplementariaTercero(environment.OIKOS_SERVICE, `dependencia?query=DependenciaTipoDependencia.TipoDependenciaId.Id:${environment.OIKOS_POSGRADOS_ID}&limit=-1`).toPromise();
 
@@ -85,11 +73,8 @@ export class InfoAcademicaPage implements OnInit {
     })
 
     this.posgradosUD = posgradosArr
-    // TipoDependenciaId
     await this.setValueFields();
-
     loader.dismiss()
-
   }
 
   async setValueFields() {
@@ -147,8 +132,6 @@ export class InfoAcademicaPage implements OnInit {
   }
 
   onChange(selectValue, id) {
-
-    // console.log(this.selectedData);
     console.log('selectValue: ', selectValue)
   }
 
