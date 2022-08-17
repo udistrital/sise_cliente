@@ -9,6 +9,7 @@ import { InfoLaboralPage } from './info-laboral/info-laboral.page';
 import { InscripcionaeventosComponent } from './inscripcionaeventos/inscripcionaeventos.component';
 import { LocalizacionPage } from './localizacion/localizacion.page';
 import { PagesComponent } from './pages.component';
+import { LoginComponent } from './login/login.component'
 
 const routes: Routes = [{
   path: '',
@@ -17,6 +18,10 @@ const routes: Routes = [{
     {
       path: 'home',
       component: HomeComponent,
+    },
+    {
+      path: 'login',
+      component: LoginComponent,
     },
     {
       path: 'creacioneventos',
@@ -46,9 +51,16 @@ const routes: Routes = [{
       path: 'localizacion',
       component: LocalizacionPage,
     },
+    // {
+    //   path: '', redirectTo: 'login', pathMatch: 'full',
+    // },
     {
-      path: '', redirectTo: 'home', pathMatch: 'full',
+      path: '',
+      redirectTo: 'home',
+      pathMatch: 'full',
     },
+    // { path: '', redirectTo: 'login', pathMatch: 'full' },
+    // { path: '**', redirectTo: 'login' },
   ]
 }]
 

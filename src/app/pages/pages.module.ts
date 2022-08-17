@@ -48,11 +48,13 @@ import { HeaderComponent } from '../@theme/components/header/header.component';
 import { ModalneweventComponent } from '../@theme/components/modals/modalsevents/modalnewevent/modalnewevent/modalnewevent.component';
 import { LocalizacionPage } from './localizacion/localizacion.page';
 import { IonicSelectableModule } from 'ionic-selectable';
+import { LoginComponent } from './login/login.component'
 
 declare var $: any;
 
 const pagesComponents = [
   PagesComponent,
+  LoginComponent,
   CreacioneventosComponent,
   HomeComponent,
   InfoAcademicaPage,

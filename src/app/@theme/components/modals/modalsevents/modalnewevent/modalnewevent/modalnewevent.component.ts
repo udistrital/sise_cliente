@@ -111,6 +111,13 @@ export class ModalneweventComponent implements OnInit {
 
     let { Nombre, Descripcion, FechaInicio, FechaFin, Lugar, TipoSesion } = form.value
 
+    let fechaInicioValidation = new Date(FechaInicio).toISOString()
+    fechaInicioValidation = this.funcsService.isoStrToYYYYMMDDHHSSNormal(fechaInicioValidation)
+    console.log('fechaInicioValidation')
+    console.log(fechaInicioValidation)
+
+    return;
+
     if(!Nombre || !Descripcion || !FechaInicio || !FechaFin || !Lugar || !TipoSesion)
      return this.toastService.presentToast("Debes diligenciar los campos obligatorios")
 

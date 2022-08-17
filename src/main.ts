@@ -8,16 +8,16 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
-import { ImplicitAutenticationService } from './app/@core/utils/implicit_autentication.service';
+// import { ImplicitAutenticationService } from './app/@core/utils/implicit_autentication.service';
 
 if (environment.production) {
   enableProdMode();
 }
 
-const autenticacion = new ImplicitAutenticationService;
+// const autenticacion = new ImplicitAutenticationService;
 
 console.log('Se ejecutó el servicio de autenticación');
-autenticacion.live(false);
+// autenticacion.live(false);
 
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));

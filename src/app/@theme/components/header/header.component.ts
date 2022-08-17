@@ -57,7 +57,8 @@ export class HeaderComponent {
   }
 
   logout() {
-    this.autenticacion.logout();
+    this.autenticacion.logout('from header');
+    // this.liveTokenValue = auth.live(true);
   }
 
   initializeApp() {
