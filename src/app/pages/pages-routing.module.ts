@@ -10,6 +10,7 @@ import { InscripcionaeventosComponent } from './inscripcionaeventos/inscripciona
 import { LocalizacionPage } from './localizacion/localizacion.page';
 import { PagesComponent } from './pages.component';
 import { LoginComponent } from './login/login.component'
+import { AuthGuard } from '../@core/_guards/auth.guard';
 
 const routes: Routes = [{
   path: '',
@@ -18,6 +19,15 @@ const routes: Routes = [{
     {
       path: 'home',
       component: HomeComponent,
+      canActivate: [AuthGuard],
+      data: {
+        roles: [
+
+
+          'Internal/selfsignup',
+          'Internal/everyone',
+        ],
+      },
     },
     {
       path: 'login',
@@ -26,41 +36,95 @@ const routes: Routes = [{
     {
       path: 'creacioneventos',
       component: CreacioneventosComponent,
+      canActivate: [AuthGuard],
+      data: {
+        roles: [
+
+
+          'Internal/selfsignup',
+          'Internal/everyone',
+        ],
+      },
     },
     {
       path: 'info-academica',
       component: InfoAcademicaPage,
+      canActivate: [AuthGuard],
+      data: {
+        roles: [
+
+
+          'Internal/selfsignup',
+          'Internal/everyone',
+        ],
+      },
     },
     {
       path: 'info-empresarial',
       component: InfoEmpresarialPage,
+      canActivate: [AuthGuard],
+      data: {
+        roles: [
+
+
+          'Internal/selfsignup',
+          'Internal/everyone',
+        ],
+      },
     },
     {
       path: 'info-laboral',
       component: InfoLaboralPage,
+      canActivate: [AuthGuard],
+      data: {
+        roles: [
+
+
+          'Internal/selfsignup',
+          'Internal/everyone',
+        ],
+      },
     },
     {
       path: 'info-personal',
       component: InfoPersonalComponent,
+      canActivate: [AuthGuard],
+      data: {
+        roles: [
+          'Internal/selfsignup',
+          'Internal/everyone',
+        ],
+      },
     },
     {
       path: 'incripcionaeventos',
       component: InscripcionaeventosComponent,
+      canActivate: [AuthGuard],
+      data: {
+        roles: [
+          'Internal/selfsignup',
+          'Internal/everyone',
+        ],
+      },
     },
     {
       path: 'localizacion',
       component: LocalizacionPage,
+      canActivate: [AuthGuard],
+      data: {
+        roles: [
+
+
+          'Internal/selfsignup',
+          'Internal/everyone',
+        ],
+      },
     },
-    // {
-    //   path: '', redirectTo: 'login', pathMatch: 'full',
-    // },
     {
       path: '',
       redirectTo: 'home',
       pathMatch: 'full',
     },
-    // { path: '', redirectTo: 'login', pathMatch: 'full' },
-    // { path: '**', redirectTo: 'login' },
   ]
 }]
 

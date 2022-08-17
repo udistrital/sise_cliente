@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private autenticacion: ImplicitAutenticationService, private router: Router) { }
+  constructor(private autenticacion: ImplicitAutenticationService,    private router: Router) { }
   appname = 'sga';
   basePathAssets = 'https://pruebasassets.portaloas.udistrital.edu.co/'
   @Input('isloading') isloading: boolean = false;
@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
     console.log(localStorage.getItem('access_token'));
 
     if (localStorage.getItem('access_token')) {
-      // alert('true')
+      alert('true')
       this.router.navigate(['/pages/home']);
     }
     // else {
