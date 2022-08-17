@@ -27,12 +27,8 @@ export class LoginComponent implements OnInit {
     console.log(localStorage.getItem('access_token'));
 
     if (localStorage.getItem('access_token')) {
-      alert('true')
       this.router.navigate(['/pages/home']);
     }
-    // else {
-    //   alert('false')
-    // }
   }
 
 }
