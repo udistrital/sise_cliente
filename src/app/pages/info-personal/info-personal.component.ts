@@ -158,76 +158,10 @@ export class InfoPersonalComponent implements OnInit {
     this.selectedData.FechaNacimiento = new Date(data[0].TerceroId.FechaNacimiento).toISOString().replace(/T/, ' ').replace(/\..+/, '').slice(0, -9)
     this.selectedData.LugarNacimiento = data[0].TerceroId.LugarOrigen as string;
 
-    // Obtenemos info de contacto
-    // setear celular
-    // const celular = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria_tercero/?query=InfoComplementariaId.Id:${environment.INFO_COMPLEMENTARIA_IDS.CELULAR},TerceroId.Id:${this.idPersonalInfo}`).toPromise();
-    // this.selectedData.Celular = celular[0].Dato
-
-    // setear correo personal
-    // const correoPersonal = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria_tercero/?query=InfoComplementariaId.Id:${environment.INFO_COMPLEMENTARIA_IDS.CORREO_PERSONAL},TerceroId.Id:${this.idPersonalInfo}`).toPromise();
-    // this.selectedData.CorreoPersonal = JSON.parse(correoPersonal[0].Dato).Data
-
-    // setear DIRECCIÓN
-    // const direccionAPIResults = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria_tercero/?query=InfoComplementariaId.Id:${environment.INFO_COMPLEMENTARIA_IDS.DIRECCION},TerceroId.Id:${this.idPersonalInfo}`).toPromise();
-    // this.selectedData.DireccionResidencia = JSON.parse(direccionAPIResults[0].Dato).DIRECCIÓN
-
-    // // setear RED SOCIAL 1
-    // const redSocialUnoAPIResults = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria_tercero/?query=InfoComplementariaId.Id:${environment.INFO_COMPLEMENTARIA_IDS.RED_SOCIAL_UNO},TerceroId.Id:${this.idPersonalInfo}`).toPromise();
-    // this.selectedData.RedSocialUno = JSON.parse(redSocialUnoAPIResults[0].Dato).Data
-
-    // // setear RED SOCIAL 2
-    // const redSocialDosAPIResults = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria_tercero/?query=InfoComplementariaId.Id:${environment.INFO_COMPLEMENTARIA_IDS.RED_SOCIAL_DOS},TerceroId.Id:${this.idPersonalInfo}`).toPromise();
-    // this.selectedData.RedSocialDos = JSON.parse(redSocialDosAPIResults[0].Dato).Data
-
-    // setear nacionalidad
-    // const nacionalidadAPIResults = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria_tercero/?query=InfoComplementariaId.Id:${environment.INFO_COMPLEMENTARIA_IDS.NACIONALIDAD},TerceroId.Id:${this.idPersonalInfo}`).toPromise();
-    // this.selectedData.Nacionalidad = JSON.parse(nacionalidadAPIResults[0].Dato).Data
-
-    // setear lugar de nacimiento
-    // const lugarNacimientoAPIResults = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria_tercero/?query=InfoComplementariaId.Id:${environment.INFO_COMPLEMENTARIA_IDS.LUGAR_NACIMIENTO},TerceroId.Id:${this.idPersonalInfo}`).toPromise();
-    // this.selectedData.LugarNacimiento = JSON.parse(lugarNacimientoAPIResults[0].Dato).Data
-
-    // setear pais
-    // const PaisAPIResults = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria_tercero/?query=InfoComplementariaId.Id:${environment.INFO_COMPLEMENTARIA_IDS.PAIS_RESIDENCIA},TerceroId.Id:${this.idPersonalInfo}`).toPromise();
-    // this.selectedData.PaisResidencia = JSON.parse(PaisAPIResults[0].Dato).Data
-
-    // Setear dpto
-    // const dptoAPIResults = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria_tercero/?query=InfoComplementariaId.Id:${environment.INFO_COMPLEMENTARIA_IDS.DEPARTAMENTO_RESIDENCIA},TerceroId.Id:${this.idPersonalInfo}`).toPromise();
-    // this.selectedData.DepartamentoResidencia = JSON.parse(dptoAPIResults[0].Dato).Data
-
-    // Setear código del país
-    // const countryCodeAPIResults = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria_tercero/?query=InfoComplementariaId.Id:${environment.INFO_COMPLEMENTARIA_IDS.CODIGO_DEL_PAIS},TerceroId.Id:${this.idPersonalInfo}`).toPromise();
-    // console.log(countryCodeAPIResults)
-    // let codigoPaisDato = JSON.parse(countryCodeAPIResults[0].Dato).Data
-    // this.selectedData.CodigoPais = codigoPaisDato
-
-    // setear LOCALIDAD
-    // const localitiesIDS = await this.getICIdsByGIC(environment.GRUPO_INFO_COMPLEMENTARIA_IDS.LOCALIDADES)
-    // await this.getDataInfoComplementariaTercero(localitiesIDS, 'LocalidadResidencia', 'Id')
-
-    // setear Municipio
-    // await this.getDataInfoComplementariaTercero(environment.INFO_COMPLEMENTARIA_IDS.MUNICIPIOS, 'MunicipioResidencia', 'Nombre')
-    // setTimeout(() => {
-    //   console.log('this.dataInfo', this.dataInfo)
-    // }, 3000);
-
-    // setear intereses
-    // const InteresesAPIResults = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria_tercero/?query=InfoComplementariaId.Id:${environment.INFO_COMPLEMENTARIA_IDS.INTERESES},TerceroId.Id:${this.idPersonalInfo}`).toPromise();
-    // this.selectedData.Intereses = JSON.parse(InteresesAPIResults[0].Dato).Data.split(',')
-
     console.log('ID DEL TERCERO ', Id)
-    // const civilStatusSetting = await this.getDataInfoComplementariaTercero(environment.INFO_COMPLEMENTARIA_IDS.ESTADO_CIVIL, 'EstadoCivil')
-
-    // const StratumSetting = await this.getDataInfoComplementariaTercero(environment.INFO_COMPLEMENTARIA_IDS.ESTRATO, 'Estrato', 'Nombre')
-    // this.selectedData.Estrato = StratumSetting ? StratumSetting.replace('Estrato ', '') : '';
-
     await this.getDataInfoComplementariaTercero(environment.INFO_COMPLEMENTARIA_IDS.GENERO, 'Genero', 'Nombre')
-
-    // const academicaIDS = await this.getICIdsByGIC(environment.GRUPO_INFO_COMPLEMENTARIA_IDS.ACADEMICA)
-
-    // console.log(academicaIDS)
+    console.log('hererereaaa')
     await this.setValueFields();
-
     loader.dismiss()
   }
 
@@ -311,6 +245,11 @@ export class InfoPersonalComponent implements OnInit {
   }
 
   async getDataInfoComplementariaTercero(arrIds: any, fieldToSet: any, fieldToGet: any = 'Id'): Promise<any> {
+
+    if(!Array.isArray(arrIds)){
+      return console.error(`El array del campo ${fieldToSet} no es un arreglo`)
+    }
+
     arrIds.forEach(async id => {
       let data = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/info_complementaria_tercero/?query=TerceroId.Id:${this.idPersonalInfo}` + `,InfoComplementariaId.Id:${id}`).toPromise();
 

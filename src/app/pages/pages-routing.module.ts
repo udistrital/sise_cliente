@@ -22,8 +22,6 @@ const routes: Routes = [{
       canActivate: [AuthGuard],
       data: {
         roles: [
-
-
           'Internal/selfsignup',
           'Internal/everyone',
         ],
@@ -39,8 +37,6 @@ const routes: Routes = [{
       canActivate: [AuthGuard],
       data: {
         roles: [
-
-
           'Internal/selfsignup',
           'Internal/everyone',
         ],
