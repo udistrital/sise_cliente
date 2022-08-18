@@ -8,8 +8,6 @@ const routes: Routes = [
       .then(m => m.PagesModule),
   },
   { path: '**', redirectTo: 'pages/login', pathMatch: 'full' }
-  // { path: '', redirectTo: 'login', pathMatch: 'full' },
-  // { path: '**', redirectTo: 'login' },
 ];
 
 @NgModule({

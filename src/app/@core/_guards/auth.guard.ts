@@ -43,6 +43,7 @@ export class AuthGuard implements CanActivate {
     }
 
     if (!valid) {
+      // alert('Sin permisos')
       // not logged in so redirect to login page with the return url
       // or not exist role return url
       this.router.navigate(['/']);
