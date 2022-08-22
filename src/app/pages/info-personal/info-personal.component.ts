@@ -14,7 +14,7 @@ import { SelectableService } from '../../@core/services/search/selectable.servic
 import codigospaisesconcdn from '../../../assets/paises/codigospaisesconcdn.json';
 import { TerceroService } from '../../@core/services/tercero/tercero.service';
 import { ToastService } from '../../@core/services/notify/toast.service';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-info-personal',
   templateUrl: './info-personal.component.html',
@@ -51,6 +51,7 @@ export class InfoPersonalComponent implements OnInit {
     private loaderService: LoaderService,
     private autenticacion: ImplicitAutenticationService,
     public toastService: ToastService,
+    private router: Router,
   ) {
     this.testSelectableData = [
       { id: 1, name: 'Tokai' },
@@ -130,7 +131,7 @@ export class InfoPersonalComponent implements OnInit {
           .charAt(0)
           .toUpperCase()
           .concat(civilStatus.Nombre.toLowerCase().substring(1, civilStatus.Nombre.length))
-          .replace(/UnIon/ig,"Unión")
+          .replace(/UnIon/ig, "Unión")
       })
     })
 
@@ -246,7 +247,7 @@ export class InfoPersonalComponent implements OnInit {
 
   async getDataInfoComplementariaTercero(arrIds: any, fieldToSet: any, fieldToGet: any = 'Id'): Promise<any> {
 
-    if(!Array.isArray(arrIds)){
+    if (!Array.isArray(arrIds)) {
       return console.error(`El array del campo ${fieldToSet} no es un arreglo`)
     }
 
@@ -369,6 +370,6 @@ export class InfoPersonalComponent implements OnInit {
     this.toastService.presentToast("Información personal actualizada con exito ✅")
     await this.setValueFields();
 
-
+    this.router.navigate(['pages/info-academica'])
   }
 }

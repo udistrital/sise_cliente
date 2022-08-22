@@ -9,7 +9,7 @@ import { DataInfoTercero } from '../../@core/data/models/data_info_tercero';
 import { TerceroService } from '../../@core/services/tercero/tercero.service';
 import { NgForm } from '@angular/forms';
 import { ToastService } from '../../@core/services/notify/toast.service';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-info-academica',
   templateUrl: './info-academica.page.html',
@@ -32,7 +32,8 @@ export class InfoAcademicaPage implements OnInit {
     private readonly infoPersonalService: InfoPersonalService,
     private loaderService: LoaderService,
     private autenticacion: ImplicitAutenticationService,
-    public toastService: ToastService
+    public toastService: ToastService,
+    private router: Router
   ) {
     this.selectedData = new InfoAcademica();
     this.env = environment.INFO_COMPLEMENTARIA_IDS
@@ -195,6 +196,8 @@ export class InfoAcademicaPage implements OnInit {
     this.toastService.presentToast("Información academica actualizada con exito ✅")
 
     await this.setValueFields();
+
+    this.router.navigate(['pages/info-laboral'])
   }
 
 }

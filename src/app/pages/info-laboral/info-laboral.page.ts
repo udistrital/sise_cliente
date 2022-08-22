@@ -9,7 +9,7 @@ import { LoaderService } from '../../@core/services/notify/loader.service';
 import { TerceroService } from '../../@core/services/tercero/tercero.service';
 import { DataInfoTercero } from '../../@core/data/models/data_info_tercero';
 import { ToastService } from '../../@core/services/notify/toast.service';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-info-laboral',
   templateUrl: './info-laboral.page.html',
@@ -29,6 +29,7 @@ export class InfoLaboralPage implements OnInit {
   // test: any
 
   constructor(
+    private router: Router,
     private readonly infoPersonalService: InfoPersonalService,
     private readonly terceroService: TerceroService,
     private loaderService: LoaderService,
@@ -167,6 +168,8 @@ export class InfoLaboralPage implements OnInit {
     loader.dismiss()
     this.toastService.presentToast("Información laboral actualizada con exito ✅")
     await this.setValueFields();
+
+    this.router.navigate(['pages/info-empresarial'])
   }
 
 }

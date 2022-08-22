@@ -8,7 +8,6 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'header-root',
   templateUrl: 'header.component.html',
-  // styleUrls: ['header.component.scss']
 })
 
 export class HeaderComponent {
@@ -23,33 +22,18 @@ export class HeaderComponent {
   userMenu = [{ title: 'ver todas', icon: 'fa fa-list' }];
   public noNotify: any = '0';
 
-
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private autenticacion: ImplicitAutenticationService,
-    //   private sidebarService: NbSidebarService,
-    //  private menuService: NbMenuService,
-    //  private analyticsService: AnalyticsService,
     private router: Router,
-    //  public notificacionService: NotificacionesService,
-    //  public translate: TranslateService
 
   ) {
     this.isRemainder = 0
     this.initializeApp();
-    // this.liveToken();
   }
 
-  // liveToken() {
-  //   if (this.autenticacion.live()) {
-  //     this.liveTokenValue = this.autenticacion.live();
-  //     this.username = (this.autenticacion.getPayload()).sub;
-  //   }
-  //   return this.autenticacion.live();
-  // }
-  //
   onContecxtItemSelection(title) {
     if (title === 'ver todas') {
       this.router.navigate(['/pages/notificacion/listado']);
@@ -57,8 +41,10 @@ export class HeaderComponent {
   }
 
   logout() {
-    this.autenticacion.logout('from header');
-    // this.liveTokenValue = auth.live(true);
+    const confirm = window.confirm('¿Estás seguro de cerrar sesión?');
+    if (confirm) {
+      this.autenticacion.logout('from header');
+    }
   }
 
   initializeApp() {
