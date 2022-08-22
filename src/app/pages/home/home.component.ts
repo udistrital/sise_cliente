@@ -54,7 +54,11 @@ export class HomeComponent implements OnInit {
   }
 
   logout() {
-    this.autenticacion.logout('from header');
+
+    const confirm = window.confirm('¿Estás seguro de cerrar sesión?');
+    if (confirm) {
+      this.autenticacion.logout('from header');
+    }
   }
 
   async ngOnInit() {

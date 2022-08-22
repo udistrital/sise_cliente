@@ -15,7 +15,10 @@ export class AppComponent {
   }
 
   logout() {
-    this.autenticacion.logout('from header');
+    const confirm = window.confirm('¿Estás seguro de cerrar sesión?');
+    if (confirm) {
+      this.autenticacion.logout('from header');
+    }
   }
 
 }

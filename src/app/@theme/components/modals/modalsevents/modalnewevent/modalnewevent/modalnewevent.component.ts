@@ -48,7 +48,7 @@ export class ModalneweventComponent implements OnInit {
     public modalService: ModalService,
     public toastService: ToastService,
     public alertService: AlertService,
-    private readonly infoPersonalService: InfoPersonalService,
+    private infoPersonalService: InfoPersonalService,
     private creacioneventosService: CreacioneventosService,
     private selectableService: SelectableService,
     private funcsService: FuncsService,
@@ -58,7 +58,12 @@ export class ModalneweventComponent implements OnInit {
     this.selectedEvent = new Event(); // iNICIALIZANDO VARIABLE CON UNA TAREA
 
     (async () => {
-      const terceros = await this.infoPersonalService.getInfoComplementariaTercero(environment.TERCEROS_SERVICE, `/tercero?fields=UsuarioWSO2&limit=-1`).toPromise();
+      const terceros = await this.infoPersonalService
+        .getInfoComplementariaTercero(
+          environment.TERCEROS_SERVICE,
+          `/tercero?fields=UsuarioWSO2&limit=-1`)
+        .toPromise();
+
       this.terceros = terceros
     })
   }
@@ -118,12 +123,12 @@ export class ModalneweventComponent implements OnInit {
 
     return;
 
-    if(!Nombre || !Descripcion || !FechaInicio || !FechaFin || !Lugar || !TipoSesion)
-     return this.toastService.presentToast("Debes diligenciar los campos obligatorios")
+    if (!Nombre || !Descripcion || !FechaInicio || !FechaFin || !Lugar || !TipoSesion)
+      return this.toastService.presentToast("Debes diligenciar los campos obligatorios")
 
     console.log(' \n Nombre:' + Nombre, ' \nDescripcion:' + Descripcion, ' \nFechaInicio:' + FechaInicio, ' \nFechaFin:' + FechaFin, ' \nLugar:' + Lugar, ' \nTipoSesion:' + TipoSesion, ' \nPoster:' + this.selectedEvent.Poster);
 
-    console.log('this.selectedEvent.',this.selectedEvent);
+    console.log('this.selectedEvent.', this.selectedEvent);
     console.log('this.typeEventPlace', this.typeEventPlace);
 
     let media;
@@ -218,30 +223,14 @@ export class ModalneweventComponent implements OnInit {
   }
 
   async validateEventPlace() {
-    console.log(this.selectedEvent.TipoLugar)
-    console.log($("#TipoLugarDataList option[value='" + $('#TipoLugar').val() + "']").attr('data-id'));
-    this.selectedEvent.TipoLugar = $("#TipoLugarDataList option[value='" + $('#TipoLugar').val() + "']").attr('data-id')
+    this.selectedEvent.TipoLugar = $("#TipoLugarDataList option[value='" + $('#TipoLugar').val() + "']")
+      .attr('data-id')
 
     if (this.selectedEvent.TipoLugar == 7) {
       this.typeEventPlace = 7
-      // const direccionesTiposLugar = await this.infoPersonalService
-      //   .getInfoComplementariaTercero(environment.API_ENDPOINT_UBICACIONES + '/lugar', `lugar?query=TipoLugarId.Id:7`)
-      //   .toPromise();
-
-      // console.log('direccionesTiposLugar', direccionesTiposLugar);
-
-      // this.eventPlace = direccionesTiposLugar
     }
     else if (this.selectedEvent.TipoLugar == 5) {
-      //   const googleMeetLink = await this.infoPersonalService
-      //   .getInfoComplementariaTercero(environment.API_ENDPOINT_UBICACIONES + '/lugar', `lugar?query=TipoLugarId.Id:7`)
-      //   .toPromise();
-
-      // console.log('googleMeetLink', googleMeetLink);
-
-      // this.eventPlace = googleMeetLink
       this.typeEventPlace = 5
-
     }
   }
 }
