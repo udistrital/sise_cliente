@@ -102,16 +102,14 @@
         </ion-item>
       </ion-col>
 
-      <ion-col size="12" class="ion-margin-vertical">
+      <!-- <ion-col size="12" class="ion-margin-vertical">
         <ion-label>Invitados</ion-label>
         <ion-item>
-          <!-- <ion-label position="floating">Invitados especificos</ion-label>
-          <ion-icon slot="start" name="people-outline"></ion-icon> -->
           <ionic-selectable item-content [isMultiple]="true" [canSearch]="true" id="InvitadosEspecificos" name="InvitadosEspecificos" #InvitadosEspecificos="ngModel" (onChange)="this.selectableUtils.specificGuestsChange($event)"
           required [(ngModel)]="selectedEvent.InvitadosEspecificos" [items]="terceros" itemValueField="Id" itemTextField="UsuarioWSO2" (onSearch)="this.selectableUtils.searchIonSelectable($event,terceros,'UsuarioWSO2')">
           </ionic-selectable>
         </ion-item>
-      </ion-col>
+      </ion-col> -->
 
       <!--
         <ion-col size="6" class="ion-margin-vertical">

@@ -56,21 +56,19 @@ export class ModalneweventComponent implements OnInit {
   ) {
     this.selectableUtils = this.selectableService
     this.selectedEvent = new Event(); // iNICIALIZANDO VARIABLE CON UNA TAREA
-
-    (async () => {
-      const terceros = await this.infoPersonalService
-        .getInfoComplementariaTercero(
-          environment.TERCEROS_SERVICE,
-          `/tercero?fields=UsuarioWSO2&limit=-1`)
-        .toPromise();
-
-      this.terceros = terceros
-    })
   }
 
   async ngOnInit() {
 
     let loader = await this.loaderService.presentLoading('Cargando formulario de eventos 📅')
+
+    const terceros = await this.infoPersonalService
+      .getInfoComplementariaTercero(
+        environment.TERCEROS_SERVICE,
+        `/tercero?fields=Id,UsuarioWSO2&limit=-1`)
+      .toPromise();
+
+    this.terceros = terceros
 
     const dataTipoEventos = await this.infoPersonalService
       .getInfoComplementariaTercero(environment.EVENTOS_ENDPOINT, `/tipo_evento?limit=-1`)
