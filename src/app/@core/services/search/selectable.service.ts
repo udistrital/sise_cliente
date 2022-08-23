@@ -19,8 +19,9 @@ export class SelectableService {
     console.log('VALUE SELECTABLE:', event.value);
   }
 
-  filterTerceros(data: any[], text: string, fieldTextKey:string) {
-    console.log(data)
+  filterTerceros(data: any[], text: string, fieldTextKey: string) {
+    console.log('data')
+    console.log(data, text, fieldTextKey)
     return data.filter(dato => {
       return dato[fieldTextKey].toLowerCase().indexOf(text) !== -1 ||
         dato[fieldTextKey].toLowerCase().indexOf(text) !== -1 ||
@@ -28,10 +29,14 @@ export class SelectableService {
     });
   }
 
-  searchIonSelectable(event: {
-    component: IonicSelectableComponent,
-    text: string
-  }, dataApi, fieldTextKey) {
+  searchIonSelectable(
+    event: {
+      component: IonicSelectableComponent,
+      text: string
+    },
+    dataApi,
+    fieldTextKey
+  ) {
     console.log(event)
     let text = event.text.trim().toLowerCase();
     event.component.startSearch();
