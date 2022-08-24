@@ -207,7 +207,6 @@ export class CreacioneventosComponent implements OnInit {
 
         this.eventos[index]['Lugar'] = ubicacion[0].Nombre
       }
-      // this.eventos[index]['place'] = ubicacion[0].Nombre
     }));
 
     this.rows = this.eventos

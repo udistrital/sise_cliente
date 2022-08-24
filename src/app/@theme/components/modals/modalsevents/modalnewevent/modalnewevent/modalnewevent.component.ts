@@ -108,106 +108,105 @@ export class ModalneweventComponent implements OnInit {
   }
 
   async submitEvent(form: NgForm) {
-    let loader = await this.loaderService.presentLoading('Enviando')
 
-    console.log(form);
+    try {
+      let loader = await this.loaderService.presentLoading('Enviando')
 
-    let { Nombre, Descripcion, FechaInicio, FechaFin, Lugar, TipoSesion } = form.value
+      console.log(form);
 
-    let fechaInicioValidation = new Date(FechaInicio).toISOString()
-    fechaInicioValidation = this.funcsService.isoStrToYYYYMMDDHHSSNormal(fechaInicioValidation)
-    console.log('fechaInicioValidation')
-    console.log(fechaInicioValidation)
+      let { Nombre, Descripcion, FechaInicio, FechaFin, Lugar, TipoSesion } = form.value
 
-    return;
+      // let fechaInicioValidation = new Date(FechaInicio).toISOString()
+      // fechaInicioValidation = this.funcsService.isoStrToYYYYMMDDHHSSNormal(fechaInicioValidation)
+      // console.log('fechaInicioValidation')
+      // console.log(fechaInicioValidation)
 
-    if (!Nombre || !Descripcion || !FechaInicio || !FechaFin || !Lugar || !TipoSesion)
-      return this.toastService.presentToast("Debes diligenciar los campos obligatorios")
 
-    console.log(' \n Nombre:' + Nombre, ' \nDescripcion:' + Descripcion, ' \nFechaInicio:' + FechaInicio, ' \nFechaFin:' + FechaFin, ' \nLugar:' + Lugar, ' \nTipoSesion:' + TipoSesion, ' \nPoster:' + this.selectedEvent.Poster);
+      if (!Nombre || !Descripcion || !FechaInicio || !FechaFin || !Lugar || !TipoSesion)
+        return this.toastService.presentToast("Debes diligenciar los campos obligatorios")
 
-    console.log('this.selectedEvent.', this.selectedEvent);
-    console.log('this.typeEventPlace', this.typeEventPlace);
+      console.log(' \n Nombre:' + Nombre, ' \nDescripcion:' + Descripcion, ' \nFechaInicio:' + FechaInicio, ' \nFechaFin:' + FechaFin, ' \nLugar:' + Lugar, ' \nTipoSesion:' + TipoSesion, ' \nPoster:' + this.selectedEvent.Poster);
 
-    let media;
-    if (this.selectedEvent.Poster) {
-      // console.log(this.selectedEvent.Poster)
-      media = await this.funcsService.imageUpload(this.selectedEvent.Poster, {
-        preset_name: 'events',
-        cloud_name: 'sise'
-      });
-    }
+      console.log('this.selectedEvent.', this.selectedEvent);
+      console.log('this.typeEventPlace', this.typeEventPlace);
 
-    // Event place creation
-    let locationValue, ubicacionId;
-    if (this.typeEventPlace == 5) {
-      locationValue = this.selectedEvent.TipoLugarMeet
-    } else if (this.typeEventPlace == 7) {
-      locationValue = this.selectedEvent.TipoLugarDireccion
-    }
+      let media;
+      if (this.selectedEvent.Poster) {
+        // console.log(this.selectedEvent.Poster)
+        media = await this.funcsService.imageUpload(this.selectedEvent.Poster, {
+          preset_name: 'events',
+          cloud_name: 'sise'
+        });
+      }
 
-    console.log('locationValue: ', locationValue);
+      // Event place creation
+      let locationValue, ubicacionId;
+      if (this.typeEventPlace == 5) {
+        locationValue = this.selectedEvent.TipoLugarMeet
+      } else if (this.typeEventPlace == 7) {
+        locationValue = this.selectedEvent.TipoLugarDireccion
+      }
 
-    if (locationValue) {
-      const respLocationCreation: any = await this.funcsService.postData(environment.API_ENDPOINT_UBICACIONES + '/lugar', {
+      console.log('locationValue: ', locationValue);
+
+      if (locationValue) {
+        const respLocationCreation: any = await this.funcsService.postData(environment.API_ENDPOINT_UBICACIONES + '/lugar', {
+          "Id": null,
+          "Nombre": locationValue,
+          "TipoLugarId": {
+            "Id": this.typeEventPlace
+          },
+          "Activo": true
+        })
+          .toPromise();
+
+        console.log('respLocationCreation: ', respLocationCreation);
+        ubicacionId = respLocationCreation.Id;
+      }
+      let response: any;
+
+      let eventBody = {
         "Id": null,
-        "Nombre": locationValue,
-        "TipoLugarId": {
-          "Id": this.typeEventPlace
+        "Nombre": Nombre,
+        "Descripcion": Descripcion,
+        "EventoPadreId": null,
+        "FechaInicio": this.funcsService.strToDateTimeWithoutSeconds(FechaInicio.split('T').join(' ')).toISOString(),
+        "FechaFin": this.funcsService.strToDateTimeWithoutSeconds(FechaFin.split('T').join(' ')).toISOString(),
+        "Activo": true,
+        "TipoEventoId": {
+          "Id": parseInt(TipoSesion)
         },
-        "Activo": true
-      })
-        .toPromise();
+        "UbicacionId": ubicacionId ? ubicacionId : 0,
+      }
 
-      console.log('respLocationCreation: ', respLocationCreation);
-      ubicacionId = respLocationCreation.Id;
+      if (this.selectedEvent.Poster && media)
+        eventBody["PosterUrl"] = media[0].url
+      else {
+        const sesion = await this.infoPersonalService.getInfoComplementariaTercero(environment.EVENTOS_ENDPOINT, `/calendario_evento/${this.eventRow.Id}`).toPromise();
+        eventBody["PosterUrl"] = sesion.PosterUrl
+      }
+
+      if (this.eventRow && this.eventRow.Id) {
+        const sesion = await this.infoPersonalService.getInfoComplementariaTercero(environment.EVENTOS_ENDPOINT, `/calendario_evento/${this.eventRow.Id}`).toPromise();
+        eventBody["FechaCreacion"] = sesion.FechaCreacion
+        eventBody["FechaModificacion"] = sesion.FechaModificacion
+        eventBody["Id"] = this.eventRow.Id
+
+        response = await this.creacioneventosService.editEvent(eventBody, this.eventRow.Id).toPromise();
+
+        this.toastService.presentToast("Evento actualizado correctamente")
+
+      } else {
+        response = await this.creacioneventosService.createEvent(eventBody).toPromise();
+        this.toastService.presentToast("Evento creado correctamente")
+      }
+
+      console.log(response)
+      this.dismissModal('modal-new-event')
+      loader.dismiss()
+    } catch (err) {
+      console.error(err)
     }
-
-    // .subscribe((res: any) => {
-    //   console.log('Res creacion tercero', res);
-    // })
-
-    let response: any;
-
-    let eventBody = {
-      "Id": null,
-      "Nombre": Nombre,
-      "Descripcion": Descripcion,
-      "EventoPadreId": null,
-      "FechaInicio": this.funcsService.strToDateTimeWithoutSeconds(FechaInicio.split('T').join(' ')).toISOString(),
-      "FechaFin": this.funcsService.strToDateTimeWithoutSeconds(FechaFin.split('T').join(' ')).toISOString(),
-      "Activo": true,
-      "TipoEventoId": {
-        "Id": parseInt(TipoSesion)
-      },
-      "UbicacionId": ubicacionId ? ubicacionId : 0,
-    }
-
-    if (this.selectedEvent.Poster && media)
-      eventBody["PosterUrl"] = media[0].url
-    else {
-      const sesion = await this.infoPersonalService.getInfoComplementariaTercero(environment.EVENTOS_ENDPOINT, `/calendario_evento/${this.eventRow.Id}`).toPromise();
-      eventBody["PosterUrl"] = sesion.PosterUrl
-    }
-
-    if (this.eventRow && this.eventRow.Id) {
-      const sesion = await this.infoPersonalService.getInfoComplementariaTercero(environment.EVENTOS_ENDPOINT, `/calendario_evento/${this.eventRow.Id}`).toPromise();
-      eventBody["FechaCreacion"] = sesion.FechaCreacion
-      eventBody["FechaModificacion"] = sesion.FechaModificacion
-      eventBody["Id"] = this.eventRow.Id
-
-      response = await this.creacioneventosService.editEvent(eventBody, this.eventRow.Id).toPromise();
-
-      this.toastService.presentToast("Evento actualizado correctamente")
-
-    } else {
-      response = await this.creacioneventosService.createEvent(eventBody).toPromise();
-      this.toastService.presentToast("Evento creado correctamente")
-    }
-
-    console.log(response)
-    this.dismissModal('modal-new-event')
-    loader.dismiss()
   }
 
   dismissModal(modalId: any) {
