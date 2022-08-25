@@ -122,8 +122,8 @@ export class ModalneweventComponent implements OnInit {
       // console.log(fechaInicioValidation)
 
 
-      if (!Nombre || !Descripcion || !FechaInicio || !FechaFin || !Lugar || !TipoSesion)
-        return this.toastService.presentToast("Debes diligenciar los campos obligatorios")
+      // if (!Nombre || !Descripcion || !FechaInicio || !FechaFin || !Lugar || !TipoSesion)
+      //   return this.toastService.presentToast("Debes diligenciar los campos obligatorios")
 
       console.log(' \n Nombre:' + Nombre, ' \nDescripcion:' + Descripcion, ' \nFechaInicio:' + FechaInicio, ' \nFechaFin:' + FechaFin, ' \nLugar:' + Lugar, ' \nTipoSesion:' + TipoSesion, ' \nPoster:' + this.selectedEvent.Poster);
 
