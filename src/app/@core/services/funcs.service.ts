@@ -38,7 +38,7 @@ export class FuncsService {
   imageUpload = async (images, options) => {
 
     const { preset_name, cloud_name } = options
-    // console.log(images);
+
     let imgArr = []
 
     for (const item of images) {
@@ -55,8 +55,6 @@ export class FuncsService {
       })
 
       const data = await res.json()
-
-      // console.log(data);
 
       imgArr.push({ public_id: data.public_id, url: data.secure_url })
     }

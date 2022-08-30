@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   constructor(private autenticacion: ImplicitAutenticationService,    private router: Router) { }
-  appname = 'sga';
   basePathAssets = 'https://pruebasassets.portaloas.udistrital.edu.co/'
   @Input('isloading') isloading: boolean = false;
   @Output('loginEvent') loginEvent: EventEmitter<any> = new EventEmitter();
@@ -19,8 +18,6 @@ export class LoginComponent implements OnInit {
     this.isloading = true;
     this.loginEvent.next('clicked');
     this.autenticacion.login(false);
-
-    console.log('hola');
   }
 
   ngOnInit(): void {

@@ -21,7 +21,6 @@
   </ion-row>
 
   <form #newEventForm="ngForm" (ngSubmit)="submitEvent(newEventForm)" enctype="multipart/form-data">
-    <!-- <ion-input *ngIf="eventRow.Id;" hidden type="text" id="Id" name="Id" #Id="ngModel"  required [(ngModel)]="selectedEvent.Id" class="border-0 border-none"></ion-input> -->
 
     <ion-row class="ion-justify-content-center ion-padding-horizontal">
 
@@ -40,29 +39,23 @@
       </ion-col>
 
       <ion-col size="6" style="text-align: center;">
-        <!-- <ion-label fixed style="width: 100%; margin-bottom: 1rem;">Inicia</ion-label> -->
         <ion-item lines="full">
           <ion-label position="floating">Inicio</ion-label>
           <ion-input type="datetime-local" id="FechaInicio" name="FechaInicio" #FechaInicio="ngModel" required [(ngModel)]="selectedEvent.FechaInicio" class="border-0 border-none"></ion-input>
-          <!-- <ion-datetime displayFormat='YYYY-MM-DD HH:mm'  (tap)="init_worked_time()"
-          pickerFormat='YYYY-MM-DD HH:mm' style="width: 100%; text-align: right;" id="FechaInicio" name="FechaInicio" #FechaInicio="ngModel" required [(ngModel)]="selectedEvent.FechaInicio"></ion-datetime> -->
         </ion-item>
       </ion-col>
-      <!-- MMM DD, h:mm A -->
 
       <ion-col size="6" style="text-align: center;">
-        <!-- <ion-label fixed style="width: 100%; margin-bottom: 1rem;">Termina</ion-label> -->
         <ion-item lines="full">
           <ion-label position="floating">Culminación</ion-label>
           <ion-input type="datetime-local" id="FechaFin" name="FechaFin" #FechaFin="ngModel" required [(ngModel)]="selectedEvent.FechaFin" class="border-0 border-none"></ion-input>
-          <!-- <ion-datetime locale="es-CO"  displayFormat="MMM DD, h:mm A"  id="FechaFin" style="width: 100%; text-align: right;" name="FechaFin" #FechaFin="ngModel" required [(ngModel)]="selectedEvent.FechaFin"></ion-datetime> -->
         </ion-item>
       </ion-col>
 
       <ion-col size="6" class="ion-margin-vertical" style="padding: 0.6rem;">
         <label for="TipoLugar">Lugar</label>
 
-        <input autocomplete="off" onfocus="this.value=''" onchange="this.blur();" id="TipoLugar" placeholder="Buscar y seleccionar..." list="TipoLugarDataList" style="width: 100%; margin-top: 0.4rem;" (change)="validateEventPlace()">
+        <input [(ngModel)]="selectedEvent.TipoLugarStr" autocomplete="off" onfocus="this.value=''" onchange="this.blur();" id="TipoLugar" placeholder="Buscar y seleccionar..." list="TipoLugarDataList" style="width: 100%; margin-top: 0.4rem;" (change)="validateEventPlace()">
 
         <datalist id="TipoLugarDataList" autocomplete="off">
           <ng-container *ngFor="let ubicacion of ubicacionesTiposLugar">
@@ -88,7 +81,6 @@
       <ion-col size="6" class="ion-margin-vertical">
         <ion-item lines="full">
           <ion-label position="floating">Tipo</ion-label>
-          <!-- <ion-icon slot="start" name="people-outline"></ion-icon> -->
           <ion-select interface="action-sheet" id="TipoSesion" item-content name="TipoSesion" #TipoSesion="ngModel" required [(ngModel)]="selectedEvent.TipoSesion">
             <ion-select-option *ngFor="let tipoevento of tipoeventos" value="{{tipoevento.Id}}">{{tipoevento.Nombre}}</ion-select-option>
           </ion-select>
@@ -101,35 +93,6 @@
           <input type="file" id="Poster" name="Poster" required class="border-0 border-none" (change)="getPoster($event)" />
         </ion-item>
       </ion-col>
-
-      <!-- <ion-col size="12" class="ion-margin-vertical">
-        <ion-label>Invitados</ion-label>
-        <ion-item>
-          <ionic-selectable item-content [isMultiple]="true" [canSearch]="true" id="InvitadosEspecificos" name="InvitadosEspecificos" #InvitadosEspecificos="ngModel" (onChange)="this.selectableUtils.specificGuestsChange($event)"
-          required [(ngModel)]="selectedEvent.InvitadosEspecificos" [items]="terceros" itemValueField="Id" itemTextField="UsuarioWSO2" (onSearch)="this.selectableUtils.searchIonSelectable($event,terceros,'UsuarioWSO2')">
-          </ionic-selectable>
-        </ion-item>
-      </ion-col> -->
-
-      <!--
-        <ion-col size="6" class="ion-margin-vertical">
-        <ion-item lines="full">
-          <ion-label position="floating">Invitados por rol</ion-label>
-          <ion-icon slot="start" name="people-outline"></ion-icon>
-          <ion-select interface="action-sheet" id="Invitados" name="Invitados" #Invitados="ngModel" required [(ngModel)]="selectedEvent.Invitados">
-            <ion-select-option *ngFor="let rol of roles" value="{{rol}}">{{rol}}</ion-select-option>
-          </ion-select>
-        </ion-item>
-      </ion-col>
-
-      <ion-col size="6" class="ion-margin-vertical">
-        <ion-item lines="full">
-          <ion-label position="floating">Invitados especificos</ion-label>
-          <ion-icon slot="start" name="people-outline"></ion-icon>
-          <ionic-selectable item-content [isMultiple]="true" [canSearch]="true" id="InvitadosEspecificos" name="InvitadosEspecificos" #InvitadosEspecificos="ngModel" (onChange)="this.selectableUtils.specificGuestsChange($event)" required [(ngModel)]="selectedEvent.InvitadosEspecificos" [items]="terceros" itemValueField="Id" itemTextField="UsuarioWSO2" (onSearch)="this.selectableUtils.searchIonSelectable($event,terceros,'UsuarioWSO2')">
-          </ionic-selectable>
-        </ion-item>
-      </ion-col> -->
     </ion-row>
 
     <ion-row class="ion-justify-content-center ion-text-center">
