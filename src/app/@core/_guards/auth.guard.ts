@@ -20,9 +20,6 @@ export class AuthGuard implements CanActivate {
     console.log(roles);
     const id_token = window.localStorage.getItem('id_token').split('.');
     const payload = JSON.parse(atob(id_token[1]));
-    console.log('payload');
-    console.log(payload);
-
     const { email } = this.autenticacion.getPayload()
     const body = { "user": email };
     const { documento, documento_compuesto, ...rest } = await this.infoPersonalService.getDocumentIdByEmail(environment.API_GET_IDENTIFICATION, body).toPromise() as Documento;
@@ -30,8 +27,6 @@ export class AuthGuard implements CanActivate {
     let rolesArr = rest["role"]
 
     if (payload && rolesArr) {
-
-      console.log('yeah')
       for (let i = 0; i < rolesArr.length; i++) {
         for (let j = 0; j < roles.length; j++) {
           if (rolesArr[i] === roles[j]) {

@@ -10,12 +10,9 @@ export class Event {
   TipoSesion: any;
   Lugar: string;
   TipoLugar: any;
+  TipoLugarStr: any;
   Poster: any;
   TipoLugarDireccion: string
-  TipoLugarPais: string
-  TipoLugarCiudad: string
-  TipoLugarLocalidad: string
-  TipoLugarDpto: string
   TipoLugarMeet: string
 
   constructor(
@@ -30,12 +27,9 @@ export class Event {
     FechaFin = '',
     Lugar = '',
     TipoLugar = '',
+    TipoLugarStr = '',
     Poster = '',
     TipoLugarDireccion = '',
-    TipoLugarPais = '',
-    TipoLugarCiudad = '',
-    TipoLugarLocalidad = '',
-    TipoLugarDpto = '',
     TipoLugarMeet = '',
   ) {
 
@@ -50,12 +44,9 @@ export class Event {
     this.FechaFin = FechaFin
     this.Lugar = Lugar
     this.TipoLugar = TipoLugar
+    this.TipoLugarStr = TipoLugarStr
     this.Poster = Poster
     this.TipoLugarDireccion = TipoLugarDireccion
-    this.TipoLugarPais = TipoLugarPais
-    this.TipoLugarCiudad = TipoLugarCiudad
-    this.TipoLugarLocalidad = TipoLugarLocalidad
-    this.TipoLugarDpto = TipoLugarDpto
     this.TipoLugarMeet = TipoLugarMeet
   }
 }

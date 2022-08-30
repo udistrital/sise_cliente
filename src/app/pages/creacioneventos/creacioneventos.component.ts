@@ -200,7 +200,8 @@ export class CreacioneventosComponent implements OnInit {
     await Promise.all(this.eventos.map(async (evento, index) => {
       if (evento.UbicacionId) {
         let ubicacion = await this.infoPersonalService
-          .getInfoComplementariaTercero(environment.API_ENDPOINT_UBICACIONES, `lugar/?query=Id:${evento.UbicacionId}&fields=Nombre&limit=1`)
+          .getInfoComplementariaTercero(environment.API_ENDPOINT_UBICACIONES,
+             `lugar/?query=Id:${evento.UbicacionId}&fields=Nombre&limit=1`)
           .toPromise();
 
         console.log(ubicacion[0].Nombre);

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ModalService } from '../../../../../../@core/services/notify/modal.service';
 import { Event } from '../../../../../../@core/data/models/event';
@@ -86,13 +86,38 @@ export class ModalneweventComponent implements OnInit {
 
     this.ubicacionesTiposLugar = ubicacionesTiposLugar
 
+    console.log('AA🤔', this.eventRow)
+
     if (this.eventRow && this.eventRow.Id) {
 
       this.selectedEvent = this.eventRow;
-      this.selectedEvent["TipoLugar"] = this.eventRow.TipoEventoId
+
       this.selectedEvent["TipoSesion"] = this.eventRow.TipoEventoId.Id.toString();
       this.selectedEvent["FechaInicio"] = this.eventRow.Inicio.split(' ').join('T')
       this.selectedEvent["FechaFin"] = this.eventRow.Fin.split(' ').join('T')
+
+      let ubicacionStr = await this.infoPersonalService
+        .getInfoComplementariaTercero(environment.API_ENDPOINT_UBICACIONES,
+          `lugar/?query=Id:${this.eventRow.UbicacionId}&fields=TipoLugarId,Nombre&limit=1`)
+        .toPromise();
+
+      console.log('ubicacionStr', ubicacionStr);
+
+      if (!ubicacionStr[0] || !ubicacionStr[0].TipoLugarId) {
+        loader.dismiss()
+        return this.toastService.presentToast("Error cargando algunos datos ⚙️")
+      }
+
+      if (ubicacionStr[0] &&
+        ubicacionStr[0].TipoLugarId &&
+        ubicacionStr[0].TipoLugarId.Id == 7) {
+        this.selectedEvent["TipoLugarDireccion"] = ubicacionStr[0].Nombre
+      } else if (ubicacionStr[0].TipoLugarId.Id == 5) {
+        this.selectedEvent["TipoLugarMeet"] = ubicacionStr[0].Nombre
+      }
+
+      this.selectedEvent.TipoLugar = ubicacionStr[0].TipoLugarId.Id
+      this.selectedEvent["TipoLugarStr"] = ubicacionStr[0].TipoLugarId.Nombre
     }
 
     loader.dismiss()
@@ -114,29 +139,37 @@ export class ModalneweventComponent implements OnInit {
 
       console.log(form);
 
-      let { Nombre, Descripcion, FechaInicio, FechaFin, Lugar, TipoSesion } = form.value
+      let { Nombre, Descripcion, FechaInicio, FechaFin, TipoSesion } = form.value
 
+      const tipoLugar = this.selectedEvent.TipoLugarStr
+      let lugarValue = ''
+
+      if (this.selectedEvent.TipoLugar == 7) {
+        lugarValue = this.selectedEvent.TipoLugarDireccion
+      }
+      else if (this.selectedEvent.TipoLugar == 5) {
+        lugarValue = this.selectedEvent.TipoLugarMeet
+      }
+
+      console.log(' \n Nombre:' + Nombre, ' \nDescripcion:' + Descripcion, ' \nFechaInicio:' + FechaInicio, ' \nFechaFin:' + FechaFin, ' \nTipo Lugar:' + tipoLugar, ' \nTipoSesion:' + TipoSesion, ' \nPoster:' + this.selectedEvent.Poster, ' \nLugar:' + lugarValue);
+// return;
       // let fechaInicioValidation = new Date(FechaInicio).toISOString()
       // fechaInicioValidation = this.funcsService.isoStrToYYYYMMDDHHSSNormal(fechaInicioValidation)
       // console.log('fechaInicioValidation')
       // console.log(fechaInicioValidation)
 
-
-      // if (!Nombre || !Descripcion || !FechaInicio || !FechaFin || !Lugar || !TipoSesion)
-      //   return this.toastService.presentToast("Debes diligenciar los campos obligatorios")
-
-      console.log(' \n Nombre:' + Nombre, ' \nDescripcion:' + Descripcion, ' \nFechaInicio:' + FechaInicio, ' \nFechaFin:' + FechaFin, ' \nLugar:' + Lugar, ' \nTipoSesion:' + TipoSesion, ' \nPoster:' + this.selectedEvent.Poster);
-
-      console.log('this.selectedEvent.', this.selectedEvent);
-      console.log('this.typeEventPlace', this.typeEventPlace);
+      if (!Nombre || !tipoLugar || !lugarValue || !Descripcion || !FechaInicio || !FechaFin || !TipoSesion) {
+        loader.dismiss()
+        return this.toastService.presentToast("Debes diligenciar los campos obligatorios")
+      }
 
       let media;
       if (this.selectedEvent.Poster) {
-        // console.log(this.selectedEvent.Poster)
-        media = await this.funcsService.imageUpload(this.selectedEvent.Poster, {
-          preset_name: 'events',
-          cloud_name: 'sise'
-        });
+        media = await this.funcsService
+          .imageUpload(this.selectedEvent.Poster, {
+            preset_name: 'events',
+            cloud_name: 'sise'
+          });
       }
 
       // Event place creation
@@ -150,19 +183,21 @@ export class ModalneweventComponent implements OnInit {
       console.log('locationValue: ', locationValue);
 
       if (locationValue) {
-        const respLocationCreation: any = await this.funcsService.postData(environment.API_ENDPOINT_UBICACIONES + '/lugar', {
-          "Id": null,
-          "Nombre": locationValue,
-          "TipoLugarId": {
-            "Id": this.typeEventPlace
-          },
-          "Activo": true
-        })
+        const respLocationCreation: any = await this.funcsService
+          .postData(environment.API_ENDPOINT_UBICACIONES + '/lugar', {
+            "Id": null,
+            "Nombre": locationValue,
+            "TipoLugarId": {
+              "Id": this.typeEventPlace
+            },
+            "Activo": true
+          })
           .toPromise();
 
         console.log('respLocationCreation: ', respLocationCreation);
         ubicacionId = respLocationCreation.Id;
       }
+
       let response: any;
 
       let eventBody = {
