@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Ubicar Egresado</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="wrapper">
+    <div class="container">
+      <div class="flex">
+        <div class="search form-inline form--search" id="search">
+          <div class="form-group">
+            <ion-item lines="full">
+              <ion-label position="floating">Filtrar por país</ion-label>
+              <ion-icon slot="start" name="search-outline"></ion-icon>
+              <ion-input id="searchInput" type="text" required></ion-input>
+            </ion-item>
+          </div>
+        </div>
+        <div class="price hidden" id="price">
+          <span class="price__value" id="value"></span>
+          <span class="price__unit" id="unit"></span>
+        </div>
+      </div>
+      <div class="map__wrap" id="mapContainer" style="margin-bottom: 2rem;">
+        <div class="map">Cargando mapa...</div>
+      </div>
+      <!-- IN TESTING -->
+      <ion-tabs style="position:inherit; padding-bottom: 0.7rem">
+        <ion-tab-bar slot="bottom">
+          <ion-tab-button tab="schedule">
+            <ion-icon name="calendar"></ion-icon>
+            <ion-label>Mapael</ion-label>
+          </ion-tab-button>
+          
+          <ion-tab-button tab="map">
+            <ion-icon name="map"></ion-icon>
+            <ion-label>Google Maps</ion-label>
+            <ion-badge>6</ion-badge>
+          </ion-tab-button>
+
+          <ion-tab-button tab="speakers">
+            <ion-icon name="map"></ion-icon>
+            <ion-label>Colombia</ion-label>
+          </ion-tab-button>
+    
+          <ion-tab-button tab="about">
+            <ion-icon name="information-circle"></ion-icon>
+            <ion-label>Otro</ion-label>
+          </ion-tab-button>
+        </ion-tab-bar>
+      </ion-tabs>
+      <!-- END IN TESTING -->
+    </div>
+  </div>
+
+
+</ion-content>

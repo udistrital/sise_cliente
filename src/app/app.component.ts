@@ -1,35 +1,23 @@
-import { AfterViewInit, Component } from '@angular/core';
-import { environment } from './../../src/environments/environment';
-import { MenuService } from './services/menu.service';
-
+import { Component } from '@angular/core';
+import { ImplicitAutenticationService } from './@core/utils/implicit_autentication.service';
 @Component({
-  selector: 'ng-uui-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  selector: 'app-root',
+  templateUrl: 'app.component.html',
+  styleUrls: ['app.component.scss']
 })
 
-export class AppComponent implements AfterViewInit {
-  opened: boolean = false;
-  userData = {user: null, userService: null}
-  environment = environment;
-  constructor(private menuService: MenuService) {
-    this.menuService.sidebar$.subscribe((opened) => (this.opened = opened))
+export class AppComponent {
+  public isRemainder: any;
+
+  constructor(private autenticacion: ImplicitAutenticationService) {
+    this.isRemainder = 0
+    // this.autenticacion.live();
   }
 
-  ngAfterViewInit() {
-  }
-
-  userEvent(event) {
-    const {user, userService} = event;
-    if(userService && user && !this.userData.user && !this.userData.userService){
-      this.userData.user = user;
-      this.userData.userService = userService;
-    }
-  }
-
-  optionEvent(event) {
-    const {Url} = event;
-    if(Url) {
+  logout() {
+    const confirm = window.confirm('¿Estás seguro de cerrar sesión?');
+    if (confirm) {
+      this.autenticacion.logout('from header');
     }
   }
 

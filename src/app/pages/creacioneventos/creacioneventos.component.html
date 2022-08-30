@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Gestión de eventos</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+  <ion-header style="margin-right: 4rem; margin-left: 2rem; margin-bottom: 3rem;" [translucent]="false">
+    <ion-toolbar style="display: flex; justify-content: space-between; margin-top: 2rem;">
+      <ion-title style="float:left;">
+        Eventos
+      </ion-title>
+
+      <ion-button style="float: right; margin-right: 7rem;" class="boton" type="submit" color="primary" (click)="openEventModal()">
+        Nuevo evento
+      </ion-button>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content [fullscreen]="false" class="scrollTable" style="height: 800px;overflow:auto; margin: 2rem; padding: 3rem; margin-bottom: 3rem;">
+
+    <ng2-smart-table [settings]="settings" [source]="rows" (createConfirm)="onCreateConfirm($event)" (custom)="onCustomAction($event)"></ng2-smart-table>
+  </ion-content>
+
+</ion-content>
