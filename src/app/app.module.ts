@@ -1,8 +1,7 @@
 import { FormsModule } from '@angular/forms';
-import { ErrorHandler, NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import {NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouteReuseStrategy } from '@angular/router';
-import { APP_BASE_HREF, CommonModule, HashLocationStrategy, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { CommonModule, HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -27,9 +26,6 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     AppRoutingModule,
     NoopAnimationsModule,
     MatIconModule,
-    // AgmCoreModule.forRoot({
-    //   apiKey: environment.MAPSKEY
-    // }),
   ],
   providers: [
     StatusBar,
