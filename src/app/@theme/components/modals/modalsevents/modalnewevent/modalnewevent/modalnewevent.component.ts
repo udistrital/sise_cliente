@@ -151,12 +151,7 @@ export class ModalneweventComponent implements OnInit {
         lugarValue = this.selectedEvent.TipoLugarMeet
       }
 
-      console.log(' \n Nombre:' + Nombre, ' \nDescripcion:' + Descripcion, ' \nFechaInicio:' + FechaInicio, ' \nFechaFin:' + FechaFin, ' \nTipo Lugar:' + tipoLugar, ' \nTipoSesion:' + TipoSesion, ' \nPoster:' + this.selectedEvent.Poster, ' \nLugar:' + lugarValue);
-// return;
-      // let fechaInicioValidation = new Date(FechaInicio).toISOString()
-      // fechaInicioValidation = this.funcsService.isoStrToYYYYMMDDHHSSNormal(fechaInicioValidation)
-      // console.log('fechaInicioValidation')
-      // console.log(fechaInicioValidation)
+      console.log('\n Nombre:' + Nombre, ' \nDescripcion:' + Descripcion, ' \nFechaInicio:' + FechaInicio, ' \nFechaFin:' + FechaFin, ' \nTipo Lugar:' + tipoLugar, ' \nTipoSesion:' + TipoSesion, ' \nPoster:' + this.selectedEvent.Poster, ' \nLugar:' + lugarValue);
 
       if (!Nombre || !tipoLugar || !lugarValue || !Descripcion || !FechaInicio || !FechaFin || !TipoSesion) {
         loader.dismiss()
@@ -180,7 +175,13 @@ export class ModalneweventComponent implements OnInit {
         locationValue = this.selectedEvent.TipoLugarDireccion
       }
 
+      if(locationValue == undefined) {
+        locationValue = lugarValue
+      }
+
       console.log('locationValue: ', locationValue);
+      console.log('locationValue: ', lugarValue);
+      console.log('typeEventPlace: ', this.typeEventPlace);
 
       if (locationValue) {
         const respLocationCreation: any = await this.funcsService
@@ -188,7 +189,7 @@ export class ModalneweventComponent implements OnInit {
             "Id": null,
             "Nombre": locationValue,
             "TipoLugarId": {
-              "Id": this.typeEventPlace
+              "Id": this.selectedEvent.TipoLugar
             },
             "Activo": true
           })
