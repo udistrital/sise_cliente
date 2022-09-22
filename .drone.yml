@@ -14,7 +14,7 @@ steps:
     image: node:latest
     commands:
      - npm install -g @angular/cli
-     - npm i
+     - npm i --force
      - ng build --configuration=test
     when:
       branch: [release/*]
@@ -24,7 +24,7 @@ steps:
     image: node:latest
     commands:
       - npm install -g @angular/cli
-      - npm i
+      - npm i --force
       - ng build --configuration=production
     when:
       branch: [master]
