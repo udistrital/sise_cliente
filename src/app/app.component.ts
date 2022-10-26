@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ImplicitAutenticationService } from './@core/utils/implicit_autentication.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -11,7 +12,6 @@ export class AppComponent {
 
   constructor(private autenticacion: ImplicitAutenticationService) {
     this.isRemainder = 0
-    // this.autenticacion.live();
   }
 
   logout() {
