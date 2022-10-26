@@ -1,0 +1,173 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Estudiantes</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button menu="main-menu"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="Inicio">
+
+    <ion-grid>
+
+      <form #form="ngForm" #formElem (ngSubmit)="handleForm(form)">
+        <ion-row>
+
+          <ion-text style="display: flex; justify-content: center; align-items: center; text-align: center; width: 100%;">
+            <h1>
+              Graduación y emprendimiento
+            </h1>
+          </ion-text>
+
+          <ion-col>
+            <ion-item>
+              <ion-label>Con motivo de su próxima graduación, ¿Cuál es su nivel de expectativa e incertidumbre frente a la obtención de su título?</ion-label>
+
+              <ion-select placeholder="Seleccionar" interface="action-sheet" okText="Ok" cancelText="Cancelar" id="motiempr" name="motiempr{{env.MOTIVACION_EMPRENDER}}" #motiempr="ngModel" required [(ngModel)]="selectedData.motiempr">
+                <ion-select-option value="aproopor">Muy alto, no tengo claridad acerca de que voy a hacer</ion-select-option>
+                <ion-select-option value="desaproy">Alto, estoy expectante al cambio pero creo que puedo afrontar el reto</ion-select-option>
+                <ion-select-option value="desagrad">Medio, no me preocupa en gran medida</ion-select-option>
+                <ion-select-option value="necedese">Bajo, tengo bastante claridad al respecto</ion-select-option>
+                <ion-select-option value="aplicono">Muy bajo, no me preocupa en lo absoluto ya tengo plena claridad de los pasos a seguir</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+
+          <ion-col>
+            <ion-item>
+              <ion-label>¿Que aspectos o competencias le generan inseguridad frente a su perfil profesional?</ion-label>
+
+              <ion-select name="seletecn{{env.TECNOLOGIAS_PROYECTO}}-" placeholder="Seleccionar" multiple="true" okText="Ok" cancelText="Cancelar" id="seletecn"
+
+              #seletecn="ngModel" required [(ngModel)]="selectedData.seletecn">
+                <ion-select-option value="probecon">Hablar en público</ion-select-option>
+                <ion-select-option value="probambi">Comunicación asertiva</ion-select-option>
+                <ion-select-option value="probcult">Ofimática</ion-select-option>
+                <ion-select-option value="probsoci">Inglés</ion-select-option>
+                <ion-select-option value="noheaport">Manejo de Software especializado</ion-select-option>
+                <ion-select-option value="aporotra">Otra (Respuesta abierta)</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+
+          <ion-col>
+            <span>
+              El Seminario de Empleabilidades, un espacio certificado creado por el Consultorio de Empleabilidad y la Unidad de Extensión de la Facultad de Ingeniería con el propósito de generar y/o potenciar las diferentes competencias laborales
+            </span>
+
+            <ion-item>
+              <ion-label>
+                ¿Desea obtener información del Seminario de empleabilidad?
+              </ion-label>
+
+              <ion-select placeholder="Seleccionar" interface="action-sheet" okText="Ok" cancelText="Cancelar" id="quieserv" name="quieserv{{env.QUIEN_VENDIDO_PRODUCTO_SERVICIO}}" #quieserv="ngModel" required [(ngModel)]="selectedData.quieserv">
+                <ion-select-option value="famiamig">Si claro, deseo participar</ion-select-option>
+                <ion-select-option value="conorela">Deseo obtener información antes de tomar una decisión</ion-select-option>
+                <ion-select-option value="clierela">No estoy interesad@ en el momento</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+
+          <ion-text style="display: flex; justify-content: center; align-items: center; text-align: center; width: 100%;">
+            <h1>
+              Facultad y carrera
+            </h1>
+          </ion-text>
+
+          <ion-col>
+            <ion-item>
+              <ion-label>Seleccione la Facultad de la que es egresado</ion-label>
+
+              <ion-select placeholder="Seleccionar" interface="action-sheet" okText="Ok" cancelText="Cancelar" id="motiempr" name="motiempr{{env.MOTIVACION_EMPRENDER}}" #motiempr="ngModel" required [(ngModel)]="selectedData.motiempr">
+                <ion-select-option value="aproopor">Artes ASAB</ion-select-option>
+                <ion-select-option value="desaproy">Ciencias y Educación</ion-select-option>
+                <ion-select-option value="desagrad">Ciencias Matemáticas y Naturales</ion-select-option>
+                <ion-select-option value="necedese">Ingeniería</ion-select-option>
+                <ion-select-option value="aplicono">Medio Ambiente y Recursos Naturales</ion-select-option>
+                <ion-select-option value="tecnogic">Tecnológica</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+
+          <ion-col>
+            <ion-item lines="full">
+              <!-- position="floating" -->
+              <ion-label>Seleccione su carrera</ion-label>
+              <ion-icon slot="start" name="business-outline"></ion-icon>
+              <!-- <ion-select placeholder="Seleccionar" okText="Ok" cancelText="Cancelar" id="PosgradosTituladosUD"  multiple="true" name="PosgradosTituladosUD{{env.PROGRAMAS_DE_POSGRADO_TITULADOS_EN_LA_UD}}-" #PosgradosTituladosUD="ngModel" required [(ngModel)]="selectedData.PosgradosTituladosUD" (ionChange)="onChange(selectedData.PosgradosTituladosUD, 'PosgradosTituladosUD')" style="width: 100% !important;">
+                <ion-select-option *ngFor="let posgrado of posgradosUD" value="{{posgrado.Id.toString()}}">{{posgrado.Nombre}}</ion-select-option>
+              </ion-select> -->
+            </ion-item>
+          </ion-col>
+          <!-- --------------------------------------------- -->
+
+
+          <ion-text style="display: flex; justify-content: center; align-items: center; text-align: center; width: 100%;">
+            <h1>
+              Formación y posgrados
+            </h1>
+          </ion-text>
+
+          <ion-col>
+            <ion-item>
+              <ion-label>Indiqué la fecha programada o estimada de su graduación</ion-label>
+
+              <ion-input name="especana{{env.CANALES_EMPLEO_VENDER_PRODUCTO_OTRO}}" #especana="ngModel" required [(ngModel)]="selectedData.especana" placeholder="Indiqué la fecha programada o estimada de su graduación" type="date"></ion-input>
+            </ion-item>
+          </ion-col>
+
+          <ion-col>
+            <ion-item>
+              <ion-label>Después de su graduación, ¿cuál de las siguientes opciones de formación ha pensado realizar?</ion-label>
+
+              <ion-select placeholder="Seleccionar" interface="action-sheet" okText="Ok" cancelText="Cancelar" id="motiempr" name="motiempr{{env.MOTIVACION_EMPRENDER}}" #motiempr="ngModel" required [(ngModel)]="selectedData.motiempr">
+                <ion-select-option value="aproopor">Estudios en idiomas</ion-select-option>
+                <ion-select-option value="desaproy">Seminarios/cursos/diplomados</ion-select-option>
+                <ion-select-option value="desagrad">Programas técnico y tecnológico</ion-select-option>
+                <ion-select-option value="necedese">Programa Universitario</ion-select-option>
+                <ion-select-option value="aplicono">Especialización</ion-select-option>
+                <ion-select-option value="tecnogic">Maestría</ion-select-option>
+                <ion-select-option value="doctorad">Doctorado</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+
+          <ion-col>
+            <ion-item>
+              <ion-label>¿Tiene conocimiento de los beneficios aplicables en programas de posgrados para egresados?</ion-label>
+
+              <ion-select placeholder="Seleccionar" interface="action-sheet" okText="Ok" cancelText="Cancelar" id="motiempr" name="motiempr{{env.MOTIVACION_EMPRENDER}}" #motiempr="ngModel" required [(ngModel)]="selectedData.motiempr">
+                <ion-select-option value="aproopor">Si tengo conocimiento</ion-select-option>
+                <ion-select-option value="desaproy">No, deseo saber más</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+
+          <ion-col>
+            <ion-item lines="full">
+              <!-- position="floating" -->
+              <ion-label>Seleccione los posgrados de su interés y en los cuales desea obtener información</ion-label>
+              <ion-icon slot="start" name="business-outline"></ion-icon>
+              <!-- <ion-select placeholder="Seleccionar" okText="Ok" cancelText="Cancelar" id="PosgradosTituladosUD"  multiple="true" name="PosgradosTituladosUD{{env.PROGRAMAS_DE_POSGRADO_TITULADOS_EN_LA_UD}}-" #PosgradosTituladosUD="ngModel" required [(ngModel)]="selectedData.PosgradosTituladosUD" (ionChange)="onChange(selectedData.PosgradosTituladosUD, 'PosgradosTituladosUD')" style="width: 100% !important;">
+                <ion-select-option *ngFor="let posgrado of posgradosUD" value="{{posgrado.Id.toString()}}">{{posgrado.Nombre}}</ion-select-option>
+              </ion-select> -->
+            </ion-item>
+          </ion-col>
+
+        </ion-row>
+
+        <ion-grid>
+          <ion-row>
+            <ion-col size="12" style="margin-bottom:1rem;display: flex; justify-content: center">
+              <ion-button class="boton" type="submit" color="primary">
+                Actualizar
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </form>
+    </ion-grid>
+  </ion-card>
+</ion-content>

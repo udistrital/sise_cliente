@@ -11,6 +11,7 @@ import { LocalizacionPage } from './localizacion/localizacion.page';
 import { PagesComponent } from './pages.component';
 import { LoginComponent } from './login/login.component'
 import { AuthGuard } from '../@core/_guards/auth.guard';
+import { InfoStudentsPage } from './info-students/info-students.page';
 
 const routes: Routes = [{
   path: '',
@@ -63,6 +64,17 @@ const routes: Routes = [{
         roles: [
 
 
+          'Internal/selfsignup',
+          'Internal/everyone',
+        ],
+      },
+    },
+    {
+      path: 'info-students',
+      component: InfoStudentsPage,
+      canActivate: [AuthGuard],
+      data: {
+        roles: [
           'Internal/selfsignup',
           'Internal/everyone',
         ],

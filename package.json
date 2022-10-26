@@ -5,6 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --port=4200 -o",
+    "startprod": "ng serve --configuration=production --port=4200 -o",
     "dev": "ng serve --port=4200 -o",
     "build": "ng build",
     "test": "ng test",
