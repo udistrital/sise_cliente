@@ -68,7 +68,6 @@ export class ModalbasicinfoComponent implements OnInit {
     }).subscribe((res: any) => {
       console.log('Res creacion tercero', res);
 
-      alert(res.Id)
       if (!res.Id) return alert("Hubo un error, contacte con tecnología")
 
       this.infoPersonalService.createTercero(environment.CREATE_DATA_IDENTIFICATION_TERCERO_ENDPOINT, {
