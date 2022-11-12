@@ -10,7 +10,7 @@ import { ImplicitAutenticationService } from '../utils/implicit_autentication.se
 })
 export class AuthGuard implements CanActivate {
 
-  constructor(private router: Router,     private infoPersonalService: InfoPersonalService,     private autenticacion: ImplicitAutenticationService) {
+  constructor(private router: Router, private infoPersonalService: InfoPersonalService, private autenticacion: ImplicitAutenticationService) {
   }
 
   async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {

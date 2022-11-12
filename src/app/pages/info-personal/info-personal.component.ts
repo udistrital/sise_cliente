@@ -160,7 +160,7 @@ export class InfoPersonalComponent implements OnInit {
     this.selectedData.LugarNacimiento = data[0].TerceroId.LugarOrigen as string;
 
     console.log('ID DEL TERCERO ', Id, environment.INFO_COMPLEMENTARIA_IDS.GENERO)
-    alert(JSON.stringify(environment.INFO_COMPLEMENTARIA_IDS.GENERO))
+    // alert(JSON.stringify(environment.INFO_COMPLEMENTARIA_IDS.GENERO))
     await this.getDataInfoComplementariaTercero(environment.INFO_COMPLEMENTARIA_IDS.GENERO, 'Genero', 'Nombre')
     console.log('hererereaaa')
     await this.setValueFields();

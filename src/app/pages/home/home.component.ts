@@ -77,6 +77,9 @@ export class HomeComponent implements OnInit {
 
     const data = await this.infoPersonalService.getInformationByDocument(environment.DATOS_IDENTIFICACION_TERCERO_ENDPOINT, documento).toPromise()
     this.terceroPersonalData = data[0]
+
+    if(!this.terceroPersonalData) return
+
     console.log(data);
     this.terceroId = data[0].TerceroId.Id
 
@@ -89,12 +92,15 @@ export class HomeComponent implements OnInit {
     const fechaActual = hoy.getDate() + '-' + (hoy.getMonth() + 1) + '-' + hoy.getFullYear();
     let fechaFormateada = fechaActual.slice(0, 4)
 
-    const diaNacimiento = new Date(this.terceroPersonalData.TerceroId?.FechaNacimiento)
-    const nacimiento = diaNacimiento.getDate() + '-' + (diaNacimiento.getMonth() + 1) + '-' + diaNacimiento.getFullYear();
-    let fechaCumpleaños = nacimiento.slice(0, 4)
+    const diaNacimiento = this.terceroPersonalData.TerceroId.hasOwnProperty('FechaNacimiento') ? new Date(this.terceroPersonalData.TerceroId?.FechaNacimiento) : null
 
-    if (fechaFormateada && fechaCumpleaños && (fechaFormateada == fechaCumpleaños)) {
-      this.modalService.openModal(ModalbirthdayComponent, 'modal-birthday');
+    if(diaNacimiento){
+      const nacimiento = diaNacimiento.getDate() + '-' + (diaNacimiento.getMonth() + 1) + '-' + diaNacimiento.getFullYear();
+      let fechaCumpleaños = nacimiento.slice(0, 4)
+
+      if (fechaFormateada && fechaCumpleaños && (fechaFormateada == fechaCumpleaños)) {
+        this.modalService.openModal(ModalbirthdayComponent, 'modal-birthday');
+      }
     }
 
     this.terceroPersonalData.TerceroId.FechaNacimiento = this.terceroPersonalData.TerceroId?.FechaNacimiento
