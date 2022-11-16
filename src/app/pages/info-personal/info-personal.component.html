@@ -352,7 +352,7 @@
               <ion-input type="text" required id="Celular" name="Celular{{env.CELULAR}}" #Celular="ngModel" required [(ngModel)]="selectedData.Celular"></ion-input>
             </ion-item>
           </ion-col>
-          <ion-col>
+          <!-- <ion-col>
             <ion-item lines="full">
               <ion-label position="floating">País de residencia</ion-label>
               <ion-icon slot="start" name="globe-outline"></ion-icon>
@@ -607,10 +607,10 @@
                 <ion-select-option value="Zimbabue" id="ZW">Zimbabue</ion-select-option>
               </ion-select>
             </ion-item>
-          </ion-col>
+          </ion-col> -->
         </ion-row>
 
-        <ion-row>
+        <!-- <ion-row>
           <ion-col>
             <ion-item lines="full">
               <ion-label position="floating">Departamento de residencia</ion-label>
@@ -625,7 +625,6 @@
             <ion-item lines="full">
               <ion-label position="floating">Municipio de residencia</ion-label>
               <ion-icon slot="start" name="pin-outline"></ion-icon>
-              <!-- value="{{dataInfo?.EstadoCivil}}"  -->
               <ion-select placeholder="Seleccione..." interface="popover" id="MunicipioResidencia" name="MunicipioResidencia{{env.MUNICIPIO_RESIDENCIA}}" #MunicipioResidencia="ngModel" required [(ngModel)]="selectedData.MunicipioResidencia" value="{{selectedData?.MunicipioResidencia}}">
                 <ion-select-option *ngFor="let municipalities of arrMunicipalities" value="{{municipalities.Nombre}}">{{municipalities.Nombre}}</ion-select-option>
               </ion-select>
@@ -637,7 +636,6 @@
             <ion-item lines="full">
               <ion-label position="floating">Localidad de residencia</ion-label>
               <ion-icon slot="start" name="pin-outline"></ion-icon>
-              <!-- value="{{dataInfo?.Municipio}}" -->
               <ion-select placeholder="Seleccione..." interface="popover" id="LocalidadResidencia" name="LocalidadResidencia{{env.LOCALIDAD_RESIDENCIA}}" #LocalidadResidencia="ngModel" required [(ngModel)]="selectedData.LocalidadResidencia" value="{{selectedData?.LocalidadResidencia}}">
                 <ion-select-option *ngFor="let localities of arrLocalities" value="{{localities.Id}}">{{localities.Nombre}}</ion-select-option>
               </ion-select>
@@ -650,7 +648,7 @@
               <ion-input type="text" required id="DireccionResidencia" name="DireccionResidencia{{env.DIRECCION_RESIDENCIA}}" #DireccionResidencia="ngModel" required [(ngModel)]="selectedData.DireccionResidencia"></ion-input>
             </ion-item>
           </ion-col>
-        </ion-row>
+        </ion-row> -->
       </ion-grid>
 
       <ion-card-header>
