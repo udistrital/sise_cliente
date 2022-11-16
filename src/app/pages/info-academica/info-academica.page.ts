@@ -132,10 +132,6 @@ export class InfoAcademicaPage implements OnInit {
     loader.dismiss()
   }
 
-  onChange(selectValue, id) {
-    console.log('selectValue: ', selectValue)
-  }
-
   async handleForm(formNg: NgForm) {
 
     let loader = await this.loaderService.presentLoading('Enviando información academica 🎓')
