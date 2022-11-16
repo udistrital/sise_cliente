@@ -19,7 +19,6 @@
               <img src="{{this.profilePicture}}">
             </ion-avatar>
             <ion-card-title>{{this.terceroPersonalData?.TerceroId?.NombreCompleto}}</ion-card-title>
-            <ion-card-subtitle class="subtitulo">Fecha ultima actualización de sus datos: {{this.terceroPersonalData?.FechaModificacion}}</ion-card-subtitle>
             <ion-button (click)="executeClickFileInput()">Nueva foto de perfil</ion-button>
             <input #fileInput hidden type="file" id="profilePictureInput" (change)="setProfilePicture($event.target.files)">
           </ion-card-header>

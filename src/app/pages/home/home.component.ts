@@ -68,8 +68,6 @@ export class HomeComponent implements OnInit {
     const { email } = this.autenticacion.getPayload()
     const body = { "user": email };
     const { documento, documento_compuesto } = await this.infoPersonalService.getDocumentIdByEmail(environment.API_GET_IDENTIFICATION, body).toPromise() as Documento;
-
-    console.log(documento, documento_compuesto)
     if (!documento) {
       console.log("Something went wrong, when try to get the identification");
       return
@@ -78,15 +76,9 @@ export class HomeComponent implements OnInit {
     const data = await this.infoPersonalService.getInformationByDocument(environment.DATOS_IDENTIFICACION_TERCERO_ENDPOINT, documento).toPromise()
     this.terceroPersonalData = data[0]
 
+
     if(!this.terceroPersonalData) return
-
-    console.log(data);
     this.terceroId = data[0].TerceroId.Id
-
-    setTimeout(() => {
-      console.log(documento);
-      console.log(data);
-    }, 2000);
 
     const hoy = new Date()
     const fechaActual = hoy.getDate() + '-' + (hoy.getMonth() + 1) + '-' + hoy.getFullYear();
@@ -104,11 +96,12 @@ export class HomeComponent implements OnInit {
     }
 
     this.terceroPersonalData.TerceroId.FechaNacimiento = this.terceroPersonalData.TerceroId?.FechaNacimiento
-      ? new Date(this.terceroPersonalData.TerceroId.FechaNacimiento).toISOString().replace(/T/, ' ').replace(/\..+/, '').slice(0, -9)
-      : null
-    this.terceroPersonalData.FechaModificacion = new Date(this.terceroPersonalData.FechaModificacion).toISOString().replace(/T/, ' ').replace(/\..+/, '').slice(0, -9)
+    ? new Date(this.terceroPersonalData.TerceroId.FechaNacimiento).toISOString().replace(/T/, ' ').replace(/\..+/, '').slice(0, -9)
+    : null
+
 
     const dataEventos = await this.infoPersonalService.getInfoComplementariaTercero(environment.EVENTOS_ENDPOINT, `/calendario_evento?query=Activo:true&limit=-1`).toPromise();
+
     this.eventos = dataEventos
     this.eventos.forEach((evento, index) => {
 
