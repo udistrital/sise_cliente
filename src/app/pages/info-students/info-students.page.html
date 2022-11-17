@@ -76,7 +76,7 @@
             </h1>
           </ion-text>
 
-          <ion-col>
+          <!-- <ion-col>
             <ion-item>
               <ion-label>Seleccione la Facultad de la que es egresado</ion-label>
 
@@ -89,18 +89,17 @@
                 <ion-select-option value="tecnogic">Tecnológica</ion-select-option>
               </ion-select>
             </ion-item>
-          </ion-col>
+          </ion-col> -->
 
-          <ion-col>
+          <!-- <ion-col>
             <ion-item lines="full">
-              <!-- position="floating" -->
               <ion-label>Seleccione su carrera</ion-label>
               <ion-icon slot="start" name="business-outline"></ion-icon>
               <ion-select placeholder="Seleccionar" okText="Ok" cancelText="Cancelar" id="selecarr"  multiple="true" name="selecarr{{env.SELECCIONE_SU_CARRERA}}-" #selecarr="ngModel" required [(ngModel)]="selectedData.selecarr" style="width: 100% !important;">
                 <ion-select-option *ngFor="let posgrado of posgradosUD" value="{{posgrado.Id.toString()}}">{{posgrado.Nombre}}</ion-select-option>
               </ion-select>
             </ion-item>
-          </ion-col>
+          </ion-col> -->
           <!-- --------------------------------------------- -->
 
 

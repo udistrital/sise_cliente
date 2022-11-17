@@ -16,7 +16,7 @@
         Eventos
       </ion-title>
 
-      <ion-button style="float: right; margin-right: 7rem;" class="boton" type="submit" color="primary" (click)="openEventModal()">
+      <ion-button *ngIf="isAdminSiseFlag" style="float: right; margin-right: 7rem;" class="boton" type="submit" color="primary" (click)="openEventModal()">
         Nuevo evento
       </ion-button>
     </ion-toolbar>

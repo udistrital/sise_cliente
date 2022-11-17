@@ -157,7 +157,7 @@ export class InfoPersonalComponent implements OnInit {
     this.selectedData.TipoIdentificacion = documento_compuesto.substring(0, 2);
     this.selectedData.NumeroDocumento = documento_compuesto.substring(2);
     this.selectedData.FechaNacimiento = new Date(data[0].TerceroId.FechaNacimiento).toISOString().replace(/T/, ' ').replace(/\..+/, '').slice(0, -9)
-    this.selectedData.LugarNacimiento = data[0].TerceroId.LugarOrigen as string;
+    this.selectedData.LugarNacimiento = data[0].TerceroId.LugarOrigen && !data[0].TerceroId.LugarOrigen.includes(0) && !data[0].TerceroId.LugarOrigen.includes('0') ? data[0].TerceroId.LugarOrigen : '';
 
     console.log('ID DEL TERCERO ', Id, environment.INFO_COMPLEMENTARIA_IDS.GENERO)
     // alert(JSON.stringify(environment.INFO_COMPLEMENTARIA_IDS.GENERO))
