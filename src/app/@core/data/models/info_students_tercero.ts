@@ -1,14 +1,14 @@
 export class InfoStudents {
   Id: string;
-  motiempr: string;
-  desaprot: string;
-  valiprod: string;
-  prodserv: string;
-  inteempr: string;
-  dispproy: string;
-  tipoempr: string;
-  seletecn: string;
-  tecnotro: string;
+  coaplice: string;
+  opcireag: string;
+  fproesti: string;
+  facuegla: string;
+  semiinem: string;
+  aspcomin: string;
+  motpgrad: string;
+  intpinfo: string;
+  selecarr: string;
   recudigi: string;
   recuotro: string;
   temaorie: string;
@@ -30,15 +30,15 @@ export class InfoStudents {
 
   constructor(
     Id = '',
-    motiempr = '',
-    desaprot = '',
-    valiprod = '',
-    prodserv = '',
-    inteempr = '',
-    dispproy = '',
-    tipoempr = '',
-    seletecn = '',
-    tecnotro = '',
+    coaplice = '',
+    opcireag = '',
+    fproesti = '',
+    facuegla = '',
+    semiinem = '',
+    aspcomin = '',
+    motpgrad = '',
+    intpinfo = '',
+    selecarr = '',
     recudigi = '',
     recuotro = '',
     temaorie = '',
@@ -60,15 +60,15 @@ export class InfoStudents {
   ) {
 
     this.Id = Id
-    this.motiempr = motiempr
-    this.desaprot = desaprot
-    this.valiprod = valiprod
-    this.prodserv = prodserv
-    this.inteempr = inteempr
-    this.dispproy = dispproy
-    this.tipoempr = tipoempr
-    this.seletecn = seletecn
-    this.tecnotro = tecnotro
+    this.coaplice = coaplice
+    this.opcireag = opcireag
+    this.fproesti = fproesti
+    this.facuegla = facuegla
+    this.semiinem = semiinem
+    this.aspcomin = aspcomin
+    this.motpgrad = motpgrad
+    this.intpinfo = intpinfo
+    this.selecarr = selecarr
     this.recudigi = recudigi
     this.recuotro = recuotro
     this.temaorie = temaorie

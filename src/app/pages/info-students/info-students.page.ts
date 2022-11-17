@@ -20,6 +20,7 @@ export class InfoStudentsPage implements OnInit {
   @ViewChildren('formElem', { read: ElementRef }) myFormElems: QueryList<ElementRef>;
 
   dataInfo: DataInfoTercero = new DataInfoTercero();
+  posgradosUD: any
   env: any
   selectedData: InfoStudents
   sessionTerceroID: any
@@ -36,11 +37,25 @@ export class InfoStudentsPage implements OnInit {
   }
 
   async ngOnInit() {
+    // Seteo de posgrados UD | Tiene que ir antes del setValueFields siempre
+    const posgrados = await this.infoPersonalService.getInfoComplementariaTercero(environment.OIKOS_SERVICE, `dependencia?query=DependenciaTipoDependencia.TipoDependenciaId.Id:${environment.OIKOS_POSGRADOS_ID}&limit=-1`).toPromise();
+    let posgradosArr = []
+    posgrados.forEach(posgrado => {
+      posgradosArr.push({
+        Id: posgrado.Id,
+        Nombre: posgrado.Nombre
+          .charAt(0)
+          .toUpperCase()
+          .concat(posgrado.Nombre.toLowerCase().substring(1, posgrado.Nombre.length))
+      })
+    })
+    this.posgradosUD = posgradosArr
+
     await this.setValueFields();
   }
 
   async setValueFields() {
-    let loader = await this.loaderService.presentLoading('Cargando información de emprendimiento 💡')
+    let loader = await this.loaderService.presentLoading('Cargando información de estudiantes 💡')
 
     const { email } = this.autenticacion.getPayload()
     const body = { "user": email };
@@ -97,7 +112,7 @@ export class InfoStudentsPage implements OnInit {
 
   async handleForm(formNg: NgForm) {
 
-    let loader = await this.loaderService.presentLoading('Enviando información de emprendimiento 💪')
+    let loader = await this.loaderService.presentLoading('Enviando información de estudiantes 💪')
     let terceroID = this.sessionTerceroID
     let infoPersonalServ = this.infoPersonalService
     let infoTercero = this.terceroService
@@ -159,7 +174,7 @@ export class InfoStudentsPage implements OnInit {
     });
 
     loader.dismiss()
-    this.toastService.presentToast("Información de emprendimiento actualizada con exito ✅")
+    this.toastService.presentToast("Información de estudiantes actualizada con exito ✅")
 
     await this.setValueFields();
   }

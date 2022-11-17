@@ -19,7 +19,7 @@
     </ion-card-header> -->
     <ion-grid>
       <ion-row>
-        
+
         <ion-text style="display: flex; justify-content: center; align-items: center; text-align: center; width: 100%;">
           <h1>
             Datos de escuela media
@@ -64,7 +64,7 @@
             <ion-item lines="full">
               <ion-label position="floating">Programas de posgrado titulados en la UD</ion-label>
               <ion-icon slot="start" name="business-outline"></ion-icon>
-              <ion-select placeholder="Seleccionar" okText="Ok" cancelText="Cancelar" id="PosgradosTituladosUD"  multiple="true" name="PosgradosTituladosUD{{env.PROGRAMAS_DE_POSGRADO_TITULADOS_EN_LA_UD}}-" #PosgradosTituladosUD="ngModel" required [(ngModel)]="selectedData.PosgradosTituladosUD" (ionChange)="onChange(selectedData.PosgradosTituladosUD, 'PosgradosTituladosUD')" style="width: 100% !important;">
+              <ion-select placeholder="Seleccionar" okText="Ok" cancelText="Cancelar" id="PosgradosTituladosUD"  multiple="true" name="PosgradosTituladosUD{{env.PROGRAMAS_DE_POSGRADO_TITULADOS_EN_LA_UD}}-" #PosgradosTituladosUD="ngModel" required [(ngModel)]="selectedData.PosgradosTituladosUD" style="width: 100% !important;">
                 <ion-select-option *ngFor="let posgrado of posgradosUD" value="{{posgrado.Id.toString()}}">{{posgrado.Nombre}}</ion-select-option>
               </ion-select>
             </ion-item>
