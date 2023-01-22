@@ -4,7 +4,9 @@
     <ion-buttons slot="start">
       <ion-menu-button menu="main-menu"></ion-menu-button>
     </ion-buttons>
-    <ion-button class="boton-cerrar" style="z-index:100;" slot="start" (click)="logout()"><ion-icon name="exit-outline"></ion-icon></ion-button>
+    <ion-button class="boton-cerrar" style="z-index:100;" slot="start" (click)="logout()">
+      <ion-icon name="exit-outline"></ion-icon>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -16,15 +18,16 @@
           <ion-card-header style="justify-content: center; display: grid; text-align: center;
       align-items: center;">
             <ion-avatar style="margin: 0 auto;">
-              <img src="{{this.profilePicture}}">
+              <img src="{{this?.profilePicture}}">
             </ion-avatar>
             <ion-card-title>{{this.terceroPersonalData?.TerceroId?.NombreCompleto}}</ion-card-title>
             <ion-button (click)="executeClickFileInput()">Nueva foto de perfil</ion-button>
+
+            <span>{{this.terceroPersonalData?.TerceroId?.FechaModificacion}}</span>
             <input #fileInput hidden type="file" id="profilePictureInput" (change)="setProfilePicture($event.target.files)">
           </ion-card-header>
         </ion-card>
       </ion-col>
-
     </ion-row>
   </ion-grid>
 
@@ -147,3 +150,5 @@
   </ion-footer>
 
 </ion-content>
+
+<div></div>

@@ -49,6 +49,7 @@ export const environment = {
 
   // OVARGAS
   TERCEROS_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/terceros_crud/v1',
+  NOTIFICATIONS_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/notificacion_mid',
   INFO_COMPLEMENTARIA_IDS: {
     GENERO: [34, 32, 33, 327],
     NOMBRE_DE_SU_EMPRESA: 436,
@@ -70,9 +71,6 @@ export const environment = {
     RED_SOCIAL_1: 452,
     RED_SOCIAL_2: 453,
     INTERESES: 454,
-    NOMBRE_COLEGIO: 455,
-    CIUDAD_COLEGIO: 456,
-    FECHA_GRADUACION: 457,
     PROGRAMAS_DE_POSGRADO_TITULADOS_EN_LA_UD: 458,
     PRINCIPAL_DIFICULTAD_A_LA_HORA_DE_CONSEGUIR_TRABAJO: 459,
     CANAL_DE_BUSQUEDA_DE_EMPLEO: 460,
@@ -155,9 +153,12 @@ export const environment = {
     CONDICIONES_DISCAPACIDAD: 303,
     CODIGO_DEL_PAIS: 22,
     PAIS_RESIDENCIA: 256,
-    DEPARTAMENTO_RESIDENCIA:257,
+    DEPARTAMENTO_RESIDENCIA: 257,
     MUNICIPIO_RESIDENCIA: 258,
-    LOCALIDAD_RESIDENCIA:322
+    LOCALIDAD_RESIDENCIA: 322,
+    NOMBRE_COLEGIO: 259,
+    CIUDAD_COLEGIO: 260,
+    FECHA_GRADUACION: 261
   },
   GRUPO_INFO_COMPLEMENTARIA_IDS: {
     MUNICIPIOS: 30,
@@ -170,5 +171,8 @@ export const environment = {
   API_ENDPOINT_UBICACIONES: "https://autenticacion.portaloas.udistrital.edu.co/apioas/ubicaciones_crud/v2/",
   EVENTOS_ENDPOINT: "https://autenticacion.portaloas.udistrital.edu.co/apioas/sesiones_crud/v2",
   OIKOS_POSGRADOS_ID: 15,
-
+  ARNS_EMAILS_EVENTS: {
+    TOPIC: "arn:aws:sns:us-east-1:699001025740:test-pruebascorreoseventos",
+    QUEUE: "arn:aws:sqs:us-east-1:699001025740:test-EventosSIGE"
+  }
 };

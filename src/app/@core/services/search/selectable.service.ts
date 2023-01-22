@@ -17,6 +17,16 @@ export class SelectableService {
     value: any
   }) {
     console.log('VALUE SELECTABLE:', event.value);
+    let emails = []
+    event.value.forEach(guest => {
+      if(!emails.includes(guest.UsuarioWSO2)){
+        emails.push(guest.UsuarioWSO2)
+      }
+    })
+
+    console.log('EMAILS INVITADOS: ', emails);
+
+    return emails
   }
 
   filterTerceros(data: any[], text: string, fieldTextKey: string) {
@@ -57,7 +67,7 @@ export class SelectableService {
       return;
     }
 
-    // this.tercerosSubscription = this.terceroService.getTercerosAsync().subscribe(terceross => {
+    // this.tercerosSubscription = this.terceroService.getUsuariosWSO2AndId().subscribe(terceross => {
     // Subscription will be closed when unsubscribed manually.
     // if (this.tercerosSubscription.closed) {
     //   return;
