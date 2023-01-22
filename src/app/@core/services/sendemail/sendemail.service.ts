@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core'
+import { Documento } from 'src/app/@core/data/models/document';
+import { InfoPersonalService } from 'src/app/@core/services/infopersonal.service';
 import { environment } from 'src/environments/environment';
 import { FuncsService } from '../funcs.service';
 
@@ -9,9 +11,10 @@ import { FuncsService } from '../funcs.service';
 
 export class SendEmailService {
 
-  constructor(private readonly httpClient: HttpClient, private funcsService: FuncsService) { }
 
-  createTopicStep1(body): any { // Paso 1
+  constructor(private readonly httpClient: HttpClient, private funcsService: FuncsService, private readonly infoPersonalService: InfoPersonalService) { }
+
+  createTopic(body): any { // Paso 1
     return this.httpClient.post<any>(
       environment.NOTIFICATIONS_SERVICE + `/notificaciones/topic`,
       body,
@@ -19,7 +22,7 @@ export class SendEmailService {
     );
   }
 
-  suscribeEmailsAndNotificationsStep2And4(body): any {
+  suscribeReceptors(body): any {
     return this.httpClient.post<any>(
       environment.NOTIFICATIONS_SERVICE + `/notificaciones/suscribir`,
       body,
@@ -27,7 +30,15 @@ export class SendEmailService {
     );
   }
 
-  createQueueStep3(body): any {
+  receptorsExists(body): any {
+    return this.httpClient.post<any>(
+      environment.NOTIFICATIONS_SERVICE + `/notificaciones/suscripcion`,
+      body,
+      this.funcsService.openIDDefaultOptions()
+    );
+  }
+
+  createQueue(body): any {
     return this.httpClient.post<any>(
       environment.NOTIFICATIONS_SERVICE + `/colas/crear`,
       body,
@@ -35,7 +46,7 @@ export class SendEmailService {
     );
   }
 
-  sendEmailStep5(body): any {
+  sendEmail(body): any {
     return this.httpClient.post<any>(
       environment.NOTIFICATIONS_SERVICE + `/notificaciones/enviar`,
       body,
@@ -53,76 +64,73 @@ export class SendEmailService {
 ** Mensaje
 **/
   // Acá es automatico el paso 3 , 4
-  async sendEmailFullSteps({ Emails, Asunto, Mensaje }): Promise<any> {
+  async sendEmailFull({ Emails, Asunto, Mensaje }): Promise<any> {
 
-    let destinatarioId = []
 
-    // Crea el topic | Paso 1
-    const topicBody = {
-      "Display": Asunto,
-      "Fifo": false,
-      "Nombre": Asunto.toLowerCase().replace(/ /g, ''),
-    }
-
-    const topic = await this.createTopicStep1(topicBody).toPromise()
-
-    const suscribedEmailsBody = {
-      "ArnTopic": topic.Data,
-      "Suscritos": Emails.map(email => {
-
-        const newDestinatarioId = this.genStrHex(12)
-        destinatarioId.push(newDestinatarioId)
-
-        return {
-          "Endpoint": email.trim(),
-          "Id": newDestinatarioId,
-          "Protocolo": "email"
-        }
-      })
-    }
-
-    const emailBody = {
-      "ArnTopic": environment.ARNS_EMAILS_EVENTS.TOPIC,
-      "Asunto": Asunto,
-      "DestinatarioId": destinatarioId,
-      "Mensaje": Mensaje,
-      "RemitenteId": "SIGE - Gestión del egresado y de eventos"
-    }
-
-    const suscribedNotifyBody = {
-      "ArnTopic": environment.ARNS_EMAILS_EVENTS.TOPIC,
-      "Suscritos": {
-        "Endpoint": environment.ARNS_EMAILS_EVENTS.QUEUE,
-        "Id": this.genStrHex(12),
-        "Protocolo": "sqs"
-      }
-    }
     try {
+      let receptorsIds = []
 
+      console.log("🍁", Emails)
 
-      // Suscribe los emails | Paso 2
-      await this.suscribeEmailsAndNotificationsStep2And4(suscribedEmailsBody).toPromise()
+      const suscriptorsArr = []
+      for (let i = 0; i < Emails.length; i++) {
+        const mainEmail = Emails[i];
+        const body = { "user": mainEmail };
 
-      // Suscribe la cola a la notificación | Paso 4
-      await this.suscribeEmailsAndNotificationsStep2And4(suscribedNotifyBody)
-        .toPromise()
+        const { documento } = await this
+          .infoPersonalService
+          .getDocumentIdByEmail(environment.API_GET_IDENTIFICATION, body)
+          .toPromise() as Documento;
+
+        receptorsIds.push(documento)
+
+        const validateReceptorBody = {
+          "Endpoint": mainEmail,
+          "ArnTopic": environment.ARN_QUEUE_SIGE_EMAILS.TOPIC,
+
+        }
+
+        const { Data } = await this
+          .receptorsExists(validateReceptorBody)
+          .toPromise()
+
+        if (!Data) {
+          suscriptorsArr.push({
+            "Endpoint": mainEmail,
+            "Id": documento,
+            "Protocolo": "email"
+          })
+        }
+      }
+
+      const suscribedEmailsBody = {
+        "ArnTopic": environment.ARN_QUEUE_SIGE_EMAILS.TOPIC,
+        "Suscritos": suscriptorsArr
+      }
+
+      // Suscribe los emails al topic que no estén suscritos
+      if (suscriptorsArr.length > 0)
+        await this
+          .suscribeReceptors(suscribedEmailsBody)
+          .toPromise()
+
+      const emailBody = {
+        "ArnTopic": environment.ARN_QUEUE_SIGE_EMAILS.TOPIC,
+        "Asunto": Asunto,
+        "DestinatarioId": receptorsIds,
+        "Mensaje": Mensaje,
+        "RemitenteId": "sigeud"
+      }
 
       // Envia el correo
-      await this.sendEmailStep5(emailBody).toPromise()
+      await this.sendEmail(emailBody)
+        .toPromise()
 
       console.info('Email enviado correctamente')
     } catch (error) {
       console.log('🐯💡')
       console.log('error', error)
       console.log('error.statusText', error.statusText)
-      if (error.statusText ===
-        "Unknown Error") {
-        // Suscribe la cola a la notificación | Paso 4
-        // await this.suscribeEmailsAndNotificationsStep2And4(suscribedNotifyBody)
-        //   .toPromise()
-        // Envia el correo
-        await this.sendEmailStep5(emailBody).toPromise()
-      }
     }
   }
 }

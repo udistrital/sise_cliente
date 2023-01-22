@@ -217,6 +217,8 @@ export class ModalneweventComponent implements OnInit {
         "UbicacionId": ubicacionId ? ubicacionId : 0,
       }
 
+      console.log(eventBody)
+
       if (this.selectedEvent.Poster && media)
         eventBody["PosterUrl"] = media[0].url
       else if(this.eventRow && this.eventRow.hasOwnProperty('Id')){
@@ -242,13 +244,16 @@ export class ModalneweventComponent implements OnInit {
       console.log(response)
 
       // Envio de correos
+      let fechaInicioEventEmail = this.funcsService.isoStrToYYYYMMDDHHSSNormal(new Date(FechaInicio).toISOString())
+      let fechaFinEventEmail = this.funcsService.isoStrToYYYYMMDDHHSSNormal(new Date(FechaFin).toISOString())
       const emailConfig = {
         Emails: this.specificGuests,
-        Asunto: Nombre,
-        Mensaje: Descripcion
+        Asunto: `Evento ${Nombre} | Egresados`,
+        Mensaje: `Participa en el evento de ${Descripcion}\nUbicación: ${lugarValue}\nInicia: ${fechaInicioEventEmail} y termina: ${fechaFinEventEmail}`
       }
+      // \n<img src="${media[0].url}" alt="poster del evento">
 
-      await this.sendEmail.sendEmailFullSteps(emailConfig)
+      await this.sendEmail.sendEmailFull(emailConfig)
 
       this.dismissModal('modal-new-event')
       loader.dismiss()
