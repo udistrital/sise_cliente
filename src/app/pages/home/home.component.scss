@@ -26,19 +26,17 @@
   text-decoration: none;
 }
 
-.boton-cerrar{
+.boton-cerrar {
   position: absolute;
   right: 5px;
-  // margin-left: 1160px;
-  // float: right;
 }
 
 .logo-ud {
-  width:200px; /* you can use % */
+  width: 200px; /* you can use % */
   height: auto;
 }
 
-.Inicio{
+.Inicio {
   border-color: #f2f2f2;
   border-image: none;
   border-radius: 30px;
@@ -51,7 +49,7 @@
   position: relative;
   width: 94%;
 }
-.Inicio-derecha{
+.Inicio-derecha {
   border-color: #f2f2f2;
   border-image: none;
   border-radius: 30px;
@@ -65,14 +63,13 @@
   position: relative;
   width: 94%;
 }
-.Inicio-izquierda{
+.Inicio-izquierda {
   border-color: #f2f2f2;
   border-image: none;
   border-radius: 30px;
   border-style: solid;
   border-width: 10px 10px 10px;
   margin: 0 auto;
-  margin-right: 30px;
   min-height: 100px !important;
   min-width: 100px;
   padding: 10px 10px 190px;
@@ -80,21 +77,23 @@
   width: 94%;
 }
 
-ion-avatar img{
+ion-avatar img {
   width: 120px;
 }
 
-
-.footer{
-  // position: relative;
+.footer {
   margin-top: 1rem;
   bottom: 0;
-  justify-content:  center;
+  justify-content: center;
   display: flex;
   align-items: center;
   text-align: center;
- /* background-color: #3880ff; */
- border-color: #3880ff;
- background-color: white;
-//  margin-left: 30px;
-}  
+  border-color: #3880ff;
+  background-color: white;
+}
+
+.labelEvent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

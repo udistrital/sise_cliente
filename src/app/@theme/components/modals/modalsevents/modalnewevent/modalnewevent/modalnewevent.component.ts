@@ -11,8 +11,7 @@ import { SelectableService } from '../../../../../../@core/services/search/selec
 import moment from 'moment';
 import { FuncsService } from '../../../../../../@core/services/funcs.service';
 import { LoaderService } from '../../../../../../@core/services/notify/loader.service';
-// import { IonicSelectableComponent } from 'ionic-selectable';
-import { MatSelectModule } from '@angular/material/select';
+import { SendEmailService } from '../../../../../../@core/services/sendemail/sendemail.service';
 declare var $: any;
 
 @Component({
@@ -35,7 +34,9 @@ export class ModalneweventComponent implements OnInit {
   roles: any
   userInfo: any
   selectableUtils: any
+  sendEmail: any
   selectedCar: number;
+  specificGuests: any
 
   cars = [
     { id: 1, name: 'Volvo' },
@@ -51,10 +52,12 @@ export class ModalneweventComponent implements OnInit {
     private infoPersonalService: InfoPersonalService,
     private creacioneventosService: CreacioneventosService,
     private selectableService: SelectableService,
+    private sendEmailService: SendEmailService,
     private funcsService: FuncsService,
     private loaderService: LoaderService,
   ) {
     this.selectableUtils = this.selectableService
+    this.sendEmail = this.sendEmailService
     this.selectedEvent = new Event(); // iNICIALIZANDO VARIABLE CON UNA TAREA
   }
 
@@ -134,8 +137,8 @@ export class ModalneweventComponent implements OnInit {
 
   async submitEvent(form: NgForm) {
 
+    let loader = await this.loaderService.presentLoading('Enviando')
     try {
-      let loader = await this.loaderService.presentLoading('Enviando')
 
       console.log(form);
 
@@ -175,7 +178,7 @@ export class ModalneweventComponent implements OnInit {
         locationValue = this.selectedEvent.TipoLugarDireccion
       }
 
-      if(locationValue == undefined) {
+      if (locationValue == undefined) {
         locationValue = lugarValue
       }
 
@@ -189,13 +192,12 @@ export class ModalneweventComponent implements OnInit {
             "Id": null,
             "Nombre": locationValue,
             "TipoLugarId": {
-              "Id": this.selectedEvent.TipoLugar
+              "Id": parseInt(this.selectedEvent.TipoLugar)
             },
             "Activo": true
           })
           .toPromise();
 
-        console.log('respLocationCreation: ', respLocationCreation);
         ubicacionId = respLocationCreation.Id;
       }
 
@@ -215,14 +217,16 @@ export class ModalneweventComponent implements OnInit {
         "UbicacionId": ubicacionId ? ubicacionId : 0,
       }
 
+      console.log(eventBody)
+
       if (this.selectedEvent.Poster && media)
         eventBody["PosterUrl"] = media[0].url
-      else {
+      else if(this.eventRow && this.eventRow.hasOwnProperty('Id')){
         const sesion = await this.infoPersonalService.getInfoComplementariaTercero(environment.EVENTOS_ENDPOINT, `/calendario_evento/${this.eventRow.Id}`).toPromise();
         eventBody["PosterUrl"] = sesion.PosterUrl
       }
 
-      if (this.eventRow && this.eventRow.Id) {
+      if (this.eventRow && this.eventRow.hasOwnProperty('Id')) {
         const sesion = await this.infoPersonalService.getInfoComplementariaTercero(environment.EVENTOS_ENDPOINT, `/calendario_evento/${this.eventRow.Id}`).toPromise();
         eventBody["FechaCreacion"] = sesion.FechaCreacion
         eventBody["FechaModificacion"] = sesion.FechaModificacion
@@ -238,9 +242,25 @@ export class ModalneweventComponent implements OnInit {
       }
 
       console.log(response)
+
+      // Envio de correos
+      let fechaInicioEventEmail = this.funcsService.isoStrToYYYYMMDDHHSSNormal(new Date(FechaInicio).toISOString())
+      let fechaFinEventEmail = this.funcsService.isoStrToYYYYMMDDHHSSNormal(new Date(FechaFin).toISOString())
+      const emailConfig = {
+        Emails: this.specificGuests,
+        Asunto: `Evento ${Nombre} | Egresados`,
+        Mensaje: `Participa en el evento de ${Descripcion}\nUbicación: ${lugarValue}\nInicia: ${fechaInicioEventEmail} y termina: ${fechaFinEventEmail}`
+      }
+      // \n<img src="${media[0].url}" alt="poster del evento">
+
+      await this.sendEmail.sendEmailFull(emailConfig)
+
       this.dismissModal('modal-new-event')
       loader.dismiss()
     } catch (err) {
+      this.toastService.presentToast('Error:' + ' ' + err)
+      this.dismissModal('modal-new-event')
+      loader.dismiss()
       console.error(err)
     }
   }

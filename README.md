@@ -55,6 +55,37 @@ npm run test
 npm run test:ui
 ```
 
+# Envio de correos
+SIGE CORREOS
+
+cola: sigemails
+{
+    "Data": {
+        "QueueARN": "arn:aws:sqs:us-east-1:699001025740:test-sigemails"
+    },
+    "Message": "Successful",
+    "Status": "200",
+    "Success": true
+}
+
+topic: 
+{
+    "Data": "arn:aws:sns:us-east-1:699001025740:test-SIGE",
+    "Message": "Successful",
+    "Status": "200",
+    "Success": true
+}
+
+Suscripción cola al topic: 
+{
+    "Data": {
+        "TopicARN": "arn:aws:sns:us-east-1:699001025740:test-SIGE:3b5dbb50-a03c-40fa-9569-9a631ae716b6"
+    },
+    "Message": "Successful",
+    "Status": "200",
+    "Success": true
+}
+
 ## Estado CI
 
 | Develop | Relese 0.0.1 | Master |

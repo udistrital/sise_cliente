@@ -14,6 +14,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "poll": 1000,
             "outputPath": "www",
             "index": "src/index.html",
             "main": "src/main.ts",

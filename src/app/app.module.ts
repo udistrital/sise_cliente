@@ -1,23 +1,24 @@
-import { FormsModule } from '@angular/forms';
-import {NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule, HashLocationStrategy, LocationStrategy } from '@angular/common';
-import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { HttpClientModule } from '@angular/common/http';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { Camera } from '@ionic-native/camera/ngx';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { Camera } from '@ionic-native/camera/ngx';
-import { HttpClientModule } from '@angular/common/http';
-import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { MatIconModule } from '@angular/material/icon';
+import { IonicModule } from '@ionic/angular';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
-    BrowserModule,
+  BrowserModule,
     FormsModule,
     IonicModule.forRoot(),
     CommonModule,
@@ -26,6 +27,8 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
     AppRoutingModule,
     NoopAnimationsModule,
     MatIconModule,
+    // NgxChartsModule,
+    // BrowserAnimationsModule
   ],
   providers: [
     StatusBar,
