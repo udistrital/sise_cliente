@@ -170,4 +170,5 @@ export const environment = {
   API_ENDPOINT_UBICACIONES: "https://autenticacion.portaloas.udistrital.edu.co/apioas/ubicaciones_crud/v2/",
   EVENTOS_ENDPOINT: "https://autenticacion.portaloas.udistrital.edu.co/apioas/sesiones_crud/v2",
   OIKOS_POSGRADOS_ID: 15,
+  NOTIFICATIONS_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/notificacion_mid',
 };

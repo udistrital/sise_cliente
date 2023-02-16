@@ -38,4 +38,6 @@ export const environment = {
   CREATE_TERCERO_ENDPOINT: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/terceros_crud/tercero',
   CREATE_DATA_IDENTIFICATION_TERCERO_ENDPOINT: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/terceros_crud/datos_identificacion',
   GET_DOCUMENT_TYPES_ENDPOINT: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/terceros_crud/tipo_documento',
+  NOTIFICATIONS_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/notificacion_mid',
+
 };

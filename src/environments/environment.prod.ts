@@ -176,4 +176,6 @@ export const environment = {
     ESTADO_CIVIL: 2,
   },
   OIKOS_POSGRADOS_ID: 15,
+  NOTIFICATIONS_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/notificacion_mid',
+
 };
