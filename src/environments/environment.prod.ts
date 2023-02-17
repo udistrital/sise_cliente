@@ -177,5 +177,8 @@ export const environment = {
   },
   OIKOS_POSGRADOS_ID: 15,
   NOTIFICATIONS_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/notificacion_mid',
-
+  ARN_QUEUE_SIGE_EMAILS: {
+    TOPIC: "arn:aws:sns:us-east-1:699001025740:production-SIGE",
+    QUEUE: "arn:aws:sqs:us-east-1:699001025740:production-sigemails"
+  }
 };

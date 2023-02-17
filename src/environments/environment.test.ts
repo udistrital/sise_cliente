@@ -171,4 +171,8 @@ export const environment = {
   EVENTOS_ENDPOINT: "https://autenticacion.portaloas.udistrital.edu.co/apioas/sesiones_crud/v2",
   OIKOS_POSGRADOS_ID: 15,
   NOTIFICATIONS_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/notificacion_mid',
+  ARN_QUEUE_SIGE_EMAILS: {
+    TOPIC: "arn:aws:sns:us-east-1:699001025740:test-SIGE",
+    QUEUE: "arn:aws:sqs:us-east-1:699001025740:test-sigemails"
+  }
 };
