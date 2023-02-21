@@ -66,7 +66,6 @@ export class SendEmailService {
   // Acá es automatico el paso 3 , 4
   async sendEmailFull({ Emails, Asunto, Mensaje }): Promise<any> {
 
-
     try {
       let receptorsIds = []
 
@@ -87,12 +86,13 @@ export class SendEmailService {
         const validateReceptorBody = {
           "Endpoint": mainEmail,
           "ArnTopic": environment.ARN_QUEUE_SIGE_EMAILS.TOPIC,
-
         }
 
         const { Data } = await this
           .receptorsExists(validateReceptorBody)
           .toPromise()
+
+          console.log("Data 📝📝📝📝", Data)
 
         if (!Data) {
           suscriptorsArr.push({
@@ -109,10 +109,11 @@ export class SendEmailService {
       }
 
       // Suscribe los emails al topic que no estén suscritos
-      if (suscriptorsArr.length > 0)
+      if (suscriptorsArr.length > 0){
         await this
           .suscribeReceptors(suscribedEmailsBody)
           .toPromise()
+      }
 
       const emailBody = {
         "ArnTopic": environment.ARN_QUEUE_SIGE_EMAILS.TOPIC,

@@ -110,7 +110,6 @@ export class HomeComponent implements OnInit {
     const data = await this.infoPersonalService.getInformationByDocument(environment.DATOS_IDENTIFICACION_TERCERO_ENDPOINT, documento).toPromise()
     this.terceroPersonalData = data[0]
 
-
     if (!this.terceroPersonalData) return
     this.terceroId = data[0].TerceroId.Id
 
@@ -124,9 +123,22 @@ export class HomeComponent implements OnInit {
       const nacimiento = diaNacimiento.getDate() + '-' + (diaNacimiento.getMonth() + 1) + '-' + diaNacimiento.getFullYear();
       let fechaCumpleaños = nacimiento.slice(0, 4)
 
-      if (fechaFormateada && fechaCumpleaños && (fechaFormateada == fechaCumpleaños)) {
-        this.modalService.openModal(ModalbirthdayComponent, 'modal-birthday');
+
+      // if (fechaFormateada && fechaCumpleaños && (fechaFormateada == fechaCumpleaños)) {
+      console.log("-😅🧩🧩", email)
+      const emailConfig = {
+        Emails: [email],
+        Asunto: "Feliz cumpleaños egresado UD 🎂",
+        Mensaje: "¡Feliz cumpleaños egresado de la Universidad Distrital Francisco José de Caldas! Hoy celebramos no solo tu cumpleaños, sino también tus logros y tu dedicación para llegar hasta aquí. Como egresado de una de las mejores universidades de Colombia, eres una inspiración para muchos y un verdadero ejemplo de perseverancia y éxito. Que este nuevo año de vida te traiga muchas más alegrías y bendiciones, y que sigas siendo un orgullo para tu alma máter. ¡Feliz cumpleaños y muchos éxitos más! 🎂"
       }
+
+      await this.sendEmail.sendEmailFull(emailConfig)
+      console.log("💪💪💪💪")
+
+      this.modalService.openModal(ModalbirthdayComponent, 'modal-birthday');
+
+
+      // }
     }
 
     this.terceroPersonalData.TerceroId.FechaNacimiento = this.terceroPersonalData.TerceroId?.FechaNacimiento
@@ -291,7 +303,7 @@ export class HomeComponent implements OnInit {
 
     } catch (error) {
       console.error(error)
-      this.toastService.presentToast("Hubo un error al inscribirte al evento, por favor intenta de nuevo más tarde")
+      this.toastService.presentToast("Hubo un error, por favor intenta de nuevo más tarde")
       loader.dismiss()
     }
   }
