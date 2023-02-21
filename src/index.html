@@ -48,12 +48,12 @@
 
       // remove logo
       let chatBotBtn = document.getElementsByClassName('tawk-branding');
-      chatBotBtn[0].style.display = 'none';
-      chatBotBtn[1].style.display = 'none';
+      if (chatBotBtn[0]) chatBotBtn[0].style.display = 'none';
+      if (chatBotBtn[1]) chatBotBtn[1].style.display = 'none';
 
       setTimeout(() => {
-        chatBotBtn[0].style.display = 'none';
-        chatBotBtn[1].style.display = 'none';
+        if (chatBotBtn[0]) chatBotBtn[0].style.display = 'none';
+        if (chatBotBtn[1]) chatBotBtn[1].style.display = 'none';
       }, 500);
     })();
   </script>
