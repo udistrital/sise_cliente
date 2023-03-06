@@ -30,6 +30,7 @@ export class ModalneweventComponent implements OnInit {
   direccionesTiposLugar: any
   typeEventPlace: any
   terceros: any
+  dependencias: any
   ports: any;
   roles: any
   userInfo: any
@@ -37,6 +38,7 @@ export class ModalneweventComponent implements OnInit {
   sendEmail: any
   selectedCar: number;
   specificGuests: any
+  guestsDependencies: any
 
   cars = [
     { id: 1, name: 'Volvo' },
@@ -68,10 +70,18 @@ export class ModalneweventComponent implements OnInit {
     const terceros = await this.infoPersonalService
       .getInfoComplementariaTercero(
         environment.TERCEROS_SERVICE,
-        `/tercero?fields=Id,UsuarioWSO2&limit=-1`)
+        `/tercero?fields=Id,UsuarioWSO2&query=Activo:true&limit=-1`)
       .toPromise();
 
     this.terceros = terceros
+
+    const dependencias = await this.infoPersonalService
+      .getInfoComplementariaTercero(
+        environment.OIKOS_SERVICE,
+        `dependencia?fields=Id,CorreoElectronico&query=Activo:true&limit=-1`)
+      .toPromise();
+
+    this.dependencias = dependencias
 
     const dataTipoEventos = await this.infoPersonalService
       .getInfoComplementariaTercero(environment.EVENTOS_ENDPOINT, `/tipo_evento?limit=-1`)
@@ -221,7 +231,7 @@ export class ModalneweventComponent implements OnInit {
 
       if (this.selectedEvent.Poster && media)
         eventBody["PosterUrl"] = media[0].url
-      else if(this.eventRow && this.eventRow.hasOwnProperty('Id')){
+      else if (this.eventRow && this.eventRow.hasOwnProperty('Id')) {
         const sesion = await this.infoPersonalService.getInfoComplementariaTercero(environment.EVENTOS_ENDPOINT, `/calendario_evento/${this.eventRow.Id}`).toPromise();
         eventBody["PosterUrl"] = sesion.PosterUrl
       }
@@ -246,14 +256,29 @@ export class ModalneweventComponent implements OnInit {
       // Envio de correos
       let fechaInicioEventEmail = this.funcsService.isoStrToYYYYMMDDHHSSNormal(new Date(FechaInicio).toISOString())
       let fechaFinEventEmail = this.funcsService.isoStrToYYYYMMDDHHSSNormal(new Date(FechaFin).toISOString())
-      const emailConfig = {
-        Emails: this.specificGuests,
-        Asunto: `Evento ${Nombre} | Egresados`,
-        Mensaje: `Participa en el evento de ${Descripcion}\nUbicación: ${lugarValue}\nInicia: ${fechaInicioEventEmail} y termina: ${fechaFinEventEmail}`
-      }
-      // \n<img src="${media[0].url}" alt="poster del evento">
 
-      await this.sendEmail.sendEmailFull(emailConfig)
+      if (this.specificGuests && this.specificGuests.length > 0) {
+        const emailConfig = {
+          Emails: this.specificGuests,
+          Asunto: `Evento ${Nombre} | Egresados`,
+          Mensaje: `Participa en el evento de ${Descripcion}\nUbicación: ${lugarValue}\nInicia: ${fechaInicioEventEmail} y termina: ${fechaFinEventEmail}`
+        }
+        // \n<img src="${media[0].url}" alt="poster del evento">
+
+        await this.sendEmail.sendEmailFull(emailConfig)
+      }
+
+      if (this.guestsDependencies && this.guestsDependencies.length > 0) {
+        const emailConfigDependencies = {
+          Emails: this.guestsDependencies,
+          Asunto: `Evento ${Nombre} | Egresados`,
+          Mensaje: `Participen en el evento de ${Descripcion}\nUbicación: ${lugarValue}\nInicia: ${fechaInicioEventEmail} y termina: ${fechaFinEventEmail}`,
+          IsDependence: true
+        }
+        // \n<img src="${media[0].url}" alt="poster del evento">
+
+        await this.sendEmail.sendEmailFull(emailConfigDependencies)
+      }
 
       this.dismissModal('modal-new-event')
       loader.dismiss()

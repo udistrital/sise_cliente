@@ -5,6 +5,7 @@ export class Event {
   Descripcion: string;
   Invitados: any;
   InvitadosEspecificos: any;
+  InvitadosDependencias: any;
   FechaInicio: string;
   FechaFin: string;
   TipoSesion: any;
@@ -22,6 +23,7 @@ export class Event {
     Descripcion = '',
     Invitados = [],
     InvitadosEspecificos = [],
+    InvitadosDependencias = [],
     FechaInicio = '',
     TipoSesion = 0,
     FechaFin = '',
@@ -39,6 +41,7 @@ export class Event {
     this.Descripcion = Descripcion
     this.Invitados = Invitados
     this.InvitadosEspecificos = InvitadosEspecificos
+    this.InvitadosDependencias = InvitadosDependencias
     this.FechaInicio = FechaInicio
     this.TipoSesion = TipoSesion
     this.FechaFin = FechaFin

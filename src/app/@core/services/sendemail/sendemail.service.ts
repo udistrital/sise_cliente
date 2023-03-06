@@ -11,7 +11,6 @@ import { FuncsService } from '../funcs.service';
 
 export class SendEmailService {
 
-
   constructor(private readonly httpClient: HttpClient, private funcsService: FuncsService, private readonly infoPersonalService: InfoPersonalService) { }
 
   createTopic(body): any { // Paso 1
@@ -62,9 +61,10 @@ export class SendEmailService {
 ** Emails
 ** Asunto
 ** Mensaje
+** IsDependence: boolean
 **/
   // Acá es automatico el paso 3 , 4
-  async sendEmailFull({ Emails, Asunto, Mensaje }): Promise<any> {
+  async sendEmailFull({ Emails, Asunto, Mensaje, IsDependence = false }): Promise<any> {
 
     try {
       let receptorsIds = []
@@ -74,32 +74,62 @@ export class SendEmailService {
       const suscriptorsArr = []
       for (let i = 0; i < Emails.length; i++) {
         const mainEmail = Emails[i];
-        const body = { "user": mainEmail };
 
-        const { documento } = await this
-          .infoPersonalService
-          .getDocumentIdByEmail(environment.API_GET_IDENTIFICATION, body)
-          .toPromise() as Documento;
+        if (IsDependence) {
+          const { Id } = await this.infoPersonalService
+            .getInfoComplementariaTercero(
+              environment.OIKOS_SERVICE,
+              `dependencia?fields=Id&query=CorreoElectronico=${mainEmail}&limit=1`)
+            .toPromise();
 
-        receptorsIds.push(documento)
+          receptorsIds.push(Id || mainEmail)
 
-        const validateReceptorBody = {
-          "Endpoint": mainEmail,
-          "ArnTopic": environment.ARN_QUEUE_SIGE_EMAILS.TOPIC,
-        }
+          const validateReceptorBody = {
+            "Endpoint": mainEmail,
+            "ArnTopic": environment.ARN_QUEUE_SIGE_EMAILS.TOPIC,
+          }
 
-        const { Data } = await this
-          .receptorsExists(validateReceptorBody)
-          .toPromise()
+          const { Data } = await this
+            .receptorsExists(validateReceptorBody)
+            .toPromise()
+
+          console.log("Data Dependencie📝📝📝📝", Data)
+
+          if (!Data) {
+            suscriptorsArr.push({
+              "Endpoint": mainEmail,
+              "Id": Id || mainEmail,
+              "Protocolo": "email"
+            })
+          }
+        } else {
+          const body = { "user": mainEmail };
+
+          const { documento } = await this
+            .infoPersonalService
+            .getDocumentIdByEmail(environment.API_GET_IDENTIFICATION, body)
+            .toPromise() as Documento;
+
+          receptorsIds.push(documento)
+
+          const validateReceptorBody = {
+            "Endpoint": mainEmail,
+            "ArnTopic": environment.ARN_QUEUE_SIGE_EMAILS.TOPIC,
+          }
+
+          const { Data } = await this
+            .receptorsExists(validateReceptorBody)
+            .toPromise()
 
           console.log("Data 📝📝📝📝", Data)
 
-        if (!Data) {
-          suscriptorsArr.push({
-            "Endpoint": mainEmail,
-            "Id": documento,
-            "Protocolo": "email"
-          })
+          if (!Data) {
+            suscriptorsArr.push({
+              "Endpoint": mainEmail,
+              "Id": documento,
+              "Protocolo": "email"
+            })
+          }
         }
       }
 
@@ -108,8 +138,11 @@ export class SendEmailService {
         "Suscritos": suscriptorsArr
       }
 
+      console.log("Envio de correo suscripción 🍕🍕🍕", suscriptorsArr)
+      console.log(suscribedEmailsBody, "🍕🍕🍕🍕")
+
       // Suscribe los emails al topic que no estén suscritos
-      if (suscriptorsArr.length > 0){
+      if (suscriptorsArr.length > 0) {
         await this
           .suscribeReceptors(suscribedEmailsBody)
           .toPromise()
