@@ -12,15 +12,18 @@ export class SelectableService {
 
   constructor(private terceroService: TerceroService) { }
 
-  specificGuestsChange(event: {
-    component: IonicSelectableComponent,
-    value: any
-  }) {
+  specificGuestsChange(
+    event: {
+      component: IonicSelectableComponent,
+      value: any
+    },
+    fieldTextKey: string = "UsuarioWSO2"
+  ) {
     console.log('VALUE SELECTABLE:', event.value);
     let emails = []
     event.value.forEach(guest => {
-      if(!emails.includes(guest.UsuarioWSO2)){
-        emails.push(guest.UsuarioWSO2)
+      if (!emails.includes(guest[fieldTextKey])) {
+        emails.push(guest[fieldTextKey])
       }
     })
 

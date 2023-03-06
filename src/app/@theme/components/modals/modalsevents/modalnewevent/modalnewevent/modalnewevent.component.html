@@ -103,14 +103,23 @@
            </ion-select>
          </ion-item>
        </ion-col> -->
-       <ion-col size="12" class="ion-margin-vertical">
-         <ion-item lines="full">
-           <ion-label position="floating">Invitados especificos</ion-label>
-           <ion-icon slot="start" name="people-outline"></ion-icon>
-           <ionic-selectable item-content [isMultiple]="true" [canSearch]="true" id="InvitadosEspecificos" name="InvitadosEspecificos" #InvitadosEspecificos="ngModel" (onChange)="this.specificGuests = this.selectableUtils.specificGuestsChange($event)" required [(ngModel)]="selectedEvent.InvitadosEspecificos" [items]="terceros" itemValueField="Id" itemTextField="UsuarioWSO2" (onSearch)="this.selectableUtils.searchIonSelectable($event,terceros,'UsuarioWSO2')">
-           </ionic-selectable>
-         </ion-item>
-       </ion-col>
+      <ion-col size="12" class="ion-margin-vertical">
+        <ion-item lines="full">
+          <ion-label position="floating">Invitados especificos</ion-label>
+          <ion-icon slot="start" name="people-outline"></ion-icon>
+          <ionic-selectable item-content [isMultiple]="true" [canSearch]="true" id="InvitadosEspecificos" name="InvitadosEspecificos" #InvitadosEspecificos="ngModel" (onChange)="this.specificGuests = this.selectableUtils.specificGuestsChange($event)" required [(ngModel)]="selectedEvent.InvitadosEspecificos" [items]="terceros" itemValueField="Id" itemTextField="UsuarioWSO2" (onSearch)="this.selectableUtils.searchIonSelectable($event,terceros,'UsuarioWSO2')">
+          </ionic-selectable>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="12" class="ion-margin-vertical">
+        <ion-item lines="full">
+          <ion-label position="floating">Invitar dependencias</ion-label>
+          <ion-icon slot="start" name="people-outline"></ion-icon>
+          <ionic-selectable item-content [isMultiple]="true" [canSearch]="true" id="InvitadosDependencias" name="InvitadosDependencias" #InvitadosDependencias="ngModel" (onChange)="this.guestsDependencies = this.selectableUtils.specificGuestsChange($event, 'CorreoElectronico')" required [(ngModel)]="selectedEvent.InvitadosDependencias" [items]="dependencias" itemValueField="Id" itemTextField="CorreoElectronico" (onSearch)="this.selectableUtils.searchIonSelectable($event,dependencias,'CorreoElectronico')">
+          </ionic-selectable>
+        </ion-item>
+      </ion-col>
     </ion-row>
 
 

@@ -124,21 +124,19 @@ export class HomeComponent implements OnInit {
       let fechaCumpleaños = nacimiento.slice(0, 4)
 
 
-      // if (fechaFormateada && fechaCumpleaños && (fechaFormateada == fechaCumpleaños)) {
-      console.log("-😅🧩🧩", email)
-      const emailConfig = {
-        Emails: [email],
-        Asunto: "Feliz cumpleaños egresado UD 🎂",
-        Mensaje: "¡Feliz cumpleaños egresado de la Universidad Distrital Francisco José de Caldas! Hoy celebramos no solo tu cumpleaños, sino también tus logros y tu dedicación para llegar hasta aquí. Como egresado de una de las mejores universidades de Colombia, eres una inspiración para muchos y un verdadero ejemplo de perseverancia y éxito. Que este nuevo año de vida te traiga muchas más alegrías y bendiciones, y que sigas siendo un orgullo para tu alma máter. ¡Feliz cumpleaños y muchos éxitos más! 🎂"
+      if (fechaFormateada && fechaCumpleaños && (fechaFormateada == fechaCumpleaños)) {
+        console.log("-😅🧩🧩", email)
+        const emailConfig = {
+          Emails: [email],
+          Asunto: "Feliz cumpleaños egresado UD 🎂",
+          Mensaje: "¡Feliz cumpleaños egresado de la Universidad Distrital Francisco José de Caldas! Hoy celebramos no solo tu cumpleaños, sino también tus logros y tu dedicación para llegar hasta aquí. Como egresado de una de las mejores universidades de Colombia, eres una inspiración para muchos y un verdadero ejemplo de perseverancia y éxito. Que este nuevo año de vida te traiga muchas más alegrías y bendiciones, y que sigas siendo un orgullo para tu alma máter. ¡Feliz cumpleaños y muchos éxitos más! 🎂"
+        }
+
+        await this.sendEmail.sendEmailFull(emailConfig)
+        console.log("💪💪💪💪")
+
+        this.modalService.openModal(ModalbirthdayComponent, 'modal-birthday');
       }
-
-      await this.sendEmail.sendEmailFull(emailConfig)
-      console.log("💪💪💪💪")
-
-      this.modalService.openModal(ModalbirthdayComponent, 'modal-birthday');
-
-
-      // }
     }
 
     this.terceroPersonalData.TerceroId.FechaNacimiento = this.terceroPersonalData.TerceroId?.FechaNacimiento
