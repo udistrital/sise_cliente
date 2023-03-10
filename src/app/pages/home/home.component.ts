@@ -123,7 +123,6 @@ export class HomeComponent implements OnInit {
       const nacimiento = diaNacimiento.getDate() + '-' + (diaNacimiento.getMonth() + 1) + '-' + diaNacimiento.getFullYear();
       let fechaCumpleaños = nacimiento.slice(0, 4)
 
-
       if (fechaFormateada && fechaCumpleaños && (fechaFormateada == fechaCumpleaños)) {
         console.log("-😅🧩🧩", email)
         const emailConfig = {
