@@ -12,11 +12,12 @@ import { ModalService } from '../../@core/services/notify/modal.service';
 import { ToastService } from '../../@core/services/notify/toast.service';
 import { PhotoService } from '../../@core/services/photo.service';
 import { TerceroService } from '../../@core/services/tercero/tercero.service';
-import { formatSSSZDate, getMaxDate } from '../../@core/utils/formatAPIDate';
 import { ImplicitAutenticationService } from '../../@core/utils/implicit_autentication.service';
 import { ModalbirthdayComponent } from '../../@theme/components/modals/modalbirthday/modalbirthday.component';
 import { single } from './data';
-import { CreacioneventosService } from 'src/app/@core/services/creacioneventos.service';
+import { CreacioneventosService } from '../../@core/services/creacioneventos.service';
+import { InscripcionaeventosService } from '../../@core/services/inscripcionaeventos.service';
+import { formatSSSZDate, getMaxDate, sortBy } from '../../@core/utils';
 
 @Component({
   selector: 'app-home',
@@ -66,6 +67,7 @@ export class HomeComponent implements OnInit {
     private autenticacion: ImplicitAutenticationService,
     private loaderService: LoaderService,
     private readonly infoPersonalService: InfoPersonalService,
+    private readonly inscripcionEventosService: InscripcionaeventosService,
     private funcsService: FuncsService,
     private router: Router,
     private sendEmailService: SendEmailService,
@@ -113,6 +115,8 @@ export class HomeComponent implements OnInit {
     if (!this.terceroPersonalData) return
     this.terceroId = data[0].TerceroId.Id
 
+    console.log("TERCERO ID", this.terceroId)
+
     const hoy = new Date()
     const fechaActual = hoy.getDate() + '-' + (hoy.getMonth() + 1) + '-' + hoy.getFullYear();
     let fechaFormateada = fechaActual.slice(0, 4)
@@ -159,7 +163,6 @@ export class HomeComponent implements OnInit {
       this.eventos[index].FechaFin = new Date(evento.FechaFin).toISOString().replace(/T/, ' ').replace(/\..+/, '').slice(0, -9)
     })
 
-
     await Promise.all(this.eventos.map(async (evento, index) => {
       if (evento.UbicacionId) {
         let ubicacion = await this.infoPersonalService
@@ -170,9 +173,17 @@ export class HomeComponent implements OnInit {
 
         this.eventos[index]['Lugar'] = ubicacion[0].Nombre
       }
+
+      const inscrito = await this.inscripcionEventosService
+        .getGuestByEventIdAndTerceroId({ eventId: evento.Id, terceroId: this.terceroId })
+        .toPromise();
+
+      if (Object.keys(inscrito[0]).length <= 0) {
+        this.eventos[index]['SinInscribirse'] = true
+      }
     }));
 
-    this.eventos = this.eventos.sort((a, b) => -1)
+    this.eventos = sortBy(this.eventos, "Id")
     await this.getProfilePicture();
 
     loader.dismiss()
@@ -287,6 +298,30 @@ export class HomeComponent implements OnInit {
         console.log(ubicacion[0].Nombre);
 
         eventLocation = ubicacion[0].Nombre
+      }
+
+      // Inscribirlo, guardarlo en tabla encargado_evento y enviarle un correo de confirmación
+      if (this.terceroId && environment.hasOwnProperty("ROL_ENCARGADO_EVENTO_IDS")) {
+
+        const inscrito = await this.inscripcionEventosService
+          .getGuestByEventIdAndTerceroId({ eventId, terceroId: this.terceroId })
+          .toPromise();
+
+        if (Object.keys(inscrito[0]).length <= 0) {
+          await this.inscripcionEventosService
+            .enrollGuest({
+              Id: null,
+              Activo: true,
+              EncargadoId: this.terceroId,
+              RolEncargadoEventoId: { Id: environment?.ROL_ENCARGADO_EVENTO_IDS?.TERCERO_ROL_ID },
+              CalendarioEventoId: { Id: eventId },
+            })
+            .toPromise();
+        } else {
+          loader.dismiss()
+          this.toastService.presentToast("Ya estás inscrito a este evento")
+          return
+        }
       }
 
       const emailConfig = {

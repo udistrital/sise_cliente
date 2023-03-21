@@ -14,6 +14,15 @@ import { map, debounceTime } from 'rxjs/operators';
 import { CreacioneventosService } from '../../@core/services/creacioneventos.service';
 import { FuncsService } from '../../@core/services/funcs.service';
 import { SimpleComponent } from '../../@theme/components/enlargeImg/simple/simple/simple.component';
+import { GuestsComponent } from './guests/guests.component';
+import { InscripcionaeventosService } from '../../@core/services/inscripcionaeventos.service';
+import { TerceroService } from '../../@core/services/tercero/tercero.service';
+import { OikosService } from '../../@core/services/oikos/oikos.service';
+
+export interface Guests {
+  name: string;
+  email: string;
+}[]
 
 @Component({
   selector: 'app-creacioneventos',
@@ -38,6 +47,9 @@ export class CreacioneventosComponent implements OnInit {
     public modalService: ModalService,
     private autenticacion: ImplicitAutenticationService,
     private readonly infoPersonalService: InfoPersonalService,
+    private readonly inscripcionEventosService: InscripcionaeventosService,
+    private readonly terceroService: TerceroService,
+    private readonly oikosService: OikosService,
     public alertService: AlertService,
     private creacioneventosService: CreacioneventosService,
     public toastService: ToastService,
@@ -135,13 +147,23 @@ export class CreacioneventosComponent implements OnInit {
             return picture
           },
           renderComponent: SimpleComponent
-          //   // return `<img width="50px" class="posterImg" style="display:flex; justify-content: center; text-align-center;" src="${picture}" />`;
+          //   // return `<img width="50px" class="rowTableValue" style="display:flex; justify-content: center; text-align-center;" src="${picture}" />`;
 
           //   return `<app-simple></app-simple>`;
           // },
           // <app-simple></app-simple>
           // renderComponent: <SimpleComponent />
           // renderComponent: <app-simple></app-simple>
+        },
+        Invitados: {
+          title: 'Invitados e Inscritos',
+          editable: false,
+          addable: false,
+          type: 'custom',
+          valuePrepareFunction: (guests) => {
+            return guests
+          },
+          renderComponent: GuestsComponent
         },
         // Fin: {
         //   title: 'Fin'
@@ -172,7 +194,7 @@ export class CreacioneventosComponent implements OnInit {
       }
     };
 
-    console.log(this.isAdminSiseFlag)
+    console.log("Es admin: ", this.isAdminSiseFlag)
     await this.setEvents();
     loader.dismiss()
   }
@@ -201,14 +223,80 @@ export class CreacioneventosComponent implements OnInit {
       if (evento.UbicacionId) {
         let ubicacion = await this.infoPersonalService
           .getInfoComplementariaTercero(environment.API_ENDPOINT_UBICACIONES,
-             `lugar/?query=Id:${evento.UbicacionId}&fields=Nombre&limit=1`)
+            `lugar/?query=Id:${evento.UbicacionId}&fields=Nombre&limit=1`)
           .toPromise();
-
-        console.log(ubicacion[0].Nombre);
 
         this.eventos[index]['Lugar'] = ubicacion[0].Nombre
       }
     }));
+
+    await Promise.all(this.eventos.map(async (evento, index) => {
+      const encargadosEventos = await this.inscripcionEventosService
+        .getGuestsByEventId(evento.Id)
+        .toPromise();
+
+      let guestsToShow: any = []
+
+
+      if (encargadosEventos.length <= 0 || Object.keys(encargadosEventos[0]).length <= 0) {
+        return;
+      }
+
+      console.log("encargadosEventos", encargadosEventos)
+
+      const encargadosEventosLength = encargadosEventos.length
+
+      for (let i = 0; i < encargadosEventosLength; i++) {
+        const guest = encargadosEventos[i];
+
+        if (!guest || !environment.hasOwnProperty("ROL_ENCARGADO_EVENTO_IDS")) continue;
+
+        console.log("💻💻💻guest", guest)
+        if (guest.RolEncargadoEventoId?.Nombre === "Tercero" || guest.RolEncargadoEventoId?.Id === environment?.ROL_ENCARGADO_EVENTO_IDS?.TERCERO_ROL_ID) {
+          const tercero = await this.terceroService
+            .getTerceroById(guest.EncargadoId, "&fields=NombreCompleto,UsuarioWSO2")
+            .toPromise();
+
+          const { NombreCompleto, UsuarioWSO2 } = tercero[0]
+
+          console.log(NombreCompleto, UsuarioWSO2, "NombreCompleto, UsuarioWSO2")
+
+          guestsToShow.push({
+            name: NombreCompleto,
+            email: UsuarioWSO2
+          })
+        }
+
+        if (guest.RolEncargadoEventoId?.Nombre === "Dependencia" || guest.RolEncargadoEventoId?.Id === environment?.ROL_ENCARGADO_EVENTO_IDS?.DEPENDENCIA_ROL_ID) {
+          const dependencia = await this.oikosService
+            .getDependenciaById(guest.EncargadoId, "&fields=Nombre,CorreoElectronico")
+            .toPromise();
+
+          const { Nombre, CorreoElectronico } = dependencia[0]
+
+          guestsToShow.push({
+            name: Nombre,
+            email: CorreoElectronico
+          })
+        }
+      }
+
+      console.log("guestsToShow", guestsToShow)
+
+      let guestStr = ``
+      if (guestsToShow && guestsToShow.length > 0) {
+        guestStr = guestsToShow.map((guest: any) => `
+        Nombre: ${guest.name}\n
+        Correo: ${guest.email}\n\n
+      `).join()
+      }
+
+      console.log("😎😎😎guestStr", guestStr)
+
+      this.eventos[index]['Invitados'] = guestStr
+    }));
+
+    console.log("this.eventos", this.eventos)
 
     this.rows = this.eventos
   }

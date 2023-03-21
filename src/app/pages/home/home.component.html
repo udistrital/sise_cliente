@@ -46,8 +46,9 @@
                     <ion-accordion value="colors" text-wrap>
                       <ion-item slot="header" text-wrap>
                         <ion-label text-wrap class="labelEvent">
-                          {{evento.Nombre}} &nbsp;
-                          <ion-button (click)="enrollMeToEvent(evento.Id)">Inscribirme</ion-button>
+                          {{evento.Id}}. {{evento.Nombre}} &nbsp;
+                          <ion-button *ngIf="evento.SinInscribirse" (click)="enrollMeToEvent(evento.Id)">Inscribirme</ion-button>
+                          <span *ngIf="!evento.SinInscribirse" class="enrolledText">Ya estás inscrito</span>
 
                           <span *ngIf="evento.PosterUrl">
                             <img width="60" style="max-height:60px;" src="{{evento.PosterUrl}}" alt="{{evento.Descripcion}} Poster">

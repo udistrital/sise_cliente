@@ -28,12 +28,12 @@ export function formatSSSZDate(date) {
 
   fullDate = fullDate.split('. ').join("")
   fullDate = fullDate.split('.').join("")
-  console.log('😔',fullDate.slice(0, fullDate.length - 2) +  fullDate.slice(fullDate.length - 1))
+  // console.log('😔',fullDate.slice(0, fullDate.length - 2) +  fullDate.slice(fullDate.length - 1))
   let newStr = fullDate.slice(0, fullDate.length - 2) +  fullDate.slice(fullDate.length - 1)
   newStr = fullDate.replace("p m", "pm")
 
-  console.log('🤔')
-  console.log(newStr)
+  // console.log('🤔')
+  // console.log(newStr)
 
   return newStr
 }
