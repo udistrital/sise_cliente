@@ -153,6 +153,13 @@ export class HomeComponent implements OnInit {
     console.log(formatSSSZDate(this.terceroPersonalData.TerceroId.FechaModificacion))
     this.terceroPersonalData.TerceroId.FechaModificacion = getMaxDate(arrFechaModificaciones)
 
+    await this.getEvents();
+    await this.getProfilePicture();
+
+    loader.dismiss()
+  }
+
+  async getEvents() {
     const dataEventos = await this.infoPersonalService
       .getInfoComplementariaTercero(environment.EVENTOS_ENDPOINT, `/calendario_evento?query=Activo:true&limit=-1`)
       .toPromise();
@@ -184,9 +191,6 @@ export class HomeComponent implements OnInit {
     }));
 
     this.eventos = sortBy(this.eventos, "Id")
-    await this.getProfilePicture();
-
-    loader.dismiss()
   }
 
   async setProfilePicture(e: File[]) {
@@ -330,9 +334,9 @@ export class HomeComponent implements OnInit {
         Mensaje: `${email} se inscribió al evento de ${eventToEnroll.Nombre} exitosamente de:\n ${eventToEnroll.Descripcion}\nUbicación: ${eventLocation || "Por definir"}\nInicia: ${fechaInicioEventEmail} y termina: ${fechaFinEventEmail}`
       }
       await this.sendEmail.sendEmailFull(emailConfig)
-      loader.dismiss()
       this.toastService.presentToast("Inscripción exitosa, te llegará un correo de confirmación")
-
+      await this.getEvents();
+      loader.dismiss()
     } catch (error) {
       console.error(error)
       this.toastService.presentToast("Hubo un error, por favor intenta de nuevo más tarde")

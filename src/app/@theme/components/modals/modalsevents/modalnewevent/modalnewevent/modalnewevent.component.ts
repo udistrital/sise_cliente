@@ -273,7 +273,6 @@ export class ModalneweventComponent implements OnInit {
 
       Fecha y Hora de inicio: ${fechaInicioEventEmail || "Por definir"}
       Fecha y Hora de finalización: ${fechaFinEventEmail || "Por definir"}
-      Hora: [hora del evento]
       Lugar: ${lugarValue || "Por definir"}\n
       Inscripción a través de: sisecliente.portaloas.udistrital.edu.co
 
