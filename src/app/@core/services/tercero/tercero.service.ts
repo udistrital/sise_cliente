@@ -21,4 +21,8 @@ export class TerceroService {
   getVariablesTercero(terceroId){
     return this.httpClient.get<any>(environment.TERCEROS_SERVICE + `/info_complementaria_tercero?query=TerceroId.Id:${terceroId}&limit=-1`, this.funcsService.openIDDefaultOptions());
   }
+
+  getTerceroById(terceroId: string | number, fields=""){
+    return this.httpClient.get<any>(environment.TERCEROS_SERVICE + `/tercero?query=Id:${terceroId}${fields}`, this.funcsService.openIDDefaultOptions());
+  }
 }

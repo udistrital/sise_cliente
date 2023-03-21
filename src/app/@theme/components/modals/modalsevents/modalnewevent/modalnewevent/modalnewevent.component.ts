@@ -99,7 +99,7 @@ export class ModalneweventComponent implements OnInit {
 
     this.ubicacionesTiposLugar = ubicacionesTiposLugar
 
-    console.log('AA🤔', this.eventRow)
+    // console.log('AA🤔', this.eventRow)
 
     if (this.eventRow && this.eventRow.Id) {
 
@@ -257,13 +257,38 @@ export class ModalneweventComponent implements OnInit {
       let fechaInicioEventEmail = this.funcsService.isoStrToYYYYMMDDHHSSNormal(new Date(FechaInicio).toISOString())
       let fechaFinEventEmail = this.funcsService.isoStrToYYYYMMDDHHSSNormal(new Date(FechaFin).toISOString())
 
+      const eventEmailMessage = (target: string = "Estimados egresados") => `Estimados egresados de la Universidad Distrital Francisco José de Caldas,
+
+      Nos complace invitarlos a un evento muy especial.
+
+      Descripción del evento: ${Descripcion || "Por definir"}\n
+
+      Tendremos la oportunidad de reunirnos nuevamente y recordar aquellos momentos maravillosos que compartimos juntos durante nuestra estadía en la universidad.
+
+      Este evento está dirigido a todos los egresados de nuestra institución, independientemente del año de graduación. Será una oportunidad para conocer a antiguos compañeros de clase, compartir experiencias y establecer nuevas conexiones.
+
+      El evento se llevará a cabo en línea, y les invitamos a inscribirse a través de la siguiente URL: sisecliente.portaloas.udistrital.edu.co
+
+      Esperamos contar con su presencia y compartir juntos un momento de felicidad y camaradería.
+
+      Fecha y Hora de inicio: ${fechaInicioEventEmail || "Por definir"}
+      Fecha y Hora de finalización: ${fechaFinEventEmail || "Por definir"}
+      Hora: [hora del evento]
+      Lugar: ${lugarValue || "Por definir"}\n
+      Inscripción a través de: sisecliente.portaloas.udistrital.edu.co
+
+      ¡No faltes! Te esperamos.
+
+      Atentamente,
+      Egresados U.Distrital`
+      // \n<img src="${media[0].url}" alt="poster del evento">
+
       if (this.specificGuests && this.specificGuests.length > 0) {
         const emailConfig = {
           Emails: this.specificGuests,
           Asunto: `Evento ${Nombre} | Egresados`,
-          Mensaje: `Participa en el evento de ${Descripcion}\nUbicación: ${lugarValue}\nInicia: ${fechaInicioEventEmail} y termina: ${fechaFinEventEmail}`
+          Mensaje: eventEmailMessage()
         }
-        // \n<img src="${media[0].url}" alt="poster del evento">
 
         await this.sendEmail.sendEmailFull(emailConfig)
       }
@@ -272,10 +297,9 @@ export class ModalneweventComponent implements OnInit {
         const emailConfigDependencies = {
           Emails: this.guestsDependencies,
           Asunto: `Evento ${Nombre} | Egresados`,
-          Mensaje: `Participen en el evento de ${Descripcion}\nUbicación: ${lugarValue}\nInicia: ${fechaInicioEventEmail} y termina: ${fechaFinEventEmail}`,
+          Mensaje: eventEmailMessage("Estimadas dependencias"),
           IsDependence: true
         }
-        // \n<img src="${media[0].url}" alt="poster del evento">
 
         await this.sendEmail.sendEmailFull(emailConfigDependencies)
       }

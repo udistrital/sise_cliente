@@ -174,5 +174,9 @@ export const environment = {
   ARN_QUEUE_SIGE_EMAILS: {
     TOPIC: "arn:aws:sns:us-east-1:699001025740:test-SIGE",
     QUEUE: "arn:aws:sqs:us-east-1:699001025740:test-sigemails"
+  },
+  ROL_ENCARGADO_EVENTO_IDS:{
+    TERCERO_ROL_ID: 3,
+    DEPENDENCIA_ROL_ID: 4,
   }
 };
