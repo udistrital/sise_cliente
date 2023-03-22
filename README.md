@@ -15,7 +15,8 @@ AWS_SECRET_ACCESS_KEY: Secreto de Usuario AWS
 ```
 
 ### Ejecución del Proyecto
-
+Este proyecto funciona con base a la ejecución previa de un ETL que se encuentra en el siguiente repositorio: 
+https://github.com/udistrital/sise_parametrizacion
 Clonar el proyecto del repositorio de git
 ```bash
 # clone the project

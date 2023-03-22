@@ -334,7 +334,7 @@ export class HomeComponent implements OnInit {
         Mensaje: `${email} se inscribió al evento de ${eventToEnroll.Nombre} exitosamente de:\n ${eventToEnroll.Descripcion}\nUbicación: ${eventLocation || "Por definir"}\nInicia: ${fechaInicioEventEmail} y termina: ${fechaFinEventEmail}`
       }
       await this.sendEmail.sendEmailFull(emailConfig)
-      this.toastService.presentToast("Inscripción exitosa, te llegará un correo de confirmación")
+      this.toastService.presentToast("Inscripción exitosa, te llegará un correo de confirmación 📨")
       await this.getEvents();
       loader.dismiss()
     } catch (error) {

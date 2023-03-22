@@ -182,7 +182,7 @@ export const environment = {
     QUEUE: "arn:aws:sqs:us-east-1:699001025740:production-sigemails"
   },
   ROL_ENCARGADO_EVENTO_IDS:{
-    TERCERO_ROL_ID: 3,
-    DEPENDENCIA_ROL_ID: 4,
+    TERCERO_ROL_ID: 2,
+    DEPENDENCIA_ROL_ID: 1,
   }
 };
