@@ -17,4 +17,8 @@ export class CreacioneventosService {
   editEvent(data, sesionId) {
     return this.httpClient.put(environment.EVENTOS_ENDPOINT + '/calendario_evento/' + sesionId, data, this.funcsService.openIDDefaultOptions())
   }
+
+  getEventById(eventId){
+    return this.httpClient.get(environment.EVENTOS_ENDPOINT + `/calendario_evento?query=Id:${eventId}`, this.funcsService.openIDDefaultOptions())
+  }
 }

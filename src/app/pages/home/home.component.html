@@ -4,7 +4,9 @@
     <ion-buttons slot="start">
       <ion-menu-button menu="main-menu"></ion-menu-button>
     </ion-buttons>
-    <ion-button class="boton-cerrar" style="z-index:100;" slot="start" (click)="logout()"><ion-icon name="exit-outline"></ion-icon></ion-button>
+    <ion-button class="boton-cerrar" style="z-index:100;" slot="start" (click)="logout()">
+      <ion-icon name="exit-outline"></ion-icon>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
@@ -16,15 +18,18 @@
           <ion-card-header style="justify-content: center; display: grid; text-align: center;
       align-items: center;">
             <ion-avatar style="margin: 0 auto;">
-              <img src="{{this.profilePicture}}">
+              <img src="{{this?.profilePicture}}">
             </ion-avatar>
             <ion-card-title>{{this.terceroPersonalData?.TerceroId?.NombreCompleto}}</ion-card-title>
-            <ion-button (click)="executeClickFileInput()">Nueva foto de perfil</ion-button>
+            <ion-button (click)="executeClickFileInput()" style="display: flex; gap: 10px;">
+              Nueva foto de perfil <ion-icon name="camera-outline"></ion-icon>
+            </ion-button>
+
+            <span>Ultima actualización de sus datos: {{this.terceroPersonalData?.TerceroId?.FechaModificacion}}</span>
             <input #fileInput hidden type="file" id="profilePictureInput" (change)="setProfilePicture($event.target.files)">
           </ion-card-header>
         </ion-card>
       </ion-col>
-
     </ion-row>
   </ion-grid>
 
@@ -40,7 +45,11 @@
                   <ion-accordion-group text-wrap>
                     <ion-accordion value="colors" text-wrap>
                       <ion-item slot="header" text-wrap>
-                        <ion-label text-wrap>{{evento.Nombre}} &nbsp;
+                        <ion-label text-wrap class="labelEvent">
+                          {{evento.Id}}. {{evento.Nombre}} &nbsp;
+                          <ion-button *ngIf="evento.SinInscribirse" (click)="enrollMeToEvent(evento.Id)">Inscribirme</ion-button>
+                          <span *ngIf="!evento.SinInscribirse" class="enrolledText">Ya estás inscrito</span>
+
                           <span *ngIf="evento.PosterUrl">
                             <img width="60" style="max-height:60px;" src="{{evento.PosterUrl}}" alt="{{evento.Descripcion}} Poster">
                           </span>
@@ -103,11 +112,26 @@
           </ion-card-content>
         </ion-card>
       </ion-col>
-      <!-- <ion-col class="ion-margin-vertical">
+      <ion-col class="ion-margin-vertical">
         <ion-card class="Inicio-izquierda">
           <ion-card-title style="padding-top: 1rem;padding-left: 1rem;">Noticias</ion-card-title>
+          <ion-card-content text-wrap>
+
+            <ion-label text-wrap>
+              <ion-list slot="content" text-wrap>
+                <ion-item text-wrap>
+                  <ion-label text-wrap>
+                    <strong>
+                      Portafolio de servicios:
+                    </strong>
+                    <a href="assets/docs/services_portfolio.pdf" target="_blank">Ver</a>
+                  </ion-label>
+                </ion-item>
+              </ion-list>
+            </ion-label>
+          </ion-card-content>
         </ion-card>
-      </ion-col> -->
+      </ion-col>
     </ion-row>
   </ion-grid>
 
@@ -147,3 +171,5 @@
   </ion-footer>
 
 </ion-content>
+
+<div></div>

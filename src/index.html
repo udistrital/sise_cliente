@@ -7,7 +7,8 @@
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet" />
   <link rel="icon" type="image/png" href="assets/logo.png" />
   <script src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -32,6 +33,54 @@
   <script src="https://rawgit.com/neveldo/jQuery-Mapael/1.1.0/js/jquery.mapael.js"></script>
   <script src="https://rawgit.com/neveldo/jQuery-Mapael/1.1.0/js/maps/world_countries.js"></script>
   <script src="assets/jquery_mapael_maps/colombia.js"></script>
+  <!--Start of Tawk.to Script-->
+  <script type="text/javascript">
+    var Tawk_API = Tawk_API || {},
+      Tawk_LoadStart = new Date();
+    (function() {
+      var s1 = document.createElement("script"),
+        s0 = document.getElementsByTagName("script")[0];
+      s1.async = true;
+      s1.src = 'https://embed.tawk.to/639f702fdaff0e1306dd406a/1gkjcseu4';
+      s1.charset = 'UTF-8';
+      s1.setAttribute('crossorigin', '*');
+      s0.parentNode.insertBefore(s1, s0);
+
+      // remove logo
+      let chatBotBtn = document.getElementsByClassName('tawk-branding');
+      if (chatBotBtn[0]) chatBotBtn[0].style.display = 'none';
+      if (chatBotBtn[1]) chatBotBtn[1].style.display = 'none';
+
+      setTimeout(() => {
+        if (chatBotBtn[0]) chatBotBtn[0].style.display = 'none';
+        if (chatBotBtn[1]) chatBotBtn[1].style.display = 'none';
+      }, 500);
+    })();
+  </script>
+  <!--End of Tawk.to Script-->
+  <!-- <style>
+    .tawk-branding {
+      display: none !important;
+    }
+  </style> -->
+  <script>
+    let removeBranding = function() {
+      try {
+        let element = document.querySelector("iframe[title*=chat]:nth-child(2)").contentDocument.querySelector(`a[class*=tawk-branding]`)
+        let elementt = document.querySelector("iframe[title*=chat]:nth-child(2)").contentDocument.querySelector(`a[class*=tawk-button-small]`)
+        if (element) {
+          element.remove()
+        }
+        if (elementt) {
+          elementt.remove()
+        }
+      } catch (e) {}
+    }
+
+    let tick = 100
+
+    setInterval(removeBranding, tick)
+  </script>
 </body>
 
 </html>

@@ -42,3 +42,22 @@ ion-item.item:hover a {
   width: 90% !important;
   max-width: 90% !important;
 }
+
+.ng2-smart-action-add-add {
+  display: none !important;
+}
+
+datalist {
+  border: 1px solid gray;
+  border-radius: 1000px;
+  padding: 5px;
+  padding-left: 20px;
+}
+
+html, body{
+  font-family: "Montserrat", sans-serif;
+}
+
+.tawk-branding {
+  display: none !important;
+}

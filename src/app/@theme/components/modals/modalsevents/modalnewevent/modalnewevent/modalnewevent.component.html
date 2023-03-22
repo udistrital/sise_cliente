@@ -93,13 +93,41 @@
           <input type="file" id="Poster" name="Poster" required class="border-0 border-none" (change)="getPoster($event)" />
         </ion-item>
       </ion-col>
+
+      <!-- <ion-col size="6" class="ion-margin-vertical">
+         <ion-item lines="full">
+           <ion-label position="floating">Invitados por rol</ion-label>
+           <ion-icon slot="start" name="people-outline"></ion-icon>
+           <ion-select interface="action-sheet" id="Invitados" name="Invitados" #Invitados="ngModel" required [(ngModel)]="selectedEvent.Invitados">
+             <ion-select-option *ngFor="let rol of roles" value="{{rol}}">{{rol}}</ion-select-option>
+           </ion-select>
+         </ion-item>
+       </ion-col> -->
+      <ion-col size="12" class="ion-margin-vertical">
+        <ion-item lines="full">
+          <ion-label position="floating">Invitados especificos</ion-label>
+          <ion-icon slot="start" name="people-outline"></ion-icon>
+          <ionic-selectable item-content [isMultiple]="true" [canSearch]="true" id="InvitadosEspecificos" name="InvitadosEspecificos" #InvitadosEspecificos="ngModel" (onChange)="this.specificGuests = this.selectableUtils.specificGuestsChange($event)" required [(ngModel)]="selectedEvent.InvitadosEspecificos" [items]="terceros" itemValueField="Id" itemTextField="UsuarioWSO2" (onSearch)="this.selectableUtils.searchIonSelectable($event,terceros,'UsuarioWSO2')">
+          </ionic-selectable>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="12" class="ion-margin-vertical">
+        <ion-item lines="full">
+          <ion-label position="floating">Invitar dependencias</ion-label>
+          <ion-icon slot="start" name="people-outline"></ion-icon>
+          <ionic-selectable item-content [isMultiple]="true" [canSearch]="true" id="InvitadosDependencias" name="InvitadosDependencias" #InvitadosDependencias="ngModel" (onChange)="this.guestsDependencies = this.selectableUtils.specificGuestsChange($event, 'CorreoElectronico')" required [(ngModel)]="selectedEvent.InvitadosDependencias" [items]="dependencias" itemValueField="Id" itemTextField="CorreoElectronico" (onSearch)="this.selectableUtils.searchIonSelectable($event,dependencias,'CorreoElectronico')">
+          </ionic-selectable>
+        </ion-item>
+      </ion-col>
     </ion-row>
 
-    <ion-row class="ion-justify-content-center ion-padding-horizontal">
+
+    <!-- <ion-row class="ion-justify-content-center ion-padding-horizontal">
       <ion-col size="12" class="ion-margin-vertical">
         <ion-button type="button" expand="block" color="primary">Agregar encuesta</ion-button>
       </ion-col>
-    </ion-row>
+    </ion-row> -->
 
     <ion-row class="ion-justify-content-center ion-text-center">
       <ion-col size="12">

@@ -1,18 +1,17 @@
 <ion-button style="position: absolute; right: 7px; border: none;" type="button" (click)="dismiss()" color="danger">
-  
+
   <ion-icon name="close-outline"></ion-icon>
 </ion-button>
 
-<div class="card">
+<div class="card" style="height: 80%;">
   <div class="back"></div>
   <div class="front">
     <div class="imgset">
-      <img width="100%" src="https://1.bp.blogspot.com/-Mgj9-rbs65E/XfMoPSD5gtI/AAAAAAAAURk/NBokE2gSS2cTSJ2em5lZ5hJDuTtRN7UVwCLcBGAsYHQ/s1600/2713997.png">
+      <img width="100%" src="https://1.bp.blogspot.com/-Mgj9-rbs65E/XfMoPSD5gtI/AAAAAAAAURk/NBokE2gSS2cTSJ2em5lZ5hJDuTtRN7UVwCLcBGAsYHQ/s1600/2713997.png" alt="Birthday Image">
     </div>
   </div>
   <div class="text-container" style="font-weight: bolder;">
-    <p id="head">Feliz cumpleaños <span color="primary">{{terceroPersonalData?.TerceroId?.PrimerNombre}}</span></p>
-    <p>Esperamos que tu día especial te traiga mucha felicidad, amor y diversión. Te lo mereces mucho. ¡Disfruta!</p>
-    <!-- <p>¡Esperamos que tu día vaya genial!</p> -->
+    <p id="head">¡Feliz cumpleaños egresado de la Universidad Distrital Francisco José de Caldas! <span color="primary">{{terceroPersonalData?.TerceroId?.PrimerNombre}}</span></p>
+    <p style="overflow-x: auto;white-space: pre-wrap;height: 9rem;">Hoy celebramos no solo tu cumpleaños, sino también tus logros y tu dedicación para llegar hasta aquí. Como egresado de una de las mejores universidades de Colombia, eres una inspiración para muchos y un verdadero ejemplo de perseverancia y éxito. Que este nuevo año de vida te traiga muchas más alegrías y bendiciones, y que sigas siendo un orgullo para tu alma máter. ¡Feliz cumpleaños y muchos éxitos más! 🎂</p>
   </div>
 </div>

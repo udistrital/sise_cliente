@@ -15,7 +15,8 @@ AWS_SECRET_ACCESS_KEY: Secreto de Usuario AWS
 ```
 
 ### Ejecución del Proyecto
-
+Este proyecto funciona con base a la ejecución previa de un ETL que se encuentra en el siguiente repositorio: 
+https://github.com/udistrital/sise_parametrizacion
 Clonar el proyecto del repositorio de git
 ```bash
 # clone the project
@@ -54,6 +55,37 @@ npm run test
 # Runt linter + unit test
 npm run test:ui
 ```
+
+# Envio de correos
+SIGE CORREOS
+
+cola: sigemails
+{
+    "Data": {
+        "QueueARN": "arn:aws:sqs:us-east-1:699001025740:test-sigemails"
+    },
+    "Message": "Successful",
+    "Status": "200",
+    "Success": true
+}
+
+topic: 
+{
+    "Data": "arn:aws:sns:us-east-1:699001025740:test-SIGE",
+    "Message": "Successful",
+    "Status": "200",
+    "Success": true
+}
+
+Suscripción cola al topic: 
+{
+    "Data": {
+        "TopicARN": "arn:aws:sns:us-east-1:699001025740:test-SIGE:3b5dbb50-a03c-40fa-9569-9a631ae716b6"
+    },
+    "Message": "Successful",
+    "Status": "200",
+    "Success": true
+}
 
 ## Estado CI
 

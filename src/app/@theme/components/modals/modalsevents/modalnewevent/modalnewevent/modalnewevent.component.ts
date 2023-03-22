@@ -11,8 +11,7 @@ import { SelectableService } from '../../../../../../@core/services/search/selec
 import moment from 'moment';
 import { FuncsService } from '../../../../../../@core/services/funcs.service';
 import { LoaderService } from '../../../../../../@core/services/notify/loader.service';
-// import { IonicSelectableComponent } from 'ionic-selectable';
-import { MatSelectModule } from '@angular/material/select';
+import { SendEmailService } from '../../../../../../@core/services/sendemail/sendemail.service';
 declare var $: any;
 
 @Component({
@@ -31,11 +30,15 @@ export class ModalneweventComponent implements OnInit {
   direccionesTiposLugar: any
   typeEventPlace: any
   terceros: any
+  dependencias: any
   ports: any;
   roles: any
   userInfo: any
   selectableUtils: any
+  sendEmail: any
   selectedCar: number;
+  specificGuests: any
+  guestsDependencies: any
 
   cars = [
     { id: 1, name: 'Volvo' },
@@ -51,10 +54,12 @@ export class ModalneweventComponent implements OnInit {
     private infoPersonalService: InfoPersonalService,
     private creacioneventosService: CreacioneventosService,
     private selectableService: SelectableService,
+    private sendEmailService: SendEmailService,
     private funcsService: FuncsService,
     private loaderService: LoaderService,
   ) {
     this.selectableUtils = this.selectableService
+    this.sendEmail = this.sendEmailService
     this.selectedEvent = new Event(); // iNICIALIZANDO VARIABLE CON UNA TAREA
   }
 
@@ -65,10 +70,18 @@ export class ModalneweventComponent implements OnInit {
     const terceros = await this.infoPersonalService
       .getInfoComplementariaTercero(
         environment.TERCEROS_SERVICE,
-        `/tercero?fields=Id,UsuarioWSO2&limit=-1`)
+        `/tercero?fields=Id,UsuarioWSO2&query=Activo:true&limit=-1`)
       .toPromise();
 
     this.terceros = terceros
+
+    const dependencias = await this.infoPersonalService
+      .getInfoComplementariaTercero(
+        environment.OIKOS_SERVICE,
+        `dependencia?fields=Id,CorreoElectronico&query=Activo:true&limit=-1`)
+      .toPromise();
+
+    this.dependencias = dependencias
 
     const dataTipoEventos = await this.infoPersonalService
       .getInfoComplementariaTercero(environment.EVENTOS_ENDPOINT, `/tipo_evento?limit=-1`)
@@ -86,7 +99,7 @@ export class ModalneweventComponent implements OnInit {
 
     this.ubicacionesTiposLugar = ubicacionesTiposLugar
 
-    console.log('AA🤔', this.eventRow)
+    // console.log('AA🤔', this.eventRow)
 
     if (this.eventRow && this.eventRow.Id) {
 
@@ -134,8 +147,8 @@ export class ModalneweventComponent implements OnInit {
 
   async submitEvent(form: NgForm) {
 
+    let loader = await this.loaderService.presentLoading('Enviando')
     try {
-      let loader = await this.loaderService.presentLoading('Enviando')
 
       console.log(form);
 
@@ -175,7 +188,7 @@ export class ModalneweventComponent implements OnInit {
         locationValue = this.selectedEvent.TipoLugarDireccion
       }
 
-      if(locationValue == undefined) {
+      if (locationValue == undefined) {
         locationValue = lugarValue
       }
 
@@ -189,13 +202,12 @@ export class ModalneweventComponent implements OnInit {
             "Id": null,
             "Nombre": locationValue,
             "TipoLugarId": {
-              "Id": this.selectedEvent.TipoLugar
+              "Id": parseInt(this.selectedEvent.TipoLugar)
             },
             "Activo": true
           })
           .toPromise();
 
-        console.log('respLocationCreation: ', respLocationCreation);
         ubicacionId = respLocationCreation.Id;
       }
 
@@ -215,14 +227,16 @@ export class ModalneweventComponent implements OnInit {
         "UbicacionId": ubicacionId ? ubicacionId : 0,
       }
 
+      console.log(eventBody)
+
       if (this.selectedEvent.Poster && media)
         eventBody["PosterUrl"] = media[0].url
-      else {
+      else if (this.eventRow && this.eventRow.hasOwnProperty('Id')) {
         const sesion = await this.infoPersonalService.getInfoComplementariaTercero(environment.EVENTOS_ENDPOINT, `/calendario_evento/${this.eventRow.Id}`).toPromise();
         eventBody["PosterUrl"] = sesion.PosterUrl
       }
 
-      if (this.eventRow && this.eventRow.Id) {
+      if (this.eventRow && this.eventRow.hasOwnProperty('Id')) {
         const sesion = await this.infoPersonalService.getInfoComplementariaTercero(environment.EVENTOS_ENDPOINT, `/calendario_evento/${this.eventRow.Id}`).toPromise();
         eventBody["FechaCreacion"] = sesion.FechaCreacion
         eventBody["FechaModificacion"] = sesion.FechaModificacion
@@ -238,9 +252,63 @@ export class ModalneweventComponent implements OnInit {
       }
 
       console.log(response)
+
+      // Envio de correos
+      let fechaInicioEventEmail = this.funcsService.isoStrToYYYYMMDDHHSSNormal(new Date(FechaInicio).toISOString())
+      let fechaFinEventEmail = this.funcsService.isoStrToYYYYMMDDHHSSNormal(new Date(FechaFin).toISOString())
+
+      const eventEmailMessage = (target: string = "Estimados egresados") => `Estimados egresados de la Universidad Distrital Francisco José de Caldas,
+
+      Nos complace invitarlos a un evento muy especial.
+
+      Descripción del evento: ${Descripcion || "Por definir"}\n
+
+      Tendremos la oportunidad de reunirnos nuevamente y recordar aquellos momentos maravillosos que compartimos juntos durante nuestra estadía en la universidad.
+
+      Este evento está dirigido a todos los egresados de nuestra institución, independientemente del año de graduación. Será una oportunidad para conocer a antiguos compañeros de clase, compartir experiencias y establecer nuevas conexiones.
+
+      El evento se llevará a cabo en línea, y les invitamos a inscribirse a través de la siguiente URL: sisecliente.portaloas.udistrital.edu.co
+
+      Esperamos contar con su presencia y compartir juntos un momento de felicidad y camaradería.
+
+      Fecha y Hora de inicio: ${fechaInicioEventEmail || "Por definir"}
+      Fecha y Hora de finalización: ${fechaFinEventEmail || "Por definir"}
+      Lugar: ${lugarValue || "Por definir"}\n
+      Inscripción a través de: sisecliente.portaloas.udistrital.edu.co
+
+      ¡No faltes! Te esperamos.
+
+      Atentamente,
+      Egresados U.Distrital`
+      // \n<img src="${media[0].url}" alt="poster del evento">
+
+      if (this.specificGuests && this.specificGuests.length > 0) {
+        const emailConfig = {
+          Emails: this.specificGuests,
+          Asunto: `Evento ${Nombre} | Egresados`,
+          Mensaje: eventEmailMessage()
+        }
+
+        await this.sendEmail.sendEmailFull(emailConfig)
+      }
+
+      if (this.guestsDependencies && this.guestsDependencies.length > 0) {
+        const emailConfigDependencies = {
+          Emails: this.guestsDependencies,
+          Asunto: `Evento ${Nombre} | Egresados`,
+          Mensaje: eventEmailMessage("Estimadas dependencias"),
+          IsDependence: true
+        }
+
+        await this.sendEmail.sendEmailFull(emailConfigDependencies)
+      }
+
       this.dismissModal('modal-new-event')
       loader.dismiss()
     } catch (err) {
+      this.toastService.presentToast('Error:' + ' ' + err)
+      this.dismissModal('modal-new-event')
+      loader.dismiss()
       console.error(err)
     }
   }

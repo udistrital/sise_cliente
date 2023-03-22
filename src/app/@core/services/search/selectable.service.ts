@@ -12,11 +12,24 @@ export class SelectableService {
 
   constructor(private terceroService: TerceroService) { }
 
-  specificGuestsChange(event: {
-    component: IonicSelectableComponent,
-    value: any
-  }) {
+  specificGuestsChange(
+    event: {
+      component: IonicSelectableComponent,
+      value: any
+    },
+    fieldTextKey: string = "UsuarioWSO2"
+  ) {
     console.log('VALUE SELECTABLE:', event.value);
+    let emails = []
+    event.value.forEach(guest => {
+      if (!emails.includes(guest[fieldTextKey])) {
+        emails.push(guest[fieldTextKey])
+      }
+    })
+
+    console.log('EMAILS INVITADOS: ', emails);
+
+    return emails
   }
 
   filterTerceros(data: any[], text: string, fieldTextKey: string) {
@@ -57,7 +70,7 @@ export class SelectableService {
       return;
     }
 
-    // this.tercerosSubscription = this.terceroService.getTercerosAsync().subscribe(terceross => {
+    // this.tercerosSubscription = this.terceroService.getUsuariosWSO2AndId().subscribe(terceross => {
     // Subscription will be closed when unsubscribed manually.
     // if (this.tercerosSubscription.closed) {
     //   return;

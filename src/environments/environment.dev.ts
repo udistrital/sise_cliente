@@ -38,4 +38,13 @@ export const environment = {
   CREATE_TERCERO_ENDPOINT: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/terceros_crud/tercero',
   CREATE_DATA_IDENTIFICATION_TERCERO_ENDPOINT: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/terceros_crud/datos_identificacion',
   GET_DOCUMENT_TYPES_ENDPOINT: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/terceros_crud/tipo_documento',
+  NOTIFICATIONS_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/notificacion_mid',
+  ARN_QUEUE_SIGE_EMAILS: {
+    TOPIC: "arn:aws:sns:us-east-1:699001025740:test-SIGE",
+    QUEUE: "arn:aws:sqs:us-east-1:699001025740:test-sigemails"
+  },
+  ROL_ENCARGADO_EVENTO_IDS:{
+    TERCERO_ROL_ID: 3,
+    DEPENDENCIA_ROL_ID: 4,
+  }
 };
