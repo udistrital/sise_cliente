@@ -34,7 +34,7 @@
       <ion-col size="6" class="ion-margin-vertical">
         <ion-item lines="full">
           <ion-label position="floating">Descripción</ion-label>
-          <ion-input type="text" id="Descripcion" name="Descripcion" #Descripcion="ngModel" required [(ngModel)]="selectedEvent.Descripcion" class="border-0 border-none"></ion-input>
+          <ion-textarea placeholder="Ingrese una descripción para el evento" id="Descripcion" name="Descripcion" #Descripcion="ngModel" required [(ngModel)]="selectedEvent.Descripcion" class="border-0 border-none"></ion-textarea>
         </ion-item>
       </ion-col>
 

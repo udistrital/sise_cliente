@@ -1,0 +1,154 @@
+@import url("https://fonts.googleapis.com/css?family=Hind");
+@media all{
+  * {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+
+  .row {
+    margin-right: -15px;
+    margin-left: -15px;
+  }
+
+  .container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
+@media (min-width: 768px){
+  .container {
+    width: 750px;
+  }
+}
+
+@media (min-width: 992px){
+  .container {
+    width: 970px;
+  }
+}
+
+@media (min-width: 1200px){
+  .container {
+    width: 1170px;
+  }
+}
+
+@media all{
+  .container {
+    max-width: 1170px;
+    width: 100%;
+  }
+
+  html.layout-wide .container {
+    max-width: 100%;
+  }
+
+  .page-default {
+    padding-top: 0px;
+    padding-bottom: 37px;
+  }
+}
+
+.main {
+    font-family:  Hind;
+    background: #F6F6F4;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: 90% auto;
+    background-repeat-x: no-repeat;
+    background-repeat-y: no-repeat;
+}
+
+@media all{
+  body {
+    margin:  0;
+    font-family:  "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size:  15px;
+    line-height:  1.42857143;
+    color:  #000;
+    background-color:  #F6F6F4;
+    overflow-x: hidden;
+  }
+}
+
+body {
+    top: 0 !important;
+}
+
+@media all{
+  html {
+    font-family:   sans-serif;
+    -ms-text-size-adjust:   100%;
+    -webkit-text-size-adjust:   100%;
+    font-size:  10px;
+    -webkit-tap-highlight-color:  rgba(0,0,0,0);
+    direction: ltr;
+  }
+}
+
+@media all{
+  .col-sm-12,.col-xs-12 {
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+
+  .col-xs-12 {
+    float:  left;
+    width: 100%;
+  }
+}
+
+@media (min-width: 768px){
+  .col-sm-12 {
+    float:  left;
+    width: 100%;
+  }
+}
+
+@media all{
+  .bg-grey {
+    background-color: #F6F6F3;
+  }
+
+  :after,:before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+
+  .col-sm-4,.col-xs-12 {
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+}
+
+@media (min-width: 768px){
+  .col-sm-4 {
+    float:  left;
+    width: 33.33333333%;
+  }
+
+  .col-sm-offset-4 {
+    margin-left: 33.33333333%;
+  }
+}
+
+@media all{
+  .news-wrap {
+    position: relative;
+    overflow: hidden;
+  }
+
+  img {
+    border:  0;
+    vertical-align: middle;
+  }
+}
