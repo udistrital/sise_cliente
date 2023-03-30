@@ -81,7 +81,7 @@ export class CreacioneventosComponent implements OnInit {
     console.log(this.arrRoleUserSession)
 
     this.arrRoleUserSession.forEach((role: any) => {
-      if (role == 'ADMIN_SISE') {
+      if (role == 'ADMIN_SISE' || role == 'ADMIN_SIGE') {
         this.isAdminSiseFlag = true
       }
     })
