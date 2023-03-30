@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Gestion empresarial</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-header style="margin-right: 4rem; margin-left: 2rem; margin-bottom: 3rem;" [translucent]="false">
+    <ion-toolbar style="display: flex; justify-content: space-between; margin-top: 2rem;">
+      <ion-title style="float:left;">
+        Gestion empresarial
+      </ion-title>
+
+      <ion-button *ngIf="isAdminSiseFlag" style="float: right; margin-right: 7rem;" class="boton" type="submit" color="primary" (click)="openEventModal()">
+        Nueva empresa
+      </ion-button>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content [fullscreen]="false" class="scrollTable" style="height: 800px;overflow:auto; margin: 2rem; padding: 3rem; margin-bottom: 3rem;">
+
+    <ng2-smart-table [settings]="settings" [source]="rows" (createConfirm)="onCreateConfirm($event)" (custom)="onCustomAction($event)"></ng2-smart-table>
+  </ion-content>
+</ion-content>

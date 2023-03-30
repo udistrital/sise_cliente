@@ -12,6 +12,11 @@ import { PagesComponent } from './pages.component';
 import { LoginComponent } from './login/login.component'
 import { AuthGuard } from '../@core/_guards/auth.guard';
 import { InfoStudentsPage } from './info-students/info-students.page';
+import { CoworkingPage } from './coworking/coworking.page';
+import { SalaBacataPage } from './coworking/sala-bacata/sala-bacata.page';
+import { SalaMonserratePage } from './coworking/sala-monserrate/sala-monserrate.page';
+import { SalaTequendamaPage } from './coworking/sala-tequendama/sala-tequendama.page';
+import { GestionEmpresarialPage } from './gestion-empresarial/gestion-empresarial.page';
 
 const routes: Routes = [{
   path: '',
@@ -107,6 +112,62 @@ const routes: Routes = [{
     {
       path: 'incripcionaeventos',
       component: InscripcionaeventosComponent,
+      canActivate: [AuthGuard],
+      data: {
+        roles: [
+          'Internal/selfsignup',
+          'Internal/everyone',
+        ],
+      },
+    },
+    {
+      path: 'coworking',
+      component: CoworkingPage,
+      data: {
+        roles: [
+          'Internal/everyone',
+        ],
+      },
+    },
+    {
+      path: 'coworking',
+      component: CoworkingPage,
+      data: {
+        roles: [
+          'Internal/everyone',
+        ],
+      },
+    },
+    {
+      path: 'coworking/sala-bacata',
+      component: SalaBacataPage,
+      data: {
+        roles: [
+          'Internal/everyone',
+        ],
+      },
+    },
+    {
+      path: 'coworking/sala-monserrate',
+      component: SalaMonserratePage,
+      data: {
+        roles: [
+          'Internal/everyone',
+        ],
+      },
+    },
+    {
+      path: 'coworking/sala-tequendama',
+      component: SalaTequendamaPage,
+      data: {
+        roles: [
+          'Internal/everyone',
+        ],
+      },
+    },
+    {
+      path: 'gestion-empresarial',
+      component: GestionEmpresarialPage,
       canActivate: [AuthGuard],
       data: {
         roles: [

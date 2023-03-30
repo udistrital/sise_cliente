@@ -1,0 +1,463 @@
+@font-face {
+  font-family:"Font Awesome 6 Free";
+  font-style:normal;
+  font-weight:400;
+  font-display:block;
+  src:url(https://use.fontawesome.com/releases/v6.2.0/webfonts/fa-regular-400.woff2) format("woff2"),url(https://use.fontawesome.com/releases/v6.2.0/webfonts/fa-regular-400.ttf) format("truetype");
+}
+@font-face {
+  font-family:"Font Awesome 6 Free";
+  font-style:normal;
+  font-weight:900;
+  font-display:block;
+  src:url(https://use.fontawesome.com/releases/v6.2.0/webfonts/fa-solid-900.woff2) format("woff2"),url(https://use.fontawesome.com/releases/v6.2.0/webfonts/fa-solid-900.ttf) format("truetype");
+}
+@font-face {
+  font-family:"Font Awesome 5 Free";
+  font-display:block;
+  font-weight:900;
+  src:url(https://use.fontawesome.com/releases/v6.2.0/webfonts/fa-solid-900.woff2) format("woff2"),url(https://use.fontawesome.com/releases/v6.2.0/webfonts/fa-solid-900.ttf) format("truetype");
+}
+@font-face {
+  font-family:"Font Awesome 5 Free";
+  font-display:block;
+  font-weight:400;
+  src:url(https://use.fontawesome.com/releases/v6.2.0/webfonts/fa-regular-400.woff2) format("woff2"),url(https://use.fontawesome.com/releases/v6.2.0/webfonts/fa-regular-400.ttf) format("truetype");
+}
+@font-face {
+  font-family:"FontAwesome";
+  font-display:block;
+  src:url(https://use.fontawesome.com/releases/v6.2.0/webfonts/fa-solid-900.woff2) format("woff2"),url(https://use.fontawesome.com/releases/v6.2.0/webfonts/fa-solid-900.ttf) format("truetype");
+}
+@font-face {
+  font-family:"FontAwesome";
+  font-display:block;
+  src:url(https://use.fontawesome.com/releases/v6.2.0/webfonts/fa-brands-400.woff2) format("woff2"),url(https://use.fontawesome.com/releases/v6.2.0/webfonts/fa-brands-400.ttf) format("truetype");
+}
+@font-face {
+  font-family:"FontAwesome";
+  font-display:block;
+  src:url(https://use.fontawesome.com/releases/v6.2.0/webfonts/fa-regular-400.woff2) format("woff2"),url(https://use.fontawesome.com/releases/v6.2.0/webfonts/fa-regular-400.ttf) format("truetype");
+  unicode-range:u+f003,u+f006,u+f014,u+f016-f017,u+f01a-f01b,u+f01d,u+f022,u+f03e,u+f044,u+f046,u+f05c-f05d,u+f06e,u+f070,u+f087-f088,u+f08a,u+f094,u+f096-f097,u+f09d,u+f0a0,u+f0a2,u+f0a4-f0a7,u+f0c5,u+f0c7,u+f0e5-f0e6,u+f0eb,u+f0f6-f0f8,u+f10c,u+f114-f115,u+f118-f11a,u+f11c-f11d,u+f133,u+f147,u+f14e,u+f150-f152,u+f185-f186,u+f18e,u+f190-f192,u+f196,u+f1c1-f1c9,u+f1d9,u+f1db,u+f1e3,u+f1ea,u+f1f7,u+f1f9,u+f20a,u+f247-f248,u+f24a,u+f24d,u+f255-f25b,u+f25d,u+f271-f274,u+f278,u+f27b,u+f28c,u+f28e,u+f29c,u+f2b5,u+f2b7,u+f2ba,u+f2bc,u+f2be,u+f2c0-f2c1,u+f2c3,u+f2d0,u+f2d2,u+f2d4,u+f2dc;
+}
+@font-face {
+  font-family:"FontAwesome";
+  font-display:block;
+  src:url(https://use.fontawesome.com/releases/v6.2.0/webfonts/fa-v4compatibility.woff2) format("woff2"),url(https://use.fontawesome.com/releases/v6.2.0/webfonts/fa-v4compatibility.ttf) format("truetype");
+  unicode-range:u+f041,u+f047,u+f065-f066,u+f07d-f07e,u+f080,u+f08b,u+f08e,u+f090,u+f09a,u+f0ac,u+f0ae,u+f0b2,u+f0d0,u+f0d6,u+f0e4,u+f0ec,u+f10a-f10b,u+f123,u+f13e,u+f148-f149,u+f14c,u+f156,u+f15e,u+f160-f161,u+f163,u+f175-f178,u+f195,u+f1f8,u+f219,u+f27a;
+}
+@font-face {
+  font-family:'FontAwesome';
+  src:url('https://egresados.udistrital.edu.co/themes/custom/versh/fonts/fontawesome-webfont.eot?v=4.3.0');
+  src:url('https://egresados.udistrital.edu.co/themes/custom/versh/fonts/fontawesome-webfont.eot?#iefix&v=4.3.0') format('embedded-opentype'),url('https://egresados.udistrital.edu.co/themes/custom/versh/fonts/fontawesome-webfont.woff2?v=4.3.0') format('woff2'),url('https://egresados.udistrital.edu.co/themes/custom/versh/fonts/fontawesome-webfont.woff?v=4.3.0') format('woff'),url('https://egresados.udistrital.edu.co/themes/custom/versh/fonts/fontawesome-webfont.ttf?v=4.3.0') format('truetype'),url('https://egresados.udistrital.edu.co/themes/custom/versh/fonts/fontawesome-webfont.svg?v=4.3.0#fontawesomeregular') format('svg');
+  font-weight:normal;
+  font-style:normal;
+}
+@import url("https://fonts.googleapis.com/css?family=Titillium+Web");
+@import url("https://fonts.googleapis.com/css?family=Hind");
+@font-face {
+  font-family:"Font Awesome 5 Free";
+  font-style:normal;
+  font-weight:400;
+  font-display:auto;
+  src:url(https://use.fontawesome.com/releases/v5.12.1/webfonts/fa-regular-400.eot);
+  src:url(https://use.fontawesome.com/releases/v5.12.1/webfonts/fa-regular-400.eot?#iefix) format("embedded-opentype"),url(https://use.fontawesome.com/releases/v5.12.1/webfonts/fa-regular-400.woff2) format("woff2"),url(https://use.fontawesome.com/releases/v5.12.1/webfonts/fa-regular-400.woff) format("woff"),url(https://use.fontawesome.com/releases/v5.12.1/webfonts/fa-regular-400.ttf) format("truetype"),url(https://use.fontawesome.com/releases/v5.12.1/webfonts/fa-regular-400.svg#fontawesome) format("svg");
+}
+@font-face {
+  font-family:"Font Awesome 5 Free";
+  font-style:normal;
+  font-weight:900;
+  font-display:auto;
+  src:url(https://use.fontawesome.com/releases/v5.12.1/webfonts/fa-solid-900.eot);
+  src:url(https://use.fontawesome.com/releases/v5.12.1/webfonts/fa-solid-900.eot?#iefix) format("embedded-opentype"),url(https://use.fontawesome.com/releases/v5.12.1/webfonts/fa-solid-900.woff2) format("woff2"),url(https://use.fontawesome.com/releases/v5.12.1/webfonts/fa-solid-900.woff) format("woff"),url(https://use.fontawesome.com/releases/v5.12.1/webfonts/fa-solid-900.ttf) format("truetype"),url(https://use.fontawesome.com/releases/v5.12.1/webfonts/fa-solid-900.svg#fontawesome) format("svg");
+}
+@media all{
+  * {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+
+  .row {
+    margin-right: -15px;
+    margin-left: -15px;
+  }
+
+  .container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
+@media (min-width: 768px){
+  .container {
+    width: 750px;
+  }
+}
+
+@media (min-width: 992px){
+  .container {
+    width: 970px;
+  }
+}
+
+@media (min-width: 1200px){
+  .container {
+    width: 1170px;
+  }
+}
+
+@media all{
+  .container {
+    max-width: 1170px;
+    width: 100%;
+  }
+
+  html.layout-wide .container {
+    max-width: 100%;
+  }
+
+  .page-default {
+    padding-top: 0px;
+    padding-bottom: 37px;
+  }
+}
+
+.main {
+    font-family:  Hind;
+    background: #F6F6F4;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: 90% auto;
+    background-repeat-x: no-repeat;
+    background-repeat-y: no-repeat;
+}
+
+@media all{
+  body {
+    margin:  0;
+    font-family:  "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size:  15px;
+    line-height:  1.42857143;
+    color:  #000;
+    background-color:  #F6F6F4;
+    overflow-x: hidden;
+  }
+}
+
+body {
+    top: 0 !important;
+}
+
+@media all{
+  html {
+    font-family:   sans-serif;
+    -ms-text-size-adjust:   100%;
+    -webkit-text-size-adjust:   100%;
+    font-size:  10px;
+    -webkit-tap-highlight-color:  rgba(0,0,0,0);
+    direction: ltr;
+  }
+}
+
+@media all{
+  .col-sm-10,.col-xs-12 {
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+
+  .col-xs-12 {
+    float:  left;
+    width: 100%;
+  }
+}
+
+@media (min-width: 768px){
+  .col-sm-10 {
+    float:  left;
+    width: 83.33333333%;
+  }
+
+  .col-sm-offset-1 {
+    margin-left: 8.33333333%;
+  }
+}
+
+@media all{
+  .tab-content {
+    background: #fff none repeat scroll 0 0;
+    border: 1px solid;
+    border-color: #ddd;
+    margin-top: -1px;
+    padding: 23px 25px;
+    -webkit-box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+    -moz-box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+    -ms-box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+    -o-box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+    background-image: none;
+    background-position-x: 0px;
+    background-position-y: 0px;
+    background-size: initial;
+    background-repeat-x: repeat;
+    background-repeat-y: repeat;
+    background-attachment: scroll;
+    background-origin: initial;
+    background-clip: initial;
+    background-color: rgb(255, 255, 255);
+  }
+
+  :after,:before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+}
+
+.margin-20px {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+@media all{
+  h2 {
+    font-family:     inherit;
+    font-weight:   300;
+    line-height:  54px;
+    color:   #262626;
+    margin-top:    20px;
+    margin-bottom:    10px;
+    font-size:  54px;
+    margin:  0 0 32px 0;
+  }
+}
+
+.encabezados {
+    font-size: 1.4em;
+    line-height: 21px;
+    color: #000;
+}
+
+.far {
+    display:   var(--fa-display,inline-block);
+    -moz-osx-font-smoothing:   grayscale;
+    -webkit-font-smoothing:   antialiased;
+    font-style:   normal;
+    font-variant:   normal;
+    text-rendering:   auto;
+    line-height:   1;
+    font-weight:    400;
+    font-family:  "Font Awesome 6 Free";
+}
+
+i  {
+    font-size: 15px;
+}
+
+.fa-newspaper:before {
+    content: "\f1ea";
+}
+
+@media all{
+  .col-sm-4,.col-xs-12 {
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+}
+
+@media (min-width: 768px){
+  .col-sm-4 {
+    float:  left;
+    width: 33.33333333%;
+  }
+}
+
+@media all{
+  .related-wrap {
+    -webkit-box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+    -moz-box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+    -ms-box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+    -o-box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.14);
+    -webkit-transition: all 250ms ease-in-out 0s;
+    -moz-transition: all 250ms ease-in-out 0s;
+    -ms-transition: all 250ms ease-in-out 0s;
+    -o-transition: all 250ms ease-in-out 0s;
+    transition: all 250ms ease-in-out 0s;
+  }
+
+  .related-wrap:hover {
+    -webkit-box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    -ms-box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    -o-box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    -webkit-transition: all 250ms ease-in-out 0s;
+    -moz-transition: all 250ms ease-in-out 0s;
+    -ms-transition: all 250ms ease-in-out 0s;
+    -o-transition: all 250ms ease-in-out 0s;
+    transition: all 250ms ease-in-out 0s;
+  }
+
+  .related-content {
+    overflow: hidden;
+    padding: 25px 20px;
+    position: relative;
+    background: #fff;
+  }
+}
+
+.related-content {
+    min-height:  100px;
+}
+
+@media all{
+  img {
+    border:  0;
+    vertical-align: middle;
+  }
+
+  .img-responsive {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+img.coworking {
+    border-radius: 20px;
+    border: 2px solid gray;
+}
+
+@media all{
+  h3 {
+    font-family:     inherit;
+    font-weight:   300;
+    line-height:  18px;
+    color:   #262626;
+    margin-top:    20px;
+    margin-bottom:    10px;
+    font-size:  1.2em;
+    margin:  0;
+  }
+}
+
+h3.coworking {
+    text-align: center;
+    font-weight: bold;
+}
+
+@media all{
+  p {
+    margin:  0 0 10px;
+    line-height: 1.9;
+  }
+}
+
+.related-content p  {
+    line-height: 1.2;
+}
+
+@media all{
+  a {
+    background-color:    transparent;
+    color:  #000;
+    text-decoration:   none;
+    -webkit-transition:  all 250ms ease-in-out 0s;
+    -moz-transition:  all 250ms ease-in-out 0s;
+    -ms-transition:  all 250ms ease-in-out 0s;
+    -o-transition:  all 250ms ease-in-out 0s;
+    transition:  all 250ms ease-in-out 0s;
+  }
+}
+
+.btn-mas {
+    float: right;
+    margin-top: 15px;
+}
+
+@media all{
+  .related-content a  {
+    -webkit-box-shadow:   0 1px 2px 1px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow:   0 1px 2px 1px rgba(0, 0, 0, 0.15);
+    -ms-box-shadow:   0 1px 2px 1px rgba(0, 0, 0, 0.15);
+    -o-box-shadow:   0 1px 2px 1px rgba(0, 0, 0, 0.15);
+    box-shadow:  none;
+    -webkit-transition:   all 250ms ease-in-out 0s;
+    -moz-transition:   all 250ms ease-in-out 0s;
+    -ms-transition:   all 250ms ease-in-out 0s;
+    -o-transition:   all 250ms ease-in-out 0s;
+    transition:   all 250ms ease-in-out 0s;
+    background-color: transparent;
+  }
+}
+
+a:visited  {
+    text-shadow: 10px 10px #000;
+    font-family: 'Titillium Web';
+    font-weight: bolder;
+    text-decoration: underline !important;
+}
+
+.btn-mas:after {
+    font-family: 'FontAwesome';
+    content: '\f0fe';
+    color: #8c1919;
+}
+
+@media all{
+  a:active,a:hover {
+    outline: 0;
+  }
+
+  a:hover {
+    color:  #23527c;
+    text-decoration:  none;
+    outline: none;
+  }
+
+  a,a:hover {
+    -webkit-transition:  all 250ms ease-in-out 0s;
+    -moz-transition:  all 250ms ease-in-out 0s;
+    -ms-transition:  all 250ms ease-in-out 0s;
+    -o-transition:  all 250ms ease-in-out 0s;
+    transition:  all 250ms ease-in-out 0s;
+    color: #000;
+  }
+
+  .related-content a:hover  {
+    -webkit-box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    -ms-box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    -o-box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    -webkit-transition: all 250ms ease-in-out 0s;
+    -moz-transition: all 250ms ease-in-out 0s;
+    -ms-transition: all 250ms ease-in-out 0s;
+    -o-transition: all 250ms ease-in-out 0s;
+    transition: all 250ms ease-in-out 0s;
+  }
+}
+
+a:hover  {
+    color: #8c1919 !important;
+}
+
+@media all{
+  .visually-hidden {
+    position: absolute !important;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+    width: 1px;
+    height: 1px;
+    word-wrap: normal;
+  }
+}
+
+

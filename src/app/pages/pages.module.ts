@@ -20,11 +20,17 @@ import { InfoEmpresarialPage } from './info-empresarial/info-empresarial.page';
 import { InfoLaboralPage } from './info-laboral/info-laboral.page';
 import { InfoPersonalComponent } from './info-personal/info-personal.component';
 import { InfoStudentsPage } from './info-students/info-students.page';
+import { CoworkingPage } from './coworking/coworking.page';
+import { SalaBacataPage } from './coworking/sala-bacata/sala-bacata.page';
+import { SalaMonserratePage } from './coworking/sala-monserrate/sala-monserrate.page';
+import { SalaTequendamaPage } from './coworking/sala-tequendama/sala-tequendama.page';
+import { GestionEmpresarialPage } from './gestion-empresarial/gestion-empresarial.page';
 import { InscripcionaeventosComponent } from './inscripcionaeventos/inscripcionaeventos.component';
 import { LocalizacionPage } from './localizacion/localizacion.page';
 import { LoginComponent } from './login/login.component';
 import { PagesRoutingModule } from './pages-routing.module';
 import { PagesComponent } from './pages.component';
+import { CoworkingFormComponent } from './coworking/coworking-form/coworking-form.component';
 
 declare var $: any;
 
@@ -37,6 +43,12 @@ const pagesComponents = [
   InfoEmpresarialPage,
   InfoStudentsPage,
   InfoLaboralPage,
+  CoworkingFormComponent,
+  CoworkingPage,
+  SalaBacataPage,
+  SalaMonserratePage,
+  SalaTequendamaPage,
+  GestionEmpresarialPage,
   InfoPersonalComponent,
   InscripcionaeventosComponent,
   LocalizacionPage,
@@ -50,7 +62,7 @@ const pagesComponents = [
     ModalbirthdayComponent,
     ModalposterComponent,
     HeaderComponent,
-    ModalneweventComponent
+    ModalneweventComponent,
   ],
   imports: [
     HttpClientModule,
